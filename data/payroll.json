@@ -1,0 +1,482 @@
+[
+  {
+    "id": "sal-001-2025-01",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-01"
+  },
+  {
+    "id": "sal-001-2025-02",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-02"
+  },
+  {
+    "id": "sal-001-2025-03",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-03"
+  },
+  {
+    "id": "sal-001-2025-04",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-04"
+  },
+  {
+    "id": "sal-001-2025-05",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-05"
+  },
+  {
+    "id": "sal-001-2025-06",
+    "nom": "Amina El Idrissi",
+    "poste": "Comptable",
+    "cnss": "1001234",
+    "salaireBrut": 10324,
+    "retenues": {
+      "cnss": 462.52,
+      "ir": 1238.88
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-06"
+  },
+  {
+    "id": "sal-002-2025-01",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-01"
+  },
+  {
+    "id": "sal-002-2025-02",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-02"
+  },
+  {
+    "id": "sal-002-2025-03",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-03"
+  },
+  {
+    "id": "sal-002-2025-04",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-04"
+  },
+  {
+    "id": "sal-002-2025-05",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-05"
+  },
+  {
+    "id": "sal-002-2025-06",
+    "nom": "Youssef Benali",
+    "poste": "Développeur",
+    "cnss": "1002468",
+    "salaireBrut": 12322,
+    "retenues": {
+      "cnss": 552.03,
+      "ir": 1478.64
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-06"
+  },
+  {
+    "id": "sal-003-2025-01",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-01"
+  },
+  {
+    "id": "sal-003-2025-02",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-02"
+  },
+  {
+    "id": "sal-003-2025-03",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-03"
+  },
+  {
+    "id": "sal-003-2025-04",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-04"
+  },
+  {
+    "id": "sal-003-2025-05",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-05"
+  },
+  {
+    "id": "sal-003-2025-06",
+    "nom": "Salma Amrani",
+    "poste": "Cheffe de projet",
+    "cnss": "1003702",
+    "salaireBrut": 7359,
+    "retenues": {
+      "cnss": 329.68,
+      "ir": 883.08
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-06"
+  },
+  {
+    "id": "sal-004-2025-01",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-01"
+  },
+  {
+    "id": "sal-004-2025-02",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-02"
+  },
+  {
+    "id": "sal-004-2025-03",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-03"
+  },
+  {
+    "id": "sal-004-2025-04",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-04"
+  },
+  {
+    "id": "sal-004-2025-05",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-05"
+  },
+  {
+    "id": "sal-004-2025-06",
+    "nom": "Hamza Laaziri",
+    "poste": "Technicien support",
+    "cnss": "1004936",
+    "salaireBrut": 7931,
+    "retenues": {
+      "cnss": 355.31,
+      "ir": 951.72
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-06"
+  },
+  {
+    "id": "sal-005-2025-01",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-01"
+  },
+  {
+    "id": "sal-005-2025-02",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-02"
+  },
+  {
+    "id": "sal-005-2025-03",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-03"
+  },
+  {
+    "id": "sal-005-2025-04",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-04"
+  },
+  {
+    "id": "sal-005-2025-05",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-05"
+  },
+  {
+    "id": "sal-005-2025-06",
+    "nom": "Laila El Fassi",
+    "poste": "Commerciale",
+    "cnss": "1006170",
+    "salaireBrut": 12578,
+    "retenues": {
+      "cnss": 563.49,
+      "ir": 1509.36
+    },
+    "avantages": {
+      "transport": 400,
+      "panier": 250
+    },
+    "periode": "2025-06"
+  }
+]
