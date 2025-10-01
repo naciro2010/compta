@@ -1,125 +1,60 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plateforme Comptable Maroc</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-</head>
-<body>
-  <header class="hero">
-    <nav class="nav">
-      <span class="nav__logo">Compta Maroc</span>
-      <ul class="nav__links">
-        <li><a href="#personas">Personae</a></li>
-        <li><a href="#epics">Épics</a></li>
-        <li><a href="#backlog">Backlog</a></li>
-        <li><a href="#roadmap">Feuille de route</a></li>
-      </ul>
-    </nav>
-    <div class="hero__content">
-      <div class="hero__text">
-        <h1>Application comptable marocaine — Vision produit</h1>
-        <p>
-          Prototype fonctionnel présentant les personae cibles, les épics et les priorités pour
-          développer une plateforme fluide conforme aux normes marocaines.
-        </p>
-        <div class="hero__actions">
-          <button id="cta-persona" class="btn btn--primary">Explorer les personae</button>
-          <button id="cta-backlog" class="btn btn--ghost">Voir les must-have</button>
-        </div>
-      </div>
-      <div class="hero__stats">
-        <div class="stat-card">
-          <span class="stat-card__value" id="stat-must"></span>
-          <span class="stat-card__label">Capacités Must</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__value" id="stat-should"></span>
-          <span class="stat-card__label">Capacités Should</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__value" id="stat-personas"></span>
-          <span class="stat-card__label">Personae couvertes</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="section" id="personas">
-      <div class="section__header">
-        <h2>Personae cibles</h2>
-        <p>
-          Cinq profils clés structurent les parcours utilisateurs pour garantir une expérience
-          multi-métier cohérente.
-        </p>
-      </div>
-      <div class="persona-layout">
-        <div class="persona-grid" id="persona-grid"></div>
-        <aside class="persona-details" id="persona-detail">
-          <p class="placeholder">Sélectionnez un persona pour afficher ses objectifs et irritants.</p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="epics">
-      <div class="section__header section__header--row">
-        <div>
-          <h2>Épics, capacités & user stories</h2>
-          <p>
-            Visualisez la couverture fonctionnelle et filtrez par priorité ou persona pour aligner le
-            scope de la version initiale.
-          </p>
-        </div>
-        <div class="filters">
-          <div class="filter-group">
-            <span class="filter-label">Priorité :</span>
-            <button class="filter-btn is-active" data-priority="all">Toutes</button>
-            <button class="filter-btn" data-priority="Must">Must</button>
-            <button class="filter-btn" data-priority="Should">Should</button>
+<html lang="fr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AtlasTech Compta POC</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/theme.css" />
+  </head>
+  <body>
+    <div id="app" class="app-shell">
+      <aside class="sidebar" aria-label="Navigation principale">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">📊</span>
+          <div>
+            <h1>AtlasTech</h1>
+            <p>Compta POC</p>
           </div>
         </div>
+        <nav>
+          <ul id="main-nav" class="nav-list" role="list">
+            <li><a href="#/dashboard" data-route="dashboard" class="nav-link active">Dashboard</a></li>
+            <li><a href="#/sales" data-route="sales" class="nav-link">Ventes</a></li>
+            <li><a href="#/purchases" data-route="purchases" class="nav-link">Achats</a></li>
+            <li><a href="#/bank" data-route="bank" class="nav-link">Banque</a></li>
+            <li><a href="#/ledger" data-route="ledger" class="nav-link">Écritures</a></li>
+            <li><a href="#/tax" data-route="tax" class="nav-link">TVA &amp; Fisc</a></li>
+            <li><a href="#/payroll" data-route="payroll" class="nav-link">Paie</a></li>
+            <li><a href="#/settings" data-route="settings" class="nav-link">Paramètres</a></li>
+          </ul>
+        </nav>
+        <button id="reset-demo" class="btn reset" type="button">Réinitialiser la démo</button>
+      </aside>
+      <div class="content-area">
+        <header class="topbar">
+          <div class="topbar-actions">
+            <label class="select-wrapper">
+              <span class="sr-only">Choisir la langue</span>
+              <select id="lang-select" aria-label="Langue">
+                <option value="fr">Français</option>
+                <option value="ar">العربية</option>
+              </select>
+            </label>
+            <label class="select-wrapper">
+              <span class="sr-only">Choisir le thème</span>
+              <select id="theme-select" aria-label="Thème">
+                <option value="light">Clair</option>
+                <option value="dark">Sombre</option>
+              </select>
+            </label>
+          </div>
+        </header>
+        <main id="view" tabindex="-1" aria-live="polite"></main>
       </div>
-      <div class="epic-grid" id="epic-grid"></div>
-    </section>
-
-    <section class="section" id="backlog">
-      <div class="section__header section__header--row">
-        <div>
-          <h2>Backlog priorisé</h2>
-          <p>
-            Organisation des capacités par niveau de priorité. Les éléments <strong>Must</strong> sont
-            ciblés pour la V1, tandis que les <strong>Should</strong> constituent le plan d’enrichissement.
-          </p>
-        </div>
-        <button id="toggle-should" class="btn btn--secondary">Afficher les Should</button>
-      </div>
-      <div class="backlog-board" id="backlog-board"></div>
-    </section>
-
-    <section class="section" id="roadmap">
-      <div class="section__header">
-        <h2>Feuille de route proposée</h2>
-        <p>
-          Vision trimestrielle pour orchestrer les livraisons, garantir la conformité et préparer les
-          intégrations futures.
-        </p>
-      </div>
-      <div class="roadmap" id="roadmap"></div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <p>© 2024 Compta Maroc — Prototype produit et backlog stratégique.</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    </div>
+    <div id="modal-root" aria-live="assertive"></div>
+    <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
+    <script type="module" src="scripts/main.js"></script>
+  </body>
 </html>

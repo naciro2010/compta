@@ -1,0 +1,932 @@
+[
+  {
+    "id": "AC-2025-0001",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-005",
+    "date": "2024-04-21",
+    "dueDate": "2024-06-20",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 8461,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1269.15,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0002",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-006",
+    "date": "2024-01-15",
+    "dueDate": "2024-02-29",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 3489,
+        "vatRate": 14
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 523.35,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-02-17",
+        "amount": 3201.45
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0003",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-011",
+    "date": "2024-09-28",
+    "dueDate": "2024-11-12",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 6716,
+        "vatRate": 20
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1007.4,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-10-07",
+        "amount": 9268.08
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0004",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-001",
+    "date": "2024-04-30",
+    "dueDate": "2024-06-14",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 3126,
+        "vatRate": 20
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 468.9,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0005",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-001",
+    "date": "2024-06-23",
+    "dueDate": "2024-07-23",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 9395,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1409.25,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0006",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-009",
+    "date": "2024-01-19",
+    "dueDate": "2024-03-19",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 3248,
+        "vatRate": 10
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 487.2,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-02-11",
+        "amount": 2374.24
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0007",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-004",
+    "date": "2024-04-02",
+    "dueDate": "2024-05-02",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 5595,
+        "vatRate": 10
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 839.25,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-04-18",
+        "amount": 7721.1
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0008",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-006",
+    "date": "2024-11-02",
+    "dueDate": "2024-12-17",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 2864,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 429.6,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-12-03",
+        "amount": 3952.32
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0009",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-012",
+    "date": "2024-03-23",
+    "dueDate": "2024-05-07",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 4058,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 608.7,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0010",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-012",
+    "date": "2024-02-19",
+    "dueDate": "2024-04-04",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 9974,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1496.1,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0011",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-003",
+    "date": "2024-05-16",
+    "dueDate": "2024-06-15",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 5306,
+        "vatRate": 14
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 795.9,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-06-08",
+        "amount": 5429.15
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0012",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-005",
+    "date": "2024-05-16",
+    "dueDate": "2024-06-15",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 5892,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 883.8,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0013",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-006",
+    "date": "2024-03-29",
+    "dueDate": "2024-05-28",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 6776,
+        "vatRate": 10
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1016.4,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-04-25",
+        "amount": 9350.88
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0014",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-010",
+    "date": "2024-09-02",
+    "dueDate": "2024-11-01",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 9168,
+        "vatRate": 10
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1375.2,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-10-07",
+        "amount": 5427.0
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0015",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-001",
+    "date": "2024-07-23",
+    "dueDate": "2024-09-21",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 5261,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 789.15,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0016",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-004",
+    "date": "2024-05-10",
+    "dueDate": "2024-06-09",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 3752,
+        "vatRate": 14
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 562.8,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-05-20",
+        "amount": 5177.76
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0017",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-003",
+    "date": "2024-01-24",
+    "dueDate": "2024-03-09",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 2990,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 448.5,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0018",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-001",
+    "date": "2024-05-15",
+    "dueDate": "2024-06-29",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 8911,
+        "vatRate": 14
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1336.65,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0019",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-007",
+    "date": "2024-06-20",
+    "dueDate": "2024-08-04",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 9460,
+        "vatRate": 7
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1419.0,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-07-25",
+        "amount": 8277.29
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0020",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-003",
+    "date": "2024-09-07",
+    "dueDate": "2024-10-22",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 3452,
+        "vatRate": 14
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 517.8,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-09-26",
+        "amount": 2729.75
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0021",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-002",
+    "date": "2024-09-27",
+    "dueDate": "2024-11-11",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 7536,
+        "vatRate": 14
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1130.4,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-10-22",
+        "amount": 6971.48
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0022",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-006",
+    "date": "2024-05-15",
+    "dueDate": "2024-06-14",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 9591,
+        "vatRate": 20
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1438.65,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-06-12",
+        "amount": 6852.98
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0023",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-003",
+    "date": "2024-10-16",
+    "dueDate": "2024-12-15",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 4434,
+        "vatRate": 10
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 665.1,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0024",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-003",
+    "date": "2024-02-25",
+    "dueDate": "2024-04-25",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 8383,
+        "vatRate": 14
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 1257.45,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-03-16",
+        "amount": 11568.54
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0025",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-012",
+    "date": "2024-06-08",
+    "dueDate": "2024-07-08",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 3259,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 488.85,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-06-16",
+        "amount": 4497.42
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0026",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-007",
+    "date": "2024-05-16",
+    "dueDate": "2024-06-30",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 3736,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 560.4,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-06-12",
+        "amount": 2621.7
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0027",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-006",
+    "date": "2024-09-20",
+    "dueDate": "2024-11-04",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 8843,
+        "vatRate": 7
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1326.45,
+        "vatRate": 7
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-10-22",
+        "amount": 12203.34
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0028",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-005",
+    "date": "2024-02-27",
+    "dueDate": "2024-03-28",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 3346,
+        "vatRate": 20
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 501.9,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-03-16",
+        "amount": 2196.39
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0029",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-007",
+    "date": "2024-12-09",
+    "dueDate": "2025-02-07",
+    "lines": [
+      {
+        "desc": "Logistique",
+        "qty": 1,
+        "unitPrice": 3899,
+        "vatRate": 10
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 584.85,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2025-01-01",
+        "amount": 3287.78
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0030",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-005",
+    "date": "2024-04-01",
+    "dueDate": "2024-05-01",
+    "lines": [
+      {
+        "desc": "Fournitures",
+        "qty": 1,
+        "unitPrice": 6300,
+        "vatRate": 14
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 945.0,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-05-06",
+        "amount": 8694.0
+      }
+    ],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0031",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-009",
+    "date": "2024-07-15",
+    "dueDate": "2024-08-29",
+    "lines": [
+      {
+        "desc": "Sous-traitance",
+        "qty": 1,
+        "unitPrice": 9656,
+        "vatRate": 14
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 1448.4,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0032",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-012",
+    "date": "2024-11-03",
+    "dueDate": "2024-12-03",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 3260,
+        "vatRate": 20
+      },
+      {
+        "desc": "Livraison",
+        "qty": 1,
+        "unitPrice": 489.0,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Reçue",
+    "payments": [],
+    "notes": "Achat POC"
+  },
+  {
+    "id": "AC-2025-0033",
+    "companyId": "co-ATLAS",
+    "supplierId": "sup-008",
+    "date": "2024-09-25",
+    "dueDate": "2024-11-24",
+    "lines": [
+      {
+        "desc": "Matériel",
+        "qty": 1,
+        "unitPrice": 4669,
+        "vatRate": 10
+      },
+      {
+        "desc": "Frais de dossier",
+        "qty": 1,
+        "unitPrice": 700.35,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-10-30",
+        "amount": 4963.98
+      }
+    ],
+    "notes": "Achat POC"
+  }
+]

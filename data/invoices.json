@@ -1,0 +1,912 @@
+[
+  {
+    "id": "FA-2025-0001",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-010",
+    "date": "2024-07-12",
+    "dueDate": "2024-09-10",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 11025,
+        "vatRate": 10
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 2205.0,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0002",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-001",
+    "date": "2024-01-19",
+    "dueDate": "2024-03-04",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 3771,
+        "vatRate": 20
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 754.2,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0003",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-005",
+    "date": "2024-04-11",
+    "dueDate": "2024-05-26",
+    "lines": [
+      {
+        "desc": "Maintenance",
+        "qty": 1,
+        "unitPrice": 6315,
+        "vatRate": 14
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 1263.0,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0004",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-06-22",
+    "dueDate": "2024-08-06",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 8189,
+        "vatRate": 20
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 1637.8,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-07-21",
+        "amount": 7754.0
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0005",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-002",
+    "date": "2024-12-14",
+    "dueDate": "2025-02-12",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 10307,
+        "vatRate": 14
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2061.4,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0006",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-005",
+    "date": "2024-06-03",
+    "dueDate": "2024-07-18",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 6964,
+        "vatRate": 14
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 1392.8,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0007",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-07-31",
+    "dueDate": "2024-09-29",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 8168,
+        "vatRate": 20
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 1633.6,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0008",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-011",
+    "date": "2024-01-31",
+    "dueDate": "2024-03-31",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 9639,
+        "vatRate": 10
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 1927.8,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-02-29",
+        "amount": 13880.16
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0009",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-012",
+    "date": "2024-12-27",
+    "dueDate": "2025-02-10",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 2363,
+        "vatRate": 10
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 472.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0010",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-011",
+    "date": "2024-07-08",
+    "dueDate": "2024-08-22",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 6892,
+        "vatRate": 10
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 1378.4,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-07-23",
+        "amount": 9924.48
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0011",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-07-05",
+    "dueDate": "2024-08-04",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 11758,
+        "vatRate": 10
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2351.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-08-10",
+        "amount": 7482.86
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0012",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-011",
+    "date": "2024-01-14",
+    "dueDate": "2024-03-14",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 4153,
+        "vatRate": 14
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 830.6,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0013",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-004",
+    "date": "2024-11-30",
+    "dueDate": "2025-01-14",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 5070,
+        "vatRate": 10
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 1014.0,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0014",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-02-22",
+    "dueDate": "2024-04-22",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 5677,
+        "vatRate": 10
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 1135.4,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0015",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-011",
+    "date": "2024-06-21",
+    "dueDate": "2024-08-20",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 11312,
+        "vatRate": 20
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2262.4,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0016",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-009",
+    "date": "2024-03-02",
+    "dueDate": "2024-04-01",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 7163,
+        "vatRate": 20
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 1432.6,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-03-22",
+        "amount": 10314.72
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0017",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-010",
+    "date": "2024-11-24",
+    "dueDate": "2024-12-24",
+    "lines": [
+      {
+        "desc": "Maintenance",
+        "qty": 1,
+        "unitPrice": 11658,
+        "vatRate": 10
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2331.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-12-20",
+        "amount": 16787.52
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0018",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-05-18",
+    "dueDate": "2024-07-02",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 8830,
+        "vatRate": 14
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 1766.0,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-06-10",
+        "amount": 5266.86
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0019",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-001",
+    "date": "2024-03-20",
+    "dueDate": "2024-04-19",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 10358,
+        "vatRate": 10
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 2071.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0020",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-008",
+    "date": "2024-01-17",
+    "dueDate": "2024-03-17",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 10503,
+        "vatRate": 14
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 2100.6,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-02-24",
+        "amount": 15124.32
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0021",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-010",
+    "date": "2024-04-26",
+    "dueDate": "2024-05-26",
+    "lines": [
+      {
+        "desc": "Maintenance",
+        "qty": 1,
+        "unitPrice": 3966,
+        "vatRate": 10
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 793.2,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0022",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-004",
+    "date": "2024-12-21",
+    "dueDate": "2025-02-19",
+    "lines": [
+      {
+        "desc": "Prestation SaaS",
+        "qty": 1,
+        "unitPrice": 11452,
+        "vatRate": 10
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 2290.4,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2025-01-05",
+        "amount": 11512.6
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0023",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-004",
+    "date": "2024-09-14",
+    "dueDate": "2024-10-29",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 2325,
+        "vatRate": 14
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 465.0,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-10-23",
+        "amount": 1410.51
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0024",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-11-09",
+    "dueDate": "2024-12-09",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 6136,
+        "vatRate": 20
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 1227.2,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0025",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-004",
+    "date": "2024-06-29",
+    "dueDate": "2024-07-29",
+    "lines": [
+      {
+        "desc": "Prestation SaaS",
+        "qty": 1,
+        "unitPrice": 10759,
+        "vatRate": 20
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 2151.8,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Validée",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0026",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-001",
+    "date": "2024-05-20",
+    "dueDate": "2024-06-19",
+    "lines": [
+      {
+        "desc": "Licence annuelle",
+        "qty": 1,
+        "unitPrice": 11353,
+        "vatRate": 10
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 2270.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-06-06",
+        "amount": 16348.32
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0027",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-009",
+    "date": "2024-05-17",
+    "dueDate": "2024-07-16",
+    "lines": [
+      {
+        "desc": "Prestation SaaS",
+        "qty": 1,
+        "unitPrice": 8930,
+        "vatRate": 14
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 1786.0,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-06-20",
+        "amount": 12859.2
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0028",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-003",
+    "date": "2024-01-01",
+    "dueDate": "2024-01-31",
+    "lines": [
+      {
+        "desc": "Prestation SaaS",
+        "qty": 1,
+        "unitPrice": 4041,
+        "vatRate": 20
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 808.2,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-02-07",
+        "amount": 4596.33
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0029",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-009",
+    "date": "2024-12-30",
+    "dueDate": "2025-01-29",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 10028,
+        "vatRate": 14
+      },
+      {
+        "desc": "Support",
+        "qty": 1,
+        "unitPrice": 2005.6,
+        "vatRate": 14
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2025-01-11",
+        "amount": 14440.32
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0030",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-011",
+    "date": "2024-06-28",
+    "dueDate": "2024-08-12",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 11611,
+        "vatRate": 10
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2322.2,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Payée",
+    "payments": [
+      {
+        "date": "2024-07-14",
+        "amount": 16719.84
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0031",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-002",
+    "date": "2024-06-17",
+    "dueDate": "2024-08-01",
+    "lines": [
+      {
+        "desc": "Prestation SaaS",
+        "qty": 1,
+        "unitPrice": 11101,
+        "vatRate": 20
+      },
+      {
+        "desc": "Intégration",
+        "qty": 1,
+        "unitPrice": 2220.2,
+        "vatRate": 20
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-07-15",
+        "amount": 11479.42
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0032",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-006",
+    "date": "2024-04-01",
+    "dueDate": "2024-05-01",
+    "lines": [
+      {
+        "desc": "Audit",
+        "qty": 1,
+        "unitPrice": 11903,
+        "vatRate": 10
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2380.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Brouillon",
+    "payments": [],
+    "notes": "Facture générée pour le POC"
+  },
+  {
+    "id": "FA-2025-0033",
+    "companyId": "co-ATLAS",
+    "customerId": "cli-001",
+    "date": "2024-11-14",
+    "dueDate": "2024-12-29",
+    "lines": [
+      {
+        "desc": "Formation",
+        "qty": 1,
+        "unitPrice": 10128,
+        "vatRate": 10
+      },
+      {
+        "desc": "Setup",
+        "qty": 1,
+        "unitPrice": 2025.6,
+        "vatRate": 10
+      }
+    ],
+    "currency": "MAD",
+    "status": "Partiellement payée",
+    "payments": [
+      {
+        "date": "2024-12-01",
+        "amount": 8522.14
+      }
+    ],
+    "notes": "Facture générée pour le POC"
+  }
+]
