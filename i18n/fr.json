@@ -1,0 +1,211 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "sales": "Ventes",
+    "purchases": "Achats",
+    "bank": "Banque",
+    "ledger": "Écritures",
+    "tax": "TVA & Fisc",
+    "payroll": "Paie",
+    "settings": "Paramètres"
+  },
+  "toast": {
+    "languageChanged": "Langue mise à jour",
+    "themeChanged": "Thème appliqué",
+    "datasetReset": "Dataset réinitialisé"
+  },
+  "table": {
+    "noData": "Aucune donnée",
+    "search": "Rechercher...",
+    "export": "Exporter CSV"
+  },
+  "modal": {
+    "close": "Fermer"
+  },
+  "dashboard": {
+    "cash30": "Flux net 30 jours",
+    "cash90": "Flux 90 jours",
+    "vatToPay": "TVA nette",
+    "vatDetail": "Collectée {collecte} / Déductible {deductible}",
+    "overdue": "Factures en retard",
+    "nextDue": "Prochaine échéance : {date}",
+    "cashFlow": "Encaissements / décaissements",
+    "last90": "90 derniers jours",
+    "reminders": "Relances clients"
+  },
+  "actions": {
+    "view": "Voir",
+    "edit": "Éditer",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "print": "Imprimer"
+  },
+  "status": {
+    "brouillon": "Brouillon",
+    "validee": "Validée",
+    "payee": "Payée",
+    "partiellement_payee": "Partiellement payée",
+    "annulee": "Annulée",
+    "recue": "Reçue"
+  },
+  "sales": {
+    "title": "Ventes & Factures",
+    "createInvoice": "Nouvelle facture",
+    "table": {
+      "id": "Référence",
+      "customer": "Client",
+      "date": "Date",
+      "due": "Échéance",
+      "status": "Statut",
+      "total": "Total TTC",
+      "actions": "Actions"
+    },
+    "invoiceId": "Facture {id}",
+    "date": "Date",
+    "due": "Échéance",
+    "item": "Désignation",
+    "qty": "Qté",
+    "unit": "Prix U.",
+    "vat": "TVA",
+    "total": "Total HT",
+    "totalTTC": "Total TTC",
+    "viewTitle": "Aperçu facture",
+    "deleted": "Facture supprimée",
+    "createTitle": "Créer une facture",
+    "editTitle": "Modifier la facture",
+    "client": "Client",
+    "status": "Statut",
+    "addLine": "Ajouter une ligne",
+    "notes": "Notes",
+    "addPayment": "Ajouter un paiement",
+    "paymentAmount": "Montant reçu",
+    "paymentRecorded": "Paiement enregistré",
+    "saved": "Facture sauvegardée"
+  },
+  "purchases": {
+    "title": "Achats & Fournisseurs",
+    "create": "Nouvel achat",
+    "table": {
+      "id": "Référence",
+      "supplier": "Fournisseur",
+      "date": "Date",
+      "due": "Échéance",
+      "status": "Statut",
+      "total": "Total TTC",
+      "actions": "Actions"
+    },
+    "invoiceId": "Facture {id}",
+    "date": "Date",
+    "due": "Échéance",
+    "item": "Désignation",
+    "qty": "Qté",
+    "unit": "Prix U.",
+    "vat": "TVA",
+    "total": "Total HT",
+    "totalTTC": "Total TTC",
+    "viewTitle": "Aperçu achat",
+    "deleted": "Facture supprimée",
+    "createTitle": "Créer un achat",
+    "editTitle": "Modifier l'achat",
+    "supplier": "Fournisseur",
+    "status": "Statut",
+    "addLine": "Ajouter une ligne",
+    "notes": "Notes",
+    "addPayment": "Enregistrer un paiement",
+    "paymentAmount": "Montant payé",
+    "paymentRecorded": "Paiement enregistré",
+    "saved": "Achat sauvegardé",
+    "ocrHint": "Déposez FACT_ICE_HT_TVA_TTC.pdf pour pré-remplir",
+    "ocrSuccess": "Données OCR récupérées"
+  },
+  "bank": {
+    "title": "Banque & Rapprochement",
+    "table": {
+      "date": "Date",
+      "label": "Libellé",
+      "amount": "Montant",
+      "ref": "Référence",
+      "status": "Statut"
+    },
+    "reconciled": "Rapproché",
+    "toMatch": "À rapprocher",
+    "docs": "Pièces à lettrer",
+    "matched": "Lettrages",
+    "manualMatch": "Rapprochement enregistré",
+    "undo": "Annuler",
+    "import": "Importer",
+    "imported": "Écritures importées",
+    "auto": "Auto-rapprocher",
+    "autoSuccess": "{count} lignes rapprochées",
+    "autoEmpty": "Aucune correspondance"
+  },
+  "ledger": {
+    "title": "Journaux & Lettrage",
+    "lettrage": "Historique lettrage",
+    "table": {
+      "date": "Date",
+      "journal": "Journal",
+      "compte": "Compte",
+      "libelle": "Libellé",
+      "debit": "Débit",
+      "credit": "Crédit"
+    }
+  },
+  "tax": {
+    "title": "TVA & déclarations",
+    "monthly": "Mensuel",
+    "quarterly": "Trimestriel",
+    "exportXml": "Exporter XML",
+    "print": "Imprimer",
+    "current": "Synthèse période",
+    "collecte": "Collectée",
+    "deductible": "Déductible",
+    "net": "À payer",
+    "table": {
+      "period": "Période",
+      "baseSales": "Base ventes",
+      "basePurchases": "Base achats",
+      "collecte": "TVA collectée",
+      "deductible": "TVA déductible",
+      "net": "Net"
+    }
+  },
+  "payroll": {
+    "title": "Paie",
+    "export": "Exporter CNSS",
+    "add": "Ajouter",
+    "table": {
+      "name": "Nom",
+      "role": "Poste",
+      "period": "Période",
+      "gross": "Brut",
+      "deductions": "Retenues",
+      "net": "Net"
+    },
+    "name": "Nom",
+    "role": "Poste",
+    "cnss": "CNSS",
+    "period": "Période",
+    "gross": "Salaire brut",
+    "cnssRate": "Retenue CNSS",
+    "ir": "IR",
+    "benefits": "Avantages",
+    "saved": "Paie enregistrée"
+  },
+  "settings": {
+    "company": "Société",
+    "city": "Ville",
+    "currency": "Devise",
+    "tvaPeriod": "Périodicité TVA",
+    "plan": "Plan comptable interne",
+    "dataset": "Dataset",
+    "export": "Exporter",
+    "import": "Importer",
+    "storageKey": "Clé LocalStorage",
+    "preferences": "Préférences",
+    "theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "language": "Langue"
+  }
+}
