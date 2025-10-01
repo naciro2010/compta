@@ -1,0 +1,19 @@
+[
+  {
+    "id": "co-ATLAS",
+    "raisonSociale": "AtlasTech SARL",
+    "ICE": "001234567890123",
+    "IF": "12345678",
+    "RC": "CASA-123456",
+    "TP": "56789012",
+    "devise": "MAD",
+    "ville": "Casablanca",
+    "tvaPeriode": "mensuel",
+    "tvaTaux": [
+      20,
+      10,
+      14,
+      7
+    ]
+  }
+]

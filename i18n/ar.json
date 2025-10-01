@@ -1,0 +1,211 @@
+{
+  "nav": {
+    "dashboard": "لوحة القيادة",
+    "sales": "المبيعات",
+    "purchases": "المشتريات",
+    "bank": "البنك",
+    "ledger": "القيود",
+    "tax": "الضريبة",
+    "payroll": "الأجور",
+    "settings": "الإعدادات"
+  },
+  "toast": {
+    "languageChanged": "تم تغيير اللغة",
+    "themeChanged": "تم تطبيق السمة",
+    "datasetReset": "تمت تهيئة البيانات"
+  },
+  "table": {
+    "noData": "لا توجد بيانات",
+    "search": "بحث...",
+    "export": "تصدير CSV"
+  },
+  "modal": {
+    "close": "إغلاق"
+  },
+  "dashboard": {
+    "cash30": "تدفق نقدي ٣٠ يوماً",
+    "cash90": "تدفق ٩٠ يوماً",
+    "vatToPay": "ضريبة صافية",
+    "vatDetail": "محصلة {collecte} / قابلة للخصم {deductible}",
+    "overdue": "فواتير متأخرة",
+    "nextDue": "الاستحقاق القادم: {date}",
+    "cashFlow": "التحصيلات والمدفوعات",
+    "last90": "آخر ٩٠ يوماً",
+    "reminders": "تذكيرات العملاء"
+  },
+  "actions": {
+    "view": "عرض",
+    "edit": "تحرير",
+    "delete": "حذف",
+    "save": "حفظ",
+    "print": "طباعة"
+  },
+  "status": {
+    "brouillon": "مسودة",
+    "validee": "مؤكدة",
+    "payee": "مدفوعة",
+    "partiellement_payee": "مدفوعة جزئياً",
+    "annulee": "ملغاة",
+    "recue": "مستلمة"
+  },
+  "sales": {
+    "title": "إدارة الفواتير",
+    "createInvoice": "فاتورة جديدة",
+    "table": {
+      "id": "المرجع",
+      "customer": "الزبون",
+      "date": "التاريخ",
+      "due": "الاستحقاق",
+      "status": "الحالة",
+      "total": "المجموع",
+      "actions": "إجراءات"
+    },
+    "invoiceId": "فاتورة {id}",
+    "date": "التاريخ",
+    "due": "الاستحقاق",
+    "item": "الوصف",
+    "qty": "الكمية",
+    "unit": "الثمن",
+    "vat": "الضريبة",
+    "total": "المجموع دون ضريبة",
+    "totalTTC": "المجموع مع الضريبة",
+    "viewTitle": "معاينة الفاتورة",
+    "deleted": "تم حذف الفاتورة",
+    "createTitle": "إنشاء فاتورة",
+    "editTitle": "تعديل الفاتورة",
+    "client": "الزبون",
+    "status": "الحالة",
+    "addLine": "إضافة سطر",
+    "notes": "ملاحظات",
+    "addPayment": "تسجيل دفع",
+    "paymentAmount": "المبلغ المتوصل به",
+    "paymentRecorded": "تم تسجيل الدفع",
+    "saved": "تم حفظ الفاتورة"
+  },
+  "purchases": {
+    "title": "مصاريف الموردين",
+    "create": "فاتورة شراء",
+    "table": {
+      "id": "المرجع",
+      "supplier": "المورد",
+      "date": "التاريخ",
+      "due": "الاستحقاق",
+      "status": "الحالة",
+      "total": "المجموع",
+      "actions": "إجراءات"
+    },
+    "invoiceId": "فاتورة {id}",
+    "date": "التاريخ",
+    "due": "الاستحقاق",
+    "item": "الوصف",
+    "qty": "الكمية",
+    "unit": "الثمن",
+    "vat": "الضريبة",
+    "total": "المجموع دون ضريبة",
+    "totalTTC": "المجموع مع الضريبة",
+    "viewTitle": "معاينة شراء",
+    "deleted": "تم الحذف",
+    "createTitle": "إنشاء شراء",
+    "editTitle": "تعديل الشراء",
+    "supplier": "المورد",
+    "status": "الحالة",
+    "addLine": "إضافة سطر",
+    "notes": "ملاحظات",
+    "addPayment": "تسجيل دفع",
+    "paymentAmount": "المبلغ المدفوع",
+    "paymentRecorded": "تم تسجيل الدفع",
+    "saved": "تم الحفظ",
+    "ocrHint": "أسقط الملف FACT_ICE_HT_TVA_TTC.pdf للملء",
+    "ocrSuccess": "تم استخراج البيانات"
+  },
+  "bank": {
+    "title": "الحساب البنكي",
+    "table": {
+      "date": "التاريخ",
+      "label": "الوصف",
+      "amount": "المبلغ",
+      "ref": "المرجع",
+      "status": "الحالة"
+    },
+    "reconciled": "مطابق",
+    "toMatch": "بانتظار المطابقة",
+    "docs": "سندات",
+    "matched": "مطابقات",
+    "manualMatch": "تمت المطابقة",
+    "undo": "إلغاء",
+    "import": "استيراد",
+    "imported": "تم الاستيراد",
+    "auto": "مطابقة آلية",
+    "autoSuccess": "{count} عمليات",
+    "autoEmpty": "لا توجد تطابقات"
+  },
+  "ledger": {
+    "title": "دفاتر اليومية",
+    "lettrage": "تاريخ المطابقة",
+    "table": {
+      "date": "التاريخ",
+      "journal": "اليومية",
+      "compte": "الحساب",
+      "libelle": "الوصف",
+      "debit": "مدين",
+      "credit": "دائن"
+    }
+  },
+  "tax": {
+    "title": "تصريح الضريبة",
+    "monthly": "شهري",
+    "quarterly": "ربعي",
+    "exportXml": "تصدير XML",
+    "print": "طباعة",
+    "current": "ملخص الفترة",
+    "collecte": "المحصل",
+    "deductible": "القابل للخصم",
+    "net": "الصافي",
+    "table": {
+      "period": "الفترة",
+      "baseSales": "أساس المبيعات",
+      "basePurchases": "أساس المشتريات",
+      "collecte": "الضريبة المحصلة",
+      "deductible": "الضريبة المخصومة",
+      "net": "الصافي"
+    }
+  },
+  "payroll": {
+    "title": "الأجور",
+    "export": "تصدير CNSS",
+    "add": "إضافة موظف",
+    "table": {
+      "name": "الاسم",
+      "role": "الوظيفة",
+      "period": "الفترة",
+      "gross": "الأجر الخام",
+      "deductions": "الاقتطاعات",
+      "net": "الصافي"
+    },
+    "name": "الاسم",
+    "role": "الوظيفة",
+    "cnss": "CNSS",
+    "period": "الفترة",
+    "gross": "الأجر الخام",
+    "cnssRate": "اقتطاع CNSS",
+    "ir": "ضريبة الدخل",
+    "benefits": "مزايا",
+    "saved": "تم حفظ الأجر"
+  },
+  "settings": {
+    "company": "بيانات الشركة",
+    "city": "المدينة",
+    "currency": "العملة",
+    "tvaPeriod": "دورية الضريبة",
+    "plan": "خطة الحسابات",
+    "dataset": "البيانات",
+    "export": "تصدير",
+    "import": "استيراد",
+    "storageKey": "مفتاح التخزين",
+    "preferences": "التفضيلات",
+    "theme": "السمة",
+    "light": "فاتح",
+    "dark": "داكن",
+    "language": "اللغة"
+  }
+}
