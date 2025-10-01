@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plateforme Comptable Maroc</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="nav__brand">Compta Maroc</div>
+      <ul class="nav__links">
+        <li><a href="#solutions">Panorama</a></li>
+        <li><a href="#personas">Personae</a></li>
+        <li><a href="#epics">Épics</a></li>
+        <li><a href="#backlog">Backlog</a></li>
+        <li><a href="#roadmap">Feuille de route</a></li>
+      </ul>
+    </nav>
+    <div class="hero__content">
+      <div class="hero__text">
+        <p class="hero__eyebrow">Produit comptable nouvelle génération</p>
+        <h1>Expérience comptable marocaine fluide et conforme</h1>
+        <p class="hero__lead">
+          Cette maquette 100% HTML &amp; CSS consolide les meilleures pratiques du marché, les besoins des
+          personae clés et un backlog exhaustif couvrant les épics A à N pour livrer une solution complète
+          adaptée au contexte réglementaire marocain.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#epics">Explorer les épics</a>
+          <a class="btn btn--ghost" href="#backlog">Consulter le backlog</a>
+        </div>
+      </div>
+      <div class="hero__highlights">
+        <div class="highlight-card">
+          <span class="highlight-card__label">Couverture</span>
+          <span class="highlight-card__value">14 épics</span>
+          <p>Onboarding, compta, fiscalité, paie, analytique, intégrations et plus encore.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-card__label">Priorités V1</span>
+          <span class="highlight-card__value">20 Must</span>
+          <p>Capacités indispensables pour un lancement opérationnel au Maroc.</p>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-card__label">Personae</span>
+          <span class="highlight-card__value">5 profils</span>
+          <p>Dirigeant, comptable interne, cabinet, RH/Paie et auditeur couverts nativement.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="solutions">
+      <div class="section__header">
+        <h2>Panorama des solutions comptables au Maroc</h2>
+        <p>
+          Synthèse des applications les plus utilisées pour inspirer la proposition de valeur locale. Chaque
+          carte détaille les forces distinctives et les limites à dépasser.
+        </p>
+      </div>
+      <div class="card-grid">
+        <article class="market-card">
+          <h3>Sage Maroc</h3>
+          <p>Référence historique pour la tenue comptable multi-sociétés.</p>
+          <ul>
+            <li>Plan comptable CGNC pré-paramétré et reporting CIF.</li>
+            <li>Modules complémentaires paie et gestion commerciale.</li>
+            <li>Interface lourde, personnalisation limitée sans intégrateur.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>CIEL Compta</h3>
+          <p>Solution TPE/PME simple d'accès pour la facturation et la compta.</p>
+          <ul>
+            <li>Saisie guidée des journaux ventes/achats et rapprochement.</li>
+            <li>Gestion TVA et exports fiscaux standards.</li>
+            <li>Peu d'automatisation, absence de workflows collaboratifs.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>QuickBooks</h3>
+          <p>Solution cloud internationale largement utilisée par les startups.</p>
+          <ul>
+            <li>Facturation moderne, tableaux de bord cash et intégrations.</li>
+            <li>Automatisation bancaire et lettrage assisté.</li>
+            <li>Adaptation limitée aux exigences fiscales marocaines.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>Odoo</h3>
+          <p>Suite ERP modulaire avec forte capacité de personnalisation.</p>
+          <ul>
+            <li>Comptabilité complète, CRM, inventaire et facturation connectés.</li>
+            <li>Moteur d'automatisation puissant et API étendue.</li>
+            <li>Implémentations longues, nécessite expertise technique.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>Xero</h3>
+          <p>Plateforme cloud orientée collaboration et automatisation bancaire.</p>
+          <ul>
+            <li>Rapprochement automatique intelligent et reporting visuel.</li>
+            <li>Market d'applications riche pour connecter CRM, paie, etc.</li>
+            <li>Non localisé pour la fiscalité et les normes marocaines.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>ExpertC</h3>
+          <p>Outil marocain dédié aux cabinets d'expertise comptable.</p>
+          <ul>
+            <li>Multi-dossiers, workflows de révision et lettrage avancé.</li>
+            <li>Exports fiscaux SIMPL-IS/TVA conformes.</li>
+            <li>Interface datée, absence de modules RH intégrés.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>EBP Compta</h3>
+          <p>Logiciel complet pour PME avec forte couverture réglementaire.</p>
+          <ul>
+            <li>Plan comptable personnalisable et reporting financier robuste.</li>
+            <li>Gestion commerciale intégrée avec devis, BL, factures.</li>
+            <li>Installation locale, mobilité et collaboration limitées.</li>
+          </ul>
+        </article>
+        <article class="market-card">
+          <h3>KHABIR</h3>
+          <p>Solution marocaine cloud axée sur la digitalisation des cabinets.</p>
+          <ul>
+            <li>Portail client, partage documentaire et suivi obligations fiscales.</li>
+            <li>Automatisation des imports bancaires et rapprochement.</li>
+            <li>Offre paie et analytique encore embryonnaire.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="personas">
+      <div class="section__header">
+        <h2>Personae cibles</h2>
+        <p>Chaque profil pilote une partie du backlog afin de garantir la valeur délivrée.</p>
+      </div>
+      <div class="persona-grid">
+        <article class="persona-card">
+          <h3>Dirigeant(e) TPE/PME</h3>
+          <p>Souhaite une vision cash instantanée, des alertes TVA/IS et des reportings clairs.</p>
+          <ul>
+            <li>Suivi trésorerie, flux cash-in/out 90 jours.</li>
+            <li>Alertes d'échéances fiscales et sociales.</li>
+            <li>Tableaux de bord mobiles bilingues.</li>
+          </ul>
+        </article>
+        <article class="persona-card">
+          <h3>Comptable interne</h3>
+          <p>Doit produire la tenue quotidienne, le lettrage et les clôtures dans les temps.</p>
+          <ul>
+            <li>Saisie guidée, règles automatiques, rapprochement bancaire.</li>
+            <li>Contrôles de cohérence avant clôture.</li>
+            <li>Imports de balances d'ouverture, journaux multi-sociétés.</li>
+          </ul>
+        </article>
+        <article class="persona-card">
+          <h3>Cabinet / Expert-comptable</h3>
+          <p>Gère plusieurs dossiers, assure la conformité fiscale et collabore avec les clients.</p>
+          <ul>
+            <li>Multi-dossiers, workflows de révision et journaux d'audit.</li>
+            <li>Exports SIMPL-IS/TVA, liasse fiscale, supervision collaborateurs.</li>
+            <li>API et intégrations CRM/banque.</li>
+          </ul>
+        </article>
+        <article class="persona-card">
+          <h3>RH / Paie</h3>
+          <p>Besoin d'un module paie connecté à la compta et aux obligations CNSS.</p>
+          <ul>
+            <li>Paramétrage rubriques, bulletins, journaux de paie.</li>
+            <li>Exports Damancom, suivi congés et absences.</li>
+            <li>Notes de frais avec imputation automatique.</li>
+          </ul>
+        </article>
+        <article class="persona-card">
+          <h3>Auditeur</h3>
+          <p>Travaille en lecture seule, vérifie les pièces et exige la traçabilité complète.</p>
+          <ul>
+            <li>Portail d'accès sécurisé, exports auditables.</li>
+            <li>Journal d'audit horodaté.</li>
+            <li>Extraction personnalisée (Excel/PDF/EDI).</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="epics">
+      <div class="section__header">
+        <h2>Épics, capacités &amp; user stories détaillées</h2>
+        <p>Couverture fonctionnelle exhaustive pour livrer une plateforme opérationnelle dès la V1.</p>
+      </div>
+      <div class="epic-list">
+        <article class="epic-card" id="epic-a">
+          <header>
+            <h3>Épic A — Onboarding &amp; Paramétrage Maroc</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Installer rapidement une nouvelle société conforme aux exigences marocaines.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li><strong>Création société :</strong> ICE, IF, RC, TP, régime TVA, langue FR/AR, devise MAD.</li>
+                <li><strong>Import plan CGNC :</strong> catalogue sectoriel + comptes analytiques.</li>
+                <li><strong>Chart of accounts custom :</strong> ajout, verrouillage sur exercice clos.</li>
+                <li><strong>Séries légales :</strong> numérotation séquentielle par exercice/établissement.</li>
+                <li><strong>Paramètres fiscaux :</strong> taux configurables, échéanciers TVA/IS/IR.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>A1.</strong> L'admin crée une société avec calcul automatique des échéances TVA. <span class="badge badge--must">Must</span></li>
+                <li><strong>A2.</strong> Le comptable importe le plan CGNC, gère mapping et doublons. <span class="badge badge--must">Must</span></li>
+                <li><strong>A3.</strong> Paramétrage fiscal avancé avec calendriers dynamiques. <span class="badge badge--should">Should</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-b">
+          <header>
+            <h3>Épic B — Écritures, journaux, lettrage, clôture</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Assurer la tenue quotidienne, l'automatisation et la clôture sécurisée des comptes.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Saisie guidée multi-journaux avec validations en temps réel.</li>
+                <li>Règles d'auto-comptabilisation basées sur tiers, mots-clés et TVA.</li>
+                <li>Lettrage automatique et manuel avec journal et undo.</li>
+                <li>Clôture : contrôles, écritures d'inventaire, report à nouveau.</li>
+                <li>États CGNC : Grand livre, journaux, balance période/exercice.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>B1.</strong> Saisie d'une facture fournisseur avec contrôles débit=crédit et TVA. <span class="badge badge--must">Must</span></li>
+                <li><strong>B2.</strong> Lettrage automatique sur 5000 lignes avec score ≥ 0,9. <span class="badge badge--must">Must</span></li>
+                <li><strong>B3.</strong> Clôture exercice avec check-list et verrouillage. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-c">
+          <header>
+            <h3>Épic C — Banque &amp; rapprochement</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Connecter les relevés bancaires et automatiser le rapprochement comptable.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Imports OFX/CSV/MT940/camt.053 multi-banques.</li>
+                <li>Règles d'affectation auto-apprenantes.</li>
+                <li>Rapprochement automatique avec tolérances et split.</li>
+                <li>Interface de rapprochement manuel assisté.</li>
+                <li>Gestion des écarts et écritures d'ajustement.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>C1.</strong> Import d'un relevé avec 90% de rapprochement auto. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-d">
+          <header>
+            <h3>Épic D — Ventes &amp; Facturation</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Digitaliser le cycle devis &rarr; facture avec conformité légale et préparation e-invoicing.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Workflow devis, BL, facture, avoirs avec statuts.</li>
+                <li>Séries par établissement et numérotation légale verrouillée.</li>
+                <li>Pré-comptabilisation immédiate lors de la validation.</li>
+                <li>Préparation e-facture (signature, QR, paquet UBL/PEPPOL-like).</li>
+                <li>Passerelle SGFÉ configurable.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>D1.</strong> Génération d'une facture conforme avec paquet e-facture prêt. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-e">
+          <header>
+            <h3>Épic E — Achats &amp; Fournisseurs</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Automatiser l'enregistrement et la validation des dépenses fournisseurs.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Commandes, réceptions, factures, avoirs et échéanciers.</li>
+                <li>Relances et pénalités configurables.</li>
+                <li>OCR factures PDF/images avec extraction TVA/ICE.</li>
+                <li>Workflow de validation à 2 niveaux.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>E1.</strong> Upload d'une facture PDF avec pré-remplissage OCR &ge;95%. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-f">
+          <header>
+            <h3>Épic F — TVA &amp; Fiscalité (DGI / SIMPL)</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Garantir la conformité fiscale et la génération des déclarations dématérialisées.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Calcul TVA collectée/déductible avec prorata.</li>
+                <li>Déclaration TVA : imprimables + fichiers SIMPL-TVA.</li>
+                <li>IS : échéances, télé-déclaration/paiement SIMPL-IS.</li>
+                <li>IR : exports pour entreprises individuelles.</li>
+                <li>Liasse fiscale : états standard et mapping CGNC.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>F1.</strong> Génération déclaration TVA avec annexes et fichier EDI. <span class="badge badge--must">Must</span></li>
+                <li><strong>F2.</strong> Préparation IS avec échéancier et export SIMPL-IS. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-g">
+          <header>
+            <h3>Épic G — Paie &amp; CNSS</h3>
+            <span class="badge badge--should">Priorité V1.1</span>
+          </header>
+          <p>Connecter la paie à la comptabilité et automatiser les obligations sociales.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Paramétrage rubriques, taux et assiettes flexibles.</li>
+                <li>Génération bulletins, journaux de paie, écritures comptables.</li>
+                <li>Exports CNSS/Damancom (bordereaux, DS, paiements).</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>G1.</strong> Calcul paie avec export bordereau CNSS conforme. <span class="badge badge--should">Should</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-h">
+          <header>
+            <h3>Épic H — Reporting &amp; États financiers</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Fournir des tableaux de bord en temps réel et les états réglementaires.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Bilan, CPC, SIG, trésorerie et échéanciers.</li>
+                <li>Tableaux de bord cash, ventes, TVA due.</li>
+                <li>Gabarits PDF/Excel bilingues FR/AR.</li>
+                <li>Portail de lecture seule pour auditeurs.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li><strong>H1.</strong> Dirigeant visualise cash-in/out 90j avec alertes TVA/IS. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-i">
+          <header>
+            <h3>Épic I — Analytique</h3>
+            <span class="badge badge--should">Priorité Should</span>
+          </header>
+          <p>Permettre le suivi multi-axes pour la performance financière.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Jusqu'à 3 axes analytiques configurables.</li>
+                <li>Répartitions automatiques et manuelles.</li>
+                <li>Reporting par axe avec comparaisons période/exercice.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Analyse des marges par centre de coût avec export Excel. <span class="badge badge--should">Should</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-j">
+          <header>
+            <h3>Épic J — Sécurité, rôles &amp; audit</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Sécuriser la plateforme et assurer la traçabilité conforme CNDP.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Rôles : Admin, Comptable, Collaborateur, Dirigeant, Auditeur.</li>
+                <li>Journal d'audit complet (qui/quoi/quand).</li>
+                <li>MFA, SSO OIDC et politiques mot de passe.</li>
+                <li>Conformité loi 09-08 : registre, consentements, DPA.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Activation MFA obligatoire pour les accès sensibles. <span class="badge badge--must">Must</span></li>
+                <li>Audit trail exportable pour contrôle CNDP. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-k">
+          <header>
+            <h3>Épic K — Intégrations &amp; automatisation</h3>
+            <span class="badge badge--should">Priorité Should</span>
+          </header>
+          <p>Ouvrir la plateforme aux systèmes tiers et déclencher des automatisations.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Connecteurs banques, CRM, e-commerce.</li>
+                <li>API REST publique et webhooks (facture_validée, écriture_validée, déclaration_générée).</li>
+                <li>Moteur de règles if/then pour auto-compta.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Connexion marketplace pour synchroniser ventes en temps réel. <span class="badge badge--should">Should</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-l">
+          <header>
+            <h3>Épic L — UX, accessibilité &amp; multilingue</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Offrir une interface fluide, accessible et bilingue adaptée aux équipes marocaines.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>UI française disponible dès la V1.</li>
+                <li>Support arabe (RTL) prévu V1.1.</li>
+                <li>Thème clair/sombre, raccourcis clavier et recherche globale.</li>
+                <li>Version desktop via wrapper + PWA offline.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Basculer en thème sombre en 1 clic. <span class="badge badge--should">Should</span></li>
+                <li>Navigation clavier complète pour l'accessibilité. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-m">
+          <header>
+            <h3>Épic M — Migration &amp; imports</h3>
+            <span class="badge badge--must">Priorité V1</span>
+          </header>
+          <p>Faciliter l'onboarding grâce à des imports massifs et contrôlés.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Imports balances d'ouverture, tiers et écritures.</li>
+                <li>Modèles Sage, CIEL, Odoo, EBP.</li>
+                <li>Contrôles automatiques (balances nulles, doublons, cohérence TVA).</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Import d'une balance depuis Sage avec rapport d'anomalies. <span class="badge badge--must">Must</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="epic-card" id="epic-n">
+          <header>
+            <h3>Épic N — Aide &amp; support</h3>
+            <span class="badge badge--should">Priorité Should</span>
+          </header>
+          <p>Accompagner les utilisateurs avec des contenus contextualisés et un feedback loop.</p>
+          <div class="epic-card__content">
+            <div>
+              <h4>Capacités</h4>
+              <ul class="tick-list">
+                <li>Guide intégré, checklist clôture et TVA.</li>
+                <li>Centre d'aide avec recherche et vidéos.</li>
+                <li>Collecte de feedback in-app.</li>
+              </ul>
+            </div>
+            <div>
+              <h4>User stories clés</h4>
+              <ul class="story-list">
+                <li>Checklist de clôture dynamique envoyée au comptable. <span class="badge badge--should">Should</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="backlog">
+      <div class="section__header">
+        <h2>Backlog priorisé</h2>
+        <p>Vue consolidée des fonctionnalités Must (V1) et Should (évolutions rapides).</p>
+      </div>
+      <div class="backlog-grid">
+        <div class="backlog-column">
+          <h3>Must — Lancement V1</h3>
+          <ul>
+            <li>Onboarding sociétés marocaines (Epic A).</li>
+            <li>Saisie comptable, lettrage, clôture (Epic B).</li>
+            <li>Rapprochement bancaire automatique (Epic C).</li>
+            <li>Facturation légale &amp; pré-compta (Epic D).</li>
+            <li>Achats &amp; OCR basique (Epic E).</li>
+            <li>Fiscalité SIMPL TVA/IS (Epic F).</li>
+            <li>Reporting cash &amp; états CGNC (Epic H).</li>
+            <li>Sécurité, rôles, audit trail (Epic J).</li>
+            <li>UX FR, accessibilité, PWA (Epic L).</li>
+            <li>Migrations Sage/CIEL/Odoo/EBP (Epic M).</li>
+          </ul>
+        </div>
+        <div class="backlog-column backlog-column--accent">
+          <h3>Should — Renforcement post-V1</h3>
+          <ul>
+            <li>Paramètres fiscaux avancés (Epic A).</li>
+            <li>Paie complète &amp; Damancom (Epic G).</li>
+            <li>Analytique multi-axes (Epic I).</li>
+            <li>Intégrations API &amp; moteur de règles (Epic K).</li>
+            <li>Thème sombre, support arabe RTL (Epic L).</li>
+            <li>Checklist in-app, centre d'aide (Epic N).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="section__header">
+        <h2>Feuille de route proposée</h2>
+        <p>Plan de livraison trimestriel équilibrant conformité, automatisation et expérience utilisateur.</p>
+      </div>
+      <div class="roadmap">
+        <div class="roadmap__lane">
+          <h3>T1 — Kick-off &amp; fondamentaux</h3>
+          <ul>
+            <li>Épics A, B, C : paramétrage, écritures, rapprochement.</li>
+            <li>Déploiement des rôles, sécurité et audit (Epic J).</li>
+            <li>Migrations initiales (Epic M) et reporting cash (Epic H partiel).</li>
+          </ul>
+        </div>
+        <div class="roadmap__lane">
+          <h3>T2 — Facturation &amp; fiscalité</h3>
+          <ul>
+            <li>Épics D, E : ventes, achats, OCR basique.</li>
+            <li>Fiscalité TVA/IS + exports SIMPL (Epic F complet).</li>
+            <li>UX FR finalisée, PWA et accessibilité (Epic L Must).</li>
+          </ul>
+        </div>
+        <div class="roadmap__lane">
+          <h3>T3 — Expérience augmentée</h3>
+          <ul>
+            <li>Tableaux de bord avancés &amp; exports auditeurs (Epic H).</li>
+            <li>Analytique multi-axes et intégrations API (Epics I &amp; K).</li>
+            <li>Support arabe RTL, thème sombre, checklist support (Epics L &amp; N Should).</li>
+          </ul>
+        </div>
+        <div class="roadmap__lane">
+          <h3>T4 — Paie &amp; automatisations</h3>
+          <ul>
+            <li>Module paie complet &amp; Damancom (Epic G).</li>
+            <li>Automatisation e-facture et passerelle SGFÉ (Epic D avancé).</li>
+            <li>Optimisation moteur de règles et connecteurs (Epic K).</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 Compta Maroc — Vision produit opérationnelle 100% HTML &amp; CSS.</p>
+  </footer>
+</body>
+</html>
