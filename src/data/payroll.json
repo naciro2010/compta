@@ -1,0 +1,3 @@
+[
+  {"id":"sal-001","nom":"Amina El Idrissi","poste":"Comptable","cnss":"1234567","salaireBrut":9000,"retenues":{"cnss":4.48,"ir":10.0},"avantages":{"transport":400},"periode":"2025-01"}
+]

@@ -1,0 +1,4 @@
+[
+  {"id":"cli-001","nom":"Zina Distribution","ICE":"001112223334455","ville":"Rabat","email":"contact@zina.ma","conditionsPaiement":"30 j fin de mois"},
+  {"id":"cli-002","nom":"Souk Pro","ICE":"001998877665544","ville":"Casablanca","email":"hello@soukpro.ma","conditionsPaiement":"45 j"}
+]

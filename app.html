@@ -1,66 +1,37 @@
-<!DOCTYPE html>
-<html lang="fr" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AtlasCompta — Démo POC</title>
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/theme.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#view">Aller au contenu</a>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Navigation principale">
-        <div class="brand">
-          <a href="index.html" class="logo-link" aria-label="Retour vers la landing">
-            <img src="assets/logo.svg" alt="AtlasCompta" width="40" height="40" />
-          </a>
-          <div>
-            <h1>AtlasCompta</h1>
-            <p>POC démo CGNC</p>
-          </div>
-        </div>
-        <p class="muted" aria-live="polite">POC — données fictives</p>
-        <nav>
-          <ul id="main-nav" class="nav-list" role="list">
-            <li><a href="#/dashboard" data-route="dashboard" class="nav-link active">Dashboard</a></li>
-            <li><a href="#/sales" data-route="sales" class="nav-link">Ventes</a></li>
-            <li><a href="#/purchases" data-route="purchases" class="nav-link">Achats</a></li>
-            <li><a href="#/bank" data-route="bank" class="nav-link">Banque</a></li>
-            <li><a href="#/ledger" data-route="ledger" class="nav-link">Écritures</a></li>
-            <li><a href="#/tax" data-route="tax" class="nav-link">TVA &amp; Fisc</a></li>
-            <li><a href="#/payroll" data-route="payroll" class="nav-link">Paie</a></li>
-            <li><a href="#/fixed-assets" data-route="fixed-assets" class="nav-link">Immobilisations</a></li>
-            <li><a href="#/settings" data-route="settings" class="nav-link">Paramètres</a></li>
-          </ul>
-        </nav>
-        <button id="reset-demo" class="btn reset" type="button">Réinitialiser la démo</button>
-      </aside>
-      <div class="content-area">
-        <header class="topbar">
-          <div class="topbar-actions">
-            <label class="select-wrapper">
-              <span class="sr-only">Choisir la langue</span>
-              <select id="lang-select" aria-label="Langue">
-                <option value="fr">Français</option>
-                <option value="ar">العربية</option>
-              </select>
-            </label>
-            <label class="select-wrapper">
-              <span class="sr-only">Choisir le thème</span>
-              <select id="theme-select" aria-label="Thème">
-                <option value="light">Clair</option>
-                <option value="dark">Sombre</option>
-              </select>
-            </label>
-          </div>
-        </header>
-        <main id="view" tabindex="-1" aria-live="polite"></main>
-      </div>
+<!doctype html><html lang="fr" x-data x-init="$store.i18n.init('fr'); $store.seed.ensure()">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MA‑ACC — App</title>
+  <script type="module" src="/src/app/main-app.js"></script>
+  <link rel="stylesheet" href="/src/styles/tailwind.css" />
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900" x-data="{menu:false}">
+  <header class="border-b bg-white">
+    <div class="container flex items-center justify-between py-4">
+      <a href="/index.html" class="flex items-center gap-2"><img src="/src/assets/logo.svg" class="h-8 w-8"><span class="font-semibold">MA‑ACC</span></a>
+      <nav class="flex items-center gap-3">
+        <button @click="$store.i18n.toggle()" class="text-sm underline">FR/AR</button>
+        <button @click="$store.seed.reset()" class="text-sm underline">Réinitialiser la démo</button>
+      </nav>
     </div>
-    <div id="modal-root" aria-live="assertive"></div>
-    <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
-    <script type="module" src="scripts/main.js"></script>
-  </body>
+  </header>
+  <div class="container grid md:grid-cols-12 gap-6 py-6">
+    <aside class="md:col-span-3 lg:col-span-2">
+      <nav class="bg-white border rounded p-3 space-y-1">
+        <a href="#/dashboard" class="block px-3 py-2 rounded hover:bg-slate-50">Dashboard</a>
+        <a href="#/sales" class="block px-3 py-2 rounded hover:bg-slate-50">Ventes</a>
+        <a href="#/purchases" class="block px-3 py-2 rounded hover:bg-slate-50">Achats</a>
+        <a href="#/bank" class="block px-3 py-2 rounded hover:bg-slate-50">Banque</a>
+        <a href="#/ledger" class="block px-3 py-2 rounded hover:bg-slate-50">Écritures</a>
+        <a href="#/tax" class="block px-3 py-2 rounded hover:bg-slate-50">TVA</a>
+        <a href="#/payroll" class="block px-3 py-2 rounded hover:bg-slate-50">Paie</a>
+        <a href="#/fixed-assets" class="block px-3 py-2 rounded hover:bg-slate-50">Immobilisations</a>
+        <a href="#/settings" class="block px-3 py-2 rounded hover:bg-slate-50">Paramètres</a>
+      </nav>
+    </aside>
+    <main class="md:col-span-9 lg:col-span-10">
+      <div id="view"></div>
+    </main>
+  </div>
+</body>
 </html>
