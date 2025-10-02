@@ -29,8 +29,14 @@ jobs:
         run: |
           rm -rf dist
           mkdir -p dist
-          cp index.html styles.css dist/
-          cp -R styles scripts data i18n dist/
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='.idea/' \
+            --exclude='dist/' \
+            --exclude='README.md' \
+            --exclude='.gitignore' \
+            ./ dist/
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
