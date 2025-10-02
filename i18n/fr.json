@@ -7,6 +7,7 @@
     "ledger": "Écritures",
     "tax": "TVA & Fisc",
     "payroll": "Paie",
+    "fixedAssets": "Immobilisations",
     "settings": "Paramètres"
   },
   "toast": {
@@ -21,6 +22,140 @@
   },
   "modal": {
     "close": "Fermer"
+  },
+  "landing": {
+    "heroTitle": "Comptabilité marocaine, simple et fluide",
+    "heroSubtitle": "POC conforme au CGNC, prêt pour la TVA SIMPL (démo), facturation, rapprochement, paie CNSS (mock) – FR/AR.",
+    "ctaDemo": "Ouvrir la démo",
+    "ctaBrochure": "Télécharger la brochure",
+    "benefits": [
+      "Conforme CGNC (démo)",
+      "TVA & IS: exports POC",
+      "Factures FR/AR",
+      "Rapprochement bancaire",
+      "Lettrage clients/fournisseurs",
+      "Paie CNSS (mock)"
+    ],
+    "complianceTitle": "Conformité marocaine par design",
+    "complianceItems": [
+      {
+        "title": "CGNC digitalisé",
+        "description": "Plan comptable classes 1 à 7, journaux et grand livre prêts pour l'audit."
+      },
+      {
+        "title": "SIMPL TVA/IS",
+        "description": "Préparation des montants et génération d'exports XML POC pour déclarations."
+      },
+      {
+        "title": "CNSS & paie",
+        "description": "Bulletins simplifiés, export CSV mock pour bordereaux CNSS mensuels."
+      },
+      {
+        "title": "Bilingue FR/AR",
+        "description": "Interface, facturation et rapports disponibles en français et en arabe."
+      }
+    ],
+    "featuresTitle": "Fonctionnalités adaptées au marché marocain",
+    "features": [
+      {
+        "title": "Plan comptable complet",
+        "description": "Classes 1 à 7, journaux automatiques, saisie en partie double et lettrage assisté."
+      },
+      {
+        "title": "Facturation bilingue",
+        "description": "Devis et factures FR/AR, numérotation intelligente, impression PDF stylée."
+      },
+      {
+        "title": "Rapprochement bancaire",
+        "description": "Imports JSON, matching auto (±5 jours) avec scoring et corrections manuelles."
+      },
+      {
+        "title": "TVA & Fisc",
+        "description": "Collectée/déductible par période, préparation SIMPL, export XML démonstratif."
+      },
+      {
+        "title": "Paie CNSS",
+        "description": "Salariés factices, calculs bruts/net, export mock CNSS et journal social."
+      },
+      {
+        "title": "Immobilisations",
+        "description": "Amortissement linéaire, écritures d'inventaire et suivi des valeurs nettes."
+      }
+    ],
+    "audienceTitle": "Pour qui ?",
+    "audience": [
+      {
+        "title": "TPE / PME",
+        "description": "Gérez vos ventes, achats et trésorerie avec une interface pensée pour le Maroc."
+      },
+      {
+        "title": "Cabinets comptables",
+        "description": "Accélérez la tenue avec un POC digital CGNC, prêt pour la collaboration client."
+      },
+      {
+        "title": "Startups & scale-ups",
+        "description": "Structurez votre finance sans lourdeur, exportez vos données à tout moment."
+      }
+    ],
+    "proofTitle": "Ils testent la démo",
+    "testimonials": [
+      {
+        "quote": "Nous avons pu simuler un exercice complet avec TVA et rapprochement sans installer de serveur.",
+        "name": "Khadija El Idrissi",
+        "role": "DAF – Marrakech Tech"
+      },
+      {
+        "quote": "Le bilingue FR/AR simplifie la formation des équipes et l'onboarding de clients régionaux.",
+        "name": "Youssef Berrada",
+        "role": "Expert-comptable – Casa Conseil"
+      },
+      {
+        "quote": "Les exports CNSS mock et SIMPL TVA nous permettent de préparer nos process internes.",
+        "name": "Salma Moutawakil",
+        "role": "Fondatrice – Tangier Makers"
+      }
+    ],
+    "faqTitle": "Questions fréquentes",
+    "faq": [
+      {
+        "question": "Les données sont-elles réelles ?",
+        "answer": "Non, tout est fictif (clients, factures, paie) et stocké uniquement dans votre navigateur."
+      },
+      {
+        "question": "Êtes-vous conforme pour production ?",
+        "answer": "Il s'agit d'un démonstrateur CGNC : aucune garantie légale, mais les principes comptables marocains sont respectés."
+      },
+      {
+        "question": "Comment est gérée la TVA ?",
+        "answer": "Le moteur calcule collectée/déductible, prépare SIMPL et génère un XML POC pour tests DGI."
+      },
+      {
+        "question": "Où sont hébergées les données ?",
+        "answer": "En local (LocalStorage). Le bouton \"Réinitialiser la démo\" supprime tout instantanément."
+      },
+      {
+        "question": "Disposez-vous d'un OCR factures ?",
+        "answer": "Oui, un mock déduit HT/TVA/TTC à partir du nom de fichier pour accélérer la saisie fournisseurs."
+      },
+      {
+        "question": "Quelle est la feuille de route ?",
+        "answer": "Echéancier multi-sociétés, exports EDI officiels, intégrations bancaires, API experts-comptables."
+      }
+    ],
+    "contactTitle": "Parlons de votre besoin",
+    "contactDisclaimer": "POC démo — Aucune donnée réelle, stockage local uniquement.",
+    "contact": {
+      "name": "Nom",
+      "company": "Société",
+      "email": "Email",
+      "phone": "Téléphone",
+      "message": "Message"
+    },
+    "contactSubmit": "Envoyer",
+    "contactExport": "Exporter contacts (CSV)",
+    "contactSuccess": "Merci, on vous recontacte (démo).",
+    "contactError": "Merci de renseigner nom, société et email.",
+    "contactEmpty": "Aucun contact enregistré pour le moment."
   },
   "dashboard": {
     "cash30": "Flux net 30 jours",
@@ -192,6 +327,57 @@
     "benefits": "Avantages",
     "saved": "Paie enregistrée"
   },
+  "fixedAssets": {
+    "title": "Immobilisations (POC)",
+    "subtitle": "Suivi des acquisitions, amortissements linéaires et écritures d'inventaire démo.",
+    "add": "Ajouter un actif",
+    "createTitle": "Nouvelle immobilisation",
+    "editTitle": "Modifier l'immobilisation",
+    "created": "Immobilisation créée",
+    "updated": "Immobilisation mise à jour",
+    "deleted": "Immobilisation supprimée",
+    "confirmDelete": "Supprimer cette immobilisation fictive ?",
+    "form": {
+      "code": "Code",
+      "label": "Libellé",
+      "category": "Catégorie",
+      "start": "Mise en service",
+      "cost": "Coût d'acquisition",
+      "residual": "Valeur résiduelle",
+      "duration": "Durée (mois)"
+    },
+    "formError": "Veuillez renseigner au minimum le code et le libellé.",
+    "table": {
+      "code": "Code",
+      "label": "Libellé",
+      "category": "Catégorie",
+      "start": "Mise en service",
+      "cost": "Coût",
+      "monthly": "Dotation mensuelle",
+      "net": "Valeur nette",
+      "actions": "Actions"
+    },
+    "scheduleTitle": "Plan d'amortissement {code}",
+    "scheduleIntro": "Calcul linéaire basé sur le coût d'acquisition hors taxes.",
+    "schedule": {
+      "date": "Date",
+      "dotation": "Dotation",
+      "cumul": "Cumul",
+      "net": "Valeur nette"
+    },
+    "entries": {
+      "date": "Date",
+      "debit": "Compte débit",
+      "label": "Libellé",
+      "amount": "Montant",
+      "credit": "Compte crédit"
+    },
+    "export": "Exporter amortissement",
+    "print": "Imprimer",
+    "noSchedule": "Paramètres insuffisants pour calculer un amortissement.",
+    "totalCost": "Coût brut",
+    "totalNet": "Valeur nette actuelle"
+  },
   "settings": {
     "company": "Société",
     "city": "Ville",
@@ -206,6 +392,15 @@
     "theme": "Thème",
     "light": "Clair",
     "dark": "Sombre",
-    "language": "Langue"
+    "language": "Langue",
+    "complianceTitle": "À propos & conformité",
+    "complianceIntro": "Ce prototype illustre les processus CGNC pour {company} : TVA SIMPL, paie CNSS (mock) et bilinguisme FR/AR.",
+    "complianceItems": {
+      "cgnc": "Plan CGNC classes 1-7",
+      "simpl": "Préparation SIMPL TVA/IS",
+      "cnss": "Exports CNSS mock",
+      "i18n": "Interface FR/AR"
+    },
+    "complianceWarning": "POC non contractuel : ne pas utiliser en production sans validation fiscale."
   }
 }

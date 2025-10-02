@@ -9,6 +9,7 @@ import Ledger from './pages/Ledger.js';
 import Tax from './pages/Tax.js';
 import Payroll from './pages/Payroll.js';
 import Settings from './pages/Settings.js';
+import FixedAssets from './pages/FixedAssets.js';
 import { showToast } from './components/Toast.js';
 
 const routes = {
@@ -19,6 +20,7 @@ const routes = {
   ledger: Ledger,
   tax: Tax,
   payroll: Payroll,
+  'fixed-assets': FixedAssets,
   settings: Settings,
 };
 
@@ -30,6 +32,7 @@ const navConfig = [
   { route: 'ledger', key: 'nav.ledger' },
   { route: 'tax', key: 'nav.tax' },
   { route: 'payroll', key: 'nav.payroll' },
+  { route: 'fixed-assets', key: 'nav.fixedAssets' },
   { route: 'settings', key: 'nav.settings' },
 ];
 
