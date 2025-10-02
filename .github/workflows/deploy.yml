@@ -22,21 +22,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Prepare static files
-        run: |
-          rm -rf dist
-          mkdir -p dist
-          rsync -av \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='.idea/' \
-            --exclude='dist/' \
-            --exclude='README.md' \
-            --exclude='.gitignore' \
-            ./ dist/
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v3
