@@ -4,19 +4,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Compta Maroc — POC</title>
   <meta name="description" content="POC comptabilité marocaine — Landing FR/AR, démo SPA, données factices locales" />
-  <script type="module" src="/src/landing/main-landing.js"></script>
-  <link rel="stylesheet" href="/src/styles/tailwind.css" />
+  <script type="module" src="./src/landing/main-landing.js"></script>
 </head>
 <body class="min-h-screen bg-slate-50 text-slate-900">
   <header class="border-b bg-white">
     <div class="container flex items-center justify-between py-4">
       <a href="./" class="flex items-center gap-2">
-        <img src="/src/assets/logo.svg" alt="" class="h-8 w-8">
+        <img src="./src/assets/logo.svg" alt="" class="h-8 w-8">
         <span class="font-semibold">MA‑ACC</span>
       </a>
       <nav class="flex items-center gap-3">
         <button @click="$store.i18n.toggle()" class="text-sm underline">FR/AR</button>
-        <a href="/app.html" class="px-3 py-1.5 rounded bg-slate-900 text-white">Ouvrir la démo</a>
+        <a href="./app.html" class="px-3 py-1.5 rounded bg-slate-900 text-white">Ouvrir la démo</a>
       </nav>
     </div>
   </header>
@@ -26,11 +25,11 @@
         <h1 class="text-3xl md:text-4xl font-bold" x-text="$store.i18n.t('landing.heroTitle')"></h1>
         <p class="mt-3 text-slate-600" x-text="$store.i18n.t('landing.heroSubtitle')"></p>
         <div class="mt-6 flex gap-3">
-          <a href="/app.html" class="px-4 py-2 rounded bg-slate-900 text-white" x-text="$store.i18n.t('landing.ctaDemo')"></a>
+          <a href="./app.html" class="px-4 py-2 rounded bg-slate-900 text-white" x-text="$store.i18n.t('landing.ctaDemo')"></a>
           <button class="px-4 py-2 rounded border" @click="window.print()" x-text="$store.i18n.t('landing.ctaBrochure')"></button>
         </div>
       </div>
-      <img src="/src/assets/hero-illustration.svg" alt="" class="w-full">
+      <img src="./src/assets/hero-illustration.svg" alt="" class="w-full">
     </section>
     <section>
       <h2 class="text-xl font-semibold mb-4" x-text="$store.i18n.t('landing.benefitsTitle')"></h2>
