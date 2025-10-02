@@ -1,4 +1,4 @@
-/* Compatibility bundle to satisfy legacy build scripts expecting styles.css.
+
    Aggregates base and theme styles for static deployments and inlines
    fallback rules for bundlers that ignore @import in CSS. */
 @import url("./styles/base.css");
