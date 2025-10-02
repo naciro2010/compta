@@ -6,50 +6,58 @@
   <meta name="description" content="POC comptabilité marocaine — Landing FR/AR, démo SPA, données factices locales" />
   <script type="module" src="./src/landing/main-landing.js"></script>
 </head>
-<body class="min-h-screen bg-slate-50 text-slate-900">
-  <header class="border-b bg-white">
+<body class="text-slate-100">
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/60 backdrop-blur">
     <div class="container flex items-center justify-between py-4">
-      <a href="./" class="flex items-center gap-2">
-        <img src="./src/assets/logo.svg" alt="" class="h-8 w-8">
-        <span class="font-semibold">MA‑ACC</span>
+      <a href="./" class="flex items-center gap-3 text-white">
+        <span class="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-500/20">
+          <img src="./src/assets/logo.svg" alt="" class="h-7 w-7">
+        </span>
+        <span class="text-lg font-semibold tracking-wide">MA‑ACC</span>
       </a>
       <nav class="flex items-center gap-3">
-        <button @click="$store.i18n.toggle()" class="text-sm underline">FR/AR</button>
-        <a href="./app.html" class="px-3 py-1.5 rounded bg-slate-900 text-white">Ouvrir la démo</a>
+        <button @click="$store.i18n.toggle()" class="btn-secondary text-sm">FR / AR</button>
+        <a href="./app.html" class="btn text-sm">Ouvrir la démo</a>
       </nav>
     </div>
   </header>
-  <main class="container py-12 space-y-16">
-    <section class="grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <h1 class="text-3xl md:text-4xl font-bold" x-text="$store.i18n.t('landing.heroTitle')"></h1>
-        <p class="mt-3 text-slate-600" x-text="$store.i18n.t('landing.heroSubtitle')"></p>
-        <div class="mt-6 flex gap-3">
-          <a href="./app.html" class="px-4 py-2 rounded bg-slate-900 text-white" x-text="$store.i18n.t('landing.ctaDemo')"></a>
-          <button class="px-4 py-2 rounded border" @click="window.print()" x-text="$store.i18n.t('landing.ctaBrochure')"></button>
+  <main class="container py-16 space-y-16">
+    <section class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] items-center">
+      <div class="space-y-6">
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.4em] text-primary-200">POC Maroc</span>
+        <h1 class="text-4xl font-semibold leading-tight text-white md:text-5xl" x-text="$store.i18n.t('landing.heroTitle')"></h1>
+        <p class="max-w-xl text-lg text-slate-300" x-text="$store.i18n.t('landing.heroSubtitle')"></p>
+        <div class="flex flex-wrap gap-3">
+          <a href="./app.html" class="btn" x-text="$store.i18n.t('landing.ctaDemo')"></a>
+          <button class="btn-secondary" @click="window.print()" x-text="$store.i18n.t('landing.ctaBrochure')"></button>
         </div>
       </div>
-      <img src="./src/assets/hero-illustration.svg" alt="" class="w-full">
+      <div class="card overflow-hidden">
+        <img src="./src/assets/hero-illustration.svg" alt="Illustration" class="w-full">
+      </div>
     </section>
-    <section>
-      <h2 class="text-xl font-semibold mb-4" x-text="$store.i18n.t('landing.benefitsTitle')"></h2>
-      <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 list-disc pl-6">
-        <template x-for="b in $store.i18n.t('landing.benefits')"><li x-text="b"></li></template>
-      </ul>
-    </section>
-    <section>
-      <h2 class="text-xl font-semibold mb-4" x-text="$store.i18n.t('landing.faqTitle')"></h2>
-      <div class="space-y-2">
-        <template x-for="q in $store.i18n.t('landing.faq')">
-          <details class="bg-white p-4 rounded border">
-            <summary class="font-medium cursor-pointer" x-text="q.q"></summary>
-            <p class="mt-2 text-slate-600" x-text="q.a"></p>
-          </details>
-        </template>
+
+    <section class="grid gap-8 lg:grid-cols-3">
+      <div class="panel">
+        <h2 class="panel__title" x-text="$store.i18n.t('landing.benefitsTitle')"></h2>
+        <ul class="space-y-3 text-sm text-slate-300">
+          <template x-for="b in $store.i18n.t('landing.benefits')"><li class="flex items-start gap-3"><span class="mt-1 h-2 w-2 rounded-full bg-primary-400"></span><span x-text="b"></span></li></template>
+        </ul>
+      </div>
+      <div class="panel lg:col-span-2">
+        <h2 class="panel__title" x-text="$store.i18n.t('landing.faqTitle')"></h2>
+        <div class="space-y-3">
+          <template x-for="q in $store.i18n.t('landing.faq')">
+            <details class="rounded-xl border border-white/10 bg-white/5 p-4">
+              <summary class="cursor-pointer text-sm font-semibold text-white" x-text="q.q"></summary>
+              <p class="mt-2 text-sm text-slate-300" x-text="q.a"></p>
+            </details>
+          </template>
+        </div>
       </div>
     </section>
   </main>
-  <footer class="border-t py-6 text-center text-sm text-slate-500">
+  <footer class="border-t border-white/10 bg-slate-950/60 py-6 text-center text-xs text-slate-500">
     POC démo — données factices — non conforme production.
   </footer>
 </body>

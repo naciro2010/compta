@@ -1,9 +1,124 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Tokens + helpers */
+
+@layer base {
+  html {
+    @apply bg-slate-950;
+  }
+  body {
+    @apply min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-100 antialiased;
+  }
+  a {
+    @apply text-primary-300 transition-colors duration-150;
+  }
+  a:hover {
+    @apply text-primary-200;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto max-w-6xl px-6;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur shadow-xl shadow-slate-950/30;
+  }
+  .panel {
+    @apply card p-6 space-y-6;
+  }
+  .panel__header {
+    @apply flex flex-wrap items-center justify-between gap-4;
+  }
+  .panel__title {
+    @apply text-lg font-semibold text-white;
+  }
+  .panel__subtitle {
+    @apply text-sm text-slate-300;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg bg-primary-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-primary-900/40 transition hover:bg-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-300;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium text-slate-200 transition hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-primary-300/50;
+  }
+  .btn-link {
+    @apply text-sm font-medium text-primary-300 hover:text-primary-200 underline-offset-4 hover:underline;
+  }
+  .tabs {
+    @apply flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 p-1 backdrop-blur;
+  }
+  .tab {
+    @apply flex-1 rounded-lg px-4 py-2 text-sm font-medium text-slate-300 transition;
+  }
+  .tab--active {
+    @apply bg-primary-500 text-white shadow shadow-primary-900/40;
+  }
+  .table {
+    @apply min-w-full divide-y divide-white/10 text-sm;
+  }
+  .table thead {
+    @apply bg-white/5 text-xs uppercase tracking-widest text-slate-300;
+  }
+  .table th {
+    @apply px-3 py-3 text-left font-semibold;
+  }
+  .table td {
+    @apply px-3 py-3 text-slate-200;
+  }
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:border-primary-400 hover:text-white;
+  }
+  .chip--active {
+    @apply border-primary-500 bg-primary-500/20 text-white shadow shadow-primary-900/30;
+  }
+  .chip__status {
+    @apply rounded-full bg-white/10 px-2 py-0.5 text-xs uppercase tracking-wide;
+  }
+  .nav-link {
+    @apply block rounded-lg px-3 py-2 text-sm text-slate-300 transition hover:bg-white/10 hover:text-white;
+  }
+  .nav-link--active {
+    @apply bg-primary-500/20 text-white shadow shadow-primary-900/30;
+  }
+  .input {
+    @apply w-full rounded-lg border border-white/10 bg-white/10 px-3 py-2 text-sm text-white placeholder:text-slate-400 focus:border-primary-400 focus:outline-none focus:ring-2 focus:ring-primary-400/50;
+  }
+  .field {
+    @apply flex flex-col gap-1 text-sm text-slate-200;
+  }
+  .field-error .input {
+    @apply border-rose-400/70 focus:border-rose-400 focus:ring-rose-400/40;
+  }
+  .field-hint {
+    @apply text-xs text-rose-300;
+  }
+  .modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+  }
+  .modal__overlay {
+    @apply absolute inset-0 bg-slate-950/70 backdrop-blur;
+  }
+  .modal__panel {
+    @apply relative z-10 w-full max-w-2xl rounded-2xl border border-white/10 bg-slate-900/90 p-6 text-slate-100 shadow-2xl;
+  }
+  .modal__header {
+    @apply mb-4 flex items-center justify-between;
+  }
+  .modal__title {
+    @apply text-lg font-semibold;
+  }
+  .modal__close {
+    @apply text-xl text-slate-400 hover:text-white;
+  }
+  .modal__body {
+    @apply max-h-[60vh] overflow-y-auto pr-1;
+  }
+  .modal__footer {
+    @apply mt-6 flex items-center justify-end gap-3;
+  }
+}
+
 @layer utilities {
-  .card { @apply bg-white border rounded p-4; }
-  .btn { @apply px-3 py-2 rounded bg-slate-900 text-white hover:opacity-90; }
-  .btn-outline { @apply px-3 py-2 rounded border; }
+  .btn-outline { @apply px-3 py-2 rounded border border-white/20 bg-transparent text-slate-200 hover:border-primary-400; }
 }
