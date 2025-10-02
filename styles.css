@@ -1,5 +1,5 @@
 
-   Aggregates base and theme styles for static deployments and inlines
+/* Aggregates base and theme styles for static deployments and inlines
    fallback rules for bundlers that ignore @import in CSS. */
 @import url("./styles/base.css");
 @import url("./styles/theme.css");
@@ -500,4 +500,3 @@ html[dir='rtl'] th,
 html[dir='rtl'] td {
   text-align: end;
 }
-
