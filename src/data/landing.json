@@ -1,0 +1,630 @@
+{
+  "fr": {
+    "nav": {
+      "compliance": "Conformité",
+      "features": "Fonctionnalités",
+      "personas": "Pour qui ?",
+      "faq": "FAQ",
+      "contact": "Contact"
+    },
+    "hero": {
+      "badge": "POC démo gratuit",
+      "title": "Comptabilité marocaine, <span class='gradient-text'>simple et fluide</span>",
+      "subtitle": "Solution complète conforme CGNC : facturation, rapprochement bancaire, TVA, paie CNSS. Bilingue FR/AR.",
+      "cta_demo": "Essayer la démo",
+      "cta_brochure": "Télécharger la brochure",
+      "metrics": {
+        "realtime": "Pilotage en temps réel",
+        "compliant": "CGNC 2024",
+        "revenue": "Chiffre d'affaires",
+        "growth": "+18% vs N-1",
+        "tva": "TVA collectée",
+        "tva_subtext": "Échéance 30 avril",
+        "ledger": "Grand livre équilibré",
+        "entries": "Écritures validées"
+      }
+    },
+    "benefits": [
+      "Conforme CGNC (classes 1-7)",
+      "Exports SIMPL-TVA/IS (POC)",
+      "Facturation bilingue FR/AR",
+      "Rapprochement bancaire auto",
+      "Paie & CNSS (mock)",
+      "Multi-sociétés/exercices"
+    ],
+    "trust": {
+      "badges": {
+        "cgnc": {
+          "title": "Conformité CGNC",
+          "subtitle": "Plan comptable marocain à jour"
+        },
+        "secure": {
+          "title": "Données sécurisées",
+          "subtitle": "Chiffrement AES 256 (démo)"
+        },
+        "morocco": {
+          "title": "100% marocain",
+          "subtitle": "Infrastructure locale simulée"
+        }
+      }
+    },
+    "compliance": {
+      "badge": "Cadre réglementaire Maroc",
+      "title": "Tout le socle CGNC en natif",
+      "subtitle": "Classes 1 à 7, tableaux et exports prêts pour vos contrôles fiscaux et sociaux.",
+      "cards": [
+        {
+          "icon": "📚",
+          "title": "CGNC complet",
+          "description": "Plan comptable marocain préchargé avec classes 1-7, journaux et modèles d'écritures."
+        },
+        {
+          "icon": "🧾",
+          "title": "SIMPL TVA & IS",
+          "description": "Exports XML démo pour SIMPL-IS et SIMPL-TVA, contrôle cohérence automatique."
+        },
+        {
+          "icon": "👥",
+          "title": "Paie & CNSS",
+          "description": "Bulletins mock, déclarations CNSS et IR source, calculs automatiques paramétrables."
+        },
+        {
+          "icon": "🌐",
+          "title": "Bilingue FR/AR",
+          "description": "Interface FR/AR avec RTL natif et documents commerciaux traduits instantanément."
+        }
+      ]
+    },
+    "features": {
+      "title": "Fonctionnalités clés",
+      "subtitle": "Une plateforme modulaire pour couvrir toute la chaîne comptable de l'entreprise marocaine.",
+      "items": [
+        {
+          "icon": "📘",
+          "title": "Comptabilité générale",
+          "description": "Journaux dynamiques, grand livre multi-axes, balance analytique.",
+          "points": [
+            "Écritures automatiques",
+            "Templates d'import Excel",
+            "Lettrage visuel"
+          ]
+        },
+        {
+          "icon": "💳",
+          "title": "Facturation",
+          "description": "Devis → factures FR/AR avec branding, envoi email et génération PDF.",
+          "points": [
+            "Workflow validation",
+            "Catalogue produits/services",
+            "Suivi paiements"
+          ]
+        },
+        {
+          "icon": "🏦",
+          "title": "Banque",
+          "description": "Rapprochement automatique et lettrage intelligent des écritures bancaires.",
+          "points": [
+            "Import CODA/CSV",
+            "Moteur de règles",
+            "Visualisation cashflow"
+          ]
+        },
+        {
+          "icon": "🧮",
+          "title": "TVA",
+          "description": "Collectée/déductible, prorata automatique, génération des états TVA Maroc.",
+          "points": [
+            "Contrôle cohérence",
+            "Simulation échéances",
+            "Exports XML"
+          ]
+        },
+        {
+          "icon": "👔",
+          "title": "Paie",
+          "description": "Bulletins mock, calcul CNSS, historique employés et workflow validation.",
+          "points": [
+            "Calcul charges patronales",
+            "Portail salarié",
+            "Exports CNSS"
+          ]
+        },
+        {
+          "icon": "🏢",
+          "title": "Immobilisations",
+          "description": "Gestion des actifs, amortissements linéaires et tableaux de suivi.",
+          "points": [
+            "Plan d'amortissement",
+            "Génération écritures",
+            "Alertes fin de vie"
+          ]
+        },
+        {
+          "icon": "📊",
+          "title": "Reporting",
+          "description": "Bilan, CPC, tableaux de bord interactifs pour piloter votre activité.",
+          "points": [
+            "KPIs temps réel",
+            "Exports PDF",
+            "Comparatifs N/N-1"
+          ]
+        },
+        {
+          "icon": "🌍",
+          "title": "Multi-sociétés",
+          "description": "Gestion de plusieurs entités, exercices et multi-devises démo.",
+          "points": [
+            "Consolidation express",
+            "Gestion des accès",
+            "Périodes verrouillées"
+          ]
+        }
+      ]
+    },
+    "personas": {
+      "title": "Pensé pour tous les acteurs",
+      "subtitle": "Adapté aux TPE/PME, cabinets et startups marocaines en croissance.",
+      "items": [
+        {
+          "icon": "🏪",
+          "title": "TPE / PME",
+          "description": "Pilotez votre comptabilité en autonomie avec des workflows guidés.",
+          "points": [
+            "Assistant onboarding",
+            "Tableaux simplifiés",
+            "Alertes obligations"
+          ]
+        },
+        {
+          "icon": "🧑‍💼",
+          "title": "Cabinets comptables",
+          "description": "Collaborez avec vos clients, partagez documents et suivis en temps réel.",
+          "points": [
+            "Multi-dossiers",
+            "Portail client",
+            "Audit trail"
+          ]
+        },
+        {
+          "icon": "🚀",
+          "title": "Startups",
+          "description": "Accélérez votre tenue comptable dès le lancement avec un socle modulable.",
+          "points": [
+            "Intégrations API",
+            "Suivi investisseurs",
+            "Forecast cash"
+          ]
+        }
+      ]
+    },
+    "partners": {
+      "badge": "Écosystème marocain",
+      "title": "Partenaires & institutions fictifs",
+      "logos": [
+        { "label": "Bank Al Maghrib" },
+        { "label": "CIH Bank" },
+        { "label": "Maroc PME" },
+        { "label": "CGEM" }
+      ]
+    },
+    "testimonials": {
+      "title": "Ils recommandent la fluidité",
+      "subtitle": "Directeurs financiers et experts-comptables marocains partagent leur expérience.",
+      "items": [
+        {
+          "name": "Salma Ait Youssef",
+          "role": "DAF – Casablanca",
+          "quote": "Enfin une solution marocaine qui combine conformité CGNC et expérience utilisateur premium.",
+          "initials": "SY"
+        },
+        {
+          "name": "Youssef Benkirane",
+          "role": "Expert-comptable – Rabat",
+          "quote": "Le mode collaboratif multi-dossiers est idéal pour mes clients TPE. On gagne des heures chaque semaine.",
+          "initials": "YB"
+        },
+        {
+          "name": "Imane El Idrissi",
+          "role": "Fondatrice startup – Tanger",
+          "quote": "La facturation bilingue et les exports TVA simplifiés nous permettent de scaler sereinement.",
+          "initials": "IE"
+        }
+      ]
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "subtitle": "Tout savoir avant de tester la démonstration.",
+      "items": [
+        {
+          "question": "C'est quoi ce POC ?",
+          "answer": "<p>Une preuve de concept moderne qui illustre notre vision de la comptabilité marocaine conforme CGNC.</p>"
+        },
+        {
+          "question": "Données réelles ou fictives ?",
+          "answer": "<p>Uniquement des données fictives inspirées du marché marocain, sans production.</p>"
+        },
+        {
+          "question": "Conformité officielle ?",
+          "answer": "<p>Ce POC respecte les principes CGNC mais n'est pas encore audité par les autorités. Utilisation à titre démo.</p>"
+        },
+        {
+          "question": "Comment tester ?",
+          "answer": "<p>Contactez-nous via le formulaire. Nous partageons un accès démo sous 24h avec accompagnement guidé.</p>"
+        },
+        {
+          "question": "Roadmap fonctionnalités ?",
+          "answer": "<p>Dashboard, comptabilité générale, facturation, banque, TVA, paie, immobilisations puis multi-sociétés.</p>"
+        },
+        {
+          "question": "Hébergement et sécurité ?",
+          "answer": "<p>Infrastructure cloud basée au Maroc (démo), chiffrement des données au repos et en transit.</p>"
+        },
+        {
+          "question": "Support et contact ?",
+          "answer": "<p>Equipe support marocaine francophone & arabophone, disponible 5j/7 par mail et WhatsApp.</p>"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Réservez votre démonstration personnalisée",
+      "subtitle": "Une équipe marocaine vous accompagne pour paramétrer votre POC en moins de 48h.",
+      "highlights": [
+        "Session live bilingue FR/AR",
+        "Migration Excel de départ",
+        "Conseils CGNC & TVA"
+      ],
+      "exportCsv": "Exporter contacts (CSV)",
+      "resetContacts": "Réinitialiser",
+      "form": {
+        "name": "Nom complet",
+        "name_placeholder": "Ex. Salma Ait Youssef",
+        "company": "Entreprise",
+        "company_placeholder": "Ex. Noor Consulting",
+        "email": "Email professionnel",
+        "email_placeholder": "prenom@entreprise.ma",
+        "phone": "Téléphone",
+        "phone_placeholder": "+212 6 12 34 56 78",
+        "message": "Votre besoin",
+        "message_placeholder": "Expliquez votre contexte comptable",
+        "agree": "J'accepte d'être contacté(e) pour la démo",
+        "submit": "Envoyer la demande",
+        "sending": "Envoi en cours..."
+      },
+      "errors": {
+        "name": "Merci d'indiquer votre nom",
+        "company": "Merci de renseigner votre entreprise",
+        "email": "Merci de renseigner votre email",
+        "email_invalid": "Format email invalide",
+        "phone": "Merci d'ajouter un numéro",
+        "message": "Ajoutez quelques détails",
+        "agree": "Nous avons besoin de votre accord"
+      },
+      "toast_success": "Merci ! On vous recontacte sous 24h (démo)",
+      "toast_empty": "Aucun contact enregistré pour le moment",
+      "toast_export": "Contacts exportés en CSV",
+      "toast_reset": "Contacts réinitialisés",
+      "privacy": "POC démonstration – données fictives stockées localement."
+    },
+    "footer": {
+      "tagline": "Comptabilité marocaine nouvelle génération",
+      "legal": "Mentions légales",
+      "privacy": "Confidentialité",
+      "terms": "CGU",
+      "disclaimer": "POC démonstration – Données fictives – Non contraignant"
+    }
+  },
+  "ar": {
+    "nav": {
+      "compliance": "الامتثال",
+      "features": "الوظائف",
+      "personas": "لمن؟",
+      "faq": "الأسئلة",
+      "contact": "اتصال"
+    },
+    "hero": {
+      "badge": "عرض تجريبي مجاني",
+      "title": "محاسبة مغربية <span class='gradient-text'>سهلة وسلسة</span>",
+      "subtitle": "حل شامل مطابق لـ CGNC: فواتير، مصالحة بنكية، TVA، أجور CNSS. ثنائي اللغة فر/ع.",
+      "cta_demo": "جرب العرض التجريبي",
+      "cta_brochure": "حمّل الكتيّب",
+      "metrics": {
+        "realtime": "قيادة لحظية",
+        "compliant": "CGNC 2024",
+        "revenue": "رقم المعاملات",
+        "growth": "+18% مقارنة بالسنة الماضية",
+        "tva": "ضريبة TVA المحصلة",
+        "tva_subtext": "استحقاق 30 أبريل",
+        "ledger": "دفتر الأستاذ متوازن",
+        "entries": "قيود معتمدة"
+      }
+    },
+    "benefits": [
+      "مطابق لـ CGNC (الأصناف 1-7)",
+      "تصدير SIMPL-TVA/IS (عرض)",
+      "فواتير ثنائية اللغة فر/ع",
+      "مصالحة بنكية تلقائية",
+      "أجور و CNSS (اختبار)",
+      "متعدد الشركات والفترات"
+    ],
+    "trust": {
+      "badges": {
+        "cgnc": {
+          "title": "امتثال CGNC",
+          "subtitle": "خطة محاسبية مغربية محدثة"
+        },
+        "secure": {
+          "title": "بيانات مؤمنة",
+          "subtitle": "تشفير AES 256 (تجريبي)"
+        },
+        "morocco": {
+          "title": "100% مغربي",
+          "subtitle": "بنية تحتية محلية وهمية"
+        }
+      }
+    },
+    "compliance": {
+      "badge": "الإطار التنظيمي المغربي",
+      "title": "كل أساسيات CGNC مدمجة",
+      "subtitle": "الأصناف 1 إلى 7، الجداول والتقارير جاهزة للمراقبة الجبائية والاجتماعية.",
+      "cards": [
+        {
+          "icon": "📚",
+          "title": "CGNC كامل",
+          "description": "خطة محاسبية مغربية محمّلة مسبقًا مع الأصناف 1-7 والدفاتر والقوالب."
+        },
+        {
+          "icon": "🧾",
+          "title": "SIMPL TVA & IS",
+          "description": "تصدير XML تجريبي لـ SIMPL-IS و SIMPL-TVA مع مراقبة تلقائية."
+        },
+        {
+          "icon": "👥",
+          "title": "الأجور و CNSS",
+          "description": "رواتب تجريبية، تصريحات CNSS و IR مصدر، حسابات مؤتمتة قابلة للضبط."
+        },
+        {
+          "icon": "🌐",
+          "title": "ثنائي اللغة",
+          "description": "واجهة فرنسية/عربية مع اتجاه RTL ودعم الوثائق التجارية المترجمة فورًا."
+        }
+      ]
+    },
+    "features": {
+      "title": "الوظائف الرئيسية",
+      "subtitle": "منصة معيارية تغطي السلسلة المحاسبية كاملة للمقاولة المغربية.",
+      "items": [
+        {
+          "icon": "📘",
+          "title": "محاسبة عامة",
+          "description": "دفاتر يومية ديناميكية، دفتر أستاذ متعدد المحاور وميزان تحليلي.",
+          "points": [
+            "قيود تلقائية",
+            "قوالب استيراد Excel",
+            "مطابقة مرئية"
+          ]
+        },
+        {
+          "icon": "💳",
+          "title": "الفوترة",
+          "description": "عروض أسعار → فواتير فر/ع مع هوية بصرية وإرسال بالبريد وتوليد PDF.",
+          "points": [
+            "مسار مصادقة",
+            "كتالوج خدمات",
+            "متابعة المدفوعات"
+          ]
+        },
+        {
+          "icon": "🏦",
+          "title": "البنك",
+          "description": "مصالحة تلقائية ومطابقة ذكية للحركات البنكية.",
+          "points": [
+            "استيراد CODA/CSV",
+            "محرك قواعد",
+            "رؤية التدفقات"
+          ]
+        },
+        {
+          "icon": "🧮",
+          "title": "الضريبة على القيمة المضافة",
+          "description": "تحصيل/استرجاع، حساب النسبة آليًا وتوليد تقارير TVA المغربية.",
+          "points": [
+            "مراقبة التناسق",
+            "محاكاة الاستحقاقات",
+            "تصدير XML"
+          ]
+        },
+        {
+          "icon": "👔",
+          "title": "الأجور",
+          "description": "رواتب تجريبية، حساب CNSS، سجل الموظفين ومسار المصادقة.",
+          "points": [
+            "حساب مساهمات المشغل",
+            "بوابة الموظف",
+            "تصدير CNSS"
+          ]
+        },
+        {
+          "icon": "🏢",
+          "title": "الأصول الثابتة",
+          "description": "إدارة الأصول، اهتلاك خطي وجداول تتبع.",
+          "points": [
+            "خطة اهتلاك",
+            "توليد قيود",
+            "تنبيهات نهاية العمر"
+          ]
+        },
+        {
+          "icon": "📊",
+          "title": "التقارير",
+          "description": "حصيلة، حساب الأرباح والخسائر، ولوحات قيادة تفاعلية.",
+          "points": [
+            "مؤشرات لحظية",
+            "تصدير PDF",
+            "مقارنات سنة/سنة"
+          ]
+        },
+        {
+          "icon": "🌍",
+          "title": "متعدد الشركات",
+          "description": "إدارة عدة كيانات، فترات وعملات اختبارية.",
+          "points": [
+            "تجميع سريع",
+            "إدارة الصلاحيات",
+            "فترات مقفلة"
+          ]
+        }
+      ]
+    },
+    "personas": {
+      "title": "مصمم لكل الفاعلين",
+      "subtitle": "ملائم لـ TPE/PME، المكاتب والمقاولات الناشئة المغربية.",
+      "items": [
+        {
+          "icon": "🏪",
+          "title": "المقاولات الصغيرة والمتوسطة",
+          "description": "أدِر محاسبتك باستقلالية مع مسارات موجهة.",
+          "points": [
+            "مساعد إعداد",
+            "جداول مبسطة",
+            "تنبيهات الالتزامات"
+          ]
+        },
+        {
+          "icon": "🧑‍💼",
+          "title": "مكاتب المحاسبة",
+          "description": "تعاون مع زبائنك، شارك الوثائق والمتابعة في الوقت الحقيقي.",
+          "points": [
+            "ملفات متعددة",
+            "بوابة الزبون",
+            "سجل تدقيق"
+          ]
+        },
+        {
+          "icon": "🚀",
+          "title": "الشركات الناشئة",
+          "description": "سرّع مسك دفاترك منذ الإطلاق مع قاعدة مرنة.",
+          "points": [
+            "تكاملات API",
+            "متابعة المستثمرين",
+            "توقعات السيولة"
+          ]
+        }
+      ]
+    },
+    "partners": {
+      "badge": "منظومة مغربية",
+      "title": "شركاء ومؤسسات افتراضية",
+      "logos": [
+        { "label": "بنك المغرب" },
+        { "label": "CIH Bank" },
+        { "label": "Maroc PME" },
+        { "label": "CGEM" }
+      ]
+    },
+    "testimonials": {
+      "title": "شهادات من السوق",
+      "subtitle": "مديرو المالية وخبراء المحاسبة المغاربة يشاركون تجربتهم.",
+      "items": [
+        {
+          "name": "سلمى آيت يوسف",
+          "role": "مديرة مالية – الدار البيضاء",
+          "quote": "أخيرًا حل مغربي يجمع بين الامتثال لـ CGNC وتجربة مستخدم راقية.",
+          "initials": "SY"
+        },
+        {
+          "name": "يوسف بنكران",
+          "role": "خبير محاسبي – الرباط",
+          "quote": "الوضع التعاوني متعدد الملفات مثالي لزبائني من المقاولات الصغيرة. نوفر ساعات كل أسبوع.",
+          "initials": "YB"
+        },
+        {
+          "name": "إيمان الإدريسي",
+          "role": "مؤسسة شركة ناشئة – طنجة",
+          "quote": "الفوترة الثنائية وتبسيط تصدير TVA يسمحان لنا بالنمو بثقة.",
+          "initials": "IE"
+        }
+      ]
+    },
+    "faq": {
+      "title": "الأسئلة المتكررة",
+      "subtitle": "كل ما تحتاج معرفته قبل تجربة العرض.",
+      "items": [
+        {
+          "question": "ما هو هذا الـ POC؟",
+          "answer": "<p>إثبات مفهوم حديث يوضح رؤيتنا للمحاسبة المغربية المطابقة لـ CGNC.</p>"
+        },
+        {
+          "question": "بيانات حقيقية أم وهمية؟",
+          "answer": "<p>بيانات تجريبية فقط مستوحاة من السوق المغربي، بدون استعمال إنتاجي.</p>"
+        },
+        {
+          "question": "هل الامتثال رسمي؟",
+          "answer": "<p>يحترم هذا العرض مبادئ CGNC لكنه غير معتمد رسميًا بعد. للاستعمال التجريبي فقط.</p>"
+        },
+        {
+          "question": "كيف يمكن التجربة؟",
+          "answer": "<p>تواصل معنا عبر النموذج. نرسل لك ولوجًا تجريبيًا خلال 24 ساعة مع مواكبة.</p>"
+        },
+        {
+          "question": "ما هي خريطة الطريق؟",
+          "answer": "<p>لوحات القيادة، المحاسبة العامة، الفوترة، البنك، TVA، الأجور، الأصول الثابتة ثم تعدد الشركات.</p>"
+        },
+        {
+          "question": "الاستضافة والأمان؟",
+          "answer": "<p>بنية سحابية مستضافة بالمغرب (تجريب)، تشفير للبيانات في الراحة وعبر النقل.</p>"
+        },
+        {
+          "question": "الدعم والتواصل؟",
+          "answer": "<p>فريق دعم مغربي بالفرنسية والعربية، متاح 5 أيام في الأسبوع عبر البريد وواتساب.</p>"
+        }
+      ]
+    },
+    "contact": {
+      "title": "احجز عرضًا توضيحيًا مخصصًا",
+      "subtitle": "فريق مغربي يرافقك لإعداد العرض التجريبي في أقل من 48 ساعة.",
+      "highlights": [
+        "جلسة مباشرة بالفرنسية أو العربية",
+        "ترحيل أولي من Excel",
+        "نصائح CGNC و TVA"
+      ],
+      "exportCsv": "تصدير جهات الاتصال (CSV)",
+      "resetContacts": "إعادة التهيئة",
+      "form": {
+        "name": "الاسم الكامل",
+        "name_placeholder": "مثال: سلمى آيت يوسف",
+        "company": "المؤسسة",
+        "company_placeholder": "مثال: Noor Consulting",
+        "email": "البريد المهني",
+        "email_placeholder": "prenom@entreprise.ma",
+        "phone": "الهاتف",
+        "phone_placeholder": "+212 6 12 34 56 78",
+        "message": "احتياجاتك",
+        "message_placeholder": "اشرح وضعك المحاسبي",
+        "agree": "أوافق على التواصل معي بخصوص العرض",
+        "submit": "إرسال الطلب",
+        "sending": "جاري الإرسال..."
+      },
+      "errors": {
+        "name": "يرجى إدخال اسمك",
+        "company": "يرجى إدخال اسم المؤسسة",
+        "email": "يرجى إدخال بريدك",
+        "email_invalid": "صيغة البريد غير صحيحة",
+        "phone": "أضف رقم هاتف",
+        "message": "أضف بعض التفاصيل",
+        "agree": "نحتاج موافقتك"
+      },
+      "toast_success": "شكرًا! سنتواصل معك في غضون 24 ساعة (تجريب)",
+      "toast_empty": "لا توجد جهات اتصال مسجلة بعد",
+      "toast_export": "تم تصدير جهات الاتصال إلى CSV",
+      "toast_reset": "تمت إعادة تهيئة جهات الاتصال",
+      "privacy": "عرض تجريبي – بيانات وهمية مخزنة محليًا."
+    },
+    "footer": {
+      "tagline": "محاسبة مغربية للجيل الجديد",
+      "legal": "الشروط القانونية",
+      "privacy": "الخصوصية",
+      "terms": "شروط الاستخدام",
+      "disclaimer": "عرض تجريبي – بيانات وهمية – غير ملزم"
+    }
+  }
+}

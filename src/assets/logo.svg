@@ -1,0 +1,14 @@
+<svg width="140" height="40" viewBox="0 0 140 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="32" height="32" rx="10" fill="url(#grad)" opacity="0.9" />
+  <path d="M14 28C14 22 20 14 24 14C28 14 32 22 32 28" stroke="white" stroke-width="2.4" stroke-linecap="round" />
+  <path d="M18 24C20 21 28 21 30 24" stroke="white" stroke-width="2.2" stroke-linecap="round" />
+  <text x="48" y="26" font-family="Inter, 'Segoe UI', sans-serif" font-size="18" font-weight="600" fill="#0f172a">Compta</text>
+  <text x="110" y="26" font-family="Inter, 'Segoe UI', sans-serif" font-size="18" font-weight="600" fill="url(#grad)">Flow</text>
+</svg>

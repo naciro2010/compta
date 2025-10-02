@@ -1,150 +1,578 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="light">
+<html lang="fr" x-data="{}" x-bind:class="{'dark': $store.ui.isDark}">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AtlasCompta — Comptabilité marocaine CGNC (POC démo)</title>
-    <meta name="description" content="AtlasCompta est un démonstrateur de comptabilité générale marocaine conforme CGNC, bilingue FR/AR, avec TVA SIMPL, paie CNSS (mock) et rapprochement bancaire." />
-    <meta name="keywords" content="comptabilité marocaine, CGNC, TVA SIMPL, CNSS, facturation bilingue" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ComptaFlow Maroc – Comptabilité CGNC moderne et fluide</title>
+    <meta
+      name="description"
+      content="Solution comptable marocaine conforme CGNC : facturation FR/AR, TVA, paie CNSS, rapprochement bancaire. POC démo gratuit."
+    />
+    <meta property="og:title" content="ComptaFlow Maroc – Comptabilité CGNC" />
+    <meta property="og:description" content="Solution comptable moderne pour entreprises marocaines" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="AtlasCompta — Démo CGNC bilingue" />
-    <meta property="og:description" content="Landing + SPA démo pour la comptabilité générale marocaine. TVA, paie CNSS mock, bilingue FR/AR." />
-    <meta property="og:url" content="https://example.com/atlascompta" />
-    <meta property="og:image" content="assets/hero-illustration.svg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="AtlasCompta — POC CGNC Maroc" />
-    <meta name="twitter:description" content="POC démo: comptabilité, TVA, paie CNSS (mock), FR/AR." />
-    <meta name="twitter:image" content="assets/hero-illustration.svg" />
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/theme.css" />
-    <link rel="stylesheet" href="styles/landing.css" />
+    <meta property="og:locale" content="fr_MA" />
+    <meta property="og:locale:alternate" content="ar_MA" />
+    <meta name="theme-color" content="#0ea5e9" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "AtlasCompta",
-        "url": "https://example.com/atlascompta",
-        "logo": "https://example.com/assets/logo.svg",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "MA",
-          "addressLocality": "Casablanca"
-        },
-        "sameAs": ["https://www.linkedin.com/company/atlascompta"]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "AtlasCompta — Démonstrateur CGNC Maroc",
-        "description": "Solution de comptabilité générale marocaine bilingue avec TVA SIMPL, paie CNSS mock et rapprochement bancaire.",
-        "brand": {
-          "@type": "Brand",
-          "name": "AtlasCompta"
-        },
+        "@type": "SoftwareApplication",
+        "name": "ComptaFlow Maroc",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
         "offers": {
           "@type": "Offer",
           "price": "0",
-          "priceCurrency": "MAD",
-          "availability": "https://schema.org/PreOrder",
-          "areaServed": "MA"
-        }
+          "priceCurrency": "MAD"
+        },
+        "description": "Solution comptable marocaine conforme CGNC"
       }
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/styles/main.css" />
   </head>
-  <body>
-    <a class="skip-link" href="#main">Aller au contenu</a>
-    <header class="landing-header" data-section="header">
-      <div class="logo-area">
-        <img src="assets/logo.svg" alt="AtlasCompta" width="48" height="48" />
-        <span class="badge warning">POC — données fictives</span>
+  <body
+    x-data="landingPage"
+    x-init="init()"
+    x-bind:dir="$store.i18n.dir"
+    x-bind:class="[$store.i18n.lang === 'ar' ? 'font-arabic' : 'font-sans', 'bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100']"
+    class="antialiased"
+  >
+    <div class="fixed inset-x-0 top-0 z-50" x-data="header">
+      <header
+        class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 transition backdrop-blur-lg bg-white/80 dark:bg-slate-900/80 border-b border-white/20 dark:border-slate-700/40 shadow-glass"
+        x-bind:class="{ 'py-3 shadow-glow': scrolled }"
+      >
+        <div class="flex items-center gap-3">
+          <a href="#hero" class="flex items-center gap-2">
+            <img src="/src/assets/logo.svg" alt="ComptaFlow Maroc" class="h-10 w-auto" />
+            <span class="text-lg font-semibold text-slate-900 dark:text-white tracking-tight">ComptaFlow</span>
+          </a>
+          <span class="hidden items-center rounded-full border border-primary-500/30 bg-primary-500/10 px-3 py-1 text-xs font-medium text-primary-600 dark:text-primary-300 md:inline-flex">
+            <span class="inline-flex h-2 w-2 rounded-full bg-success-500 mr-2 animate-pulse"></span>
+            Conforme CGNC
+          </span>
+        </div>
+        <nav class="hidden items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300 lg:flex">
+          <a class="hover:text-primary-600" href="#conformite" x-text="$store.i18n.t('nav.compliance')"></a>
+          <a class="hover:text-primary-600" href="#features" x-text="$store.i18n.t('nav.features')"></a>
+          <a class="hover:text-primary-600" href="#personas" x-text="$store.i18n.t('nav.personas')"></a>
+          <a class="hover:text-primary-600" href="#faq" x-text="$store.i18n.t('nav.faq')"></a>
+          <a class="hover:text-primary-600" href="#contact" x-text="$store.i18n.t('nav.contact')"></a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button
+            class="flex h-10 w-10 items-center justify-center rounded-full border border-white/40 bg-white/60 text-slate-700 backdrop-blur transition hover:border-primary-500 hover:text-primary-600 dark:bg-slate-800/60 dark:text-slate-200"
+            @click="$store.ui.toggleTheme()"
+            :aria-label="$store.ui.isDark ? 'Light mode' : 'Dark mode'"
+          >
+            <template x-if="!$store.ui.isDark">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 3v1.5M12 19.5V21M4.5 12H3m18 0h-1.5M5.47 5.47 6.53 6.53m10.94 10.94 1.06 1.06M18.53 5.47l-1.06 1.06M6.53 17.47l-1.06 1.06M12 7.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5z"
+                ></path>
+              </svg>
+            </template>
+            <template x-if="$store.ui.isDark">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            </template>
+          </button>
+          <div class="relative hidden lg:block">
+            <button
+              @click="toggleLangMenu"
+              class="flex items-center gap-2 rounded-full border border-white/40 bg-white/60 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm transition hover:border-primary-500 hover:text-primary-600 dark:bg-slate-800/60 dark:text-slate-100"
+            >
+              <span x-text="$store.i18n.lang.toUpperCase()"></span>
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+            <div
+              x-show="langMenu"
+              x-transition
+              @click.away="langMenu = false"
+              class="absolute right-0 mt-2 w-32 rounded-xl border border-white/20 bg-white/90 p-2 text-sm shadow-lg backdrop-blur dark:bg-slate-900/90"
+            >
+              <button @click="changeLang('fr')" class="flex w-full items-center justify-between rounded-lg px-3 py-2 hover:bg-primary-500/10">
+                <span>Français</span>
+                <span x-show="$store.i18n.lang === 'fr'">✓</span>
+              </button>
+              <button @click="changeLang('ar')" class="flex w-full items-center justify-between rounded-lg px-3 py-2 hover:bg-primary-500/10">
+                <span>العربية</span>
+                <span x-show="$store.i18n.lang === 'ar'">✓</span>
+              </button>
+            </div>
+          </div>
+          <button
+            class="hidden rounded-full bg-gradient-primary px-6 py-2 text-sm font-semibold text-white shadow-lg transition hover:shadow-glow lg:block"
+            x-text="$store.i18n.t('hero.cta_demo')"
+            @click="scrollToSection('#contact')"
+          ></button>
+          <button
+            class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/60 text-slate-700 transition hover:border-primary-500 hover:text-primary-600 dark:bg-slate-800/60 lg:hidden"
+            @click="mobileMenu = !mobileMenu"
+          >
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </header>
+      <div
+        x-show="mobileMenu"
+        x-transition
+        class="mx-auto flex max-w-7xl flex-col gap-4 rounded-b-3xl bg-white/90 px-6 pb-6 pt-4 text-sm shadow-lg backdrop-blur dark:bg-slate-900/90 lg:hidden"
+      >
+        <nav class="flex flex-col gap-3 text-slate-700 dark:text-slate-200">
+          <a class="rounded-xl px-3 py-2 hover:bg-primary-500/10" href="#conformite" x-text="$store.i18n.t('nav.compliance')" @click="mobileMenu=false"></a>
+          <a class="rounded-xl px-3 py-2 hover:bg-primary-500/10" href="#features" x-text="$store.i18n.t('nav.features')" @click="mobileMenu=false"></a>
+          <a class="rounded-xl px-3 py-2 hover:bg-primary-500/10" href="#personas" x-text="$store.i18n.t('nav.personas')" @click="mobileMenu=false"></a>
+          <a class="rounded-xl px-3 py-2 hover:bg-primary-500/10" href="#faq" x-text="$store.i18n.t('nav.faq')" @click="mobileMenu=false"></a>
+          <a class="rounded-xl px-3 py-2 hover:bg-primary-500/10" href="#contact" x-text="$store.i18n.t('nav.contact')" @click="mobileMenu=false"></a>
+        </nav>
+        <div class="flex items-center justify-between gap-3">
+          <button
+            class="rounded-full bg-gradient-primary px-6 py-2 text-sm font-semibold text-white shadow-lg transition hover:shadow-glow"
+            x-text="$store.i18n.t('hero.cta_demo')"
+            @click="scrollToSection('#contact'); mobileMenu=false"
+          ></button>
+          <button
+            class="rounded-full border border-white/40 bg-white/60 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-primary-500 hover:text-primary-600 dark:bg-slate-800/60 dark:text-slate-100"
+            x-text="$store.i18n.t('hero.cta_brochure')"
+            @click="printBrochure"
+          ></button>
+          <div class="flex gap-2">
+            <button class="rounded-full border border-white/40 px-3 py-2" @click="changeLang('fr')">FR</button>
+            <button class="rounded-full border border-white/40 px-3 py-2" @click="changeLang('ar')">AR</button>
+          </div>
+        </div>
       </div>
-      <nav class="landing-nav" aria-label="Navigation principale">
-        <button id="lang-switch" class="btn secondary" type="button" aria-label="Basculer la langue">AR</button>
-        <a class="btn" data-action="cta-demo" href="app.html" data-i18n="landing.ctaDemo">Ouvrir la démo</a>
-      </nav>
-    </header>
-    <main id="main">
-      <section class="hero" data-section="hero">
-        <div class="hero-text">
-          <h1 data-i18n="landing.heroTitle">Comptabilité marocaine, simple et fluide</h1>
-          <p data-i18n="landing.heroSubtitle">POC conforme au CGNC, prêt pour la TVA SIMPL (démo), facturation, rapprochement, paie CNSS (mock) – FR/AR.</p>
-          <div class="hero-cta">
-            <a class="btn" data-action="cta-demo" href="app.html" data-i18n="landing.ctaDemo">Ouvrir la démo</a>
-            <button class="btn secondary" id="brochure" type="button" data-i18n="landing.ctaBrochure">Télécharger la brochure</button>
+    </div>
+
+    <main class="relative overflow-hidden pt-28">
+      <div class="absolute inset-0 -z-10 bg-gradient-hero"></div>
+      <section id="hero" class="mx-auto flex max-w-7xl flex-col-reverse items-center gap-12 px-4 pb-24 pt-12 lg:flex-row lg:pt-20">
+        <div class="w-full lg:w-1/2" x-data="{}" x-animate>
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-2 text-xs font-medium text-primary-600 dark:text-primary-300">
+            <span class="inline-flex h-2 w-2 animate-pulse rounded-full bg-success-500"></span>
+            <span x-text="$store.i18n.t('hero.badge')"></span>
           </div>
-          <ul class="hero-benefits" id="benefits-list" aria-label="Bénéfices clés"></ul>
-        </div>
-        <figure class="hero-illustration">
-          <img src="assets/hero-illustration.svg" alt="Illustration interface AtlasCompta" />
-        </figure>
-      </section>
-      <section class="compliance" aria-labelledby="compliance-title">
-        <h2 id="compliance-title" data-i18n="landing.complianceTitle">Conformité marocaine par design</h2>
-        <ul id="compliance-list"></ul>
-      </section>
-      <section class="features" aria-labelledby="features-title">
-        <h2 id="features-title" data-i18n="landing.featuresTitle">Fonctionnalités adaptées au marché marocain</h2>
-        <div class="feature-grid" id="features-grid"></div>
-      </section>
-      <section class="audience" aria-labelledby="audience-title">
-        <h2 id="audience-title" data-i18n="landing.audienceTitle">Pour qui ?</h2>
-        <div class="audience-grid" id="audience-grid"></div>
-      </section>
-      <section class="social-proof" aria-labelledby="proof-title">
-        <h2 id="proof-title" data-i18n="landing.proofTitle">Ils testent la démo</h2>
-        <div class="logos">
-          <svg viewBox="0 0 120 40" role="img" aria-label="Casablanca Finance Lab"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Casablanca Finance Lab</text></svg>
-          <svg viewBox="0 0 120 40" role="img" aria-label="Rabat Startup Hub"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Rabat Startup Hub</text></svg>
-          <svg viewBox="0 0 120 40" role="img" aria-label="Fès Experts Conseil"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Fès Experts Conseil</text></svg>
-        </div>
-        <div class="testimonials" id="testimonials"></div>
-      </section>
-      <section class="faq" aria-labelledby="faq-title">
-        <h2 id="faq-title" data-i18n="landing.faqTitle">Questions fréquentes</h2>
-        <div class="faq-list" id="faq-list"></div>
-      </section>
-      <section class="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title" data-i18n="landing.contactTitle">Parlons de votre besoin</h2>
-        <p class="muted" data-i18n="landing.contactDisclaimer">POC démo — Aucune donnée réelle, stockage local uniquement.</p>
-        <form id="contact-form" class="form-grid">
-          <label>
-            <span data-i18n="landing.contact.name">Nom</span><span class="required">*</span>
-            <input name="name" required />
-          </label>
-          <label>
-            <span data-i18n="landing.contact.company">Société</span><span class="required">*</span>
-            <input name="company" required />
-          </label>
-          <label>
-            <span data-i18n="landing.contact.email">Email</span><span class="required">*</span>
-            <input name="email" type="email" required />
-          </label>
-          <label>
-            <span data-i18n="landing.contact.phone">Téléphone</span>
-            <input name="phone" type="tel" />
-          </label>
-          <label>
-            <span data-i18n="landing.contact.message">Message</span>
-            <textarea name="message" rows="4"></textarea>
-          </label>
-          <div class="contact-actions">
-            <button class="btn" type="submit" data-i18n="landing.contactSubmit">Envoyer</button>
-            <button class="btn secondary" type="button" id="export-contacts" data-i18n="landing.contactExport">Exporter contacts (CSV)</button>
+          <h1 class="mb-6 text-4xl font-bold leading-tight text-slate-900 dark:text-white sm:text-5xl" x-html="$store.i18n.t('hero.title')"></h1>
+          <p class="mb-8 text-lg text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('hero.subtitle')"></p>
+          <div class="flex flex-col items-start gap-4 sm:flex-row">
+            <button
+              class="rounded-full bg-gradient-primary px-8 py-3 text-sm font-semibold text-white shadow-lg transition hover:shadow-glow"
+              x-text="$store.i18n.t('hero.cta_demo')"
+              @click="scrollToSection('#contact')"
+            ></button>
+            <button
+              class="rounded-full border border-primary-500/40 bg-white/70 px-8 py-3 text-sm font-semibold text-primary-600 transition hover:border-primary-500 dark:bg-slate-900/60 dark:text-primary-300"
+              x-text="$store.i18n.t('hero.cta_brochure')"
+              @click="printBrochure"
+            ></button>
           </div>
-        </form>
+          <ul class="mt-10 grid gap-3 text-sm text-slate-600 dark:text-slate-300 sm:grid-cols-2">
+            <template x-for="benefit in $store.i18n.t('benefits')" :key="benefit">
+              <li class="flex items-center gap-3 rounded-2xl border border-white/30 bg-white/70 p-3 shadow-sm backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/60">
+                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-primary-500/15 text-primary-600 dark:text-primary-300">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+                </span>
+                <span x-text="benefit"></span>
+              </li>
+            </template>
+          </ul>
+        </div>
+        <div class="relative flex w-full items-center justify-center lg:w-1/2" x-data="heroIllustration">
+          <div class="relative w-full max-w-xl">
+            <div class="relative overflow-hidden rounded-3xl border border-white/40 bg-white/70 p-6 shadow-2xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-ref="card" x-animate>
+              <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary-500/10 blur-3xl"></div>
+              <div class="absolute -bottom-12 -left-12 h-36 w-36 rounded-full bg-primary-600/20 blur-3xl"></div>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium text-slate-500 dark:text-slate-300" x-text="$store.i18n.t('hero.metrics.realtime')"></span>
+                  <span class="rounded-full bg-success-500/10 px-3 py-1 text-xs font-semibold text-success-500" x-text="$store.i18n.t('hero.metrics.compliant')"></span>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                  <div class="rounded-2xl border border-white/30 bg-white/90 p-4 shadow-sm backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/60">
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('hero.metrics.revenue')"></p>
+                    <p class="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">1.2M MAD</p>
+                    <p class="text-xs text-success-500" x-text="$store.i18n.t('hero.metrics.growth')"></p>
+                  </div>
+                  <div class="rounded-2xl border border-white/30 bg-white/90 p-4 shadow-sm backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/60">
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('hero.metrics.tva')"></p>
+                    <p class="mt-2 text-2xl font-semibold text-slate-900 dark:text-white">72 450 MAD</p>
+                    <p class="text-xs text-primary-600 dark:text-primary-300" x-text="$store.i18n.t('hero.metrics.tva_subtext')"></p>
+                  </div>
+                  <div class="col-span-2 rounded-2xl border border-white/30 bg-white/90 p-4 shadow-sm backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/60">
+                    <p class="text-xs font-medium text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('hero.metrics.ledger')"></p>
+                    <div class="mt-3 h-2 w-full rounded-full bg-slate-200 dark:bg-slate-700">
+                      <div class="h-2 rounded-full bg-gradient-primary" style="width: 82%"></div>
+                    </div>
+                    <div class="mt-2 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                      <span x-text="$store.i18n.t('hero.metrics.entries')"></span>
+                      <span>+245</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pointer-events-none absolute inset-0 -z-10 rounded-3xl border border-primary-500/30"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trust" class="relative mx-auto max-w-7xl px-4 pb-20" x-data="{}" x-animate>
+        <div class="grid gap-4 rounded-3xl border border-white/30 bg-white/80 p-6 shadow-xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70 sm:grid-cols-3">
+          <div class="flex items-center gap-3">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('trust.badges.cgnc.title')"></p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('trust.badges.cgnc.subtitle')"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('trust.badges.secure.title')"></p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('trust.badges.secure.subtitle')"></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h12v12H6z" />
+              </svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('trust.badges.morocco.title')"></p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('trust.badges.morocco.subtitle')"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="conformite" class="mx-auto max-w-7xl px-4 pb-20">
+        <div class="mx-auto max-w-3xl text-center" x-data="{}" x-animate>
+          <span class="inline-flex rounded-full border border-primary-500/30 bg-primary-500/10 px-3 py-1 text-xs font-semibold text-primary-600 dark:text-primary-300" x-text="$store.i18n.t('compliance.badge')"></span>
+          <h2 class="mt-4 text-3xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('compliance.title')"></h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('compliance.subtitle')"></p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <template x-for="card in $store.i18n.t('compliance.cards')" :key="card.title">
+            <article class="group relative overflow-hidden rounded-3xl border border-white/30 bg-white/80 p-6 shadow-xl transition hover:-translate-y-1 hover:shadow-glow backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-data="{}" x-animate>
+              <div class="absolute inset-x-0 top-0 h-1 bg-gradient-primary opacity-0 transition group-hover:opacity-100"></div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+                <span x-text="card.icon" class="text-xl"></span>
+              </div>
+              <h3 class="mt-5 text-xl font-semibold text-slate-900 dark:text-white" x-text="card.title"></h3>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300" x-text="card.description"></p>
+            </article>
+          </template>
+        </div>
+      </section>
+
+      <section id="features" class="relative mx-auto max-w-7xl px-4 pb-20">
+        <div class="mx-auto max-w-3xl text-center" x-data="{}" x-animate>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('features.title')"></h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('features.subtitle')"></p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <template x-for="feature in $store.i18n.t('features.items')" :key="feature.title">
+            <div class="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/20 bg-white/80 p-6 shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-glow dark:border-slate-800/60 dark:bg-slate-900/70" x-data="{}" x-animate>
+              <div class="absolute inset-x-6 top-0 h-px bg-gradient-primary opacity-0 transition group-hover:opacity-100"></div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+                <span x-text="feature.icon" class="text-xl"></span>
+              </div>
+              <h3 class="mt-5 text-xl font-semibold text-slate-900 dark:text-white" x-text="feature.title"></h3>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300" x-text="feature.description"></p>
+              <ul class="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400">
+                <template x-for="point in feature.points" :key="point">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary-500"></span>
+                    <span x-text="point"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <section id="personas" class="mx-auto max-w-7xl px-4 pb-20">
+        <div class="mx-auto max-w-3xl text-center" x-data="{}" x-animate>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('personas.title')"></h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('personas.subtitle')"></p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <template x-for="persona in $store.i18n.t('personas.items')" :key="persona.title">
+            <div class="relative overflow-hidden rounded-3xl border border-white/20 bg-white/80 p-6 shadow-xl transition hover:-translate-y-1 hover:shadow-glow backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-data="{}" x-animate>
+              <div class="absolute inset-0 bg-gradient-primary opacity-0 transition group-hover:opacity-5"></div>
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-500/10 text-primary-600 dark:text-primary-300">
+                <span x-text="persona.icon" class="text-xl"></span>
+              </div>
+              <h3 class="mt-5 text-xl font-semibold text-slate-900 dark:text-white" x-text="persona.title"></h3>
+              <p class="mt-3 text-sm text-slate-600 dark:text-slate-300" x-text="persona.description"></p>
+              <ul class="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400">
+                <template x-for="point in persona.points" :key="point">
+                  <li class="flex items-start gap-2">
+                    <span class="mt-1 h-1.5 w-1.5 rounded-full bg-primary-500"></span>
+                    <span x-text="point"></span>
+                  </li>
+                </template>
+              </ul>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <section id="partners" class="mx-auto max-w-7xl px-4 pb-20">
+        <div class="rounded-3xl border border-white/20 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-data="{}" x-animate>
+          <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-wide text-primary-600" x-text="$store.i18n.t('partners.badge')"></p>
+              <h3 class="mt-2 text-2xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('partners.title')"></h3>
+            </div>
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <template x-for="logo in $store.i18n.t('partners.logos')" :key="logo.label">
+                <div class="flex h-16 items-center justify-center rounded-2xl border border-white/20 bg-white/70 p-3 text-sm font-semibold text-slate-500 transition hover:border-primary-500/40 hover:text-primary-600 dark:border-slate-800/60 dark:bg-slate-900/60 dark:text-slate-300">
+                  <span x-text="logo.label"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="mx-auto max-w-7xl px-4 pb-20">
+        <div class="mx-auto max-w-3xl text-center" x-data="{}" x-animate>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('testimonials.title')"></h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('testimonials.subtitle')"></p>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <template x-for="testimonial in $store.i18n.t('testimonials.items')" :key="testimonial.name">
+            <figure class="relative overflow-hidden rounded-3xl border border-white/20 bg-white/80 p-6 shadow-xl transition hover:-translate-y-1 hover:shadow-glow backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-data="{}" x-animate>
+              <svg class="h-10 w-10 text-primary-500" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.17 6.17A5.5 5.5 0 0 1 12 2.5V6a3 3 0 0 0-3 3v.75H12V15H5V9.5a5.5 5.5 0 0 1 2.17-3.33zM17.17 6.17A5.5 5.5 0 0 1 22 2.5V6a3 3 0 0 0-3 3v.75H22V15h-7V9.5a5.5 5.5 0 0 1 2.17-3.33z" />
+              </svg>
+              <blockquote class="mt-4 text-sm text-slate-600 dark:text-slate-300" x-text="testimonial.quote"></blockquote>
+              <figcaption class="mt-6 flex items-center gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-500/10 text-primary-600 dark:text-primary-300" x-text="testimonial.initials"></span>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white" x-text="testimonial.name"></p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400" x-text="testimonial.role"></p>
+                </div>
+              </figcaption>
+            </figure>
+          </template>
+        </div>
+      </section>
+
+      <section id="faq" class="mx-auto max-w-5xl px-4 pb-20">
+        <div class="mx-auto max-w-3xl text-center" x-data="{}" x-animate>
+          <h2 class="text-3xl font-semibold text-slate-900 dark:text-white" x-text="$store.i18n.t('faq.title')"></h2>
+          <p class="mt-3 text-slate-600 dark:text-slate-300" x-text="$store.i18n.t('faq.subtitle')"></p>
+        </div>
+        <div class="mt-10 space-y-4" x-data="accordion">
+          <template x-for="item in $store.i18n.t('faq.items')" :key="item.question">
+            <div class="rounded-2xl border border-white/20 bg-white/80 p-5 shadow-lg backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-animate>
+              <button class="flex w-full items-center justify-between text-left" @click="toggle(item.question)">
+                <span class="text-sm font-semibold text-slate-900 dark:text-white" x-text="item.question"></span>
+                <svg
+                  class="h-5 w-5 text-slate-500 transition"
+                  x-bind:class="{ 'rotate-180 text-primary-500': isOpen(item.question) }"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                </svg>
+              </button>
+              <div x-show="isOpen(item.question)" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="mt-3 text-sm text-slate-600 dark:text-slate-300" x-html="item.answer"></div>
+            </div>
+          </template>
+        </div>
+      </section>
+
+      <section id="contact" class="relative mx-auto max-w-6xl px-4 pb-24">
+        <div class="grid gap-12 lg:grid-cols-2">
+          <div class="rounded-3xl border border-white/20 bg-gradient-dark p-10 text-white shadow-2xl" x-data="contactActions" x-init="init()" x-animate>
+            <h2 class="text-3xl font-semibold" x-text="$store.i18n.t('contact.title')"></h2>
+            <p class="mt-3 text-sm text-white/80" x-text="$store.i18n.t('contact.subtitle')"></p>
+            <div class="mt-10 space-y-4 text-sm text-white/80">
+              <template x-for="item in $store.i18n.t('contact.highlights')" :key="item">
+                <div class="flex items-start gap-3">
+                  <span class="mt-1 h-2 w-2 rounded-full bg-white"></span>
+                  <span x-text="item"></span>
+                </div>
+              </template>
+            </div>
+            <div class="mt-12 flex gap-4">
+              <button class="rounded-full border border-white/60 px-6 py-2 text-sm font-semibold transition hover:bg-white/10" @click="exportCSV()">
+                <span x-text="$store.i18n.t('contact.exportCsv')"></span>
+              </button>
+              <button class="rounded-full border border-white/60 px-6 py-2 text-sm font-semibold transition hover:bg-white/10" @click="resetContacts()">
+                <span x-text="$store.i18n.t('contact.resetContacts')"></span>
+              </button>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-white/20 bg-white/80 p-8 shadow-xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70" x-data="contactForm">
+            <form @submit.prevent="submit" class="space-y-5">
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200" x-text="$store.i18n.t('contact.form.name')"></label>
+                <input
+                  type="text"
+                  x-model="form.name"
+                  class="mt-2 w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-3 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-900/60"
+                  :placeholder="$store.i18n.t('contact.form.name_placeholder')"
+                />
+                <p class="mt-1 text-xs text-danger-500" x-text="errors.name"></p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200" x-text="$store.i18n.t('contact.form.company')"></label>
+                <input
+                  type="text"
+                  x-model="form.company"
+                  class="mt-2 w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-3 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-900/60"
+                  :placeholder="$store.i18n.t('contact.form.company_placeholder')"
+                />
+                <p class="mt-1 text-xs text-danger-500" x-text="errors.company"></p>
+              </div>
+              <div class="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-200" x-text="$store.i18n.t('contact.form.email')"></label>
+                  <input
+                    type="email"
+                    x-model="form.email"
+                    class="mt-2 w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-3 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-900/60"
+                    :placeholder="$store.i18n.t('contact.form.email_placeholder')"
+                  />
+                  <p class="mt-1 text-xs text-danger-500" x-text="errors.email"></p>
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-slate-700 dark:text-slate-200" x-text="$store.i18n.t('contact.form.phone')"></label>
+                  <input
+                    type="tel"
+                    x-model="form.phone"
+                    class="mt-2 w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-3 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-900/60"
+                    :placeholder="$store.i18n.t('contact.form.phone_placeholder')"
+                  />
+                  <p class="mt-1 text-xs text-danger-500" x-text="errors.phone"></p>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-slate-700 dark:text-slate-200" x-text="$store.i18n.t('contact.form.message')"></label>
+                <textarea
+                  rows="4"
+                  x-model="form.message"
+                  class="mt-2 w-full rounded-2xl border-slate-200 bg-white/80 px-4 py-3 text-sm shadow-sm focus:border-primary-500 focus:ring-primary-500 dark:border-slate-700 dark:bg-slate-900/60"
+                  :placeholder="$store.i18n.t('contact.form.message_placeholder')"
+                ></textarea>
+                <p class="mt-1 text-xs text-danger-500" x-text="errors.message"></p>
+              </div>
+              <div class="flex items-center justify-between">
+                <label class="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                  <input type="checkbox" x-model="form.agree" class="rounded border-slate-300 text-primary-500 focus:ring-primary-500" />
+                  <span x-text="$store.i18n.t('contact.form.agree')"></span>
+                </label>
+                <p class="text-xs text-danger-500" x-text="errors.agree"></p>
+              </div>
+              <button
+                type="submit"
+                class="flex w-full items-center justify-center gap-2 rounded-full bg-gradient-primary px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                x-bind:disabled="loading"
+              >
+                <svg x-show="loading" class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <span x-text="loading ? $store.i18n.t('contact.form.sending') : $store.i18n.t('contact.form.submit')"></span>
+              </button>
+            </form>
+            <div class="mt-6 text-xs text-slate-500 dark:text-slate-400">
+              <p x-text="$store.i18n.t('contact.privacy')"></p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-    <footer class="landing-footer">
-      <small>POC démo – données fictives – non conforme production</small>
-      <nav aria-label="Mentions légales">
-        <a href="legal/mentions-legales.html">Mentions légales</a>
-        <a href="legal/confidentialite.html">Confidentialité</a>
-      </nav>
+
+    <footer class="border-t border-white/20 bg-white/70 py-10 backdrop-blur dark:border-slate-800/60 dark:bg-slate-950/70">
+      <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-3">
+          <img src="/src/assets/logo.svg" alt="ComptaFlow Maroc" class="h-8" />
+          <p class="text-sm text-slate-500 dark:text-slate-400" x-text="$store.i18n.t('footer.tagline')"></p>
+        </div>
+        <nav class="flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+          <a class="hover:text-primary-600" href="#" x-text="$store.i18n.t('footer.legal')"></a>
+          <a class="hover:text-primary-600" href="#" x-text="$store.i18n.t('footer.privacy')"></a>
+          <a class="hover:text-primary-600" href="#" x-text="$store.i18n.t('footer.terms')"></a>
+        </nav>
+        <p class="text-xs text-slate-400" x-text="$store.i18n.t('footer.disclaimer')"></p>
+      </div>
     </footer>
-    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
-    <script type="module" src="scripts/landing.js"></script>
+
+    <div class="pointer-events-none fixed inset-x-0 top-20 z-[60] flex flex-col items-center gap-3" x-data="toastManager" @toast.window="push($event.detail)">
+      <template x-for="toast in toasts" :key="toast.id">
+        <div
+          class="pointer-events-auto flex min-w-[240px] max-w-sm items-center gap-3 rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm shadow-xl backdrop-blur transition dark:border-slate-800/60 dark:bg-slate-900/90"
+          x-bind:class="toast.type === 'success' ? 'border-success-500/40 text-success-500' : 'border-primary-500/40 text-primary-500'"
+          x-show="toast.visible"
+          x-transition
+        >
+          <span>
+            <template x-if="toast.type === 'success'">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+            </template>
+            <template x-if="toast.type !== 'success'">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.007v.008H12z" />
+              </svg>
+            </template>
+          </span>
+          <span x-text="toast.message"></span>
+        </div>
+      </template>
+    </div>
+
+    <div class="fixed inset-0 z-40 hidden items-center justify-center bg-slate-900/60 backdrop-blur" x-data="modal" x-show="open" x-transition>
+      <div class="relative w-full max-w-2xl rounded-3xl border border-white/20 bg-white/90 p-8 shadow-2xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/80">
+        <button class="absolute right-4 top-4 text-slate-500 hover:text-slate-700 dark:text-slate-400" @click="close">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+          </svg>
+        </button>
+        <div class="space-y-4 text-sm text-slate-600 dark:text-slate-300">
+          <h3 class="text-2xl font-semibold text-slate-900 dark:text-white" x-text="title"></h3>
+          <p x-text="message"></p>
+          <div class="flex justify-end">
+            <button class="rounded-full bg-gradient-primary px-5 py-2 text-sm font-semibold text-white shadow" @click="close">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/js/landing.js"></script>
   </body>
 </html>

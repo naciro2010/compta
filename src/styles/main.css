@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+.gradient-text {
+  @apply bg-gradient-primary bg-clip-text text-transparent;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+.glass-card {
+  @apply rounded-3xl border border-white/20 bg-white/80 shadow-xl backdrop-blur dark:border-slate-800/60 dark:bg-slate-900/70;
+}
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: all 0.7s ease;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.8), rgba(3, 105, 161, 0.8));
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #0f172a;
+    background: #ffffff !important;
+  }
+  header,
+  footer,
+  nav,
+  .toast,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  section {
+    page-break-inside: avoid;
+  }
+}
