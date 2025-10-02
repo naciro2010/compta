@@ -2,59 +2,149 @@
 <html lang="fr" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AtlasTech Compta POC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AtlasCompta — Comptabilité marocaine CGNC (POC démo)</title>
+    <meta name="description" content="AtlasCompta est un démonstrateur de comptabilité générale marocaine conforme CGNC, bilingue FR/AR, avec TVA SIMPL, paie CNSS (mock) et rapprochement bancaire." />
+    <meta name="keywords" content="comptabilité marocaine, CGNC, TVA SIMPL, CNSS, facturation bilingue" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="AtlasCompta — Démo CGNC bilingue" />
+    <meta property="og:description" content="Landing + SPA démo pour la comptabilité générale marocaine. TVA, paie CNSS mock, bilingue FR/AR." />
+    <meta property="og:url" content="https://example.com/atlascompta" />
+    <meta property="og:image" content="assets/hero-illustration.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AtlasCompta — POC CGNC Maroc" />
+    <meta name="twitter:description" content="POC démo: comptabilité, TVA, paie CNSS (mock), FR/AR." />
+    <meta name="twitter:image" content="assets/hero-illustration.svg" />
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
     <link rel="stylesheet" href="styles/base.css" />
     <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/landing.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AtlasCompta",
+        "url": "https://example.com/atlascompta",
+        "logo": "https://example.com/assets/logo.svg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "MA",
+          "addressLocality": "Casablanca"
+        },
+        "sameAs": ["https://www.linkedin.com/company/atlascompta"]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "AtlasCompta — Démonstrateur CGNC Maroc",
+        "description": "Solution de comptabilité générale marocaine bilingue avec TVA SIMPL, paie CNSS mock et rapprochement bancaire.",
+        "brand": {
+          "@type": "Brand",
+          "name": "AtlasCompta"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "MAD",
+          "availability": "https://schema.org/PreOrder",
+          "areaServed": "MA"
+        }
+      }
+    </script>
   </head>
   <body>
-    <div id="app" class="app-shell">
-      <aside class="sidebar" aria-label="Navigation principale">
-        <div class="brand">
-          <span class="logo" aria-hidden="true">📊</span>
-          <div>
-            <h1>AtlasTech</h1>
-            <p>Compta POC</p>
-          </div>
-        </div>
-        <nav>
-          <ul id="main-nav" class="nav-list" role="list">
-            <li><a href="#/dashboard" data-route="dashboard" class="nav-link active">Dashboard</a></li>
-            <li><a href="#/sales" data-route="sales" class="nav-link">Ventes</a></li>
-            <li><a href="#/purchases" data-route="purchases" class="nav-link">Achats</a></li>
-            <li><a href="#/bank" data-route="bank" class="nav-link">Banque</a></li>
-            <li><a href="#/ledger" data-route="ledger" class="nav-link">Écritures</a></li>
-            <li><a href="#/tax" data-route="tax" class="nav-link">TVA &amp; Fisc</a></li>
-            <li><a href="#/payroll" data-route="payroll" class="nav-link">Paie</a></li>
-            <li><a href="#/settings" data-route="settings" class="nav-link">Paramètres</a></li>
-          </ul>
-        </nav>
-        <button id="reset-demo" class="btn reset" type="button">Réinitialiser la démo</button>
-      </aside>
-      <div class="content-area">
-        <header class="topbar">
-          <div class="topbar-actions">
-            <label class="select-wrapper">
-              <span class="sr-only">Choisir la langue</span>
-              <select id="lang-select" aria-label="Langue">
-                <option value="fr">Français</option>
-                <option value="ar">العربية</option>
-              </select>
-            </label>
-            <label class="select-wrapper">
-              <span class="sr-only">Choisir le thème</span>
-              <select id="theme-select" aria-label="Thème">
-                <option value="light">Clair</option>
-                <option value="dark">Sombre</option>
-              </select>
-            </label>
-          </div>
-        </header>
-        <main id="view" tabindex="-1" aria-live="polite"></main>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <header class="landing-header" data-section="header">
+      <div class="logo-area">
+        <img src="assets/logo.svg" alt="AtlasCompta" width="48" height="48" />
+        <span class="badge warning">POC — données fictives</span>
       </div>
-    </div>
-    <div id="modal-root" aria-live="assertive"></div>
-    <div id="toast-root" aria-live="polite" aria-atomic="true"></div>
-    <script type="module" src="scripts/main.js"></script>
+      <nav class="landing-nav" aria-label="Navigation principale">
+        <button id="lang-switch" class="btn secondary" type="button" aria-label="Basculer la langue">AR</button>
+        <a class="btn" data-action="cta-demo" href="app.html" data-i18n="landing.ctaDemo">Ouvrir la démo</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" data-section="hero">
+        <div class="hero-text">
+          <h1 data-i18n="landing.heroTitle">Comptabilité marocaine, simple et fluide</h1>
+          <p data-i18n="landing.heroSubtitle">POC conforme au CGNC, prêt pour la TVA SIMPL (démo), facturation, rapprochement, paie CNSS (mock) – FR/AR.</p>
+          <div class="hero-cta">
+            <a class="btn" data-action="cta-demo" href="app.html" data-i18n="landing.ctaDemo">Ouvrir la démo</a>
+            <button class="btn secondary" id="brochure" type="button" data-i18n="landing.ctaBrochure">Télécharger la brochure</button>
+          </div>
+          <ul class="hero-benefits" id="benefits-list" aria-label="Bénéfices clés"></ul>
+        </div>
+        <figure class="hero-illustration">
+          <img src="assets/hero-illustration.svg" alt="Illustration interface AtlasCompta" />
+        </figure>
+      </section>
+      <section class="compliance" aria-labelledby="compliance-title">
+        <h2 id="compliance-title" data-i18n="landing.complianceTitle">Conformité marocaine par design</h2>
+        <ul id="compliance-list"></ul>
+      </section>
+      <section class="features" aria-labelledby="features-title">
+        <h2 id="features-title" data-i18n="landing.featuresTitle">Fonctionnalités adaptées au marché marocain</h2>
+        <div class="feature-grid" id="features-grid"></div>
+      </section>
+      <section class="audience" aria-labelledby="audience-title">
+        <h2 id="audience-title" data-i18n="landing.audienceTitle">Pour qui ?</h2>
+        <div class="audience-grid" id="audience-grid"></div>
+      </section>
+      <section class="social-proof" aria-labelledby="proof-title">
+        <h2 id="proof-title" data-i18n="landing.proofTitle">Ils testent la démo</h2>
+        <div class="logos">
+          <svg viewBox="0 0 120 40" role="img" aria-label="Casablanca Finance Lab"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Casablanca Finance Lab</text></svg>
+          <svg viewBox="0 0 120 40" role="img" aria-label="Rabat Startup Hub"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Rabat Startup Hub</text></svg>
+          <svg viewBox="0 0 120 40" role="img" aria-label="Fès Experts Conseil"><rect width="120" height="40" rx="8" fill="var(--color-surface-alt)"></rect><text x="60" y="25" text-anchor="middle" font-size="14" fill="var(--color-primary)">Fès Experts Conseil</text></svg>
+        </div>
+        <div class="testimonials" id="testimonials"></div>
+      </section>
+      <section class="faq" aria-labelledby="faq-title">
+        <h2 id="faq-title" data-i18n="landing.faqTitle">Questions fréquentes</h2>
+        <div class="faq-list" id="faq-list"></div>
+      </section>
+      <section class="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" data-i18n="landing.contactTitle">Parlons de votre besoin</h2>
+        <p class="muted" data-i18n="landing.contactDisclaimer">POC démo — Aucune donnée réelle, stockage local uniquement.</p>
+        <form id="contact-form" class="form-grid">
+          <label>
+            <span data-i18n="landing.contact.name">Nom</span><span class="required">*</span>
+            <input name="name" required />
+          </label>
+          <label>
+            <span data-i18n="landing.contact.company">Société</span><span class="required">*</span>
+            <input name="company" required />
+          </label>
+          <label>
+            <span data-i18n="landing.contact.email">Email</span><span class="required">*</span>
+            <input name="email" type="email" required />
+          </label>
+          <label>
+            <span data-i18n="landing.contact.phone">Téléphone</span>
+            <input name="phone" type="tel" />
+          </label>
+          <label>
+            <span data-i18n="landing.contact.message">Message</span>
+            <textarea name="message" rows="4"></textarea>
+          </label>
+          <div class="contact-actions">
+            <button class="btn" type="submit" data-i18n="landing.contactSubmit">Envoyer</button>
+            <button class="btn secondary" type="button" id="export-contacts" data-i18n="landing.contactExport">Exporter contacts (CSV)</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer class="landing-footer">
+      <small>POC démo – données fictives – non conforme production</small>
+      <nav aria-label="Mentions légales">
+        <a href="legal/mentions-legales.html">Mentions légales</a>
+        <a href="legal/confidentialite.html">Confidentialité</a>
+      </nav>
+    </footer>
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+    <script type="module" src="scripts/landing.js"></script>
   </body>
 </html>

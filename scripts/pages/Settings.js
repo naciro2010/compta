@@ -112,6 +112,24 @@ function buildPreferences(state) {
   return section;
 }
 
+function buildComplianceSection(state) {
+  const section = document.createElement('section');
+  section.className = 'card';
+  const company = state.settings.company;
+  section.innerHTML = `
+    <h3>${t('settings.complianceTitle')}</h3>
+    <p>${t('settings.complianceIntro', { company: company.raisonSociale })}</p>
+    <ul class="chip-list">
+      <li>${t('settings.complianceItems.cgnc')}</li>
+      <li>${t('settings.complianceItems.simpl')}</li>
+      <li>${t('settings.complianceItems.cnss')}</li>
+      <li>${t('settings.complianceItems.i18n')}</li>
+    </ul>
+    <p class="muted">${t('settings.complianceWarning')}</p>
+  `;
+  return section;
+}
+
 export default {
   render(state) {
     const container = document.createElement('div');
@@ -120,6 +138,7 @@ export default {
     container.appendChild(buildPlanEditor(state));
     container.appendChild(buildPreferences(state));
     container.appendChild(buildDatasetSection());
+    container.appendChild(buildComplianceSection(state));
     return container;
   },
 };

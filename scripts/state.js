@@ -53,6 +53,16 @@ async function bootstrap() {
       purchases,
       bank,
       payroll,
+      fixedAssets: (company.immobilisations || []).map((asset, index) => ({
+        id: asset.id || `IMMO-${String(index + 1).padStart(3, '0')}`,
+        code: asset.code,
+        label: asset.label,
+        category: asset.category,
+        startDate: asset.startDate,
+        cost: asset.cost,
+        residual: asset.residual,
+        duration: asset.duration,
+      })),
     },
     i18n: { fr, ar },
     reconciliation: [],
@@ -198,6 +208,24 @@ export function savePayrollEntry(entry) {
   const idx = store.data.payroll.findIndex((item) => item.id === entry.id);
   if (idx >= 0) store.data.payroll[idx] = entry;
   else store.data.payroll.push(entry);
+  notify();
+}
+
+export function addFixedAsset(asset) {
+  store.data.fixedAssets.push(asset);
+  notify();
+}
+
+export function updateFixedAsset(id, patch) {
+  const idx = store.data.fixedAssets.findIndex((item) => item.id === id);
+  if (idx >= 0) {
+    store.data.fixedAssets[idx] = { ...store.data.fixedAssets[idx], ...patch };
+    notify();
+  }
+}
+
+export function deleteFixedAsset(id) {
+  store.data.fixedAssets = store.data.fixedAssets.filter((item) => item.id !== id);
   notify();
 }
 
