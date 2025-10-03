@@ -165,33 +165,33 @@ export function renderPayroll(){
   const company = settingsStore.getCompany()
   const currency = company.devise || 'MAD'
   return `
-  <section class="space-y-8" x-data="payrollView()">
-    <header class="flex flex-col gap-2">
-      <p class="text-xs uppercase tracking-[0.3em] text-primary-300" x-text="$store.i18n.t('payroll.header.badge')"></p>
-      <h1 class="text-2xl font-semibold text-white" x-text="$store.i18n.t('payroll.header.title')"></h1>
-      <p class="text-sm text-slate-300" x-text="$store.i18n.t('payroll.header.subtitle')"></p>
-      <div class="flex items-center gap-2 text-xs text-slate-400">
+  <section class="space-y-10" x-data="payrollView()">
+    <header class="space-y-2">
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-500" x-text="$store.i18n.t('payroll.header.badge')"></p>
+      <h1 class="text-2xl font-semibold text-slate-900" x-text="$store.i18n.t('payroll.header.title')"></h1>
+      <p class="text-sm text-slate-600" x-text="$store.i18n.t('payroll.header.subtitle')"></p>
+      <div class="flex items-center gap-2 text-xs text-slate-500">
         <span x-text="$store.i18n.t('payroll.header.currency') + ': ' + currencyDisplay"></span>
         <span aria-hidden="true">•</span>
-        <a href="#/settings" class="underline-offset-4 hover:underline" x-text="$store.i18n.t('payroll.header.settingsLink')"></a>
+        <a href="#/settings" class="btn-link text-xs" x-text="$store.i18n.t('payroll.header.settingsLink')"></a>
       </div>
     </header>
 
-    <div class="tabs" role="tablist">
+    <div class="tablist" role="tablist">
       <button class="tab" :class="{ 'tab--active': tab === 'employees' }" @click="tab='employees'" role="tab" x-text="$store.i18n.t('payroll.tabs.employees')"></button>
       <button class="tab" :class="{ 'tab--active': tab === 'runs' }" @click="tab='runs'" role="tab" x-text="$store.i18n.t('payroll.tabs.runs')"></button>
       <button class="tab" :class="{ 'tab--active': tab === 'exports' }" @click="tab='exports'" role="tab" x-text="$store.i18n.t('payroll.tabs.exports')"></button>
     </div>
 
-    <div x-show="tab === 'employees'" class="panel" x-cloak>
-      <div class="panel__header">
-        <div>
-          <h2 class="panel__title" x-text="$store.i18n.t('payroll.employees.title')"></h2>
-          <p class="panel__subtitle" x-text="$store.i18n.t('payroll.employees.subtitle')"></p>
+    <div x-show="tab === 'employees'" class="card p-6 space-y-6 shadow-sm" x-cloak>
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div class="space-y-1">
+          <h2 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('payroll.employees.title')"></h2>
+          <p class="text-sm text-slate-600" x-text="$store.i18n.t('payroll.employees.subtitle')"></p>
         </div>
-        <button class="btn" @click="openEmployeeModal()" x-text="$store.i18n.t('payroll.employees.create')"></button>
+        <button class="btn-primary" @click="openEmployeeModal()" x-text="$store.i18n.t('payroll.employees.create')"></button>
       </div>
-      <div class="overflow-x-auto">
+      <div class="table-wrapper">
         <table class="table">
           <thead>
             <tr>
@@ -209,29 +209,29 @@ export function renderPayroll(){
                 <td x-text="employee.poste"></td>
                 <td x-text="employee.matriculeCnss || '-' "></td>
                 <td class="text-right" x-text="(employee.salaireBase || 0).toFixed(2) + ' ${currency}'"></td>
-                <td class="text-right space-x-2">
+                <td class="flex justify-end gap-2">
                   <button class="btn-link" @click="openEmployeeModal(employee)" x-text="$store.i18n.t('payroll.employees.actions.edit')"></button>
-                  <button class="btn-link text-rose-300" @click="deleteEmployee(employee.id)" x-text="$store.i18n.t('payroll.employees.actions.delete')"></button>
+                  <button class="btn-link text-rose-500" @click="deleteEmployee(employee.id)" x-text="$store.i18n.t('payroll.employees.actions.delete')"></button>
                 </td>
               </tr>
             </template>
-            <tr x-show="employees.length === 0"><td colspan="5" class="py-6 text-center text-sm text-slate-400" x-text="$store.i18n.t('payroll.employees.table.empty')"></td></tr>
+            <tr x-show="employees.length === 0"><td colspan="5" class="py-6 text-center text-sm text-slate-500" x-text="$store.i18n.t('payroll.employees.table.empty')"></td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <div x-show="tab === 'runs'" class="space-y-6" x-cloak>
-      <div class="panel">
-        <div class="panel__header">
-          <div>
-            <h2 class="panel__title" x-text="$store.i18n.t('payroll.runs.title')"></h2>
-            <p class="panel__subtitle" x-text="$store.i18n.t('payroll.runs.subtitle')"></p>
+      <div class="card p-6 space-y-4 shadow-sm">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="space-y-1">
+            <h2 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('payroll.runs.title')"></h2>
+            <p class="text-sm text-slate-600" x-text="$store.i18n.t('payroll.runs.subtitle')"></p>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <input type="month" class="input" x-model="period" />
-            <button class="btn-secondary" @click="generate()" x-text="$store.i18n.t('payroll.runs.generate')"></button>
-            <button class="btn-secondary" @click="recompute()" x-text="$store.i18n.t('payroll.runs.recompute')"></button>
+          <div class="flex flex-wrap items-center gap-2">
+            <input type="month" class="input w-40" x-model="period" />
+            <button class="btn-primary" @click="generate()" x-text="$store.i18n.t('payroll.runs.generate')"></button>
+            <button class="btn-outline" @click="recompute()" x-text="$store.i18n.t('payroll.runs.recompute')"></button>
           </div>
         </div>
         <div class="flex flex-wrap gap-3">
@@ -241,30 +241,30 @@ export function renderPayroll(){
               <span class="chip__status" x-text="run.statut"></span>
             </button>
           </template>
-          <p x-show="runs.length === 0" class="text-sm text-slate-400" x-text="$store.i18n.t('payroll.runs.emptyRuns')"></p>
+          <p x-show="runs.length === 0" class="text-sm text-slate-500" x-text="$store.i18n.t('payroll.runs.emptyRuns')"></p>
         </div>
       </div>
 
-      <div class="panel" x-show="currentRun">
-        <div class="panel__header">
-          <div>
-            <h3 class="panel__title" x-text="$store.i18n.t('payroll.runs.panelTitle') + ' ${currency}'"></h3>
-            <p class="panel__subtitle">
+      <div class="card p-6 space-y-4 shadow-sm" x-show="currentRun">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="space-y-1">
+            <h3 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('payroll.runs.panelTitle') + ' ${currency}'"></h3>
+            <p class="text-sm text-slate-600">
               <span x-text="$store.i18n.t('payroll.runs.periodLabel')"></span>
               <span x-text="currentRun?.periode"></span>
               <span aria-hidden="true">·</span>
               <span x-text="$store.i18n.t('payroll.runs.statusLabel')"></span>
-              <span class="font-semibold" x-text="currentRun?.statut"></span>
+              <span class="font-semibold text-slate-900" x-text="currentRun?.statut"></span>
             </p>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <button class="btn-secondary" @click="validate()" x-text="$store.i18n.t('payroll.runs.actions.validate')"></button>
-            <button class="btn-secondary" @click="markPaid()" x-text="$store.i18n.t('payroll.runs.actions.markPaid')"></button>
-            <button class="btn-secondary" @click="printPayslips()" x-text="$store.i18n.t('payroll.runs.actions.print')"></button>
-            <button class="btn-secondary" @click="exportCnss()" x-text="$store.i18n.t('payroll.runs.actions.exportCnss')"></button>
+          <div class="flex flex-wrap items-center gap-2">
+            <button class="btn-outline" @click="validate()" x-text="$store.i18n.t('payroll.runs.actions.validate')"></button>
+            <button class="btn-outline" @click="markPaid()" x-text="$store.i18n.t('payroll.runs.actions.markPaid')"></button>
+            <button class="btn-outline" @click="printPayslips()" x-text="$store.i18n.t('payroll.runs.actions.print')"></button>
+            <button class="btn-outline" @click="exportCnss()" x-text="$store.i18n.t('payroll.runs.actions.exportCnss')"></button>
           </div>
         </div>
-        <div class="overflow-x-auto">
+        <div class="table-wrapper">
           <table class="table">
             <thead>
               <tr>
@@ -285,7 +285,7 @@ export function renderPayroll(){
                   <td class="text-right" x-text="line.netAPayer.toFixed(2)"></td>
                 </tr>
               </template>
-              <tr x-show="currentLines.length === 0"><td colspan="5" class="py-6 text-center text-sm text-slate-400" x-text="$store.i18n.t('payroll.runs.table.empty')"></td></tr>
+              <tr x-show="currentLines.length === 0"><td colspan="5" class="py-6 text-center text-sm text-slate-500" x-text="$store.i18n.t('payroll.runs.table.empty')"></td></tr>
             </tbody>
             <tfoot>
               <tr class="font-semibold">
@@ -301,15 +301,15 @@ export function renderPayroll(){
       </div>
     </div>
 
-    <div x-show="tab === 'exports'" class="panel" x-cloak>
-      <div class="panel__header">
-        <div>
-          <h2 class="panel__title" x-text="$store.i18n.t('payroll.exports.title')"></h2>
-          <p class="panel__subtitle" x-text="$store.i18n.t('payroll.exports.subtitle')"></p>
+    <div x-show="tab === 'exports'" class="card p-6 space-y-4 shadow-sm" x-cloak>
+      <div class="flex flex-wrap items-start justify-between gap-3">
+        <div class="space-y-1">
+          <h2 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('payroll.exports.title')"></h2>
+          <p class="text-sm text-slate-600" x-text="$store.i18n.t('payroll.exports.subtitle')"></p>
         </div>
-        <button class="btn" @click="exportCnss()" :disabled="!currentRun" x-text="$store.i18n.t('payroll.exports.action')"></button>
+        <button class="btn-primary" @click="exportCnss()" :disabled="!currentRun" x-text="$store.i18n.t('payroll.exports.action')"></button>
       </div>
-      <p class="text-sm text-slate-300" x-text="$store.i18n.t('payroll.exports.hint')"></p>
+      <p class="text-sm text-slate-600" x-text="$store.i18n.t('payroll.exports.hint')"></p>
     </div>
 
     <div x-show="showEmployeeModal" class="modal" x-cloak @keydown.escape.window="showEmployeeModal=false">
@@ -344,36 +344,36 @@ export function renderPayroll(){
           </div>
           <div class="space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-sm font-medium text-slate-200" x-text="$store.i18n.t('payroll.employees.modal.labels.primes')"></span>
+              <span class="text-sm font-medium text-slate-700" x-text="$store.i18n.t('payroll.employees.modal.labels.primes')"></span>
               <button class="btn-link" type="button" @click="addPrime()" x-text="$store.i18n.t('payroll.employees.modal.addPrime')"></button>
             </div>
             <template x-for="(prime, index) in employeeForm.primes" :key="index">
               <div class="grid gap-2 md:grid-cols-[1fr_auto_auto] items-center">
                 <input class="input" placeholder="Libellé" x-model="prime.label" />
                 <input class="input" type="number" step="0.01" placeholder="Montant" x-model.number="prime.amount" />
-                <button class="btn-link text-rose-300" @click="removePrime(index)" x-text="$store.i18n.t('payroll.employees.modal.remove')"></button>
+                <button class="btn-link text-rose-500" @click="removePrime(index)" x-text="$store.i18n.t('payroll.employees.modal.remove')"></button>
               </div>
             </template>
             <p x-show="employeeForm.primes.length===0" class="text-xs text-slate-500" x-text="$store.i18n.t('payroll.employees.modal.noPrime')"></p>
           </div>
           <div class="space-y-2">
             <div class="flex items-center justify-between">
-              <span class="text-sm font-medium text-slate-200" x-text="$store.i18n.t('payroll.employees.modal.labels.retenues')"></span>
+              <span class="text-sm font-medium text-slate-700" x-text="$store.i18n.t('payroll.employees.modal.labels.retenues')"></span>
               <button class="btn-link" type="button" @click="addRetenue()" x-text="$store.i18n.t('payroll.employees.modal.addRetenue')"></button>
             </div>
             <template x-for="(ret, index) in employeeForm.retenues" :key="index">
               <div class="grid gap-2 md:grid-cols-[1fr_auto_auto] items-center">
                 <input class="input" placeholder="Libellé" x-model="ret.label" />
                 <input class="input" type="number" step="0.01" placeholder="Montant" x-model.number="ret.amount" />
-                <button class="btn-link text-rose-300" @click="removeRetenue(index)" x-text="$store.i18n.t('payroll.employees.modal.remove')"></button>
+                <button class="btn-link text-rose-500" @click="removeRetenue(index)" x-text="$store.i18n.t('payroll.employees.modal.remove')"></button>
               </div>
             </template>
             <p x-show="employeeForm.retenues.length===0" class="text-xs text-slate-500" x-text="$store.i18n.t('payroll.employees.modal.noRetenue')"></p>
           </div>
         </div>
         <div class="modal__footer">
-          <button class="btn-secondary" @click="showEmployeeModal=false" x-text="$store.i18n.t('payroll.employees.modal.cancel')"></button>
-          <button class="btn" @click="saveEmployee()" x-text="$store.i18n.t('payroll.employees.modal.save')"></button>
+          <button class="btn-outline" @click="showEmployeeModal=false" x-text="$store.i18n.t('payroll.employees.modal.cancel')"></button>
+          <button class="btn-primary" @click="saveEmployee()" x-text="$store.i18n.t('payroll.employees.modal.save')"></button>
         </div>
       </div>
     </div>

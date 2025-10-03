@@ -1,0 +1,6 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="48" rx="12" fill="#0B1120"/>
+  <circle cx="40" cy="20" r="12" stroke="#FACC15" stroke-width="2"/>
+  <path d="M32 28C36 24 44 24 48 28" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+  <text x="64" y="29" fill="#E2E8F0" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="600">Rif Industries</text>
+</svg>

@@ -1,0 +1,68 @@
+:root {
+  color-scheme: light;
+  --surface-base: #ffffff;
+  --surface-muted: #f8fafc;
+  --surface-border: rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 10px 30px -20px rgba(15, 23, 42, 0.35);
+  --shadow-md: 0 24px 60px -32px rgba(15, 23, 42, 0.28);
+  --shadow-lg: 0 30px 80px -40px rgba(15, 23, 42, 0.35);
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --color-primary: #0f172a;
+  --color-secondary: #2563eb;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warn: #f59e0b;
+}
+
+.section-padding {
+  padding-block: clamp(3.5rem, 5vw + 2rem, 6.5rem);
+}
+
+.section-padding-sm {
+  padding-block: clamp(2.5rem, 4vw + 1.5rem, 4.5rem);
+}
+
+.stack-gap {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.card-surface {
+  background: var(--surface-base);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-surface-muted {
+  background: var(--surface-muted);
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+}
+
+.btn-token-primary {
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-token-secondary {
+  background: var(--color-secondary);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-floating {
+  box-shadow: var(--shadow-lg);
+}
+
+.background-muted {
+  background: var(--surface-muted);
+}

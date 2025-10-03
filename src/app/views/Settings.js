@@ -63,8 +63,8 @@ if (typeof window !== 'undefined') {
 function renderTvaTable(company){
   return company.tvaTaux.map((rate, index) => `
     <tr>
-      <td class=\"py-2 pr-3\"><input type=\"number\" step=\"0.1\" class=\"input\" x-model.number=\"company.tvaTaux[${index}]\" /></td>
-      <td class=\"py-2\"><button type=\"button\" class=\"btn-link\" @click=\"removeTvaRate(${index})\" x-text=\"$store.i18n.t('settings.companyCard.actions.removeRate')\"></button></td>
+      <td class=\"px-3 py-2\"><input type=\"number\" step=\"0.1\" class=\"input\" x-model.number=\"company.tvaTaux[${index}]\" /></td>
+      <td class=\"px-3 py-2 text-right\"><button type=\"button\" class=\"btn-link\" @click=\"removeTvaRate(${index})\" x-text=\"$store.i18n.t('settings.companyCard.actions.removeRate')\"></button></td>
     </tr>
   `).join('')
 }
@@ -72,22 +72,22 @@ function renderTvaTable(company){
 export function renderSettings(){
   const { company } = settingsStore.state
   return `
-  <section class="space-y-8" x-data="settingsController()">
-    <header class="flex flex-col gap-2">
-      <p class="text-xs uppercase tracking-[0.3em] text-primary-300" x-text="company.raisonSociale || 'MA-ACC'"></p>
-      <h1 class="text-2xl font-semibold text-white" x-text="$store.i18n.t('settings.title')"></h1>
-      <p class="text-sm text-slate-300" x-text="$store.i18n.t('settings.subtitle')"></p>
-      <div x-show="message" class="inline-flex items-center gap-2 px-3 py-1 text-sm rounded bg-emerald-500/20 text-emerald-200">✅ <span x-text="message"></span></div>
+  <section class="space-y-10" x-data="settingsController()">
+    <header class="space-y-2">
+      <p class="text-xs uppercase tracking-[0.3em] text-slate-500" x-text="company.raisonSociale || 'MA-ACC'"></p>
+      <h1 class="text-2xl font-semibold text-slate-900" x-text="$store.i18n.t('settings.title')"></h1>
+      <p class="text-sm text-slate-600" x-text="$store.i18n.t('settings.subtitle')"></p>
+      <div x-show="message" class="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-700">✅ <span x-text="message"></span></div>
     </header>
 
     <div class="grid gap-6 lg:grid-cols-2">
-      <div class="panel">
-        <div class="panel__header">
-          <div>
-            <h2 class="panel__title" x-text="$store.i18n.t('settings.companyCard.title')"></h2>
-            <p class="panel__subtitle" x-text="$store.i18n.t('settings.companyCard.subtitle')"></p>
+      <div class="card p-6 space-y-6 shadow-sm">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="space-y-1">
+            <h2 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('settings.companyCard.title')"></h2>
+            <p class="text-sm text-slate-600" x-text="$store.i18n.t('settings.companyCard.subtitle')"></p>
           </div>
-          <button type="button" class="btn-secondary" @click="reset()" x-text="$store.i18n.t('settings.companyCard.reset')"></button>
+          <button type="button" class="btn-outline" @click="reset()" x-text="$store.i18n.t('settings.companyCard.reset')"></button>
         </div>
         <form class="space-y-6" @submit.prevent="save()">
           <div class="grid gap-4 md:grid-cols-2">
@@ -147,33 +147,35 @@ export function renderSettings(){
           </div>
 
           <div>
-            <div class="flex items-center justify-between">
-              <span class="font-medium text-sm text-slate-200" x-text="$store.i18n.t('settings.companyCard.labels.tvaRates')"></span>
+            <div class="flex items-center justify-between gap-3">
+              <span class="text-sm font-medium text-slate-700" x-text="$store.i18n.t('settings.companyCard.labels.tvaRates')"></span>
               <button type="button" class="btn-link" @click="addTvaRate()" x-text="$store.i18n.t('settings.companyCard.actions.addRate')"></button>
             </div>
-            <table class="table mt-3">
-              <thead><tr><th>Taux</th><th></th></tr></thead>
+            <div class="table-wrapper mt-3">
+            <table class="table text-sm">
+              <thead><tr><th>Taux</th><th class="text-right"></th></tr></thead>
               <tbody>
                 ${renderTvaTable(company)}
-                <tr x-show="company.tvaTaux.length === 0"><td colspan="2" class="py-4 text-sm text-slate-400" x-text="$store.i18n.t('settings.companyCard.noRate')"></td></tr>
+                <tr x-show="company.tvaTaux.length === 0"><td colspan="2" class="px-3 py-4 text-sm text-slate-500" x-text="$store.i18n.t('settings.companyCard.noRate')"></td></tr>
               </tbody>
             </table>
+            </div>
           </div>
 
-          <div class="flex items-center justify-end gap-3">
-            <button type="button" class="btn-secondary" @click="reset()" x-text="$store.i18n.t('settings.companyCard.actions.cancel')"></button>
-            <button type="submit" class="btn" :disabled="Object.keys(errors).length" x-text="$store.i18n.t('settings.companyCard.actions.save')"></button>
+          <div class="flex flex-wrap items-center justify-end gap-3">
+            <button type="button" class="btn-outline" @click="reset()" x-text="$store.i18n.t('settings.companyCard.actions.cancel')"></button>
+            <button type="submit" class="btn-primary" :disabled="Object.keys(errors).length" x-text="$store.i18n.t('settings.companyCard.actions.save')"></button>
           </div>
         </form>
       </div>
 
-      <div class="panel">
-        <div class="panel__header">
-          <div>
-            <h2 class="panel__title" x-text="$store.i18n.t('settings.payrollCard.title')"></h2>
-            <p class="panel__subtitle" x-text="$store.i18n.t('settings.payrollCard.subtitle')"></p>
+      <div class="card p-6 space-y-6 shadow-sm">
+        <div class="flex flex-wrap items-start justify-between gap-3">
+          <div class="space-y-1">
+            <h2 class="text-lg font-semibold text-slate-900" x-text="$store.i18n.t('settings.payrollCard.title')"></h2>
+            <p class="text-sm text-slate-600" x-text="$store.i18n.t('settings.payrollCard.subtitle')"></p>
           </div>
-          <a href="#/payroll" class="btn-secondary" x-text="$store.i18n.t('settings.payrollCard.goToPayroll')"></a>
+          <a href="#/payroll" class="btn-outline" x-text="$store.i18n.t('settings.payrollCard.goToPayroll')"></a>
         </div>
         <form class="space-y-6" @submit.prevent="save()">
           <div class="grid gap-4 md:grid-cols-2">
@@ -200,9 +202,9 @@ export function renderSettings(){
               </select>
             </label>
           </div>
-          <div class="rounded border border-white/10 bg-white/5 p-4 text-sm text-slate-300" x-text="$store.i18n.t('settings.payrollCard.note')"></div>
+          <div class="rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600" x-text="$store.i18n.t('settings.payrollCard.note')"></div>
           <div class="flex items-center justify-end gap-3">
-            <button type="submit" class="btn" x-text="$store.i18n.t('settings.payrollCard.action')"></button>
+            <button type="submit" class="btn-primary" x-text="$store.i18n.t('settings.payrollCard.action')"></button>
           </div>
         </form>
       </div>

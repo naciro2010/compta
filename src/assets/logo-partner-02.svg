@@ -1,0 +1,7 @@
+<svg width="160" height="48" viewBox="0 0 160 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="48" rx="12" fill="#0B1120"/>
+  <path d="M30 15L40 9L50 15V27L40 33L30 27V15Z" stroke="#14B8A6" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M34 20H46" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+  <path d="M34 24H46" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <text x="64" y="29" fill="#F1F5F9" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="600">Casablanca Digital</text>
+</svg>

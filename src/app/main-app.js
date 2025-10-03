@@ -6,6 +6,7 @@ import { settingsStore } from './stores/settings.js'
 import { payrollStore } from './stores/payroll.js'
 import { ledgerStore } from './stores/ledger.js'
 import '../styles/tailwind.css'
+import '../styles/tokens.css'
 
 window.Alpine = Alpine
 Alpine.store('i18n', i18nStore)
