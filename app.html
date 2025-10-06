@@ -6,79 +6,189 @@
   <title>MA‑ACC — App</title>
   <script type="module" src="./src/app/main-app.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-900">
-  <header class="landing-header sticky top-0 z-40 bg-white/95 backdrop-blur">
-    <div class="container flex items-center justify-between gap-4 py-4">
-      <a href="./index.html" class="flex items-center gap-3 rounded-full border border-transparent px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
-        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-soft">
-          <img src="./src/assets/logo.svg" class="h-6 w-6" alt="MA-ACC" />
-        </span>
-        <span class="text-lg font-semibold tracking-wide">MA‑ACC</span>
-      </a>
-      <nav class="hidden items-center gap-3 lg:flex" aria-label="Actions rapides">
-        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm" type="button">FR / AR</button>
-        <button @click="$store.seed.reset()" class="btn-outline text-sm" type="button">Réinitialiser les données</button>
-        <a href="./index.html" class="btn-primary text-sm">Retour landing</a>
+<body class="bg-[var(--surface-alt)] text-[var(--ink)]" x-data="{ scrolled: false }" @scroll.window="scrolled = window.scrollY > 12">
+  <div class="min-h-screen flex flex-col">
+    <header class="sticky top-0 z-40">
+      <div class="glass-panel mx-auto mt-3 flex w-[min(96%,1080px)] items-center justify-between gap-3 px-5 py-3 transition" :class="{'shadow-header': scrolled}">
+        <div class="flex items-center gap-2">
+          <button type="button" class="btn-ghost lg:hidden" aria-label="Menu" @click="$store.layout.sidebarOpen = true">
+            <svg class="h-5 w-5" aria-hidden="true">
+              <use href="./src/assets/icon-pack.svg#icon-menu"></use>
+            </svg>
+          </button>
+          <a href="./index.html" class="flex items-center gap-3 rounded-full px-2 py-1 transition hover:bg-white/70">
+            <span class="icon-circle">
+              <img src="./src/assets/logo.svg" alt="MA-ACC" class="h-5 w-5" />
+            </span>
+            <span class="text-base font-semibold">MA‑ACC Studio</span>
+          </a>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" class="btn-ghost hidden sm:flex" @click="$store.seed.reset()">
+            <svg class="h-4 w-4" aria-hidden="true">
+              <use href="./src/assets/icon-pack.svg#icon-refresh"></use>
+            </svg>
+            <span x-text="$store.i18n.t('global.resetData')"></span>
+          </button>
+          <button type="button" class="btn-ghost" @click="$store.i18n.toggle()">
+            <span class="font-semibold" x-text="$store.i18n.lang === 'fr' ? 'FR' : 'AR'"></span>
+          </button>
+          <a href="./index.html" class="btn-outline hidden md:inline-flex gap-2">
+            <svg class="h-4 w-4" aria-hidden="true">
+              <use href="./src/assets/icon-pack.svg#icon-arrow-left"></use>
+            </svg>
+            <span x-text="$store.i18n.t('global.backLanding')"></span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <div class="container-ma py-10">
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
+          <aside class="glass-panel hidden h-fit flex-col gap-4 px-4 py-6 lg:flex">
+            <div class="space-y-2 px-2">
+              <p class="eyebrow" x-text="$store.i18n.t('global.datasetInfo')"></p>
+            </div>
+            <nav
+              class="space-y-1"
+              x-data="{
+                active: window.location.hash || '#/dashboard',
+                items: [
+                  { href: '#/dashboard', icon: 'analytics', key: 'nav.dashboard', fallback: 'Dashboard' },
+                  { href: '#/sales', icon: 'invoice', key: 'nav.sales', fallback: 'Ventes' },
+                  { href: '#/purchases', icon: 'cart', key: 'nav.purchases', fallback: 'Achats' },
+                  { href: '#/bank', icon: 'bank', key: 'nav.bank', fallback: 'Banque' },
+                  { href: '#/ledger', icon: 'double-entry', key: 'nav.ledger', fallback: 'Écritures' },
+                  { href: '#/tax', icon: 'vat', key: 'nav.tax', fallback: 'TVA' },
+                  { href: '#/payroll', icon: 'users', key: 'nav.payroll', fallback: 'Paie' },
+                  { href: '#/fixed-assets', icon: 'report', key: 'nav.assets', fallback: 'Immobilisations' },
+                  { href: '#/settings', icon: 'settings', key: 'nav.settings', fallback: 'Paramètres' }
+                ],
+                init(){
+                  window.addEventListener('hashchange', () => {
+                    const next = window.location.hash || '#/dashboard'
+                    this.active = next
+                  })
+                }
+              }"
+            >
+              <template x-for="item in items" :key="item.href">
+                <a
+                  :href="item.href"
+                  class="flex items-center gap-3 rounded-[18px] px-4 py-3 transition"
+                  :class="active === item.href ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink)] text-opacity-70 hover:bg-white/80 hover:text-[var(--ink)] hover:text-opacity-100'"
+                  :aria-current="active === item.href ? 'page' : undefined"
+                >
+                  <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-[var(--accent)] shadow-sm">
+                    <svg class="h-5 w-5" aria-hidden="true">
+                      <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
+                    </svg>
+                  </span>
+                  <span x-text="$store.i18n.t(item.key) || item.fallback"></span>
+                </a>
+              </template>
+            </nav>
+          </aside>
+
+          <section class="glass-panel min-h-[70vh] p-6 md:p-8">
+            <div id="view" data-router-view class="space-y-6" aria-live="polite"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div
+    x-show="$store.layout.sidebarOpen"
+    x-transition.opacity
+    class="fixed inset-0 z-50 flex items-start justify-end bg-black/40 backdrop-blur-sm"
+    @click.self="$store.layout.closeSidebar()"
+  >
+    <div class="glass-panel h-full w-80 space-y-6 p-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="icon-circle">
+            <img src="./src/assets/logo.svg" alt="MA-ACC" class="h-5 w-5" />
+          </span>
+          <span class="text-base font-semibold">MA‑ACC</span>
+        </div>
+        <button type="button" class="btn-ghost" aria-label="Fermer" @click="$store.layout.closeSidebar()">
+          <svg class="h-4 w-4" aria-hidden="true">
+            <use href="./src/assets/icon-pack.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+      <nav
+        class="space-y-1 text-base"
+        x-data="{
+          active: window.location.hash || '#/dashboard',
+          items: [
+            { href: '#/dashboard', icon: 'analytics', key: 'nav.dashboard', fallback: 'Dashboard' },
+            { href: '#/sales', icon: 'invoice', key: 'nav.sales', fallback: 'Ventes' },
+            { href: '#/purchases', icon: 'cart', key: 'nav.purchases', fallback: 'Achats' },
+            { href: '#/bank', icon: 'bank', key: 'nav.bank', fallback: 'Banque' },
+            { href: '#/ledger', icon: 'double-entry', key: 'nav.ledger', fallback: 'Écritures' },
+            { href: '#/tax', icon: 'vat', key: 'nav.tax', fallback: 'TVA' },
+            { href: '#/payroll', icon: 'users', key: 'nav.payroll', fallback: 'Paie' },
+            { href: '#/fixed-assets', icon: 'report', key: 'nav.assets', fallback: 'Immobilisations' },
+            { href: '#/settings', icon: 'settings', key: 'nav.settings', fallback: 'Paramètres' }
+          ],
+          init(){
+            window.addEventListener('hashchange', () => {
+              const next = window.location.hash || '#/dashboard'
+              this.active = next
+              window.Alpine?.store('layout')?.closeSidebar?.()
+            })
+          }
+        }"
+      >
+        <template x-for="item in items" :key="item.href">
+          <a
+            :href="item.href"
+            class="flex items-center gap-3 rounded-[18px] px-4 py-3 transition"
+            :class="active === item.href ? 'bg-white text-[var(--ink)] shadow-sm' : 'text-[var(--ink)] text-opacity-70 hover:bg-white/80 hover:text-[var(--ink)] hover:text-opacity-100'"
+            :aria-current="active === item.href ? 'page' : undefined"
+            @click="$store.layout.closeSidebar()"
+          >
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-[var(--accent)] shadow-sm">
+              <svg class="h-5 w-5" aria-hidden="true">
+                <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
+              </svg>
+            </span>
+            <span x-text="$store.i18n.t(item.key) || item.fallback"></span>
+          </a>
+        </template>
       </nav>
-      <div class="flex items-center gap-2 lg:hidden">
-        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm" type="button">FR / AR</button>
-        <button @click="$store.seed.reset()" class="btn-outline text-sm" type="button">Reset</button>
+      <div class="mt-auto space-y-3 border-t border-[var(--divider)] pt-4 text-sm text-[var(--ink-muted)]">
+        <p x-text="$store.i18n.t('global.datasetInfo')"></p>
+        <button type="button" class="btn-outline w-full justify-center" @click="$store.seed.reset(); $store.layout.closeSidebar()" x-text="$store.i18n.t('global.resetAction')"></button>
       </div>
     </div>
-  </header>
-  <main class="container py-10 lg:py-14" role="main">
-    <div class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]">
-      <aside class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <nav
-          class="space-y-1"
-          x-data="{
-            active: window.location.hash || '#/dashboard',
-            items: [
-              { href: '#/dashboard', label: 'Dashboard', icon: 'analytics' },
-              { href: '#/sales', label: 'Ventes', icon: 'invoice' },
-              { href: '#/purchases', label: 'Achats', icon: 'double-entry' },
-              { href: '#/bank', label: 'Banque', icon: 'bank' },
-              { href: '#/ledger', label: 'Écritures', icon: 'ledger' },
-              { href: '#/tax', label: 'TVA', icon: 'vat' },
-              { href: '#/payroll', label: 'Paie', icon: 'users' },
-              { href: '#/fixed-assets', label: 'Immobilisations', icon: 'report' },
-              { href: '#/settings', label: 'Paramètres', icon: 'multi' }
-            ],
-            init(){
-              window.addEventListener('hashchange', () => {
-                const nextHash = window.location.hash || '#/dashboard'
-                if (nextHash === this.active) return
-                this.active = nextHash
-              })
-            }
-          }"
-        >
-          <template x-for="item in items" :key="item.href">
-            <a
-              :href="item.href"
-              class="nav-link flex items-center gap-3"
-              :class="{'nav-link--active !bg-slate-900 !text-white shadow-sm': active === item.href}"
-              :aria-current="active === item.href ? 'page' : undefined"
-            >
-              <span
-                class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50"
-                :class="{'border-slate-900 bg-slate-900 text-white': active === item.href}"
-              >
-                <svg class="h-5 w-5" aria-hidden="true">
-                  <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
-                </svg>
-              </span>
-              <span x-text="item.label"></span>
-            </a>
-          </template>
-        </nav>
-      </aside>
-      <section class="space-y-6">
-        <div class="card min-h-[60vh] p-6 shadow-sm">
-          <div id="view" data-router-view class="space-y-6" aria-live="polite"></div>
+  </div>
+
+  <div class="toast-stack" x-data x-cloak>
+    <template x-for="toast in $store.toast.items" :key="toast.id">
+      <div
+        class="toast-item"
+        :class="{
+          'border-[color:rgba(52,199,89,0.4)] bg-[color:rgba(52,199,89,0.14)]': toast.type === 'success',
+          'border-[color:rgba(255,59,48,0.4)] bg-[color:rgba(255,59,48,0.14)] text-[color:#ff3b30]': toast.type === 'error',
+          'border-[color:rgba(245,166,35,0.35)] bg-[color:rgba(245,166,35,0.14)]': toast.type === 'warning',
+          'border-[var(--divider)] bg-white': toast.type === 'info'
+        }"
+      >
+        <div class="flex-1">
+          <p class="text-sm font-semibold" x-text="toast.title"></p>
+          <p class="mt-1 text-xs text-[var(--ink-soft)]" x-text="toast.message"></p>
         </div>
-      </section>
-    </div>
-  </main>
+        <button type="button" class="btn-ghost btn-sm" @click="$store.toast.dismiss(toast.id)">
+          <svg class="h-4 w-4" aria-hidden="true">
+            <use href="./src/assets/icon-pack.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+    </template>
+  </div>
 </body>
 </html>

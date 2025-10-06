@@ -1,5 +1,7 @@
 import { payrollStore } from '../stores/payroll.js'
 import { settingsStore } from '../stores/settings.js'
+import { toast } from '../components/Toast.js'
+import { toggleBodyScroll, trapFocus as modalTrapFocus, focusPanel as modalFocusPanel } from '../components/Modal.js'
 
 const clone = (value) => JSON.parse(JSON.stringify(value))
 
@@ -26,7 +28,6 @@ function payrollView(){
     editingId: null,
     employeeForm: { nom: '', matriculeCnss: '', poste: '', salaireBase: 0, primes: [], retenues: [], iban: '' },
     employeeError: '',
-    notification: { visible: false, message: '', type: 'info', timeout: null },
     actionLocks: {},
     currencyDisplay: (settingsStore.getCompany().devise || 'MAD'),
     init(){
@@ -69,50 +70,20 @@ function payrollView(){
         return null
       }
     },
-    notify(message, type = 'info'){
+    notify(message, type = 'info', title = ''){
       if (!message) return
-      if (this.notification.timeout) window.clearTimeout(this.notification.timeout)
-      this.notification.message = message
-      this.notification.type = type
-      this.notification.visible = true
-      this.notification.timeout = window.setTimeout(() => this.clearNotification(), 4000)
-    },
-    clearNotification(){
-      if (this.notification.timeout) window.clearTimeout(this.notification.timeout)
-      this.notification.visible = false
-      this.notification.message = ''
-      this.notification.type = 'info'
-      this.notification.timeout = null
+      toast({ message, type, title })
     },
     focusPanel(ref){
       const el = this.$refs?.[ref]
-      if (el) el.focus({ preventScroll: false })
+      if (el) modalFocusPanel(el)
     },
     trapFocus(event, ref){
-      if (event.key !== 'Tab') return
       const panel = this.$refs?.[ref]
-      if (!panel) return
-      const focusable = panel.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])')
-      if (!focusable.length) {
-        event.preventDefault()
-        panel.focus()
-        return
-      }
-      const first = focusable[0]
-      const last = focusable[focusable.length - 1]
-      const active = document.activeElement
-      if (event.shiftKey && active === first) {
-        event.preventDefault()
-        last.focus()
-      } else if (!event.shiftKey && active === last) {
-        event.preventDefault()
-        first.focus()
-      }
+      if (panel) modalTrapFocus(event, panel)
     },
     syncScrollLock(){
-      const opened = this.showEmployeeModal
-      document.documentElement.classList.toggle('overflow-hidden', Boolean(opened))
-      document.body.classList.toggle('overflow-hidden', Boolean(opened))
+      toggleBodyScroll(Boolean(this.showEmployeeModal))
     },
     get employees(){
       return this.store.state.employees
@@ -278,24 +249,6 @@ export function renderPayroll(){
   const currency = company.devise || 'MAD'
   return `
   <section class="space-y-10" x-data="payrollView()" @keydown.escape.window="showEmployeeModal = false; syncScrollLock()">
-    <div class="pointer-events-none fixed inset-x-0 top-5 z-[60] flex justify-center px-4" aria-live="assertive">
-      <div
-        class="pointer-events-auto flex items-center gap-3 rounded-full border px-4 py-2 text-sm font-medium shadow-lg backdrop-blur"
-        x-show="notification.visible"
-        x-transition.opacity
-        :class="{
-          'border-emerald-200 bg-emerald-50 text-emerald-700': notification.type === 'success',
-          'border-amber-200 bg-amber-50 text-amber-700': notification.type === 'warning',
-          'border-rose-200 bg-rose-50 text-rose-700': notification.type === 'error',
-          'border-slate-200 bg-white text-slate-700': notification.type === 'info'
-        }"
-        role="status"
-      >
-        <span class="text-base" aria-hidden="true" x-text="notification.type === 'error' ? '⚠️' : notification.type === 'warning' ? '⚠️' : '✅'"></span>
-        <p x-text="notification.message"></p>
-        <button class="btn-link text-xs" type="button" @click="clearNotification()">Fermer</button>
-      </div>
-    </div>
     <header class="space-y-2">
       <p class="text-xs uppercase tracking-[0.3em] text-slate-500" x-text="$store.i18n.t('payroll.header.badge')"></p>
       <h1 class="text-2xl font-semibold text-slate-900" x-text="$store.i18n.t('payroll.header.title')"></h1>

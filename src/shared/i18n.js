@@ -1,4 +1,21 @@
 const FR = {
+  nav: {
+    dashboard: 'Tableau de bord',
+    sales: 'Ventes',
+    purchases: 'Achats',
+    bank: 'Banque',
+    ledger: 'Écritures',
+    tax: 'TVA',
+    payroll: 'Paie',
+    assets: 'Immobilisations',
+    settings: 'Paramètres'
+  },
+  global: {
+    resetData: 'Réinitialiser les données',
+    backLanding: 'Retour landing',
+    datasetInfo: 'Dataset local stocké dans votre navigateur.',
+    resetAction: 'Réinitialiser'
+  },
   landing: {
     heroTitle: "Comptabilité marocaine, simple et fluide",
     heroSubtitle: "POC conforme au CGNC (démo), TVA/IS (export factice), facturation, rapprochement, paie CNSS (mock) — FR/AR.",
@@ -246,6 +263,23 @@ const FR = {
 }
 
 const AR = {
+  nav: {
+    dashboard: 'لوحة القيادة',
+    sales: 'المبيعات',
+    purchases: 'المشتريات',
+    bank: 'البنك',
+    ledger: 'القيود',
+    tax: 'الضريبة',
+    payroll: 'الأجور',
+    assets: 'الأصول الثابتة',
+    settings: 'الإعدادات'
+  },
+  global: {
+    resetData: 'إعادة تعيين البيانات',
+    backLanding: 'الرجوع إلى الصفحة التعريفية',
+    datasetInfo: 'البيانات مخزنة محلياً في متصفحك.',
+    resetAction: 'إعادة تعيين'
+  },
   landing: {
     heroTitle: "محاسبة مغربية سهلة وسلسة",
     heroSubtitle: "نموذج تجريبي مطابق لـ CGNC (عرض)، TVA/IS (ملفات تمثيلية)، فواتير، مصالحة، أجور CNSS — فر/ع.",

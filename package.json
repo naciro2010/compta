@@ -1,5 +1,12 @@
-{ "name": "ma-acc-poc", "private": true, "version": "0.1.0",
-  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview" },
+{
+  "name": "ma-acc-poc",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.45",
@@ -7,6 +14,9 @@
     "vite": "^5.4.0"
   },
   "dependencies": {
+    "@alpinejs/collapse": "^3.14.0",
+    "@alpinejs/intersect": "^3.14.0",
+    "@alpinejs/persist": "^3.14.0",
     "alpinejs": "^3.14.0"
   }
 }

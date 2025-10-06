@@ -58,389 +58,379 @@
   </script>
   <script type="module" src="./src/landing/main-landing.js"></script>
 </head>
-<body class="bg-white text-slate-900" x-data="landingApp()" x-init="init()" @scroll.window="onScroll()" @keydown.escape.window="navOpen = false">
-  <header class="landing-header sticky top-0 z-50 bg-white/95 backdrop-blur" :data-scrolled="scrolled">
-    <div class="container flex items-center gap-4 py-4">
-      <a href="#hero" class="flex items-center gap-3 rounded-full border border-transparent px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
-        <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-soft">
-          <svg class="h-5 w-5" aria-hidden="true">
-            <use href="./src/assets/icon-pack.svg#icon-ledger"></use>
-          </svg>
-        </span>
-        <span class="text-lg font-semibold tracking-wide text-slate-900">CGNC Flow</span>
-      </a>
-      <nav class="mx-auto hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
-        <template x-for="item in $store.landing.content.nav" :key="item.id">
-          <a :href="'#' + item.id" class="nav-link" @click="navOpen = false" x-text="item.label"></a>
-        </template>
-      </nav>
-      <div class="ml-auto hidden items-center gap-3 lg:flex">
-        <button type="button" class="btn-ghost" @click="$store.landing.toggleLang()">
-          <span class="text-sm font-semibold" x-text="$store.landing.lang === 'fr' ? 'FR' : 'AR'"></span>
-        </button>
-        <a href="./app.html" class="btn-primary" @click="$store.landing.track($store.landing.content.cta.trackDemo)">
-          <span x-text="$store.landing.content.cta.primary"></span>
-        </a>
-        <a :href="$store.landing.content.cta.expertAnchor" class="btn-outline" @click="scrollToContact(); $store.landing.track($store.landing.content.cta.trackExpert)">
-          <span x-text="$store.landing.content.cta.secondary"></span>
-        </a>
-      </div>
-      <div class="ml-auto flex items-center gap-2 lg:hidden">
-        <button type="button" class="btn-ghost px-3" @click="$store.landing.toggleLang()">
-          <span class="text-sm font-semibold" x-text="$store.landing.lang === 'fr' ? 'FR' : 'AR'"></span>
-        </button>
-        <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white shadow-sm transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" @click="navOpen = !navOpen" :aria-expanded="navOpen" aria-controls="mobile-nav">
-          <span class="sr-only">Menu</span>
-          <svg class="h-5 w-5 text-slate-900" aria-hidden="true">
-            <use :href="navOpen ? './src/assets/icon-pack.svg#icon-close' : './src/assets/icon-pack.svg#icon-menu'"></use>
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div id="mobile-nav" class="fixed inset-0 z-40 mobile-nav-panel lg:hidden" x-show="navOpen" x-transition.opacity @keydown.escape.window="navOpen=false">
-      <div class="flex h-full flex-col justify-between gap-6">
-        <div class="flex justify-end">
-          <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-slate-200 bg-white shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" @click="navOpen = false">
-            <span class="sr-only">Fermer le menu</span>
-            <svg class="h-5 w-5 text-slate-900" aria-hidden="true">
-              <use href="./src/assets/icon-pack.svg#icon-close"></use>
+<body class="text-neutral" x-data="landingApp()" x-init="init()" @keydown.escape.window="navOpen = false" @scroll.window="handleScroll()">
+  <div class="min-h-screen flex flex-col">
+    <header class="nav-shell" :class="{'shadow-header': scrolled}">
+      <div class="container-ma flex items-center justify-between py-4">
+        <a href="#hero" class="flex items-center gap-3 rounded-full px-2 py-1 transition hover:bg-white/70" @click.prevent="scrollTo('#hero')">
+          <span class="icon-circle">
+            <svg class="h-5 w-5" aria-hidden="true">
+              <use href="./src/assets/icon-pack.svg#icon-ledger"></use>
             </svg>
-          </button>
-        </div>
-        <nav class="flex flex-col gap-3 text-center" aria-label="Navigation mobile">
-          <template x-for="item in $store.landing.content.nav" :key="item.id + '-mobile'">
-            <a :href="'#' + item.id" class="nav-link text-base" @click="navOpen = false" x-text="item.label"></a>
+          </span>
+          <span class="text-lg font-semibold tracking-tight">CGNC Flow</span>
+        </a>
+        <nav class="hidden items-center gap-6 lg:flex" aria-label="Navigation principale">
+          <template x-for="item in $store.landing.content.nav" :key="item.id">
+            <button type="button" class="nav-link" @click="scrollTo('#' + item.id)" x-text="item.label"></button>
           </template>
         </nav>
-        <div class="space-y-3">
-          <a href="./app.html" class="btn-primary w-full" @click="$store.landing.track($store.landing.content.cta.trackDemo); navOpen=false">
-            <span x-text="$store.landing.content.cta.primary"></span>
-          </a>
-          <button type="button" class="btn-outline w-full" @click="navOpen = false; scrollToContact(); $store.landing.track($store.landing.content.cta.trackExpert)">
+        <div class="hidden items-center gap-3 lg:flex">
+          <button type="button" class="btn-ghost" @click="$store.landing.toggleLang()" :aria-label="$store.landing.lang === 'fr' ? 'Basculer en arabe' : 'Switch to French'">
+            <span class="font-semibold" x-text="$store.landing.lang === 'fr' ? 'FR' : 'AR'"></span>
+          </button>
+          <a href="./app.html" class="btn-primary" @click="$store.landing.track($store.landing.content.cta.trackDemo)" x-text="$store.landing.content.cta.primary"></a>
+          <button type="button" class="btn-outline" @click="scrollTo($store.landing.content.cta.expertAnchor); $store.landing.track($store.landing.content.cta.trackExpert)">
             <span x-text="$store.landing.content.cta.secondary"></span>
           </button>
         </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section id="hero" class="section-padding">
-      <div class="container grid gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center">
-        <div class="space-y-8">
-          <span class="pill" x-text="$store.landing.content.hero.badge"></span>
-          <div class="space-y-5">
-            <p class="text-sm text-slate-600" x-text="$store.landing.content.hero.pitch"></p>
-            <h1 class="text-balance text-4xl font-semibold text-slate-900 md:text-5xl" x-text="$store.landing.content.hero.title"></h1>
-            <p class="text-lg text-slate-600" x-text="$store.landing.content.hero.subtitle"></p>
-          </div>
-          <div class="grid gap-3 sm:grid-cols-2">
-            <template x-for="badge in $store.landing.content.hero.bullets" :key="badge">
-              <span class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700">
-                <svg class="h-4 w-4 text-slate-900" aria-hidden="true">
-                  <use href="./src/assets/icon-pack.svg#icon-check"></use>
-                </svg>
-                <span x-text="badge"></span>
-              </span>
-            </template>
-          </div>
-          <div class="flex flex-wrap items-center gap-4">
-            <a href="./app.html" class="btn-primary" @click="$store.landing.track($store.landing.content.cta.trackDemo)">
-              <svg class="h-4 w-4" aria-hidden="true">
-                <use href="./src/assets/icon-pack.svg#icon-rocket"></use>
-              </svg>
-              <span x-text="$store.landing.content.cta.primary"></span>
-            </a>
-            <button type="button" class="btn-outline" @click="scrollToContact(); $store.landing.track($store.landing.content.cta.trackExpert)">
-              <svg class="h-4 w-4" aria-hidden="true">
-                <use href="./src/assets/icon-pack.svg#icon-chat"></use>
-              </svg>
-              <span x-text="$store.landing.content.cta.secondary"></span>
-            </button>
-            <p class="text-sm text-slate-600" x-text="$store.landing.content.hero.contactPrompt"></p>
-          </div>
-        </div>
-        <figure class="hero-visual">
-          <img src="./src/assets/hero-landing.svg" alt="Illustration interface comptabilité" loading="lazy" />
-        </figure>
-      </div>
-    </section>
-
-    <section id="why" class="section-padding section-muted">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.why.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.why.subtitle"></p>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <template x-for="item in $store.landing.content.why.items" :key="item.pain">
-            <article class="card card-interactive p-6 space-y-4">
-              <h3 class="text-lg font-semibold text-slate-900" x-text="item.pain"></h3>
-              <p class="text-sm text-slate-600">
-                <span class="font-semibold text-slate-900" x-text="$store.landing.content.why.label"></span>
-                <span class="ms-1" x-text="item.fix"></span>
-              </p>
-            </article>
-          </template>
+        <div class="flex items-center gap-2 lg:hidden">
+          <button type="button" class="btn-ghost" @click="$store.landing.toggleLang()">
+            <span class="font-semibold" x-text="$store.landing.lang === 'fr' ? 'FR' : 'AR'"></span>
+          </button>
+          <button type="button" class="btn-ghost" aria-label="Menu" @click="navOpen = true">
+            <svg class="h-6 w-6" aria-hidden="true">
+              <use href="./src/assets/icon-pack.svg#icon-menu"></use>
+            </svg>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <section id="features" class="section-padding">
-      <div class="container space-y-14">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.features.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.features.subtitle"></p>
-        </div>
-        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          <template x-for="tile in $store.landing.content.features.tiles" :key="tile.id">
-            <article class="card card-interactive p-6 space-y-4">
-              <div class="flex items-center gap-3">
-                <span class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-white">
-                  <svg class="h-5 w-5" aria-hidden="true">
-                    <use :href="'./src/assets/icon-pack.svg#icon-' + tile.icon"></use>
-                  </svg>
-                </span>
-                <h3 class="text-lg font-semibold text-slate-900" x-text="tile.title"></h3>
-              </div>
-              <p class="text-sm font-medium text-slate-700" x-text="tile.summary"></p>
-              <p class="text-sm text-slate-600" x-text="tile.body"></p>
-              <ul class="space-y-2 text-sm text-slate-600">
-                <template x-for="detail in tile.details" :key="tile.id + detail">
-                  <li class="flex items-start gap-2">
-                    <svg class="mt-0.5 h-4 w-4 text-slate-900" aria-hidden="true">
-                      <use href="./src/assets/icon-pack.svg#icon-check"></use>
-                    </svg>
-                    <span x-text="detail"></span>
-                  </li>
-                </template>
-              </ul>
-            </article>
-          </template>
-        </div>
-        <div class="space-y-4">
-          <h3 class="text-xl font-semibold text-slate-900" x-text="$store.landing.content.features.accordionTitle"></h3>
-          <p class="text-sm text-slate-600" x-text="$store.landing.content.features.accordionIntro"></p>
-          <div class="grid gap-3 lg:grid-cols-2">
-            <template x-for="tile in $store.landing.content.features.tiles" :key="tile.id + '-accordion'">
-              <details class="accordion-item p-5" x-data="{ open: false }" @toggle="open = $el.open">
-                <summary class="flex cursor-pointer items-center justify-between gap-4 text-left text-base font-semibold text-slate-900">
-                  <span x-text="tile.title"></span>
-                  <svg class="h-5 w-5 text-slate-500 transition" :class="open ? 'rotate-90' : ''" aria-hidden="true">
-                    <use href="./src/assets/icon-pack.svg#icon-caret"></use>
-                  </svg>
-                </summary>
-                <div class="mt-4 space-y-3 text-sm text-slate-600">
-                  <p x-text="tile.body"></p>
-                  <ul class="space-y-2">
-                    <template x-for="detail in tile.details" :key="tile.id + detail + '-accordion'">
-                      <li class="flex items-start gap-2">
-                        <svg class="mt-0.5 h-4 w-4 text-slate-900" aria-hidden="true">
-                          <use href="./src/assets/icon-pack.svg#icon-check"></use>
-                        </svg>
-                        <span x-text="detail"></span>
-                      </li>
-                    </template>
-                  </ul>
-                </div>
-              </details>
-            </template>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="how" class="section-padding section-muted">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.howItWorks.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.howItWorks.subtitle"></p>
-        </div>
-        <ol class="grid gap-4 md:grid-cols-5">
-          <template x-for="(step, index) in $store.landing.content.howItWorks.steps" :key="step.step">
-            <li class="card p-5 space-y-3">
-              <span class="badge-soft">Étape <span x-text="index + 1"></span></span>
-              <h3 class="text-base font-semibold text-slate-900" x-text="step.step"></h3>
-              <p class="text-sm text-slate-600" x-text="step.desc"></p>
-            </li>
-          </template>
-        </ol>
-      </div>
-    </section>
-
-    <section id="audiences" class="section-padding">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.audiences.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.audiences.subtitle"></p>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <template x-for="audience in $store.landing.content.audiences.items" :key="audience.title">
-            <article class="card p-6 space-y-4">
-              <h3 class="text-lg font-semibold text-slate-900" x-text="audience.title"></h3>
-              <ul class="space-y-2 text-sm text-slate-600">
-                <template x-for="benefit in audience.benefits" :key="audience.title + benefit">
-                  <li class="flex items-start gap-2">
-                    <svg class="mt-0.5 h-4 w-4 text-slate-900" aria-hidden="true">
-                      <use href="./src/assets/icon-pack.svg#icon-check"></use>
-                    </svg>
-                    <span x-text="benefit"></span>
-                  </li>
-                </template>
-              </ul>
-            </article>
-          </template>
-        </div>
-      </div>
-    </section>
-
-    <section id="results" class="section-padding section-muted">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.results.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.results.subtitle"></p>
-        </div>
-        <div class="grid gap-6 md:grid-cols-3">
-          <template x-for="kpi in $store.landing.content.results.kpis" :key="kpi.label">
-            <article class="card p-6 space-y-4">
-              <div>
-                <h3 class="text-base font-semibold text-slate-900" x-text="kpi.label"></h3>
-                <p class="text-lg font-semibold text-slate-700" x-text="kpi.value"></p>
-              </div>
-              <div class="stat-bar">
-                <div class="stat-bar__value" :style="`width: ${(kpi.progress || 0)}%`"></div>
-              </div>
-            </article>
-          </template>
-        </div>
-        <p class="text-xs text-slate-500" x-text="$store.landing.content.results.note"></p>
-      </div>
-    </section>
-
-    <section id="proof" class="section-padding">
-      <div class="container space-y-12">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.proof.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.proof.subtitle"></p>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-3">
-          <template x-for="logo in $store.landing.content.proof.logos" :key="logo.name">
-            <div class="card-muted flex items-center justify-center rounded-xl p-6">
-              <img :src="logo.src" :alt="logo.name" class="h-10" loading="lazy" />
+    <main class="flex-1">
+      <!-- sections identical to previous version -->
+      <section id="hero" class="section">
+        <div class="container-ma hero-grid hero-shell gradient-sunrise p-10 md:p-14 lg:p-16 floating-dots">
+          <div class="space-y-6">
+            <span class="hero-badge" x-text="$store.landing.content.hero.badge"></span>
+            <h1 class="headline max-w-xl text-balance" x-text="$store.landing.content.hero.title"></h1>
+            <p class="subheadline max-w-xl" x-text="$store.landing.content.hero.subtitle"></p>
+            <div class="flex flex-wrap items-center gap-3">
+              <a href="./app.html" class="btn-primary" @click="$store.landing.track($store.landing.content.cta.trackDemo)" x-text="$store.landing.content.cta.primary"></a>
+              <button type="button" class="btn-outline" @click="scrollTo('#contact'); $store.landing.track($store.landing.content.cta.trackExpert)">
+                <span x-text="$store.landing.content.hero.contactPrompt"></span>
+              </button>
             </div>
-          </template>
+            <div class="scrolling-strip" aria-hidden="true">
+              <div>
+                <template x-for="item in $store.landing.content.hero.bullets" :key="item">
+                  <span class="chip" x-text="item"></span>
+                </template>
+              </div>
+              <div>
+                <template x-for="item in $store.landing.content.hero.bullets" :key="item + '-duplicate'">
+                  <span class="chip" x-text="item"></span>
+                </template>
+              </div>
+            </div>
+          </div>
+          <div class="hero-device">
+            <img src="./src/assets/hero-landing.svg" alt="Illustration interface CGNC" class="w-full" loading="lazy" />
+          </div>
         </div>
-        <div class="space-y-6">
-          <h3 class="text-2xl font-semibold text-slate-900" x-text="$store.landing.content.proof.testimonialsTitle"></h3>
+      </section>
+
+      <section id="why" class="section-tight">
+        <div class="container-ma grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:items-start">
+          <div class="space-y-4">
+            <p class="eyebrow" x-text="$store.landing.content.why.label"></p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.why.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.why.subtitle"></p>
+          </div>
+          <div class="grid gap-4">
+            <template x-for="item in $store.landing.content.why.items" :key="item.pain">
+              <article class="card-ma p-6">
+                <h3 class="text-lg font-semibold text-[var(--ink)]" x-text="item.pain"></h3>
+                <p class="mt-2 text-sm text-[var(--ink-soft)]" x-text="item.fix"></p>
+              </article>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section section-muted">
+        <div class="container-ma grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] items-start">
+          <div class="space-y-5">
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.features.title"></h2>
+            <p class="subheadline max-w-ch" x-text="$store.landing.content.features.subtitle"></p>
+            <div class="grid gap-4">
+              <template x-for="tile in $store.landing.content.features.tiles" :key="tile.id">
+                <button
+                  type="button"
+                  class="card-ghost group flex items-start justify-between gap-4 p-6 text-left transition"
+                  :class="isFeatureActive(tile.id) ? 'border-[color:rgba(0,113,227,0.35)] shadow-soft' : ''"
+                  @click="setFeature(tile.id)"
+                >
+                  <div class="space-y-2">
+                    <h3 class="text-lg font-semibold text-[var(--ink)]" x-text="tile.title"></h3>
+                    <p class="text-sm text-[var(--ink-soft)]" x-text="tile.summary"></p>
+                  </div>
+                  <svg class="h-5 w-5 text-[var(--accent)] opacity-0 transition group-hover:opacity-100" aria-hidden="true">
+                    <use href="./src/assets/icon-pack.svg#icon-arrow-right"></use>
+                  </svg>
+                </button>
+              </template>
+            </div>
+          </div>
+          <div class="card-ma p-8 space-y-6">
+            <template x-for="tile in $store.landing.content.features.tiles" :key="tile.id">
+              <div x-show="isFeatureActive(tile.id)" x-transition.opacity class="space-y-6">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div>
+                    <p class="text-sm uppercase tracking-[0.35em] text-[var(--ink-muted)]" x-text="$store.landing.content.features.accordionTitle"></p>
+                    <h3 class="text-2xl font-semibold text-[var(--ink)]" x-text="tile.title"></h3>
+                  </div>
+                  <span class="icon-circle">
+                    <svg class="h-5 w-5" aria-hidden="true">
+                      <use :href="'./src/assets/icon-pack.svg#icon-' + tile.icon"></use>
+                    </svg>
+                  </span>
+                </div>
+                <p class="text-sm text-[var(--ink-soft)]" x-text="tile.body"></p>
+                <ul class="grid gap-3 md:grid-cols-2">
+                  <template x-for="detail in tile.details" :key="detail">
+                    <li class="card-ghost px-4 py-3 text-sm text-[var(--ink-soft)]" x-text="detail"></li>
+                  </template>
+                </ul>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" class="section-tight">
+        <div class="container-ma grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-start">
+          <div class="space-y-4">
+            <p class="eyebrow">Processus</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.howItWorks.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.howItWorks.subtitle"></p>
+          </div>
+          <div class="relative timeline space-y-6">
+            <template x-for="step in $store.landing.content.howItWorks.steps" :key="step.step">
+              <div class="timeline-item card-ghost py-5">
+                <h3 class="text-lg font-semibold text-[var(--ink)]" x-text="step.step"></h3>
+                <p class="text-sm text-[var(--ink-soft)]" x-text="step.desc"></p>
+              </div>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <section id="audiences" class="section section-muted">
+        <div class="container-ma space-y-10">
+          <div class="max-w-3xl space-y-3">
+            <p class="eyebrow">Personae</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.audiences.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.audiences.subtitle"></p>
+          </div>
           <div class="grid gap-6 md:grid-cols-3">
-            <template x-for="testimonial in $store.landing.content.proof.testimonials" :key="testimonial.name">
-              <figure class="card p-6 space-y-3">
-                <blockquote class="text-sm text-slate-600" x-text="testimonial.quote"></blockquote>
-                <figcaption class="space-y-1 text-sm">
-                  <p class="font-semibold text-slate-900" x-text="testimonial.name"></p>
-                  <p class="text-slate-500" x-text="testimonial.role"></p>
-                </figcaption>
+            <template x-for="item in $store.landing.content.audiences.items" :key="item.title">
+              <article class="card-ma p-6 space-y-4">
+                <h3 class="text-lg font-semibold text-[var(--ink)]" x-text="item.title"></h3>
+                <ul class="space-y-2 text-sm text-[var(--ink-soft)]">
+                  <template x-for="benefit in item.benefits" :key="benefit">
+                    <li class="flex items-center gap-2">
+                      <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--accent)]"></span>
+                      <span x-text="benefit"></span>
+                    </li>
+                  </template>
+                </ul>
+              </article>
+            </template>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="section-tight">
+        <div class="container-ma space-y-8">
+          <div class="max-w-3xl space-y-3">
+            <p class="eyebrow">Impact</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.results.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.results.subtitle"></p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <template x-for="kpi in $store.landing.content.results.kpis" :key="kpi.label">
+              <div class="card-ghost p-6 space-y-3">
+                <p class="text-sm font-semibold text-[var(--ink-soft)]" x-text="kpi.label"></p>
+                <p class="text-2xl font-semibold text-[var(--ink)]" x-text="kpi.value"></p>
+                <div class="h-1.5 rounded-full bg-[var(--surface-alt)]">
+                  <div class="h-full rounded-full bg-[var(--accent)]" :style="`width:${kpi.progress}%`"></div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <p class="text-sm text-[var(--ink-muted)]" x-text="$store.landing.content.results.note"></p>
+        </div>
+      </section>
+
+      <section id="proof" class="section section-muted">
+        <div class="container-ma space-y-12">
+          <div class="max-w-3xl space-y-3">
+            <p class="eyebrow">Confiance</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.proof.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.proof.subtitle"></p>
+          </div>
+          <div class="grid items-center gap-6 sm:grid-cols-3">
+            <template x-for="logo in $store.landing.content.proof.logos" :key="logo.name">
+              <div class="card-ghost flex items-center justify-center p-6">
+                <img :src="logo.src" :alt="logo.name" class="max-h-14 object-contain" loading="lazy" />
+              </div>
+            </template>
+          </div>
+          <div class="grid gap-6 lg:grid-cols-3">
+            <template x-for="quote in $store.landing.content.proof.testimonials" :key="quote.name">
+              <figure class="card-ma h-full p-6 space-y-3">
+                <blockquote class="text-sm text-[var(--ink-soft)]" x-text="quote.quote"></blockquote>
+                <figcaption class="text-sm font-semibold text-[var(--ink)]" x-text="quote.name + ' — ' + quote.role"></figcaption>
               </figure>
             </template>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="faq" class="section-padding section-muted">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-4">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.faq.title"></h2>
+      <section id="faq" class="section-tight">
+        <div class="container-ma space-y-8">
+          <div class="max-w-2xl space-y-3">
+            <p class="eyebrow">FAQ</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.faq.title"></h2>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2">
+            <template x-for="item in $store.landing.content.faq.items" :key="item.q">
+              <details class="faq-item p-5">
+                <summary class="text-base font-semibold text-[var(--ink)] cursor-pointer" x-text="item.q"></summary>
+                <p class="mt-2 text-sm text-[var(--ink-soft)]" x-text="item.a"></p>
+              </details>
+            </template>
+          </div>
         </div>
-        <div class="space-y-3">
-          <template x-for="(item, index) in $store.landing.content.faq.items" :key="item.q + index">
-            <details class="accordion-item p-5" x-data="{ open: index === 0 }" x-bind:open="open" @toggle="open = $event.target.open">
-              <summary class="flex cursor-pointer items-center justify-between gap-4 text-left text-base font-semibold text-slate-900">
-                <span x-text="item.q"></span>
-                <svg class="h-5 w-5 text-slate-500" aria-hidden="true">
-                  <use href="./src/assets/icon-pack.svg#icon-caret"></use>
-                </svg>
-              </summary>
-              <p class="mt-3 text-sm text-slate-600" x-text="item.a"></p>
-            </details>
-          </template>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="contact" class="section-padding" x-ref="contactSection">
-      <div class="container space-y-10">
-        <div class="max-w-3xl space-y-3">
-          <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.contact.title"></h2>
-          <p class="text-base text-slate-600" x-text="$store.landing.content.contact.subtitle"></p>
-          <p class="text-sm text-slate-500" x-text="$store.landing.content.contact.disclaimer"></p>
-        </div>
-        <form class="grid gap-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-md md:grid-cols-2" @submit.prevent="submitLead">
-          <div class="md:col-span-1 field">
-            <label class="field-label" for="lead-name" x-text="$store.landing.content.contact.labels.name"></label>
-            <input id="lead-name" name="name" type="text" x-model="lead.name" :placeholder="$store.landing.content.contact.placeholders.name" required class="input" />
+      <section id="contact" class="section section-muted" x-ref="contactSection">
+        <div class="container-ma space-y-10">
+          <div class="max-w-3xl space-y-3">
+            <p class="eyebrow">Contact</p>
+            <h2 class="headline text-3xl md:text-4xl" x-text="$store.landing.content.contact.title"></h2>
+            <p class="subheadline" x-text="$store.landing.content.contact.subtitle"></p>
+            <p class="text-sm text-[var(--ink-muted)]" x-text="$store.landing.content.contact.disclaimer"></p>
           </div>
-          <div class="md:col-span-1 field">
-            <label class="field-label" for="lead-company" x-text="$store.landing.content.contact.labels.company"></label>
-            <input id="lead-company" name="company" type="text" x-model="lead.company" :placeholder="$store.landing.content.contact.placeholders.company" required class="input" />
-          </div>
-          <div class="md:col-span-1 field">
-            <label class="field-label" for="lead-email" x-text="$store.landing.content.contact.labels.email"></label>
-            <input id="lead-email" name="email" type="email" x-model="lead.email" :placeholder="$store.landing.content.contact.placeholders.email" required class="input" />
-          </div>
-          <div class="md:col-span-1 field">
-            <label class="field-label" for="lead-phone" x-text="$store.landing.content.contact.labels.phone"></label>
-            <input id="lead-phone" name="phone" type="tel" x-model="lead.phone" :placeholder="$store.landing.content.contact.placeholders.phone" required class="input" />
-          </div>
-          <div class="md:col-span-2 field">
-            <label class="field-label" for="lead-message" x-text="$store.landing.content.contact.labels.message"></label>
-            <textarea id="lead-message" name="message" rows="4" x-model="lead.message" :placeholder="$store.landing.content.contact.placeholders.message" required class="input"></textarea>
-          </div>
-          <p class="md:col-span-2 text-xs text-slate-500" x-text="$store.landing.content.contact.consent"></p>
-          <div class="md:col-span-2 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div class="text-sm text-rose-500" role="alert" x-show="formFeedback" x-text="formFeedback"></div>
-            <div class="flex flex-col gap-3 sm:flex-row">
-              <button type="submit" class="btn-primary">
-                <svg class="h-4 w-4" aria-hidden="true">
-                  <use href="./src/assets/icon-pack.svg#icon-send"></use>
-                </svg>
-                <span x-text="$store.landing.content.contact.submit"></span>
-              </button>
-              <button type="button" class="btn-outline" @click="exportCsv">
-                <svg class="h-4 w-4" aria-hidden="true">
-                  <use href="./src/assets/icon-pack.svg#icon-download"></use>
-                </svg>
-                <span x-text="$store.landing.content.contact.export"></span>
-              </button>
+          <form class="card-ma space-y-6 p-8" @submit.prevent="submitLead">
+            <div class="grid gap-4 md:grid-cols-2">
+              <label class="form-field" for="lead-name">
+                <span class="form-label" x-text="$store.landing.content.contact.labels.name"></span>
+                <input id="lead-name" type="text" class="input" x-model="lead.name" :placeholder="$store.landing.content.contact.placeholders.name" required />
+              </label>
+              <label class="form-field" for="lead-company">
+                <span class="form-label" x-text="$store.landing.content.contact.labels.company"></span>
+                <input id="lead-company" type="text" class="input" x-model="lead.company" :placeholder="$store.landing.content.contact.placeholders.company" required />
+              </label>
+              <label class="form-field" for="lead-email">
+                <span class="form-label" x-text="$store.landing.content.contact.labels.email"></span>
+                <input id="lead-email" type="email" class="input" x-model="lead.email" :placeholder="$store.landing.content.contact.placeholders.email" required />
+              </label>
+              <label class="form-field" for="lead-phone">
+                <span class="form-label" x-text="$store.landing.content.contact.labels.phone"></span>
+                <input id="lead-phone" type="tel" class="input" x-model="lead.phone" :placeholder="$store.landing.content.contact.placeholders.phone" required />
+              </label>
             </div>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
+            <label class="form-field" for="lead-message">
+              <span class="form-label" x-text="$store.landing.content.contact.labels.message"></span>
+              <textarea id="lead-message" rows="4" class="textarea" x-model="lead.message" :placeholder="$store.landing.content.contact.placeholders.message" required></textarea>
+            </label>
+            <p class="form-hint" x-text="$store.landing.content.contact.consent"></p>
+            <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+              <template x-if="formFeedback.message">
+                <div
+                  class="rounded-full border px-4 py-2 text-sm"
+                  :class="{
+                    'border-[color:rgba(52,199,89,0.45)] bg-[color:rgba(52,199,89,0.12)] text-[color:#1f7f40]': formFeedback.type === 'success',
+                    'border-[color:rgba(255,59,48,0.4)] bg-[color:rgba(255,59,48,0.12)] text-[color:#ff3b30]': formFeedback.type === 'error',
+                    'border-[color:rgba(245,166,35,0.35)] bg-[color:rgba(245,166,35,0.12)] text-[color:#a45a00]': formFeedback.type === 'warning',
+                    'border-[color:rgba(60,60,67,0.12)] bg-white text-[var(--ink-soft)]': formFeedback.type === 'info'
+                  }"
+                  role="alert"
+                >
+                  <span x-text="formFeedback.message"></span>
+                </div>
+              </template>
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <button type="submit" class="btn-primary">
+                  <svg class="h-5 w-5" aria-hidden="true">
+                    <use href="./src/assets/icon-pack.svg#icon-send"></use>
+                  </svg>
+                  <span x-text="$store.landing.content.contact.submit"></span>
+                </button>
+                <button type="button" class="btn-outline" @click="exportCsv">
+                  <svg class="h-5 w-5" aria-hidden="true">
+                    <use href="./src/assets/icon-pack.svg#icon-download"></use>
+                  </svg>
+                  <span x-text="$store.landing.content.contact.export"></span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
 
-  <footer class="border-t border-slate-200 bg-white">
-    <div class="container flex flex-col items-center justify-between gap-3 py-6 text-xs text-slate-500 sm:flex-row">
-      <div class="flex gap-6">
-        <a href="./legal" class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" x-text="$store.landing.content.footer.legal"></a>
-        <a href="./legal/privacy.html" class="hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500" x-text="$store.landing.content.footer.privacy"></a>
+    <footer class="border-t border-[var(--divider)] bg-white/80">
+      <div class="container-ma flex flex-col items-center justify-between gap-4 py-6 text-xs text-[var(--ink-muted)] sm:flex-row">
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="./legal" class="hover:text-[var(--ink)]" x-text="$store.landing.content.footer.legal"></a>
+          <a href="./legal/privacy.html" class="hover:text-[var(--ink)]" x-text="$store.landing.content.footer.privacy"></a>
+        </div>
+        <p class="text-center" x-text="$store.landing.content.footer.note"></p>
       </div>
-      <p class="text-center" x-text="$store.landing.content.footer.note"></p>
+    </footer>
+  </div>
+
+  <div
+    x-show="navOpen"
+    x-transition.opacity
+    class="fixed inset-0 z-50 flex items-start justify-end bg-black/40 backdrop-blur-sm"
+    @click.self="navOpen = false"
+  >
+    <div class="glass-panel h-full w-80 space-y-6 p-6">
+      <div class="flex items-center justify-between">
+        <span class="text-lg font-semibold">CGNC Flow</span>
+        <button type="button" class="btn-ghost" aria-label="Fermer" @click="navOpen = false">
+          <svg class="h-4 w-4" aria-hidden="true">
+            <use href="./src/assets/icon-pack.svg#icon-close"></use>
+          </svg>
+        </button>
+      </div>
+      <nav class="flex flex-col gap-2 text-lg" aria-label="Navigation mobile">
+        <template x-for="item in $store.landing.content.nav" :key="item.id">
+          <button type="button" class="rounded-2xl px-4 py-3 text-left transition hover:bg-white" @click="scrollTo('#' + item.id)">
+            <span x-text="item.label"></span>
+          </button>
+        </template>
+      </nav>
+      <div class="space-y-3">
+        <a href="./app.html" class="btn-primary w-full justify-center" @click="$store.landing.track($store.landing.content.cta.trackDemo)" x-text="$store.landing.content.cta.primary"></a>
+        <button type="button" class="btn-outline w-full justify-center" @click="scrollTo('#contact'); $store.landing.track($store.landing.content.cta.trackExpert)">
+          <span x-text="$store.landing.content.cta.secondary"></span>
+        </button>
+      </div>
     </div>
-  </footer>
+  </div>
 
-  <div class="pointer-events-none fixed inset-x-0 bottom-0 z-[999] flex justify-center px-4 pb-6 sm:justify-end" aria-live="assertive">
-    <div class="toast" x-show="toast.visible" x-transition:enter="toast-enter" x-transition:enter-active="toast-enter-active">
-      <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-slate-900 text-white">
-        <svg class="h-5 w-5" aria-hidden="true">
-          <use href="./src/assets/icon-pack.svg#icon-success"></use>
-        </svg>
-      </span>
+  <div class="toast-stack" aria-live="assertive">
+    <div
+      class="toast-item"
+      x-show="toast.visible"
+      x-transition.opacity
+      :class="{
+        'border-[color:rgba(52,199,89,0.45)] bg-[color:rgba(52,199,89,0.12)] text-[var(--ink)]': toast.type === 'success',
+        'border-[color:rgba(255,59,48,0.4)] bg-[color:rgba(255,59,48,0.12)] text-[color:#ff3b30]': toast.type === 'error',
+        'border-[color:rgba(245,166,35,0.35)] bg-[color:rgba(245,166,35,0.12)] text-[var(--ink)]': toast.type === 'warning',
+        'border-[color:rgba(60,60,67,0.12)] bg-white text-[var(--ink)]': toast.type === 'info'
+      }"
+    >
       <div class="flex-1">
-        <p class="text-sm font-semibold text-slate-900" x-text="$store.landing.content.toast.title"></p>
-        <p class="mt-1 text-xs text-slate-600" x-text="$store.landing.content.toast.description"></p>
+        <h3 class="text-sm font-semibold" x-text="toast.title"></h3>
+        <p class="mt-1 text-xs text-[var(--ink-soft)]" x-text="toast.message"></p>
       </div>
-      <button type="button" class="btn-link text-xs" @click="dismissToast" x-text="$store.landing.content.toast.close"></button>
+      <button type="button" class="btn-ghost" @click="dismissToast()" x-text="$store.landing.content.toast.close"></button>
     </div>
   </div>
 </body>
