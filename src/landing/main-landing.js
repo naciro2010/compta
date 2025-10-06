@@ -136,6 +136,10 @@ window.landingApp = function landingApp() {
       if (!store) Alpine.store('landing', landingStore)
       Alpine.store('landing').setLang(landingStore.lang)
       this.onScroll()
+      this.$watch('navOpen', (open) => {
+        document.documentElement.classList.toggle('overflow-hidden', Boolean(open))
+        document.body.classList.toggle('overflow-hidden', Boolean(open))
+      })
     },
     resetForm() {
       this.lead = {
@@ -181,7 +185,8 @@ window.landingApp = function landingApp() {
       if (this.toast.timeout) window.clearTimeout(this.toast.timeout)
     },
     scrollToContact() {
-      const target = document.querySelector('#contact')
+      this.navOpen = false
+      const target = this.$refs?.contactSection
       if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' })
     },
     exportCsv() {

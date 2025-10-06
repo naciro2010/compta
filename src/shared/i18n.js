@@ -151,6 +151,97 @@ const FR = {
       needEmployee: "Ajoutez au moins un employé avant de générer.",
       confirmDelete: "Supprimer cet employé ?"
     }
+  },
+  sales: {
+    header: {
+      title: "Module ventes Maroc",
+      subtitle: "Cycle Devis → Commande → BL → Facture → Avoir, TVA débit ou encaissements."
+    },
+    tabs: {
+      quotes: "Devis",
+      orders: "Commandes",
+      deliveries: "BL",
+      invoices: "Factures",
+      credits: "Avoirs",
+      customers: "Clients",
+      reminders: "Relances"
+    },
+    actions: {
+      newQuote: "Nouveau devis",
+      newOrder: "Nouvelle commande",
+      newDelivery: "Nouveau BL",
+      newInvoice: "Nouvelle facture",
+      newCredit: "Nouvel avoir",
+      edit: "Modifier",
+      confirm: "Confirmer",
+      transform: "Transformer",
+      print: "Imprimer",
+      pay: "Enregistrer paiement",
+      reminder: "Plan de relances",
+      refund: "Créer un avoir",
+      cancel: "Annuler",
+      save: "Enregistrer"
+    },
+    labels: {
+      customer: "Client",
+      issue: "Émission",
+      dueDate: "Échéance",
+      vatMode: "Mode TVA",
+      vatOnCash: "Sur encaissement",
+      vatOnDebit: "Sur débits",
+      status: "Statut",
+      actions: "Actions"
+    },
+    totals: {
+      ht: "HT",
+      vat: "TVA",
+      ttc: "TTC",
+      due: "Reste à payer"
+    },
+    statuses: {
+      DRAFT: "Brouillon",
+      CONFIRMED: "Confirmé",
+      DELIVERED: "Livré",
+      INVOICED: "Facturé",
+      PAID: "Payée",
+      PARTIAL: "Partielle",
+      CANCELLED: "Annulée"
+    },
+    legal: {
+      issuer: "Émetteur",
+      ice: "ICE",
+      if: "IF",
+      rc: "RC",
+      footer: "POC démo – données factices – non conforme production."
+    }
+  },
+  customers: {
+    title: "Clients",
+    new: "Nouveau client",
+    form: {
+      name: "Nom",
+      ice: "ICE",
+      if: "IF",
+      rc: "RC",
+      address: "Adresse",
+      city: "Ville",
+      email: "Email",
+      phone: "Téléphone",
+      terms: "Conditions de paiement",
+      credit: "Limite de crédit"
+    },
+    actions: {
+      edit: "Modifier",
+      delete: "Supprimer",
+      save: "Enregistrer"
+    },
+    deleteConfirm: "Supprimer ce client ?"
+  },
+  reminders: {
+    title: "Relances",
+    plan: "Plan de relances",
+    sendMark: "Marquer envoyée",
+    export: "Exporter CSV"
   }
 }
 
@@ -307,6 +398,97 @@ const AR = {
       needEmployee: "أضف موظفاً واحداً على الأقل للمتابعة.",
       confirmDelete: "هل تريد حذف هذا الموظف؟"
     }
+  },
+  sales: {
+    header: {
+      title: "وحدة المبيعات المغربية",
+      subtitle: "دورة العرض → الطلبية → سند التسليم → الفاتورة → الإشعار الدائن مع TVA على الخصم أو التحصيل."
+    },
+    tabs: {
+      quotes: "عروض أسعار",
+      orders: "أوامر شراء",
+      deliveries: "سندات تسليم",
+      invoices: "فواتير",
+      credits: "إشعارات دائنة",
+      customers: "الزبائن",
+      reminders: "التذكيرات"
+    },
+    actions: {
+      newQuote: "عرض جديد",
+      newOrder: "طلبية جديدة",
+      newDelivery: "سند تسليم جديد",
+      newInvoice: "فاتورة جديدة",
+      newCredit: "إشعار دائن جديد",
+      edit: "تعديل",
+      confirm: "تأكيد",
+      transform: "تحويل",
+      print: "طباعة",
+      pay: "تسجيل دفع",
+      reminder: "خطة تذكير",
+      refund: "إنشاء إشعار دائن",
+      cancel: "إلغاء",
+      save: "حفظ"
+    },
+    labels: {
+      customer: "الزبون",
+      issue: "تاريخ الإصدار",
+      dueDate: "تاريخ الاستحقاق",
+      vatMode: "وضع TVA",
+      vatOnCash: "على التحصيل",
+      vatOnDebit: "على الفوترة",
+      status: "الحالة",
+      actions: "إجراءات"
+    },
+    totals: {
+      ht: "بدون ضريبة",
+      vat: "الضريبة",
+      ttc: "شامل الضريبة",
+      due: "المبلغ المتبقي"
+    },
+    statuses: {
+      DRAFT: "مسودة",
+      CONFIRMED: "مؤكدة",
+      DELIVERED: "مسلمة",
+      INVOICED: "مفوترة",
+      PAID: "مدفوعة",
+      PARTIAL: "مدفوعة جزئياً",
+      CANCELLED: "ملغاة"
+    },
+    legal: {
+      issuer: "المُصدر",
+      ice: "ICE",
+      if: "IF",
+      rc: "RC",
+      footer: "عرض توضيحي – بيانات وهمية – غير صالح للإنتاج."
+    }
+  },
+  customers: {
+    title: "الزبائن",
+    new: "زبون جديد",
+    form: {
+      name: "الاسم",
+      ice: "ICE",
+      if: "IF",
+      rc: "RC",
+      address: "العنوان",
+      city: "المدينة",
+      email: "البريد الإلكتروني",
+      phone: "الهاتف",
+      terms: "شروط الأداء",
+      credit: "حد الائتمان"
+    },
+    actions: {
+      edit: "تعديل",
+      delete: "حذف",
+      save: "حفظ"
+    },
+    deleteConfirm: "هل تريد حذف هذا الزبون؟"
+  },
+  reminders: {
+    title: "التذكيرات",
+    plan: "خطة التذكير",
+    sendMark: "وضع كمرسلة",
+    export: "تصدير CSV"
   }
 }
 

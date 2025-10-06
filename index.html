@@ -58,7 +58,7 @@
   </script>
   <script type="module" src="./src/landing/main-landing.js"></script>
 </head>
-<body class="bg-white text-slate-900" x-data="landingApp()" x-init="init()" @scroll.window="onScroll()">
+<body class="bg-white text-slate-900" x-data="landingApp()" x-init="init()" @scroll.window="onScroll()" @keydown.escape.window="navOpen = false">
   <header class="landing-header sticky top-0 z-50 bg-white/95 backdrop-blur" :data-scrolled="scrolled">
     <div class="container flex items-center gap-4 py-4">
       <a href="#hero" class="flex items-center gap-3 rounded-full border border-transparent px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
@@ -368,7 +368,7 @@
       </div>
     </section>
 
-    <section id="contact" class="section-padding">
+    <section id="contact" class="section-padding" x-ref="contactSection">
       <div class="container space-y-10">
         <div class="max-w-3xl space-y-3">
           <h2 class="text-3xl font-semibold text-slate-900" x-text="$store.landing.content.contact.title"></h2>

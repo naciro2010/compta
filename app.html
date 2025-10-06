@@ -1,4 +1,5 @@
-<!doctype html><html lang="fr" x-data x-init="$store.i18n.init('fr'); $store.seed.ensure()">
+<!doctype html>
+<html lang="fr" x-data="{}" x-init="$store.i18n.init('fr'); $store.seed.ensure()">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,25 +11,27 @@
     <div class="container flex items-center justify-between gap-4 py-4">
       <a href="./index.html" class="flex items-center gap-3 rounded-full border border-transparent px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500">
         <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-900 text-white shadow-soft">
-          <img src="./src/assets/logo.svg" class="h-6 w-6" alt="MA-ACC">
+          <img src="./src/assets/logo.svg" class="h-6 w-6" alt="MA-ACC" />
         </span>
         <span class="text-lg font-semibold tracking-wide">MA‑ACC</span>
       </a>
       <nav class="hidden items-center gap-3 lg:flex" aria-label="Actions rapides">
-        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm">FR / AR</button>
-        <button @click="$store.seed.reset()" class="btn-outline text-sm">Réinitialiser les données</button>
+        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm" type="button">FR / AR</button>
+        <button @click="$store.seed.reset()" class="btn-outline text-sm" type="button">Réinitialiser les données</button>
         <a href="./index.html" class="btn-primary text-sm">Retour landing</a>
       </nav>
       <div class="flex items-center gap-2 lg:hidden">
-        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm">FR / AR</button>
-        <button @click="$store.seed.reset()" class="btn-outline text-sm">Reset</button>
+        <button @click="$store.i18n.toggle()" class="btn-ghost text-sm" type="button">FR / AR</button>
+        <button @click="$store.seed.reset()" class="btn-outline text-sm" type="button">Reset</button>
       </div>
     </div>
   </header>
-  <main class="container py-10 lg:py-14">
+  <main class="container py-10 lg:py-14" role="main">
     <div class="grid gap-6 lg:grid-cols-[260px_minmax(0,1fr)]">
       <aside class="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-        <nav class="space-y-1" x-data="{
+        <nav
+          class="space-y-1"
+          x-data="{
             active: window.location.hash || '#/dashboard',
             items: [
               { href: '#/dashboard', label: 'Dashboard', icon: 'analytics' },
@@ -43,13 +46,24 @@
             ],
             init(){
               window.addEventListener('hashchange', () => {
-                this.active = window.location.hash || '#/dashboard'
+                const nextHash = window.location.hash || '#/dashboard'
+                if (nextHash === this.active) return
+                this.active = nextHash
               })
             }
-          }">
+          }"
+        >
           <template x-for="item in items" :key="item.href">
-            <a :href="item.href" class="nav-link flex items-center gap-3" :class="{'nav-link--active !bg-slate-900 !text-white shadow-sm': active === item.href}">
-              <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50" :class="{'border-slate-900 bg-slate-900 text-white': active === item.href}">
+            <a
+              :href="item.href"
+              class="nav-link flex items-center gap-3"
+              :class="{'nav-link--active !bg-slate-900 !text-white shadow-sm': active === item.href}"
+              :aria-current="active === item.href ? 'page' : undefined"
+            >
+              <span
+                class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-slate-200 bg-slate-50"
+                :class="{'border-slate-900 bg-slate-900 text-white': active === item.href}"
+              >
                 <svg class="h-5 w-5" aria-hidden="true">
                   <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
                 </svg>
@@ -61,7 +75,7 @@
       </aside>
       <section class="space-y-6">
         <div class="card min-h-[60vh] p-6 shadow-sm">
-          <div id="view" class="space-y-6"></div>
+          <div id="view" data-router-view class="space-y-6" aria-live="polite"></div>
         </div>
       </section>
     </div>
