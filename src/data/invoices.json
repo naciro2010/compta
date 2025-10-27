@@ -1,9 +1,0 @@
-[
-  {
-    "id":"FA-2025-0001","companyId":"co-ATLAS","customerId":"cli-001","customerName":"Zina Distribution",
-    "date":"2025-01-10","dueDate":"2025-02-10",
-    "lines":[{"desc":"Prestation SaaS","qty":1,"unitPrice":4500,"vatRate":20},{"desc":"Setup","qty":1,"unitPrice":1500,"vatRate":20}],
-    "currency":"MAD","status":"Validée","payments":[{"date":"2025-01-25","amount":3000}],
-    "totalHt":6000,"totalTva":1200,"totalTtc":7200
-  }
-]
