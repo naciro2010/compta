@@ -7,7 +7,7 @@
   <script type="module" src="./src/app/main-app.js"></script>
 </head>
 <body class="bg-[var(--surface-alt)] text-[var(--ink)]" x-data="{ scrolled: false }" @scroll.window="scrolled = window.scrollY > 12">
-  <div class="min-h-screen flex flex-col bg-gradient-soft">
+  <div class="min-h-screen flex flex-col">
     <header class="sticky top-0 z-40">
       <div class="glass-panel mx-auto mt-4 flex w-[min(96%,1080px)] items-center justify-between gap-3 px-6 py-4 transition-all duration-[var(--duration-normal)]" :class="{'shadow-header': scrolled}">
         <div class="flex items-center gap-3">
@@ -16,7 +16,7 @@
               <use href="./src/assets/icon-pack.svg#icon-menu"></use>
             </svg>
           </button>
-          <a href="./index.html" class="flex items-center gap-3 rounded-[var(--radius-lg)] px-3 py-2 transition-all duration-[var(--duration-fast)] hover:bg-white/90 hover:shadow-[var(--shadow-sm)]">
+          <a href="./index.html" class="flex items-center gap-3 rounded-[var(--radius-lg)] px-3 py-2 transition-all duration-[var(--duration-fast)] hover:bg-[var(--surface-hover)]">
             <span class="icon-circle">
               <img src="./src/assets/logo.svg" alt="MA-ACC" class="h-5 w-5" />
             </span>
@@ -77,10 +77,10 @@
                 <a
                   :href="item.href"
                   class="flex items-center gap-3 rounded-[var(--radius-lg)] px-4 py-3.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-smooth)] group"
-                  :class="active === item.href ? 'bg-[var(--surface)] text-[var(--ink)] font-semibold shadow-[var(--shadow-sm)]' : 'text-[var(--ink-soft)] hover:bg-[var(--surface)]/70 hover:text-[var(--ink)]'"
+                  :class="active === item.href ? 'bg-[var(--surface)] text-[var(--ink)] font-semibold shadow-[var(--shadow-sm)]' : 'text-[var(--ink-soft)] hover:bg-[var(--surface-hover)] hover:text-[var(--ink)]'"
                   :aria-current="active === item.href ? 'page' : undefined"
                 >
-                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--surface)]/80 shadow-[var(--shadow-xs)] transition-all duration-[var(--duration-fast)] group-hover:shadow-[var(--shadow-sm)]"
+                  <span class="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--surface-gloss)] shadow-[var(--shadow-xs)] transition-all duration-[var(--duration-fast)] group-hover:shadow-[var(--shadow-sm)]"
                         :class="active === item.href ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--ink-muted)]'">
                     <svg class="h-5 w-5" aria-hidden="true">
                       <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
@@ -103,7 +103,8 @@
   <div
     x-show="$store.layout.sidebarOpen"
     x-transition.opacity.duration.300ms
-    class="fixed inset-0 z-50 flex items-start justify-end bg-black/50 backdrop-blur-md"
+    class="fixed inset-0 z-50 flex items-start justify-end bg-black/40"
+    style="backdrop-filter: blur(8px);"
     @click.self="$store.layout.closeSidebar()"
   >
     <div class="glass-panel h-full w-80 space-y-8 p-7 flex flex-col"
@@ -154,11 +155,11 @@
           <a
             :href="item.href"
             class="flex items-center gap-3 rounded-[var(--radius-lg)] px-4 py-3.5 transition-all duration-[var(--duration-fast)] ease-[var(--ease-smooth)] group"
-            :class="active === item.href ? 'bg-[var(--surface)] text-[var(--ink)] font-semibold shadow-[var(--shadow-sm)]' : 'text-[var(--ink-soft)] hover:bg-[var(--surface)]/70 hover:text-[var(--ink)]'"
+            :class="active === item.href ? 'bg-[var(--surface)] text-[var(--ink)] font-semibold shadow-[var(--shadow-sm)]' : 'text-[var(--ink-soft)] hover:bg-[var(--surface-hover)] hover:text-[var(--ink)]'"
             :aria-current="active === item.href ? 'page' : undefined"
             @click="$store.layout.closeSidebar()"
           >
-            <span class="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--surface)]/80 shadow-[var(--shadow-xs)] transition-all duration-[var(--duration-fast)] group-hover:shadow-[var(--shadow-sm)]"
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] bg-[var(--surface-gloss)] shadow-[var(--shadow-xs)] transition-all duration-[var(--duration-fast)] group-hover:shadow-[var(--shadow-sm)]"
                   :class="active === item.href ? 'text-[var(--accent)] bg-[var(--accent-soft)]' : 'text-[var(--ink-muted)]'">
               <svg class="h-5 w-5" aria-hidden="true">
                 <use :href="'./src/assets/icon-pack.svg#icon-' + item.icon"></use>
