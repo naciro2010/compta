@@ -11,38 +11,38 @@ export function renderDashboard(){
   const latestBank = ds.bank.slice(0, 6)
 
   return `
-    <section class="space-y-8">
+    <section class="space-y-8 animate-fade-in-up">
       <header class="space-y-2">
-        <h1 class="text-2xl font-semibold text-slate-900">Vue d'ensemble</h1>
-        <p class="text-sm text-slate-600">Suivi des données mock de la démonstration CGNC.</p>
+        <h1 class="text-3xl font-bold text-[var(--ink)]">Vue d'ensemble</h1>
+        <p class="text-base text-[var(--ink-soft)]">Suivi des données mock de la démonstration CGNC.</p>
       </header>
 
-      <div class="grid gap-4 md:grid-cols-3">
-        <div class="stat-card">
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="stat-card hover-scale delay-1">
           <p class="stat-label">Factures ouvertes</p>
           <p class="stat-value">${invOpen.length}</p>
-          <p class="text-xs text-slate-500">Inclut les factures validées et partiellement payées.</p>
+          <p class="stat-description">Inclut les factures validées et partiellement payées.</p>
         </div>
-        <div class="stat-card">
+        <div class="stat-card hover-scale delay-2">
           <p class="stat-label">Encours clients (MAD)</p>
           <p class="stat-value">${toPay.toFixed(2)}</p>
-          <p class="text-xs text-slate-500">Différence entre TTC et paiements enregistrés.</p>
+          <p class="stat-description">Différence entre TTC et paiements enregistrés.</p>
         </div>
-        <div class="stat-card">
+        <div class="stat-card hover-scale delay-3">
           <p class="stat-label">Lignes bancaires importées</p>
           <p class="stat-value">${ds.bank.length}</p>
-          <p class="text-xs text-slate-500">Transactions mock prêtes pour le rapprochement.</p>
+          <p class="stat-description">Transactions mock prêtes pour le rapprochement.</p>
         </div>
       </div>
 
       <div class="grid gap-6 lg:grid-cols-2">
-        <section class="card p-5 space-y-4">
-          <header class="flex items-center justify-between">
-            <div>
-              <h2 class="text-lg font-semibold text-slate-900">Dernières factures</h2>
-              <p class="text-sm text-slate-600">Échantillon mock (6 plus récentes).</p>
+        <section class="card p-6 space-y-5">
+          <header class="flex items-center justify-between pb-3 border-b border-[var(--divider)]">
+            <div class="space-y-1">
+              <h2 class="text-xl font-bold text-[var(--ink)]">Dernières factures</h2>
+              <p class="text-sm text-[var(--ink-soft)]">Échantillon mock (6 plus récentes).</p>
             </div>
-            <a href="#/sales" class="btn-link text-sm">Voir tout</a>
+            <a href="#/sales" class="btn-link">Voir tout</a>
           </header>
           ${latestInvoices.length ? `
             <div class="table-wrapper">
@@ -58,10 +58,10 @@ export function renderDashboard(){
                 <tbody>
                   ${latestInvoices.map((invoice) => `
                     <tr>
-                      <td>${invoice.id}</td>
-                      <td>${invoice.customerName}</td>
-                      <td>${invoice.date}</td>
-                      <td class="text-right">${invoice.totalTtc.toFixed(2)}</td>
+                      <td class="font-semibold text-[var(--ink)]">${invoice.id}</td>
+                      <td class="font-medium text-[var(--ink)]">${invoice.customerName}</td>
+                      <td class="text-[var(--ink-soft)]">${invoice.date}</td>
+                      <td class="text-right font-semibold text-[var(--ink)]">${invoice.totalTtc.toFixed(2)}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -69,7 +69,7 @@ export function renderDashboard(){
             </div>
           ` : `
             <div class="empty-state">
-              <svg class="h-6 w-6 text-slate-400" aria-hidden="true">
+              <svg aria-hidden="true">
                 <use href="./src/assets/icon-pack.svg#icon-invoice"></use>
               </svg>
               <p>Aucune facture disponible dans cet environnement de démonstration.</p>
@@ -77,13 +77,13 @@ export function renderDashboard(){
           `}
         </section>
 
-        <section class="card p-5 space-y-4">
-          <header class="flex items-center justify-between">
-            <div>
-              <h2 class="text-lg font-semibold text-slate-900">Flux bancaires récents</h2>
-              <p class="text-sm text-slate-600">Transactions mock pour les tests de rapprochement.</p>
+        <section class="card p-6 space-y-5">
+          <header class="flex items-center justify-between pb-3 border-b border-[var(--divider)]">
+            <div class="space-y-1">
+              <h2 class="text-xl font-bold text-[var(--ink)]">Flux bancaires récents</h2>
+              <p class="text-sm text-[var(--ink-soft)]">Transactions mock pour les tests de rapprochement.</p>
             </div>
-            <a href="#/bank" class="btn-link text-sm">Accéder à la banque</a>
+            <a href="#/bank" class="btn-link">Accéder à la banque</a>
           </header>
           ${latestBank.length ? `
             <div class="table-wrapper">
@@ -98,9 +98,9 @@ export function renderDashboard(){
                 <tbody>
                   ${latestBank.map((entry) => `
                     <tr>
-                      <td>${entry.date}</td>
-                      <td>${entry.label}</td>
-                      <td class="text-right">${entry.amount.toFixed(2)}</td>
+                      <td class="text-[var(--ink-soft)]">${entry.date}</td>
+                      <td class="font-medium text-[var(--ink)]">${entry.label}</td>
+                      <td class="text-right font-semibold text-[var(--ink)]">${entry.amount.toFixed(2)}</td>
                     </tr>
                   `).join('')}
                 </tbody>
@@ -108,7 +108,7 @@ export function renderDashboard(){
             </div>
           ` : `
             <div class="empty-state">
-              <svg class="h-6 w-6 text-slate-400" aria-hidden="true">
+              <svg aria-hidden="true">
                 <use href="./src/assets/icon-pack.svg#icon-bank"></use>
               </svg>
               <p>Aucune ligne bancaire importée dans ce scénario.</p>
