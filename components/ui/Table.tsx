@@ -8,10 +8,12 @@ interface TableProps {
 
 export const Table: React.FC<TableProps> = ({ children, className }) => {
   return (
-    <div className="overflow-x-auto">
-      <table className={clsx('w-full', className)}>
-        {children}
-      </table>
+    <div className="overflow-x-auto -mx-4 sm:mx-0">
+      <div className="inline-block min-w-full align-middle">
+        <table className={clsx('w-full', className)}>
+          {children}
+        </table>
+      </div>
     </div>
   );
 };
@@ -72,7 +74,7 @@ export const TableHead: React.FC<TableHeadProps> = ({ children, className }) => 
   return (
     <th
       className={clsx(
-        'px-4 py-3 text-left text-sm font-semibold text-claude-text',
+        'px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-claude-text whitespace-nowrap',
         className
       )}
     >
@@ -93,7 +95,7 @@ export const TableCell: React.FC<TableCellProps> = ({ children, className, align
   return (
     <td
       className={clsx(
-        'px-4 py-3 text-sm text-claude-text-muted',
+        'px-2 sm:px-4 py-3 text-xs sm:text-sm text-claude-text-muted',
         align === 'right' && 'text-right',
         align === 'center' && 'text-center',
         className
