@@ -68,6 +68,7 @@ export interface EntryLine {
   creditMAD: number;             // Montant crédit en MAD
   auxiliaryAccount?: string;     // Compte auxiliaire (tiers)
   analyticalAccount?: string;    // Compte analytique
+  establishmentId?: string;      // EPIC 2: Établissement de rattachement
 }
 
 // Écriture comptable
@@ -78,6 +79,7 @@ export interface Entry {
   journal?: Journal;             // Journal (pour affichage)
   date: Date;                    // Date de l'écriture
   periodId: string;              // Référence à la période comptable
+  establishmentId?: string;      // EPIC 2: Établissement (optionnel)
   reference?: string;            // Référence externe (facture, etc.)
   description: string;           // Description de l'écriture
   lines: EntryLine[];            // Lignes de l'écriture
@@ -112,6 +114,142 @@ export interface AuditEntry {
   userId: string;               // Utilisateur
   timestamp: Date;              // Horodatage
   details?: Record<string, any>; // Détails de l'action
+}
+
+// ============================================================================
+// EPIC 2: Système RBAC (Role-Based Access Control)
+// ============================================================================
+
+// Rôles utilisateur
+export type UserRole =
+  | 'ADMIN'                     // Administrateur (tous droits)
+  | 'ACCOUNTANT'                // Comptable (saisie)
+  | 'REVIEWER'                  // Réviseur (validation/clôture)
+  | 'AUDITOR';                  // Auditeur (lecture seule)
+
+// Permissions granulaires
+export type Permission =
+  // Gestion des comptes
+  | 'accounts:read'
+  | 'accounts:create'
+  | 'accounts:update'
+  | 'accounts:delete'
+  // Gestion des écritures
+  | 'entries:read'
+  | 'entries:create'
+  | 'entries:update'
+  | 'entries:delete'
+  | 'entries:validate'
+  // Gestion des périodes
+  | 'periods:read'
+  | 'periods:create'
+  | 'periods:close'
+  // Gestion des journaux
+  | 'journals:read'
+  | 'journals:create'
+  | 'journals:update'
+  // Exports et rapports
+  | 'reports:generate'
+  | 'reports:export'
+  // Configuration
+  | 'settings:read'
+  | 'settings:update'
+  // Utilisateurs et rôles
+  | 'users:read'
+  | 'users:create'
+  | 'users:update'
+  | 'users:delete'
+  // Audit
+  | 'audit:read';
+
+// Matrice des permissions par rôle
+export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
+  ADMIN: [
+    'accounts:read', 'accounts:create', 'accounts:update', 'accounts:delete',
+    'entries:read', 'entries:create', 'entries:update', 'entries:delete', 'entries:validate',
+    'periods:read', 'periods:create', 'periods:close',
+    'journals:read', 'journals:create', 'journals:update',
+    'reports:generate', 'reports:export',
+    'settings:read', 'settings:update',
+    'users:read', 'users:create', 'users:update', 'users:delete',
+    'audit:read',
+  ],
+  ACCOUNTANT: [
+    'accounts:read',
+    'entries:read', 'entries:create', 'entries:update',
+    'periods:read',
+    'journals:read',
+    'reports:generate',
+    'settings:read',
+  ],
+  REVIEWER: [
+    'accounts:read',
+    'entries:read', 'entries:validate',
+    'periods:read', 'periods:close',
+    'journals:read',
+    'reports:generate', 'reports:export',
+    'settings:read',
+  ],
+  AUDITOR: [
+    'accounts:read',
+    'entries:read',
+    'periods:read',
+    'journals:read',
+    'reports:generate', 'reports:export',
+    'settings:read',
+    'audit:read',
+  ],
+};
+
+// Utilisateur
+export interface User {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: UserRole;                // Rôle principal
+  isActive: boolean;             // Compte actif
+  establishmentIds?: string[];   // Établissements autorisés (optionnel)
+  createdAt: Date;
+  updatedAt?: Date;
+  lastLoginAt?: Date;
+}
+
+// Action d'audit
+export type AuditAction =
+  | 'USER_LOGIN'
+  | 'USER_LOGOUT'
+  | 'ENTRY_CREATE'
+  | 'ENTRY_UPDATE'
+  | 'ENTRY_DELETE'
+  | 'ENTRY_VALIDATE'
+  | 'PERIOD_CLOSE'
+  | 'PERIOD_REOPEN'
+  | 'ACCOUNT_CREATE'
+  | 'ACCOUNT_UPDATE'
+  | 'JOURNAL_CREATE'
+  | 'REPORT_EXPORT'
+  | 'SETTINGS_UPDATE'
+  | 'USER_CREATE'
+  | 'USER_UPDATE'
+  | 'USER_DELETE';
+
+// Entrée du journal d'audit global (immuable)
+export interface GlobalAuditEntry {
+  id: string;
+  action: AuditAction;           // Type d'action
+  userId: string;                // Utilisateur ayant effectué l'action
+  user?: User;                   // Détails utilisateur (pour affichage)
+  entityType: string;            // Type d'entité (Entry, Period, Account, etc.)
+  entityId: string;              // ID de l'entité affectée
+  timestamp: Date;               // Horodatage
+  ipAddress?: string;            // Adresse IP
+  userAgent?: string;            // User agent
+  metadata?: Record<string, any>; // Métadonnées additionnelles
+  changes?: {                    // Changements effectués (pour les UPDATE)
+    before?: Record<string, any>;
+    after?: Record<string, any>;
+  };
 }
 
 // Période comptable
@@ -223,16 +361,72 @@ export type SectorModel =
   | 'SERVICE'                    // Services
   | 'INDUSTRY';                  // Industrie
 
+// Identifiants légaux marocains
+export interface LegalIdentifiers {
+  ice: string;                   // ICE - Identifiant Commun de l'Entreprise (15 chiffres: 9+4+2)
+  if: string;                    // IF - Identifiant Fiscal
+  rc?: string;                   // RC - Registre de Commerce
+  cnss?: string;                 // CNSS - Numéro d'affiliation CNSS
+  patente?: string;              // Numéro de Patente
+}
+
+// Régime de TVA
+export type VATRegime =
+  | 'STANDARD'                   // Régime standard
+  | 'REDUCED'                    // Régime réduit
+  | 'EXEMPT'                     // Exonéré
+  | 'AUTO_ENTREPRENEUR';         // Auto-entrepreneur
+
+// Établissement (lié à l'ICE)
+export interface Establishment {
+  id: string;
+  companyId: string;             // Référence à la société mère
+  code: string;                  // Code établissement (4 chiffres de l'ICE)
+  name: string;                  // Nom de l'établissement
+  address?: string;              // Adresse
+  city?: string;                 // Ville
+  postalCode?: string;           // Code postal
+  phone?: string;                // Téléphone
+  email?: string;                // Email
+  isActive: boolean;             // Établissement actif
+  isMainEstablishment: boolean;  // Établissement principal (siège)
+  createdAt: Date;
+  suspendedAt?: Date;            // Date de suspension
+  suspendedBy?: string;          // Utilisateur ayant suspendu
+}
+
 // Configuration de la société
 export interface CompanySettings {
   id: string;
   name: string;
   legalForm: string;             // Forme juridique
-  taxId: string;                 // ICE / IF
+  legalIdentifiers: LegalIdentifiers; // Identifiants légaux marocains
   baseCurrency: string;          // Monnaie de tenue (MAD)
   sectorModel: SectorModel;      // Modèle sectoriel
   fiscalYearStart: number;       // Mois de début d'exercice (1-12)
+
+  // Informations de contact
+  address?: string;
+  city?: string;
+  postalCode?: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+
+  // Paramètres fiscaux
+  vatRegime: VATRegime;          // Régime de TVA
+  vatNumber?: string;            // Numéro de TVA
+  vatRate?: number;              // Taux de TVA par défaut
+
+  // Multi-établissements
+  establishments: Establishment[]; // Liste des établissements
+
   createdAt: Date;
+  updatedAt?: Date;
+
+  // Backward compatibility
+  /** @deprecated Use legalIdentifiers.ice instead */
+  taxId?: string;
 }
 
 // Validation d'écriture
