@@ -17,12 +17,16 @@ import {
   Menu,
   X,
   FileSpreadsheet,
+  UserCheck,
+  Truck,
 } from 'lucide-react'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Ventes', href: '/sales', icon: FileText },
   { name: 'Achats', href: '/purchases', icon: ShoppingCart },
+  { name: 'Clients', href: '/customers', icon: UserCheck },
+  { name: 'Fournisseurs', href: '/suppliers', icon: Truck },
   { name: 'Banque', href: '/bank', icon: Banknote },
   { name: 'Grand livre', href: '/ledger', icon: BookOpen },
   { name: 'États de synthèse', href: '/financial-statements', icon: FileSpreadsheet },
