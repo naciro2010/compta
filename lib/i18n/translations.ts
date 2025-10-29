@@ -114,7 +114,9 @@ export const translations = {
  */
 export function useTranslation(locale: keyof typeof translations = 'fr') {
   const t = (key: TranslationKey): string => {
-    return translations[locale][key] || translations.fr[key] || key;
+    const localeTranslations = translations[locale] as Record<string, string>;
+    const frTranslations = translations.fr;
+    return localeTranslations[key] || frTranslations[key] || key;
   };
 
   return { t, locale };
