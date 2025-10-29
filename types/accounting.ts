@@ -418,6 +418,9 @@ export interface CompanySettings {
   vatNumber?: string;            // Numéro de TVA
   vatRate?: number;              // Taux de TVA par défaut
 
+  // EPIC 3: États de synthèse
+  statementModel?: 'NORMAL' | 'SIMPLIFIE'; // Modèle d'états de synthèse (auto si non défini)
+
   // Multi-établissements
   establishments: Establishment[]; // Liste des établissements
 
