@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useInvoicingStore } from '@/store/invoicing';
 import { Invoice } from '@/types/invoicing';
 import { Button } from '@/components/ui/Button';
@@ -13,6 +14,7 @@ import { FileText, AlertCircle } from 'lucide-react';
 type ViewMode = 'list' | 'form' | 'detail';
 
 export default function InvoicesPage() {
+  const router = useRouter();
   const { getInvoices, deleteInvoice, getCustomers } = useInvoicingStore();
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [editingInvoice, setEditingInvoice] = useState<Invoice | undefined>();
@@ -109,7 +111,7 @@ export default function InvoicesPage() {
                   </p>
                   <Button
                     variant="primary"
-                    onClick={() => window.location.href = '/customers'}
+                    onClick={() => router.push('/customers')}
                   >
                     Aller aux clients
                   </Button>
