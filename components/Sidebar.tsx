@@ -22,6 +22,7 @@ import {
   HelpCircle,
   FileCheck,
   AlertTriangle,
+  Mail,
 } from 'lucide-react'
 import { LanguageSelector } from './LanguageSelector'
 import { useT, TranslationKey } from '@/lib/i18n/translations'
@@ -41,6 +42,7 @@ const navigation: Array<{ nameKey: TranslationKey; href: string; icon: any }> = 
   { nameKey: 'nav.tax', href: '/tax', icon: Receipt },
   { nameKey: 'nav.payroll', href: '/payroll', icon: Users },
   { nameKey: 'nav.guide', href: '/guide', icon: HelpCircle },
+  { nameKey: 'nav.contact', href: '/contact', icon: Mail },
   { nameKey: 'nav.settings', href: '/settings', icon: Settings },
 ]
 
@@ -87,7 +89,7 @@ export function Sidebar() {
             <div className="w-8 h-8 bg-claude-accent rounded-lg flex items-center justify-center">
               <Calculator className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-claude-text">CGNC Flow</span>
+            <span className="text-lg font-semibold text-claude-text">MizanPro</span>
           </Link>
         </div>
 

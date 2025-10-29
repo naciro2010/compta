@@ -22,7 +22,7 @@ export function ChatAssistant({ isOpen, onClose }: ChatAssistantProps) {
     {
       id: '1',
       type: 'assistant',
-      content: 'Bonjour ! 👋 Je suis votre assistant CGNC Flow. Je peux vous aider avec l\'utilisation de l\'application et répondre à vos questions sur la comptabilité marocaine. Comment puis-je vous aider aujourd\'hui ?',
+      content: 'Bonjour ! 👋 Je suis votre assistant MizanPro. Je peux vous aider avec l\'utilisation de l\'application et répondre à vos questions sur la comptabilité marocaine. Comment puis-je vous aider aujourd\'hui ?',
       timestamp: new Date(),
     },
   ]);
@@ -87,7 +87,11 @@ export function ChatAssistant({ isOpen, onClose }: ChatAssistantProps) {
         suggestions.slice(0, 4).forEach((q, idx) => {
           responseContent += `\n${idx + 1}. ${q}`;
         });
-        responseContent += '\n\nN\'hésitez pas à reformuler votre question ou à choisir parmi ces suggestions.';
+        responseContent += '\n\n💬 Pour une assistance personnalisée, contactez notre support :';
+        responseContent += '\n📧 Email: support@mizanpro.ma';
+        responseContent += '\n📞 Téléphone: +212 537-68-68-68';
+        responseContent += '\n📍 Adresse: Hay Riad, Rabat';
+        responseContent += '\n\nN\'hésitez pas à reformuler votre question ou à choisir parmi les suggestions ci-dessus.';
       }
 
       const assistantMessage: Message = {
@@ -130,7 +134,7 @@ export function ChatAssistant({ isOpen, onClose }: ChatAssistantProps) {
               </svg>
             </div>
             <div>
-              <h3 className="font-semibold text-claude-text">Assistant CGNC</h3>
+              <h3 className="font-semibold text-claude-text">Assistant MizanPro</h3>
               <p className="text-xs text-claude-text-muted">Toujours disponible pour vous aider</p>
             </div>
           </div>
