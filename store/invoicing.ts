@@ -18,7 +18,7 @@ import {
   InvoiceTemplate,
   InvoicingStats,
 } from '@/types/invoicing';
-import { JournalEntry, JournalCode } from '@/types/accounting';
+import { Entry } from '@/types/accounting';
 
 interface InvoicingStore {
   // ============================================================================
@@ -172,7 +172,7 @@ interface InvoicingStore {
   // ============================================================================
 
   // Générer l'écriture comptable depuis une facture
-  generateJournalEntry: (invoiceId: string) => JournalEntry | null;
+  generateJournalEntry: (invoiceId: string) => Entry | null;
 
   // ============================================================================
   // ACTIONS - STATISTIQUES

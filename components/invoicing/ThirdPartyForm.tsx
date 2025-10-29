@@ -67,8 +67,8 @@ export default function ThirdPartyForm({
     // Validation ICE si fourni
     if (formData.ice) {
       const iceValidation = validateICE(formData.ice);
-      if (!iceValidation.valid) {
-        setIceError(iceValidation.errors[0] || 'ICE invalide');
+      if (!iceValidation.isValid) {
+        setIceError(iceValidation.error || 'ICE invalide');
         newErrors.ice = 'ICE invalide';
       } else {
         setIceError('');
