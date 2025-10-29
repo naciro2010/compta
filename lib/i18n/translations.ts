@@ -68,6 +68,21 @@ export const translations = {
     'message.error': 'Une erreur est survenue',
     'message.confirm': 'Êtes-vous sûr ?',
     'message.noData': 'Aucune donnée disponible',
+
+    // Chat Assistant
+    'chat.title': 'Assistant CGNC',
+    'chat.subtitle': 'Toujours disponible pour vous aider',
+    'chat.welcome': 'Bonjour ! 👋 Je suis votre assistant CGNC Flow. Je peux vous aider avec l\'utilisation de l\'application et répondre à vos questions sur la comptabilité marocaine. Comment puis-je vous aider aujourd\'hui ?',
+    'chat.placeholder': 'Posez votre question...',
+    'chat.disclaimer': 'Les réponses sont basées sur la réglementation marocaine (CGNC)',
+    'chat.frequentQuestions': 'Questions fréquentes :',
+    'chat.noResults': 'Je n\'ai pas trouvé de réponse précise à votre question. Voici quelques suggestions qui pourraient vous aider :',
+    'chat.reformulate': 'N\'hésitez pas à reformuler votre question ou à choisir parmi ces suggestions.',
+    'chat.relatedTopics': '📚 Vous pourriez aussi être intéressé par :',
+    'chat.categoryAll': 'Tout',
+    'chat.categoryUsage': 'Utilisation',
+    'chat.categoryLegal': 'Légal',
+    'chat.categoryTax': 'TVA',
   },
 
   // Traductions arabes (structure de base)
@@ -86,6 +101,17 @@ export const translations = {
     'common.save': 'حفظ',
     'common.cancel': 'إلغاء',
     'common.delete': 'حذف',
+
+    'chat.title': 'مساعد CGNC',
+    'chat.subtitle': 'متاح دائمًا لمساعدتك',
+    'chat.welcome': 'مرحبا! 👋 أنا مساعدك CGNC Flow. يمكنني مساعدتك في استخدام التطبيق والإجابة على أسئلتك حول المحاسبة المغربية. كيف يمكنني مساعدتك اليوم؟',
+    'chat.placeholder': 'اطرح سؤالك...',
+    'chat.disclaimer': 'الإجابات مبنية على التنظيم المغربي (CGNC)',
+    'chat.frequentQuestions': 'أسئلة متكررة:',
+    'chat.categoryAll': 'الكل',
+    'chat.categoryUsage': 'الاستخدام',
+    'chat.categoryLegal': 'قانوني',
+    'chat.categoryTax': 'الضرائب',
     // ... (autres traductions AR à compléter)
   },
 
@@ -105,6 +131,20 @@ export const translations = {
     'common.save': 'Save',
     'common.cancel': 'Cancel',
     'common.delete': 'Delete',
+
+    'chat.title': 'CGNC Assistant',
+    'chat.subtitle': 'Always available to help you',
+    'chat.welcome': 'Hello! 👋 I\'m your CGNC Flow assistant. I can help you with using the application and answer your questions about Moroccan accounting. How can I help you today?',
+    'chat.placeholder': 'Ask your question...',
+    'chat.disclaimer': 'Answers are based on Moroccan regulations (CGNC)',
+    'chat.frequentQuestions': 'Frequent questions:',
+    'chat.noResults': 'I couldn\'t find a precise answer to your question. Here are some suggestions that might help:',
+    'chat.reformulate': 'Feel free to rephrase your question or choose from these suggestions.',
+    'chat.relatedTopics': '📚 You might also be interested in:',
+    'chat.categoryAll': 'All',
+    'chat.categoryUsage': 'Usage',
+    'chat.categoryLegal': 'Legal',
+    'chat.categoryTax': 'Tax',
     // ... (autres traductions EN à compléter)
   },
 };
