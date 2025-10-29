@@ -259,11 +259,14 @@ export interface Payment {
 
 export type ReminderType = 'AUTOMATIC' | 'MANUAL';
 
+export type ReminderLevel = 'FIRST' | 'SECOND' | 'THIRD' | 'FINAL';
+
 export interface InvoiceReminder {
   id: string;
   invoiceId: string;
 
   type: ReminderType;
+  level?: ReminderLevel;           // Niveau de relance
 
   // Contenu
   subject: string;
@@ -274,9 +277,51 @@ export interface InvoiceReminder {
   sentBy?: string;                 // Si manuel
   sentTo: string[];                // Liste emails
 
+  // Statistiques
+  daysOverdue: number;             // Nombre de jours de retard au moment de l'envoi
+
   // Statut
   opened?: boolean;
   openedAt?: Date;
+}
+
+export interface ReminderTemplate {
+  id: string;
+  name: string;
+  level: ReminderLevel;
+
+  // Contenu
+  subject: string;                 // Template avec variables: {invoice_number}, {customer_name}, etc.
+  message: string;                 // Message avec variables
+
+  // Timing
+  daysOverdue: number;             // Envoyer après X jours de retard
+
+  // Active
+  isActive: boolean;
+  isDefault: boolean;
+
+  createdAt: Date;
+  updatedAt?: Date;
+}
+
+export interface OverdueInvoiceSummary {
+  total: number;
+  totalAmount: number;
+
+  // Par niveau de sévérité
+  recent: {                        // < 30 jours
+    count: number;
+    amount: number;
+  };
+  moderate: {                      // 30-60 jours
+    count: number;
+    amount: number;
+  };
+  severe: {                        // > 60 jours
+    count: number;
+    amount: number;
+  };
 }
 
 // ============================================================================

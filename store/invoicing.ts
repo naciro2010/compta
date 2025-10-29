@@ -17,6 +17,9 @@ import {
   InvoiceNumberingConfig,
   InvoiceTemplate,
   InvoicingStats,
+  ReminderTemplate,
+  ReminderLevel,
+  OverdueInvoiceSummary,
 } from '@/types/invoicing';
 import { Entry } from '@/types/accounting';
 
@@ -40,6 +43,9 @@ interface InvoicingStore {
   numberingConfigs: InvoiceNumberingConfig[];
   templates: InvoiceTemplate[];
   activeTemplate: InvoiceTemplate | null;
+
+  // Relances
+  reminderTemplates: ReminderTemplate[];
 
   // UI State
   isLoading: boolean;
@@ -157,6 +163,33 @@ interface InvoicingStore {
   // Obtenir les factures en retard
   getOverdueInvoices: () => Invoice[];
 
+  // Obtenir le résumé des factures en retard
+  getOverdueSummary: () => OverdueInvoiceSummary;
+
+  // Obtenir les factures en retard par niveau
+  getOverdueInvoicesByLevel: (level: 'recent' | 'moderate' | 'severe') => Invoice[];
+
+  // Calculer le nombre de jours de retard
+  getDaysOverdue: (invoiceId: string) => number;
+
+  // Obtenir les relances d'une facture
+  getInvoiceReminders: (invoiceId: string) => InvoiceReminder[];
+
+  // Créer un template de relance
+  createReminderTemplate: (template: Omit<ReminderTemplate, 'id' | 'createdAt'>) => ReminderTemplate;
+
+  // Mettre à jour un template de relance
+  updateReminderTemplate: (id: string, updates: Partial<ReminderTemplate>) => void;
+
+  // Supprimer un template de relance
+  deleteReminderTemplate: (id: string) => void;
+
+  // Obtenir un template de relance par niveau
+  getReminderTemplateByLevel: (level: ReminderLevel) => ReminderTemplate | undefined;
+
+  // Générer un message depuis un template
+  generateReminderFromTemplate: (invoiceId: string, templateId: string) => Omit<InvoiceReminder, 'id' | 'sentAt'>;
+
   // ============================================================================
   // ACTIONS - NUMÉROTATION
   // ============================================================================
@@ -208,6 +241,7 @@ const initialState = {
   numberingConfigs: [],
   templates: [],
   activeTemplate: null,
+  reminderTemplates: [],
   isLoading: false,
   error: null,
 };
@@ -650,6 +684,153 @@ export const useInvoicingStore = create<InvoicingStore>((set, get) => ({
     );
   },
 
+  getOverdueSummary: () => {
+    const overdueInvoices = get().getOverdueInvoices();
+    const now = new Date();
+
+    const summary: OverdueInvoiceSummary = {
+      total: overdueInvoices.length,
+      totalAmount: overdueInvoices.reduce((sum, inv) => sum + inv.amountDue, 0),
+      recent: { count: 0, amount: 0 },
+      moderate: { count: 0, amount: 0 },
+      severe: { count: 0, amount: 0 },
+    };
+
+    overdueInvoices.forEach((invoice) => {
+      if (!invoice.dueDate) return;
+
+      const daysOverdue = Math.floor(
+        (now.getTime() - invoice.dueDate.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (daysOverdue < 30) {
+        summary.recent.count++;
+        summary.recent.amount += invoice.amountDue;
+      } else if (daysOverdue < 60) {
+        summary.moderate.count++;
+        summary.moderate.amount += invoice.amountDue;
+      } else {
+        summary.severe.count++;
+        summary.severe.amount += invoice.amountDue;
+      }
+    });
+
+    return summary;
+  },
+
+  getOverdueInvoicesByLevel: (level) => {
+    const overdueInvoices = get().getOverdueInvoices();
+    const now = new Date();
+
+    return overdueInvoices.filter((invoice) => {
+      if (!invoice.dueDate) return false;
+
+      const daysOverdue = Math.floor(
+        (now.getTime() - invoice.dueDate.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      if (level === 'recent') return daysOverdue < 30;
+      if (level === 'moderate') return daysOverdue >= 30 && daysOverdue < 60;
+      if (level === 'severe') return daysOverdue >= 60;
+      return false;
+    });
+  },
+
+  getDaysOverdue: (invoiceId) => {
+    const invoice = get().getInvoice(invoiceId);
+    if (!invoice || !invoice.dueDate) return 0;
+
+    const now = new Date();
+    const daysOverdue = Math.floor(
+      (now.getTime() - invoice.dueDate.getTime()) / (1000 * 60 * 60 * 24)
+    );
+
+    return daysOverdue > 0 ? daysOverdue : 0;
+  },
+
+  getInvoiceReminders: (invoiceId) => {
+    const invoice = get().getInvoice(invoiceId);
+    return invoice?.reminders || [];
+  },
+
+  createReminderTemplate: (templateData) => {
+    const newTemplate: ReminderTemplate = {
+      ...templateData,
+      id: `remt-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      createdAt: new Date(),
+    };
+
+    set((state) => ({
+      reminderTemplates: [...state.reminderTemplates, newTemplate],
+    }));
+
+    return newTemplate;
+  },
+
+  updateReminderTemplate: (id, updates) => {
+    set((state) => ({
+      reminderTemplates: state.reminderTemplates.map((t) =>
+        t.id === id ? { ...t, ...updates, updatedAt: new Date() } : t
+      ),
+    }));
+  },
+
+  deleteReminderTemplate: (id) => {
+    set((state) => ({
+      reminderTemplates: state.reminderTemplates.filter((t) => t.id !== id),
+    }));
+  },
+
+  getReminderTemplateByLevel: (level) => {
+    const { reminderTemplates } = get();
+    return reminderTemplates.find((t) => t.level === level && t.isActive && t.isDefault);
+  },
+
+  generateReminderFromTemplate: (invoiceId, templateId) => {
+    const invoice = get().getInvoice(invoiceId);
+    const template = get().reminderTemplates.find((t) => t.id === templateId);
+
+    if (!invoice || !template) {
+      throw new Error('Invoice or template not found');
+    }
+
+    const thirdParty = invoice.thirdParty || get().getThirdParty(invoice.thirdPartyId);
+    const daysOverdue = get().getDaysOverdue(invoiceId);
+
+    // Variables pour le template
+    const variables: Record<string, string> = {
+      invoice_number: invoice.number,
+      customer_name: thirdParty?.name || '',
+      amount_due: invoice.amountDue.toFixed(2),
+      currency: invoice.currency,
+      due_date: invoice.dueDate?.toLocaleDateString('fr-MA') || '',
+      days_overdue: daysOverdue.toString(),
+      invoice_total: invoice.totalTTC.toFixed(2),
+    };
+
+    // Remplacer les variables dans le sujet et le message
+    let subject = template.subject;
+    let message = template.message;
+
+    Object.entries(variables).forEach(([key, value]) => {
+      const placeholder = `{${key}}`;
+      subject = subject.replace(new RegExp(placeholder, 'g'), value);
+      message = message.replace(new RegExp(placeholder, 'g'), value);
+    });
+
+    const reminder: Omit<InvoiceReminder, 'id' | 'sentAt'> = {
+      invoiceId: invoice.id,
+      type: 'AUTOMATIC',
+      level: template.level,
+      subject,
+      message,
+      sentTo: thirdParty?.email ? [thirdParty.email] : [],
+      daysOverdue,
+    };
+
+    return reminder;
+  },
+
   // ============================================================================
   // NUMÉROTATION
   // ============================================================================
@@ -798,6 +979,88 @@ export const useInvoicingStore = create<InvoicingStore>((set, get) => ({
 
   loadData: () => {
     // TODO: Charger depuis localStorage ou API
+
+    // Créer des templates de relance par défaut si aucun n'existe
+    const { reminderTemplates } = get();
+    if (reminderTemplates.length === 0) {
+      const defaultTemplates: Omit<ReminderTemplate, 'id' | 'createdAt'>[] = [
+        {
+          name: 'Première relance (J+7)',
+          level: 'FIRST',
+          subject: 'Rappel : Facture {invoice_number} en attente de paiement',
+          message: `Bonjour {customer_name},
+
+Nous vous rappelons que la facture {invoice_number} d'un montant de {amount_due} {currency}, échue le {due_date}, reste impayée.
+
+Merci de procéder au règlement dans les plus brefs délais.
+
+Cordialement,
+L'équipe comptable`,
+          daysOverdue: 7,
+          isActive: true,
+          isDefault: true,
+        },
+        {
+          name: 'Relance modérée (J+30)',
+          level: 'SECOND',
+          subject: 'Rappel urgent : Facture {invoice_number} en retard de {days_overdue} jours',
+          message: `Bonjour {customer_name},
+
+Nous constatons que la facture {invoice_number} d'un montant de {amount_due} {currency} n'a toujours pas été réglée malgré notre précédent rappel.
+
+Cette facture est maintenant en retard de {days_overdue} jours. Nous vous demandons de bien vouloir régulariser votre situation au plus vite.
+
+En cas de problème, n'hésitez pas à nous contacter.
+
+Cordialement,
+L'équipe comptable`,
+          daysOverdue: 30,
+          isActive: true,
+          isDefault: true,
+        },
+        {
+          name: 'Relance sévère (J+60)',
+          level: 'THIRD',
+          subject: 'Dernier rappel : Facture {invoice_number} - {days_overdue} jours de retard',
+          message: `Bonjour {customer_name},
+
+Malgré nos précédents rappels, la facture {invoice_number} d'un montant de {amount_due} {currency} demeure impayée depuis {days_overdue} jours.
+
+Nous vous demandons de procéder au règlement immédiat de cette facture. À défaut, nous nous verrons contraints de prendre les mesures nécessaires pour recouvrer cette créance.
+
+Nous restons à votre disposition pour tout arrangement.
+
+Cordialement,
+L'équipe comptable`,
+          daysOverdue: 60,
+          isActive: true,
+          isDefault: true,
+        },
+        {
+          name: 'Mise en demeure finale (J+90)',
+          level: 'FINAL',
+          subject: 'MISE EN DEMEURE - Facture {invoice_number}',
+          message: `Madame, Monsieur,
+
+Par la présente, nous vous mettons formellement en demeure de régler la facture {invoice_number} d'un montant de {amount_due} {currency}, en retard de {days_overdue} jours.
+
+En l'absence de règlement sous 15 jours, nous engagerons une procédure de recouvrement contentieux sans autre préavis.
+
+Cette démarche pourra entraîner des frais supplémentaires à votre charge.
+
+Cordialement,
+La Direction`,
+          daysOverdue: 90,
+          isActive: true,
+          isDefault: true,
+        },
+      ];
+
+      defaultTemplates.forEach((template) => {
+        get().createReminderTemplate(template);
+      });
+    }
+
     set({ isLoading: false });
   },
 

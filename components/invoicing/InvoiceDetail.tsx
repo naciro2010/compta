@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/Button';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import PaymentForm from './PaymentForm';
 import PaymentTimeline from './PaymentTimeline';
+import ReminderForm from './ReminderForm';
+import ReminderTimeline from './ReminderTimeline';
 import {
   FileText,
   Building,
@@ -18,7 +20,9 @@ import {
   Eye,
   Edit,
   ArrowLeft,
-  Plus
+  Plus,
+  Mail,
+  AlertTriangle
 } from 'lucide-react';
 
 interface InvoiceDetailProps {
@@ -34,8 +38,9 @@ export default function InvoiceDetail({
   onEdit,
   onViewPDF
 }: InvoiceDetailProps) {
-  const { getThirdParty, deletePayment } = useInvoicingStore();
+  const { getThirdParty, deletePayment, getDaysOverdue } = useInvoicingStore();
   const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [showReminderForm, setShowReminderForm] = useState(false);
 
   const thirdParty = getThirdParty(invoice.thirdPartyId);
 
@@ -91,8 +96,18 @@ export default function InvoiceDetail({
     invoice.status !== 'CANCELLED' &&
     invoice.status !== 'DRAFT';
 
+  const canSendReminder = isOverdue &&
+    invoice.status !== 'CANCELLED' &&
+    invoice.status !== 'PAID';
+
+  const daysOverdue = getDaysOverdue(invoice.id);
+
   const handlePaymentSuccess = () => {
     setShowPaymentForm(false);
+  };
+
+  const handleReminderSuccess = () => {
+    setShowReminderForm(false);
   };
 
   const paymentPercentage = invoice.totalTTC > 0
@@ -133,6 +148,16 @@ export default function InvoiceDetail({
               Modifier
             </Button>
           )}
+          {canSendReminder && !showReminderForm && (
+            <Button
+              variant="outline"
+              onClick={() => setShowReminderForm(true)}
+              className="border-orange-500 text-orange-400 hover:bg-orange-500/10"
+            >
+              <Mail className="w-4 h-4 mr-2" />
+              Envoyer une relance
+            </Button>
+          )}
           {canAddPayment && !showPaymentForm && (
             <Button variant="primary" onClick={() => setShowPaymentForm(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -145,15 +170,40 @@ export default function InvoiceDetail({
       {/* Alerte si en retard */}
       {isOverdue && (
         <Card className="bg-red-50 border-red-200">
-          <div className="p-4 flex items-start gap-3">
-            <AlertCircle className="w-6 h-6 text-red-600 mt-1" />
-            <div>
-              <h3 className="font-semibold text-red-900">Facture en retard</h3>
-              <p className="text-red-800 text-sm mt-1">
-                La date d'échéance ({formatDate(invoice.dueDate!)}) est dépassée.
-                Montant restant dû: {formatAmount(invoice.amountDue)}
-              </p>
+          <div className="p-4 flex items-start justify-between gap-3">
+            <div className="flex items-start gap-3">
+              <AlertCircle className="w-6 h-6 text-red-600 mt-1" />
+              <div>
+                <h3 className="font-semibold text-red-900 flex items-center gap-2">
+                  Facture en retard
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-200 text-red-800 text-xs rounded">
+                    <AlertTriangle className="w-3 h-3" />
+                    {daysOverdue} jour{daysOverdue > 1 ? 's' : ''}
+                  </span>
+                </h3>
+                <p className="text-red-800 text-sm mt-1">
+                  La date d'échéance ({formatDate(invoice.dueDate!)}) est dépassée.
+                  Montant restant dû: {formatAmount(invoice.amountDue)}
+                </p>
+                {invoice.reminders.length > 0 && (
+                  <p className="text-red-700 text-xs mt-2 flex items-center gap-1.5">
+                    <Mail className="w-3.5 h-3.5" />
+                    {invoice.reminders.length} relance{invoice.reminders.length > 1 ? 's' : ''} envoyée{invoice.reminders.length > 1 ? 's' : ''}
+                    {invoice.lastReminderSent && ` • Dernière: ${formatDate(invoice.lastReminderSent)}`}
+                  </p>
+                )}
+              </div>
             </div>
+            {canSendReminder && !showReminderForm && (
+              <Button
+                variant="outline"
+                onClick={() => setShowReminderForm(true)}
+                className="border-red-400 text-red-700 hover:bg-red-100 flex-shrink-0"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Relancer
+              </Button>
+            )}
           </div>
         </Card>
       )}
@@ -296,6 +346,15 @@ export default function InvoiceDetail({
             />
           )}
 
+          {/* Formulaire de relance si actif */}
+          {showReminderForm && (
+            <ReminderForm
+              invoiceId={invoice.id}
+              onSuccess={handleReminderSuccess}
+              onCancel={() => setShowReminderForm(false)}
+            />
+          )}
+
           {/* Timeline des paiements */}
           <PaymentTimeline
             payments={invoice.payments}
@@ -303,6 +362,24 @@ export default function InvoiceDetail({
             onDeletePayment={deletePayment}
             showActions={true}
           />
+
+          {/* Timeline des relances */}
+          {invoice.reminders && invoice.reminders.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mail className="w-5 h-5" />
+                  Historique des relances
+                </CardTitle>
+                <CardDescription>
+                  Toutes les relances envoyées pour cette facture
+                </CardDescription>
+              </CardHeader>
+              <div className="p-6">
+                <ReminderTimeline reminders={invoice.reminders} />
+              </div>
+            </Card>
+          )}
         </div>
 
         {/* Colonne latérale - Résumé financier */}
