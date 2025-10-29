@@ -104,7 +104,7 @@ export default function QuotesPage() {
               </p>
               <Button
                 variant="primary"
-                onClick={() => window.location.href = '/customers'}
+                onClick={() => router.push('/customers')}
               >
                 Aller aux clients
               </Button>
