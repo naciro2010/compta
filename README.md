@@ -15,9 +15,13 @@ Application Next.js de comptabilité générale conforme au plan comptable maroc
 
 - **Dashboard** — Vue d'ensemble de l'activité
 - **Ventes** — Facturation (devis, commandes, livraisons, factures, avoirs)
+- **Factures** ✅ — Gestion complète des factures clients avec calculs automatiques
 - **Achats** — Gestion des fournisseurs
+- **Clients** ✅ — Gestion des clients avec identifiants légaux (ICE, IF, RC, CNSS)
+- **Fournisseurs** ✅ — Gestion des fournisseurs
 - **Banque** — Rapprochement bancaire
 - **Grand livre** — Plan comptable CGNC
+- **États de synthèse** ✅ — Bilan, CPC, ESG (Normes CGNC)
 - **TVA** — Déclarations fiscales
 - **Paie** — Bulletins et CNSS
 - **Paramètres** — Configuration
@@ -76,9 +80,13 @@ Chaque push sur `main` ou `master` déclenchera un déploiement automatique.
 │   ├── (dashboard)/       # Routes de l'application
 │   │   ├── dashboard/
 │   │   ├── sales/
+│   │   ├── invoices/      ✅ NEW - Gestion factures
 │   │   ├── purchases/
+│   │   ├── customers/     ✅ NEW - Gestion clients
+│   │   ├── suppliers/     ✅ NEW - Gestion fournisseurs
 │   │   ├── bank/
 │   │   ├── ledger/
+│   │   ├── financial-statements/ ✅ NEW - États CGNC
 │   │   ├── tax/
 │   │   ├── payroll/
 │   │   └── settings/
@@ -87,22 +95,52 @@ Chaque push sur `main` ou `master` déclenchera un déploiement automatique.
 │   └── page.tsx           # Page d'accueil
 ├── components/            # Composants réutilisables
 │   ├── ui/               # Composants UI de base
+│   ├── invoicing/        ✅ NEW - Composants facturation
+│   │   ├── ThirdPartyForm.tsx
+│   │   ├── ThirdPartyList.tsx
+│   │   ├── InvoiceForm.tsx
+│   │   ├── InvoiceList.tsx
+│   │   └── InvoicePDFTemplate.tsx
 │   └── Sidebar.tsx
+├── store/                 ✅ NEW - État global Zustand
+│   └── invoicing.ts       # Store facturation (40+ actions)
+├── types/                 ✅ NEW - Types TypeScript
+│   ├── accounting.ts
+│   └── invoicing.ts
+├── lib/                   # Utilitaires
+│   └── accounting/
+│       └── validation.ts  # Validation ICE, etc.
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml    # GitHub Actions
 └── public/               # Fichiers statiques
 ```
 
-## 🎯 Fonctionnalités prévues
+## 🎯 Fonctionnalités
 
-- [ ] Gestion complète des clients
-- [ ] Cycle de facturation complet
+### ✅ Implémentées (Story F.1 & F.2)
+
+- [x] **Gestion des clients** — CRUD complet avec validation ICE
+- [x] **Gestion des fournisseurs** — Identifiants légaux marocains
+- [x] **Création de factures** — Formulaire multi-lignes avec calculs automatiques
+- [x] **Calculs TVA** — Support des taux marocains (20%, 14%, 10%, 7%, 0%)
+- [x] **Remises** — Remises par ligne et remise globale
+- [x] **Numérotation automatique** — Format FA-2025-00001
+- [x] **Template PDF** — Conforme aux normes CGNC (prêt pour impression)
+- [x] **États de synthèse** — Bilan, CPC, ESG conformes CGNC
+- [x] **Validation ICE** — Contrôle du format et checksum
+
+### 📋 À venir
+
+- [ ] Gestion des devis (Story F.3)
+- [ ] Suivi des paiements (Story F.4)
+- [ ] Relances automatiques (Story F.5)
+- [ ] Intégration comptable automatique (Story F.7)
 - [ ] Import de relevés bancaires
 - [ ] Rapprochement automatique
 - [ ] Déclarations TVA
 - [ ] Exports comptables
-- [ ] Impression PDF des documents
+- [ ] Génération PDF automatique (avec bibliothèque tierce)
 - [ ] Support bilingue FR/AR
 - [ ] Mode hors ligne avec LocalStorage
 - [ ] Analytics et tableaux de bord

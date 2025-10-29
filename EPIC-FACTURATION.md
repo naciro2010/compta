@@ -4,7 +4,9 @@
 
 L'EPIC Facturation est un module essentiel du MVP permettant aux TPE/PME marocaines de gérer le cycle commercial complet : Devis → Factures → Paiements, ainsi que la gestion des clients et fournisseurs.
 
-**Status:** Story F.1 (Gestion Tiers) - ✅ Complétée
+**Status:**
+- Story F.1 (Gestion Tiers) - ✅ **COMPLÉTÉE**
+- Story F.2 (Création Factures) - ✅ **COMPLÉTÉE**
 
 **Priorité:** 🔴 CRITIQUE - Bloquant MVP
 
@@ -26,13 +28,15 @@ L'EPIC Facturation est un module essentiel du MVP permettant aux TPE/PME marocai
 /components/invoicing/
   ├── ThirdPartyForm.tsx                     (✅ Créé)
   ├── ThirdPartyList.tsx                     (✅ Créé)
-  ├── InvoiceForm.tsx                        (❌ À créer - Story F.2)
-  ├── InvoiceList.tsx                        (❌ À créer - Story F.2)
+  ├── InvoiceForm.tsx                        (✅ Créé - Story F.2)
+  ├── InvoiceList.tsx                        (✅ Créé - Story F.2)
+  ├── InvoicePDFTemplate.tsx                 (✅ Créé - Story F.2)
   └── PaymentForm.tsx                        (❌ À créer - Story F.4)
 
 /app/(dashboard)/
   ├── customers/page.tsx                     (✅ Créé)
   ├── suppliers/page.tsx                     (✅ Créé)
+  ├── invoices/page.tsx                      (✅ Créé - Story F.2)
   └── sales/page.tsx                         (⚠️ Existant - À migrer)
 ```
 
@@ -304,17 +308,184 @@ describe('ThirdPartyForm', () => {
 
 ---
 
+## Story F.2 : Création Factures (✅ COMPLÉTÉE)
+
+### Objectif
+Permettre la création de factures complètes avec gestion multi-lignes, calculs automatiques de TVA, remises, et template PDF conforme CGNC.
+
+### Fonctionnalités Implémentées
+
+#### 1. Composant InvoiceForm.tsx (`components/invoicing/InvoiceForm.tsx`)
+
+**Fonctionnalités:**
+- Formulaire complet de création/édition de factures
+- Sélection client depuis la base de tiers
+- Gestion multi-lignes dynamique (ajout/suppression)
+- Calculs automatiques en temps réel
+
+**Sections du formulaire:**
+1. **En-tête** - Type de document, Client, Référence
+2. **Dates et conditions** - Date émission, échéance (calculée automatiquement), conditions de paiement
+3. **Lignes de facturation** - Description, Quantité, Prix unitaire, TVA, Remise
+4. **Totaux** - Remise globale, Détail TVA par taux, Totaux HT/TVA/TTC
+5. **Notes** - Notes publiques (sur facture) et privées (internes)
+
+**Validation:**
+- Client obligatoire (avec vérification qu'au moins un client existe)
+- Date d'émission obligatoire
+- Lignes: description, quantité et prix obligatoires
+- Calculs automatiques pour chaque ligne
+
+**Calculs automatiques:**
+```typescript
+// Par ligne:
+- Sous-total = Quantité × Prix unitaire
+- Remise ligne = Sous-total × (Taux remise / 100)
+- Sous-total HT = Sous-total - Remise ligne
+- TVA ligne = Sous-total HT × (Taux TVA / 100)
+- Total TTC ligne = Sous-total HT + TVA ligne
+
+// Global:
+- Sous-total HT = Σ Sous-totaux HT lignes
+- Remise globale = Sous-total HT × (Taux remise globale / 100)
+- Total HT = Sous-total HT - Remise globale
+- TVA par taux = Regroupement et calcul par taux
+- Total TVA = Σ TVA par taux
+- Total TTC = Total HT + Total TVA
+```
+
+#### 2. Composant InvoiceList.tsx (`components/invoicing/InvoiceList.tsx`)
+
+**Fonctionnalités:**
+- Liste complète des factures avec filtres
+- Recherche par numéro, client, référence
+- Filtres par type (Facture, Devis, Avoir, etc.) et statut
+- Statistiques en temps réel
+
+**Colonnes du tableau:**
+- Numéro (avec référence client)
+- Type (badge coloré)
+- Client (nom + code)
+- Date émission
+- Date échéance (en rouge si en retard)
+- Montant TTC
+- Restant dû
+- Statut (badge coloré)
+- Actions (Voir PDF, Modifier, Dupliquer, Supprimer)
+
+**Statistiques affichées:**
+- Total factures
+- Montant total
+- Montant payé
+- Restant dû
+- Nombre de factures en retard (alerte rouge)
+
+**Gestion des statuts:**
+- DRAFT (Brouillon) - Gris
+- SENT (Envoyée) - Bleu
+- VIEWED (Vue) - Cyan
+- PARTIALLY_PAID (Payée partiellement) - Jaune
+- PAID (Payée) - Vert
+- OVERDUE (En retard) - Rouge
+- CANCELLED (Annulée) - Gris foncé
+- CONVERTED (Convertie) - Violet
+
+#### 3. Page /invoices (`app/(dashboard)/invoices/page.tsx`)
+
+**Fonctionnalités:**
+- Interface complète de gestion des factures
+- Basculement entre liste et formulaire
+- Vérification qu'au moins un client existe avant création
+- Alertes et aide contextuelle
+
+**Workflow:**
+1. Affichage liste des factures
+2. Clic "Nouvelle facture" → Vérification clients → Affichage formulaire
+3. Remplissage formulaire → Validation → Sauvegarde
+4. Retour à la liste avec facture créée
+
+**Aide contextuelle:**
+- Alerte si aucun client (redirection vers /customers)
+- Guide de démarrage si aucune facture
+- Messages d'erreur clairs
+
+#### 4. Template PDF (`components/invoicing/InvoicePDFTemplate.tsx`)
+
+**Conformité CGNC:**
+- En-tête société avec ICE, RC, IF
+- Informations client complètes avec ICE
+- Numéro de facture unique
+- Dates (émission, échéance, livraison)
+- Détail des lignes avec TVA par ligne
+- Détail TVA par taux
+- Totaux HT, TVA, TTC
+- Mentions légales obligatoires
+
+**Sections du template:**
+1. **En-tête** - Logo et informations émetteur
+2. **Destinataire** - Client avec tous les identifiants
+3. **Informations facture** - Numéro, dates, conditions
+4. **Tableau des lignes** - Description, Qté, P.U., TVA, Remise, Total
+5. **Totaux** - Sous-total, Remise globale, Détail TVA, Total TTC
+6. **Paiements** - Montant payé, Restant dû (si applicable)
+7. **Notes** - Notes publiques visibles
+8. **Mentions légales** - Texte conforme législation marocaine
+
+**Format:**
+- HTML/CSS prêt pour impression (Ctrl+P ou window.print())
+- Responsive et optimisé pour format A4
+- Prêt pour intégration avec bibliothèque PDF (jsPDF, react-pdf, etc.)
+
+#### 5. Navigation (`components/Sidebar.tsx`)
+
+**Ajout:**
+- Menu "Factures" avec icône Receipt
+- Position: après "Ventes", avant "Achats"
+- Lien vers `/invoices`
+
+#### 6. Numérotation automatique
+
+**Implémentation dans le store:**
+```typescript
+generateInvoiceNumber(type, companyId)
+- Format: {PREFIX}-{YEAR}-{COUNTER}
+- Exemples: FA-2025-00001, DEV-2025-00001, AV-2025-00001
+- Incrémentation automatique
+- Réinitialisation annuelle (optionnelle)
+```
+
+**Configuration par type:**
+- INVOICE → FA (Facture)
+- QUOTE → DEV (Devis)
+- CREDIT_NOTE → AV (Avoir)
+- PROFORMA → PRO (Pro-forma)
+- PURCHASE_INVOICE → FACH (Facture achat)
+- DELIVERY_NOTE → BL (Bon de livraison)
+
+### Tests Réalisés
+
+✅ Création facture complète avec client
+✅ Ajout/suppression de lignes
+✅ Calculs automatiques HT/TVA/TTC
+✅ Remise par ligne
+✅ Remise globale
+✅ Détail TVA par taux
+✅ Validation formulaire
+✅ Numérotation automatique
+✅ Filtres et recherche
+✅ Statistiques temps réel
+
+### Métriques
+
+- **Composants créés:** 3 (InvoiceForm, InvoiceList, InvoicePDFTemplate)
+- **Lignes de code:** ~1200 lignes
+- **Types TypeScript:** Réutilisation complète des types existants
+- **Actions store:** Toutes les actions factures déjà implémentées (Story F.1)
+- **Temps de création facture:** < 2 minutes (objectif atteint)
+
+---
+
 ## Prochaines Stories
-
-### Story F.2 : Création Factures (5 jours)
-**À implémenter:**
-- `InvoiceForm.tsx` - Formulaire facture multi-lignes
-- Calcul automatique TVA par ligne
-- Gestion des remises (ligne + globale)
-- Génération PDF template CGNC
-- Numérotation automatique (FA-2025-00001)
-
-**Dépendances:** Story F.1 ✅
 
 ### Story F.3 : Gestion Devis (3 jours)
 **À implémenter:**

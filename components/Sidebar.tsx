@@ -19,11 +19,13 @@ import {
   FileSpreadsheet,
   UserCheck,
   Truck,
+  HelpCircle,
 } from 'lucide-react'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Ventes', href: '/sales', icon: FileText },
+  { name: 'Factures', href: '/invoices', icon: Receipt },
   { name: 'Achats', href: '/purchases', icon: ShoppingCart },
   { name: 'Clients', href: '/customers', icon: UserCheck },
   { name: 'Fournisseurs', href: '/suppliers', icon: Truck },
@@ -32,6 +34,7 @@ const navigation = [
   { name: 'États de synthèse', href: '/financial-statements', icon: FileSpreadsheet },
   { name: 'TVA', href: '/tax', icon: Receipt },
   { name: 'Paie', href: '/payroll', icon: Users },
+  { name: 'Guide', href: '/guide', icon: HelpCircle },
   { name: 'Paramètres', href: '/settings', icon: Settings },
 ]
 
