@@ -94,7 +94,19 @@ export function Sidebar() {
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            // Check if pathname matches this item
+            const matchesPath = pathname === item.href || pathname.startsWith(item.href + '/')
+
+            // Check if there's a more specific menu item that should be active instead
+            const hasMoreSpecificMatch = matchesPath && navigation.some(
+              (navItem) =>
+                navItem.href !== item.href &&
+                navItem.href.startsWith(item.href + '/') &&
+                (pathname === navItem.href || pathname.startsWith(navItem.href + '/'))
+            )
+
+            // Only set active if it matches and there's no more specific match
+            const isActive = matchesPath && !hasMoreSpecificMatch
             const Icon = item.icon
 
             return (
