@@ -375,7 +375,7 @@ export interface FinancialStatementsPack {
   // Les 5 états (4 si simplifié)
   bilan: Bilan;
   cpc: CPC;
-  esg?: ESG;                         // Uniquement si modèle NORMAL
+  esg?: ESG | null;                  // Uniquement si modèle NORMAL
   tableauFinancement: TableauFinancement;
   etic: ETIC;
 
