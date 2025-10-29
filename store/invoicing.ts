@@ -153,6 +153,9 @@ interface InvoicingStore {
   // Obtenir les paiements d'une facture
   getInvoicePayments: (invoiceId: string) => Payment[];
 
+  // Story F.7: Générer l'écriture comptable pour un paiement (lettrage)
+  generatePaymentJournalEntry: (paymentId: string) => Entry | null;
+
   // ============================================================================
   // ACTIONS - RELANCES
   // ============================================================================
@@ -653,6 +656,119 @@ export const useInvoicingStore = create<InvoicingStore>((set, get) => ({
     return get().payments.filter((p) => p.invoiceId === invoiceId);
   },
 
+  // Story F.7: Generate journal entry for payment (lettrage)
+  generatePaymentJournalEntry: (paymentId: string) => {
+    const payment = get().payments.find(p => p.id === paymentId);
+    if (!payment) {
+      console.error('Payment not found:', paymentId);
+      return null;
+    }
+
+    const invoice = get().getInvoice(payment.invoiceId);
+    if (!invoice) {
+      console.error('Invoice not found for payment:', payment.invoiceId);
+      return null;
+    }
+
+    // Import accounting store dynamically to avoid circular dependency
+    const { useAccountingStore } = require('@/store/accounting');
+    const accountingStore = useAccountingStore.getState();
+
+    const { journals, currentPeriod, currentUser } = accountingStore;
+
+    if (!currentPeriod) {
+      console.error('No current period selected');
+      return null;
+    }
+
+    if (!currentUser) {
+      console.error('No current user');
+      return null;
+    }
+
+    // Get the third party
+    const thirdParty = invoice.thirdParty || get().getThirdParty(invoice.thirdPartyId);
+    if (!thirdParty) {
+      console.error('Third party not found:', invoice.thirdPartyId);
+      return null;
+    }
+
+    // Import GL integration functions
+    const {
+      generatePaymentJournalEntry,
+      generateSupplierPaymentJournalEntry,
+      getBankJournal,
+      validateJournalEntry,
+    } = require('@/lib/accounting/gl-integration');
+
+    // Get the appropriate bank/cash journal
+    const journal = getBankJournal(payment.method, journals);
+    if (!journal) {
+      console.error('No bank/cash journal found for payment method:', payment.method);
+      return null;
+    }
+
+    // Generate entry based on invoice type (customer or supplier)
+    let entry;
+    try {
+      if (invoice.type === 'PURCHASE_INVOICE') {
+        // Supplier payment
+        entry = generateSupplierPaymentJournalEntry(
+          payment,
+          invoice,
+          thirdParty,
+          journal,
+          currentPeriod,
+          currentUser.id
+        );
+      } else {
+        // Customer payment
+        entry = generatePaymentJournalEntry(
+          payment,
+          invoice,
+          thirdParty,
+          journal,
+          currentPeriod,
+          currentUser.id
+        );
+      }
+
+      // Validate the entry
+      const validation = validateJournalEntry(entry);
+      if (!validation.isValid) {
+        console.error('Invalid journal entry:', validation.errors);
+        return null;
+      }
+
+      // Create the entry in the accounting store
+      accountingStore.createEntry(entry);
+
+      // Link the entry to the payment
+      const updatedPayment: Payment = {
+        ...payment,
+        journalEntryId: entry.id,
+      };
+
+      set((state) => ({
+        payments: state.payments.map(p =>
+          p.id === paymentId ? updatedPayment : p
+        ),
+      }));
+
+      // Update the payment in the invoice as well
+      get().updateInvoice(invoice.id, {
+        payments: invoice.payments.map(p =>
+          p.id === paymentId ? updatedPayment : p
+        ),
+      });
+
+      return entry;
+    } catch (error) {
+      console.error('Error generating payment journal entry:', error);
+      return null;
+    }
+  },
+
   // ============================================================================
   // RELANCES
   // ============================================================================
@@ -899,13 +1015,118 @@ export const useInvoicingStore = create<InvoicingStore>((set, get) => ({
   },
 
   // ============================================================================
-  // COMPTABILITÉ
+  // COMPTABILITÉ - Story F.7: GL Integration
   // ============================================================================
 
   generateJournalEntry: (invoiceId) => {
-    // TODO: Implémenter la génération d'écriture comptable
-    // Sera implémenté dans Story F.7
-    return null;
+    const invoice = get().getInvoice(invoiceId);
+    if (!invoice) {
+      console.error('Invoice not found:', invoiceId);
+      return null;
+    }
+
+    // Import accounting store dynamically to avoid circular dependency
+    // In a real app, this would be handled via dependency injection or context
+    const { useAccountingStore } = require('@/store/accounting');
+    const accountingStore = useAccountingStore.getState();
+
+    const { journals, currentPeriod, currentUser } = accountingStore;
+
+    if (!currentPeriod) {
+      console.error('No current period selected');
+      return null;
+    }
+
+    if (!currentUser) {
+      console.error('No current user');
+      return null;
+    }
+
+    // Get the third party
+    const thirdParty = invoice.thirdParty || get().getThirdParty(invoice.thirdPartyId);
+    if (!thirdParty) {
+      console.error('Third party not found:', invoice.thirdPartyId);
+      return null;
+    }
+
+    // Import GL integration functions
+    const {
+      generateInvoiceJournalEntry,
+      generateCreditNoteJournalEntry,
+      generatePurchaseInvoiceJournalEntry,
+      getJournalForInvoiceType,
+      validateJournalEntry,
+    } = require('@/lib/accounting/gl-integration');
+
+    // Get the appropriate journal
+    const journal = getJournalForInvoiceType(invoice.type, journals);
+    if (!journal) {
+      console.error('No journal found for invoice type:', invoice.type);
+      return null;
+    }
+
+    // Generate entry based on invoice type
+    let entry;
+    try {
+      switch (invoice.type) {
+        case 'INVOICE':
+        case 'PROFORMA':
+        case 'QUOTE':
+        case 'DELIVERY_NOTE':
+          entry = generateInvoiceJournalEntry(
+            invoice,
+            thirdParty,
+            journal,
+            currentPeriod,
+            currentUser.id
+          );
+          break;
+
+        case 'CREDIT_NOTE':
+          entry = generateCreditNoteJournalEntry(
+            invoice,
+            thirdParty,
+            journal,
+            currentPeriod,
+            currentUser.id
+          );
+          break;
+
+        case 'PURCHASE_INVOICE':
+          entry = generatePurchaseInvoiceJournalEntry(
+            invoice,
+            thirdParty,
+            journal,
+            currentPeriod,
+            currentUser.id
+          );
+          break;
+
+        default:
+          console.error('Unsupported invoice type for journal entry:', invoice.type);
+          return null;
+      }
+
+      // Validate the entry
+      const validation = validateJournalEntry(entry);
+      if (!validation.isValid) {
+        console.error('Invalid journal entry:', validation.errors);
+        return null;
+      }
+
+      // Create the entry in the accounting store
+      accountingStore.createEntry(entry);
+
+      // Link the entry to the invoice
+      get().updateInvoice(invoiceId, {
+        relatedJournalEntryId: entry.id,
+      });
+
+      return entry;
+    } catch (error) {
+      console.error('Error generating journal entry:', error);
+      return null;
+    }
   },
 
   // ============================================================================

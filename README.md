@@ -118,7 +118,7 @@ Chaque push sur `main` ou `master` déclenchera un déploiement automatique.
 
 ## 🎯 Fonctionnalités
 
-### ✅ Implémentées (Story F.1 & F.2)
+### ✅ Implémentées
 
 - [x] **Gestion des clients** — CRUD complet avec validation ICE
 - [x] **Gestion des fournisseurs** — Identifiants légaux marocains
@@ -129,13 +129,11 @@ Chaque push sur `main` ou `master` déclenchera un déploiement automatique.
 - [x] **Template PDF** — Conforme aux normes CGNC (prêt pour impression)
 - [x] **États de synthèse** — Bilan, CPC, ESG conformes CGNC
 - [x] **Validation ICE** — Contrôle du format et checksum
+- [x] **Suivi des paiements** — Enregistrement et timeline des paiements (Story F.4)
+- [x] **Relances automatiques** — Système d'alertes et templates personnalisables (Story F.5)
+- [x] **Intégration GL** — Génération automatique d'écritures comptables depuis factures et paiements (Story F.7)
 
 ### 📋 À venir
-
-- [ ] Gestion des devis (Story F.3)
-- [ ] Suivi des paiements (Story F.4)
-- [ ] Relances automatiques (Story F.5)
-- [ ] Intégration comptable automatique (Story F.7)
 - [ ] Import de relevés bancaires
 - [ ] Rapprochement automatique
 - [ ] Déclarations TVA
