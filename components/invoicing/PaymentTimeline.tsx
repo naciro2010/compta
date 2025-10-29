@@ -132,7 +132,7 @@ export default function PaymentTimeline({
           {sortedPayments.map((payment, index) => (
             <div
               key={payment.id}
-              className={`border-l-4 border-green-500 bg-white rounded-lg p-4 shadow-sm ${
+              className={`border-l-4 border-green-500 bg-claude-surface rounded-lg p-4 shadow-sm ${
                 index !== sortedPayments.length - 1 ? 'mb-4' : ''
               }`}
             >

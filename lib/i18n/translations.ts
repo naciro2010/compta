@@ -9,14 +9,19 @@ export const translations = {
   fr: {
     // Navigation
     'nav.dashboard': 'Tableau de bord',
-    'nav.ledger': 'Grand Livre',
+    'nav.sales': 'Ventes',
     'nav.invoices': 'Factures',
+    'nav.invoices.overdue': 'Factures en retard',
+    'nav.quotes': 'Devis',
+    'nav.purchases': 'Achats',
     'nav.customers': 'Clients',
     'nav.suppliers': 'Fournisseurs',
-    'nav.quotes': 'Devis',
-    'nav.tax': 'TVA & Fiscalité',
-    'nav.bank': 'Trésorerie',
-    'nav.financial-statements': 'États Financiers',
+    'nav.bank': 'Banque',
+    'nav.ledger': 'Grand livre',
+    'nav.financial-statements': 'États de synthèse',
+    'nav.tax': 'TVA',
+    'nav.payroll': 'Paie',
+    'nav.guide': 'Guide',
     'nav.settings': 'Paramètres',
 
     // Commun
@@ -88,14 +93,19 @@ export const translations = {
   // Traductions arabes (structure de base)
   ar: {
     'nav.dashboard': 'لوحة القيادة',
-    'nav.ledger': 'دفتر الأستاذ',
+    'nav.sales': 'المبيعات',
     'nav.invoices': 'الفواتير',
+    'nav.invoices.overdue': 'الفواتير المتأخرة',
+    'nav.quotes': 'عروض الأسعار',
+    'nav.purchases': 'المشتريات',
     'nav.customers': 'العملاء',
     'nav.suppliers': 'الموردون',
-    'nav.quotes': 'عروض الأسعار',
-    'nav.tax': 'الضرائب',
-    'nav.bank': 'الخزينة',
+    'nav.bank': 'البنك',
+    'nav.ledger': 'دفتر الأستاذ',
     'nav.financial-statements': 'القوائم المالية',
+    'nav.tax': 'الضرائب',
+    'nav.payroll': 'الرواتب',
+    'nav.guide': 'الدليل',
     'nav.settings': 'الإعدادات',
 
     'common.save': 'حفظ',
@@ -118,14 +128,19 @@ export const translations = {
   // Traductions anglaises (structure de base)
   en: {
     'nav.dashboard': 'Dashboard',
-    'nav.ledger': 'General Ledger',
+    'nav.sales': 'Sales',
     'nav.invoices': 'Invoices',
+    'nav.invoices.overdue': 'Overdue Invoices',
+    'nav.quotes': 'Quotes',
+    'nav.purchases': 'Purchases',
     'nav.customers': 'Customers',
     'nav.suppliers': 'Suppliers',
-    'nav.quotes': 'Quotes',
-    'nav.tax': 'Tax & Compliance',
-    'nav.bank': 'Treasury',
+    'nav.bank': 'Bank',
+    'nav.ledger': 'General Ledger',
     'nav.financial-statements': 'Financial Statements',
+    'nav.tax': 'Tax',
+    'nav.payroll': 'Payroll',
+    'nav.guide': 'Guide',
     'nav.settings': 'Settings',
 
     'common.save': 'Save',
@@ -151,8 +166,27 @@ export const translations = {
 
 /**
  * Hook simple pour traduction (alternative légère à next-intl)
+ * Utilise le LocaleProvider pour obtenir la locale actuelle
  */
 export function useTranslation(locale: keyof typeof translations = 'fr') {
+  const t = (key: TranslationKey): string => {
+    const localeTranslations = translations[locale] as Record<string, string>;
+    const frTranslations = translations.fr;
+    return localeTranslations[key] || frTranslations[key] || key;
+  };
+
+  return { t, locale };
+}
+
+/**
+ * Hook optimisé qui utilise automatiquement le LocaleContext
+ * À utiliser dans les composants clients avec LocaleProvider
+ */
+import { useLocale } from './LocaleProvider';
+
+export function useT() {
+  const { locale } = useLocale();
+
   const t = (key: TranslationKey): string => {
     const localeTranslations = translations[locale] as Record<string, string>;
     const frTranslations = translations.fr;
