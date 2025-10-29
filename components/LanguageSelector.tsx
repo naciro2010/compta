@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Globe } from 'lucide-react'
 import { clsx } from 'clsx'
-
-type Locale = 'fr' | 'ar' | 'en'
+import { useLocale } from '@/lib/i18n/LocaleProvider'
+import { Locale } from '@/lib/i18n/config'
 
 const languages = [
   { code: 'fr' as Locale, name: 'Français', flag: '🇫🇷' },
@@ -13,23 +13,12 @@ const languages = [
 ]
 
 export function LanguageSelector() {
-  const [currentLocale, setCurrentLocale] = useState<Locale>('fr')
+  const { locale: currentLocale, setLocale } = useLocale()
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    // Récupérer la langue du localStorage
-    const savedLocale = localStorage.getItem('locale') as Locale
-    if (savedLocale) {
-      setCurrentLocale(savedLocale)
-    }
-  }, [])
-
   const handleLanguageChange = (locale: Locale) => {
-    setCurrentLocale(locale)
-    localStorage.setItem('locale', locale)
+    setLocale(locale)
     setIsOpen(false)
-    // Recharger la page pour appliquer la nouvelle langue
-    window.location.reload()
   }
 
   const currentLanguage = languages.find((lang) => lang.code === currentLocale) || languages[0]
@@ -57,7 +46,7 @@ export function LanguageSelector() {
           />
 
           {/* Menu dropdown */}
-          <div className="absolute bottom-full left-0 mb-2 w-full bg-white border border-claude-border rounded-lg shadow-lg z-20 overflow-hidden">
+          <div className="absolute bottom-full left-0 mb-2 w-full bg-claude-surface border border-claude-border rounded-lg shadow-lg z-20 overflow-hidden">
             {languages.map((lang) => (
               <button
                 key={lang.code}

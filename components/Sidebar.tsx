@@ -24,27 +24,29 @@ import {
   AlertTriangle,
 } from 'lucide-react'
 import { LanguageSelector } from './LanguageSelector'
+import { useT, TranslationKey } from '@/lib/i18n/translations'
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Ventes', href: '/sales', icon: FileText },
-  { name: 'Factures', href: '/invoices', icon: Receipt },
-  { name: 'Factures en retard', href: '/invoices/overdue', icon: AlertTriangle },
-  { name: 'Devis', href: '/quotes', icon: FileCheck },
-  { name: 'Achats', href: '/purchases', icon: ShoppingCart },
-  { name: 'Clients', href: '/customers', icon: UserCheck },
-  { name: 'Fournisseurs', href: '/suppliers', icon: Truck },
-  { name: 'Banque', href: '/bank', icon: Banknote },
-  { name: 'Grand livre', href: '/ledger', icon: BookOpen },
-  { name: 'États de synthèse', href: '/financial-statements', icon: FileSpreadsheet },
-  { name: 'TVA', href: '/tax', icon: Receipt },
-  { name: 'Paie', href: '/payroll', icon: Users },
-  { name: 'Guide', href: '/guide', icon: HelpCircle },
-  { name: 'Paramètres', href: '/settings', icon: Settings },
+const navigation: Array<{ nameKey: TranslationKey; href: string; icon: any }> = [
+  { nameKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { nameKey: 'nav.sales', href: '/sales', icon: FileText },
+  { nameKey: 'nav.invoices', href: '/invoices', icon: Receipt },
+  { nameKey: 'nav.invoices.overdue', href: '/invoices/overdue', icon: AlertTriangle },
+  { nameKey: 'nav.quotes', href: '/quotes', icon: FileCheck },
+  { nameKey: 'nav.purchases', href: '/purchases', icon: ShoppingCart },
+  { nameKey: 'nav.customers', href: '/customers', icon: UserCheck },
+  { nameKey: 'nav.suppliers', href: '/suppliers', icon: Truck },
+  { nameKey: 'nav.bank', href: '/bank', icon: Banknote },
+  { nameKey: 'nav.ledger', href: '/ledger', icon: BookOpen },
+  { nameKey: 'nav.financial-statements', href: '/financial-statements', icon: FileSpreadsheet },
+  { nameKey: 'nav.tax', href: '/tax', icon: Receipt },
+  { nameKey: 'nav.payroll', href: '/payroll', icon: Users },
+  { nameKey: 'nav.guide', href: '/guide', icon: HelpCircle },
+  { nameKey: 'nav.settings', href: '/settings', icon: Settings },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
+  const { t } = useT()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
@@ -97,7 +99,7 @@ export function Sidebar() {
 
             return (
               <Link
-                key={item.name}
+                key={item.nameKey}
                 href={item.href}
                 onClick={closeMobileMenu}
                 className={clsx(
@@ -108,7 +110,7 @@ export function Sidebar() {
                 )}
               >
                 <Icon className="w-5 h-5" />
-                {item.name}
+                {t(item.nameKey)}
               </Link>
             )
           })}

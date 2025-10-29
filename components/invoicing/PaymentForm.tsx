@@ -285,7 +285,7 @@ export default function PaymentForm({ invoice, onSuccess, onCancel }: PaymentFor
           <textarea
             value={formData.notes}
             onChange={(e) => handleChange('notes', e.target.value)}
-            className="w-full px-4 py-2 bg-white border border-claude-border rounded-lg focus:outline-none focus:ring-2 focus:ring-claude-primary focus:border-transparent text-claude-text"
+            className="w-full px-4 py-2 bg-claude-bg border border-claude-border rounded-lg focus:outline-none focus:ring-2 focus:ring-claude-primary focus:border-transparent text-claude-text"
             rows={3}
             placeholder="Notes internes sur ce paiement..."
           />

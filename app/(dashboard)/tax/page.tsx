@@ -308,7 +308,7 @@ export default function TaxPage() {
       {/* Modal Création */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-2xl">
+          <div className="bg-claude-surface rounded-lg p-6 w-full max-w-md shadow-2xl">
             <h2 className="text-xl font-bold text-claude-text mb-4">Nouvelle Déclaration TVA</h2>
 
             <div className="space-y-4">
@@ -318,7 +318,7 @@ export default function TaxPage() {
                   type="number"
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(parseInt(e.target.value))}
-                  className="w-full px-3 py-2 border border-claude-border rounded-md"
+                  className="w-full px-3 py-2 bg-claude-bg border border-claude-border rounded-md text-claude-text"
                 />
               </div>
 
@@ -327,7 +327,7 @@ export default function TaxPage() {
                 <select
                   value={period}
                   onChange={(e) => setPeriod(e.target.value as any)}
-                  className="w-full px-3 py-2 border border-claude-border rounded-md"
+                  className="w-full px-3 py-2 bg-claude-bg border border-claude-border rounded-md text-claude-text"
                 >
                   <option value="MONTHLY">Mensuelle</option>
                   <option value="QUARTERLY">Trimestrielle</option>
@@ -340,7 +340,7 @@ export default function TaxPage() {
                   <select
                     value={selectedMonth || ''}
                     onChange={(e) => setSelectedMonth(parseInt(e.target.value))}
-                    className="w-full px-3 py-2 border border-claude-border rounded-md"
+                    className="w-full px-3 py-2 bg-claude-bg border border-claude-border rounded-md text-claude-text"
                   >
                     {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
                       <option key={month} value={month}>
