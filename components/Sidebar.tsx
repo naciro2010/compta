@@ -23,6 +23,7 @@ import {
   FileCheck,
   AlertTriangle,
 } from 'lucide-react'
+import { LanguageSelector } from './LanguageSelector'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -66,7 +67,7 @@ export function Sidebar() {
       {/* Overlay mobile */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          className="lg:hidden fixed inset-0 bg-black/70 z-40"
           onClick={closeMobileMenu}
         />
       )}
@@ -114,8 +115,9 @@ export function Sidebar() {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-claude-border">
-          <p className="text-xs text-claude-text-subtle">Version 2.0.0</p>
+        <div className="p-4 border-t border-claude-border space-y-3">
+          <LanguageSelector />
+          <p className="text-xs text-claude-text-subtle text-center">Version 2.0.0</p>
         </div>
       </aside>
     </>

@@ -65,13 +65,25 @@ export default function GuidePage() {
               <ArrowRight className="w-4 h-4" />
               6. Génération de documents PDF
             </a>
+            <a href="#grand-livre" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
+              <ArrowRight className="w-4 h-4" />
+              7. Grand livre comptable
+            </a>
+            <a href="#etats-financiers" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
+              <ArrowRight className="w-4 h-4" />
+              8. États de synthèse
+            </a>
+            <a href="#tva" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
+              <ArrowRight className="w-4 h-4" />
+              9. TVA et déclarations fiscales
+            </a>
             <a href="#workflow" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
               <ArrowRight className="w-4 h-4" />
-              7. Workflow complet
+              10. Workflow complet
             </a>
             <a href="#bonnes-pratiques" className="flex items-center gap-2 text-blue-700 hover:text-blue-900">
               <ArrowRight className="w-4 h-4" />
-              8. Bonnes pratiques
+              11. Bonnes pratiques
             </a>
           </nav>
         </div>
@@ -731,6 +743,312 @@ export default function GuidePage() {
                   Les données sont actuellement stockées localement. Pensez à exporter régulièrement vos factures en PDF.
                 </p>
               </div>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* 7. Grand Livre */}
+      <section id="grand-livre">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full font-bold">
+                7
+              </span>
+              <BookOpen className="w-6 h-6" />
+              Grand Livre Comptable
+            </CardTitle>
+          </CardHeader>
+          <div className="p-6 pt-0 space-y-4">
+            <p className="text-claude-text">
+              Le Grand Livre est un document comptable fondamental qui regroupe l'ensemble des écritures
+              comptables de votre entreprise, classées par compte. Il constitue la base de votre comptabilité.
+            </p>
+
+            <div className="bg-indigo-50 border border-indigo-200 rounded-lg p-4">
+              <h5 className="font-semibold text-indigo-900 mb-3">Qu'est-ce que le Grand Livre ?</h5>
+              <p className="text-sm text-indigo-800 mb-3">
+                Le Grand Livre présente, pour chaque compte du plan comptable :
+              </p>
+              <ul className="space-y-2 text-sm text-indigo-800">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Toutes les écritures</strong> : Chaque mouvement comptable (débit/crédit)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Le solde progressif</strong> : L'évolution du solde après chaque écriture</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Les références</strong> : Numéro de pièce, journal, date, libellé</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h5 className="font-semibold text-claude-text mb-3">Utilisation du Grand Livre</h5>
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    1
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Accédez au Grand Livre</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Cliquez sur <strong>Grand livre</strong> dans le menu latéral
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    2
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Sélectionnez une période</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Choisissez l'exercice comptable à consulter (ex: 2025)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    3
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Filtrez par compte (optionnel)</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Vous pouvez afficher soit tous les comptes, soit un compte spécifique (ex: 3421 - Clients)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    4
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Exportez en CSV</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Cliquez sur "Exporter CSV" pour obtenir un fichier exploitable dans Excel
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h5 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                À quoi sert le Grand Livre ?
+              </h5>
+              <ul className="space-y-2 text-sm text-green-800">
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Contrôle de gestion</strong> : Vérifier tous les mouvements d'un compte</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Audit</strong> : Justifier chaque écriture avec ses pièces comptables</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Réconciliation bancaire</strong> : Comparer avec vos relevés bancaires</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span><strong>Clôture annuelle</strong> : Document légal obligatoire à conserver</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h5 className="font-semibold text-blue-900 mb-2">💡 Bon à savoir</h5>
+              <p className="text-sm text-blue-800">
+                Le Grand Livre est <strong>obligatoire</strong> selon le CGNC. Il doit être conservé pendant
+                10 ans minimum. L'export CSV vous permet de sauvegarder facilement vos données comptables.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* 8. États de Synthèse */}
+      <section id="etats-financiers">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 bg-teal-100 text-teal-600 rounded-full font-bold">
+                8
+              </span>
+              <Calculator className="w-6 h-6" />
+              États de Synthèse
+            </CardTitle>
+          </CardHeader>
+          <div className="p-6 pt-0 space-y-4">
+            <p className="text-claude-text">
+              Les états de synthèse regroupent les documents comptables de fin d'exercice conformes au CGNC :
+              Bilan, Compte de Résultat, Balance, et Tableau de Financement.
+            </p>
+
+            <div className="grid gap-4">
+              <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                <h5 className="font-semibold text-teal-900 mb-2">📊 La Balance Comptable</h5>
+                <p className="text-sm text-teal-800 mb-2">
+                  Récapitulatif de tous les comptes avec leurs totaux débit/crédit et soldes.
+                </p>
+                <p className="text-sm text-teal-800">
+                  <strong>Usage :</strong> Vérifier l'équilibre comptable avant d'établir le bilan
+                </p>
+              </div>
+
+              <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                <h5 className="font-semibold text-teal-900 mb-2">📈 Le Bilan</h5>
+                <p className="text-sm text-teal-800 mb-2">
+                  Photo du patrimoine de l'entreprise à une date donnée (Actif vs Passif).
+                </p>
+                <p className="text-sm text-teal-800">
+                  <strong>Usage :</strong> Analyser la santé financière et la solvabilité
+                </p>
+              </div>
+
+              <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
+                <h5 className="font-semibold text-teal-900 mb-2">💰 Le Compte de Résultat</h5>
+                <p className="text-sm text-teal-800 mb-2">
+                  Récapitulatif des produits et charges de l'exercice pour calculer le résultat net.
+                </p>
+                <p className="text-sm text-teal-800">
+                  <strong>Usage :</strong> Mesurer la rentabilité de l'activité
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-orange-600 mt-0.5" />
+                <div>
+                  <h5 className="font-semibold text-orange-900 mb-1">Période de consultation</h5>
+                  <p className="text-sm text-orange-800">
+                    Les états de synthèse sont généralement établis annuellement (31/12), mais peuvent être
+                    consultés en cours d'exercice pour le pilotage de l'entreprise.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      {/* 9. TVA et Déclarations */}
+      <section id="tva">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-3">
+              <span className="flex items-center justify-center w-10 h-10 bg-red-100 text-red-600 rounded-full font-bold">
+                9
+              </span>
+              <Receipt className="w-6 h-6" />
+              TVA et Déclarations Fiscales
+            </CardTitle>
+          </CardHeader>
+          <div className="p-6 pt-0 space-y-4">
+            <p className="text-claude-text">
+              Le module TVA vous permet de générer automatiquement vos déclarations de TVA mensuelles ou
+              trimestrielles et d'exporter le fichier XML SIMPL-TVA pour la télédéclaration.
+            </p>
+
+            <div>
+              <h5 className="font-semibold text-claude-text mb-3">Créer une déclaration TVA</h5>
+              <div className="space-y-4">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    1
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Accédez au module TVA</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Cliquez sur <strong>TVA</strong> dans le menu latéral
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    2
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Créez une nouvelle déclaration</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Cliquez sur "Nouvelle Déclaration" et sélectionnez l'année et le mois (ou trimestre)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    3
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Vérifiez les calculs automatiques</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      L'application calcule automatiquement la TVA collectée et déductible par taux (20%, 14%, 10%, 7%, 0%)
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    4
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Exportez le fichier XML SIMPL-TVA</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Cliquez sur "Export XML" pour télécharger le fichier à soumettre sur le portail SIMPL
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 bg-claude-accent text-white rounded-full flex items-center justify-center font-bold">
+                    5
+                  </div>
+                  <div>
+                    <h6 className="font-medium text-claude-text">Soumettez la déclaration</h6>
+                    <p className="text-sm text-claude-text-muted">
+                      Une fois vérifiée, cliquez sur "Soumettre" pour marquer la déclaration comme prête
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h5 className="font-semibold text-red-900 mb-2">📋 Relevé de déductions</h5>
+              <p className="text-sm text-red-800 mb-2">
+                Le relevé de déductions détaille toutes les factures fournisseurs avec TVA déductible.
+                Il est obligatoire pour justifier la TVA déduite.
+              </p>
+              <p className="text-sm text-red-800">
+                <strong>Important :</strong> Vérifiez que tous vos fournisseurs ont un ICE valide pour
+                bénéficier de la déduction de TVA.
+              </p>
+            </div>
+
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h5 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
+                Taux de TVA au Maroc
+              </h5>
+              <ul className="space-y-1 text-sm text-green-800">
+                <li><strong>20%</strong> - Taux normal (la plupart des biens et services)</li>
+                <li><strong>14%</strong> - Taux intermédiaire (transport, énergie...)</li>
+                <li><strong>10%</strong> - Taux réduit (restauration, hôtellerie...)</li>
+                <li><strong>7%</strong> - Taux super réduit (eau, produits pharmaceutiques...)</li>
+                <li><strong>0%</strong> - Exonéré ou hors champ d'application</li>
+              </ul>
             </div>
           </div>
         </Card>
