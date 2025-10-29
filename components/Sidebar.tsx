@@ -21,12 +21,14 @@ import {
   Truck,
   HelpCircle,
   FileCheck,
+  AlertTriangle,
 } from 'lucide-react'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Ventes', href: '/sales', icon: FileText },
   { name: 'Factures', href: '/invoices', icon: Receipt },
+  { name: 'Factures en retard', href: '/invoices/overdue', icon: AlertTriangle },
   { name: 'Devis', href: '/quotes', icon: FileCheck },
   { name: 'Achats', href: '/purchases', icon: ShoppingCart },
   { name: 'Clients', href: '/customers', icon: UserCheck },
