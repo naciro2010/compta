@@ -24,6 +24,10 @@ import {
   LegalIdentifiers,
   VATRegime,
 } from '@/types/accounting';
+import {
+  FinancialStatementsPack,
+  FinancialStatementModel,
+} from '@/types/financial-statements';
 import { CGNC_ACCOUNTS } from '@/data/cgnc-plan';
 import {
   validateEntry,
@@ -34,6 +38,10 @@ import {
 } from '@/lib/accounting/validation';
 import { createAuditEntry } from '@/lib/accounting/audit';
 import { hasPermission } from '@/lib/accounting/permissions';
+import {
+  generateFinancialStatementsPack,
+  determineStatementModel,
+} from '@/lib/accounting/financial-statements';
 
 interface AccountingState {
   // Configuration
@@ -66,6 +74,10 @@ interface AccountingState {
 
   // EPIC 2: Journal d'audit global (immuable)
   globalAuditLog: GlobalAuditEntry[];
+
+  // EPIC 3: États de synthèse
+  financialStatements: FinancialStatementsPack[];
+  currentFinancialStatements: FinancialStatementsPack | null;
 
   // Actions - Configuration
   initializeCompany: (settings: Omit<CompanySettings, 'id' | 'createdAt' | 'establishments' | 'updatedAt'>) => void;
@@ -117,6 +129,14 @@ interface AccountingState {
   addAuditEntry: (action: AuditAction, entityType: string, entityId: string, metadata?: Record<string, any>) => void;
   getAuditEntries: (filters?: { userId?: string; action?: AuditAction; entityType?: string; startDate?: Date; endDate?: Date }) => GlobalAuditEntry[];
 
+  // EPIC 3: Actions - États de synthèse
+  generateFinancialStatements: (fiscalYearId: string) => FinancialStatementsPack | null;
+  getFinancialStatements: (fiscalYearId: string) => FinancialStatementsPack | null;
+  validateFinancialStatements: (packId: string) => void;
+  lockFinancialStatements: (packId: string) => void;
+  setCurrentFinancialStatements: (pack: FinancialStatementsPack | null) => void;
+  updateStatementModel: (model: FinancialStatementModel) => void;
+
   // Requêtes - Rapports
   getBalance: (periodId: string, establishmentId?: string) => BalanceSheet | null;
   getGeneralLedger: (periodId: string, accountId?: string, establishmentId?: string) => GeneralLedger | null;
@@ -148,6 +168,10 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
   establishments: [],
   currentEstablishment: null,
   globalAuditLog: [],
+
+  // EPIC 3: État initial
+  financialStatements: [],
+  currentFinancialStatements: null,
 
   // ============================================================================
   // Configuration
@@ -940,5 +964,115 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
     });
 
     return balance;
+  },
+
+  // ============================================================================
+  // EPIC 3: États de synthèse
+  // ============================================================================
+
+  generateFinancialStatements: (fiscalYearId) => {
+    const { fiscalYears, accounts, entries, companySettings, currentUser, financialStatements } = get();
+
+    if (!companySettings || !currentUser) {
+      console.error('Company settings or current user not found');
+      return null;
+    }
+
+    const fiscalYear = fiscalYears.find(fy => fy.id === fiscalYearId);
+    if (!fiscalYear) {
+      console.error('Fiscal year not found');
+      return null;
+    }
+
+    // Trouver l'exercice précédent
+    const previousFiscalYear = fiscalYears.find(
+      fy => fy.year === fiscalYear.year - 1
+    );
+
+    // Générer le pack complet
+    const pack = generateFinancialStatementsPack(
+      fiscalYear,
+      accounts,
+      entries,
+      previousFiscalYear,
+      companySettings,
+      currentUser.id
+    );
+
+    // Sauvegarder le pack
+    set((state) => ({
+      financialStatements: [...state.financialStatements, pack],
+      currentFinancialStatements: pack,
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', pack.id, {
+      fiscalYearId,
+      model: pack.model,
+    });
+
+    return pack;
+  },
+
+  getFinancialStatements: (fiscalYearId) => {
+    const { financialStatements } = get();
+    return financialStatements.find(fs => fs.fiscalYearId === fiscalYearId) || null;
+  },
+
+  validateFinancialStatements: (packId) => {
+    const { currentUser } = get();
+    if (!currentUser) return;
+
+    set((state) => ({
+      financialStatements: state.financialStatements.map(fs =>
+        fs.id === packId
+          ? {
+              ...fs,
+              status: 'VALIDATED' as const,
+              validatedAt: new Date(),
+              validatedBy: currentUser.id,
+            }
+          : fs
+      ),
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', packId, {
+      action: 'validated',
+    });
+  },
+
+  lockFinancialStatements: (packId) => {
+    const { currentUser } = get();
+    if (!currentUser) return;
+
+    set((state) => ({
+      financialStatements: state.financialStatements.map(fs =>
+        fs.id === packId
+          ? {
+              ...fs,
+              status: 'LOCKED' as const,
+            }
+          : fs
+      ),
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', packId, {
+      action: 'locked',
+    });
+  },
+
+  setCurrentFinancialStatements: (pack) => {
+    set({ currentFinancialStatements: pack });
+  },
+
+  updateStatementModel: (model) => {
+    const { companySettings } = get();
+    if (!companySettings) return;
+
+    get().updateCompanySettings({
+      statementModel: model,
+    });
   },
 }));

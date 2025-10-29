@@ -16,6 +16,7 @@ import {
   Calculator,
   Menu,
   X,
+  FileSpreadsheet,
 } from 'lucide-react'
 
 const navigation = [
@@ -24,6 +25,7 @@ const navigation = [
   { name: 'Achats', href: '/purchases', icon: ShoppingCart },
   { name: 'Banque', href: '/bank', icon: Banknote },
   { name: 'Grand livre', href: '/ledger', icon: BookOpen },
+  { name: 'États de synthèse', href: '/financial-statements', icon: FileSpreadsheet },
   { name: 'TVA', href: '/tax', icon: Receipt },
   { name: 'Paie', href: '/payroll', icon: Users },
   { name: 'Paramètres', href: '/settings', icon: Settings },
