@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useInvoicingStore } from '@/store/invoicing';
 import {
   Invoice,
@@ -15,6 +16,11 @@ import { Input, Label } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { Plus, Trash2, Calculator } from 'lucide-react';
+
+// Dynamically import FileImporter to avoid SSR issues with PDF.js
+const FileImporter = dynamic(() => import('./FileImporter'), {
+  ssr: false,
+});
 
 interface InvoiceFormProps {
   invoice?: Invoice;
@@ -36,10 +42,12 @@ export default function InvoiceForm({
     updateInvoice,
     calculateInvoiceTotals,
     getCustomers,
+    getSuppliers,
     getThirdParty,
   } = useInvoicingStore();
 
   const customers = getCustomers();
+  const suppliers = getSuppliers();
 
   // Form state
   const [formData, setFormData] = useState<Partial<Invoice>>({
@@ -72,6 +80,9 @@ export default function InvoiceForm({
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [selectedThirdParty, setSelectedThirdParty] = useState<ThirdParty | null>(null);
+
+  // Use suppliers for purchase invoices, customers for other types
+  const thirdParties = formData.type === 'PURCHASE_INVOICE' ? suppliers : customers;
 
   // Load third party data when selected
   useEffect(() => {
@@ -257,8 +268,55 @@ export default function InvoiceForm({
         return 'Avoir';
       case 'PROFORMA':
         return 'Pro-forma';
+      case 'PURCHASE_INVOICE':
+        return 'Facture d\'achat';
       default:
         return 'Document';
+    }
+  };
+
+  // Handle data from file import
+  const handleFileImport = (data: any) => {
+    // Update form data with extracted information
+    if (data.reference) {
+      handleChange('reference', data.reference);
+    }
+
+    if (data.issueDate) {
+      handleChange('issueDate', data.issueDate);
+    }
+
+    if (data.dueDate) {
+      handleChange('dueDate', data.dueDate);
+    }
+
+    // Try to find matching customer or supplier by name or ICE
+    if (data.clientName || data.clientICE) {
+      const searchList = formData.type === 'PURCHASE_INVOICE' ? suppliers : customers;
+      const matchingParty = searchList.find(
+        (c) =>
+          (data.clientICE && c.ice === data.clientICE) ||
+          (data.clientName && c.name.toLowerCase().includes(data.clientName.toLowerCase()))
+      );
+
+      if (matchingParty) {
+        handleChange('thirdPartyId', matchingParty.id);
+      }
+    }
+
+    // Update lines if any were extracted
+    if (data.lines && data.lines.length > 0) {
+      const calculatedLines = data.lines.map((line: any, index: number) => ({
+        ...line,
+        order: index,
+        ...calculateLineTotals(line),
+      }));
+      setLines(calculatedLines);
+    }
+
+    // Set notes if extracted
+    if (data.notes) {
+      handleChange('publicNotes', data.notes);
     }
   };
 
@@ -287,6 +345,7 @@ export default function InvoiceForm({
                   { value: 'QUOTE', label: 'Devis' },
                   { value: 'CREDIT_NOTE', label: 'Avoir' },
                   { value: 'PROFORMA', label: 'Pro-forma' },
+                  { value: 'PURCHASE_INVOICE', label: 'Facture d\'achat' },
                 ]}
               />
             </div>
@@ -307,14 +366,21 @@ export default function InvoiceForm({
             </div>
 
             <div className="md:col-span-2">
-              <Label htmlFor="thirdPartyId">Client *</Label>
+              <Label htmlFor="thirdPartyId">
+                {formData.type === 'PURCHASE_INVOICE' ? 'Fournisseur' : 'Client'} *
+              </Label>
               <Select
                 id="thirdPartyId"
                 value={formData.thirdPartyId}
                 onChange={(e) => handleChange('thirdPartyId', e.target.value)}
                 options={[
-                  { value: '', label: 'Sélectionner un client...' },
-                  ...customers.map((c) => ({
+                  {
+                    value: '',
+                    label: formData.type === 'PURCHASE_INVOICE'
+                      ? 'Sélectionner un fournisseur...'
+                      : 'Sélectionner un client...'
+                  },
+                  ...thirdParties.map((c) => ({
                     value: c.id,
                     label: `${c.code} - ${c.name}`,
                   })),
@@ -346,6 +412,11 @@ export default function InvoiceForm({
           </div>
         </div>
       </Card>
+
+      {/* File Importer - Only show for new invoices */}
+      {!invoice && (
+        <FileImporter onDataExtracted={handleFileImport} />
+      )}
 
       {/* Dates et Conditions */}
       <Card>
