@@ -76,14 +76,14 @@ export const GeneralLedger: React.FC = () => {
   return (
     <Card>
       <CardHeader>
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-4">
           <div>
             <CardTitle>Grand Livre</CardTitle>
             <CardDescription>{currentPeriod.label}</CardDescription>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 w-full sm:w-auto">
             {ledger && ledger.entries.length > 0 && (
-              <Button variant="outline" size="sm" onClick={exportToCSV}>
+              <Button variant="outline" size="sm" onClick={exportToCSV} className="w-full sm:w-auto">
                 <Download className="w-4 h-4 mr-2" />
                 Exporter CSV
               </Button>
@@ -111,7 +111,7 @@ export const GeneralLedger: React.FC = () => {
 
         {/* Tableau du grand livre */}
         {!ledger || ledger.entries.length === 0 ? (
-          <div className="p-12 text-center bg-claude-bg-secondary rounded-lg">
+          <div className="p-12 text-center bg-claude-surface rounded-lg">
             <BookOpen className="w-12 h-12 mx-auto mb-4 text-claude-text-muted opacity-50" />
             <p className="text-claude-text-muted">
               Aucune écriture comptable pour cette période
@@ -119,25 +119,24 @@ export const GeneralLedger: React.FC = () => {
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>N° Pièce</TableHead>
-                  <TableHead>Journal</TableHead>
-                  {!selectedAccountId && <TableHead>Compte</TableHead>}
-                  <TableHead>Libellé</TableHead>
-                  <TableHead>Référence</TableHead>
-                  <TableHead className="text-right">Débit (MAD)</TableHead>
-                  <TableHead className="text-right">Crédit (MAD)</TableHead>
-                  <TableHead className="text-right">Solde (MAD)</TableHead>
+                  <TableHead className="min-w-[100px]">Date</TableHead>
+                  <TableHead className="min-w-[100px]">N° Pièce</TableHead>
+                  <TableHead className="min-w-[100px]">Journal</TableHead>
+                  {!selectedAccountId && <TableHead className="min-w-[120px]">Compte</TableHead>}
+                  <TableHead className="min-w-[200px]">Libellé</TableHead>
+                  <TableHead className="min-w-[100px]">Référence</TableHead>
+                  <TableHead className="text-right min-w-[120px]">Débit (MAD)</TableHead>
+                  <TableHead className="text-right min-w-[120px]">Crédit (MAD)</TableHead>
+                  <TableHead className="text-right min-w-[120px]">Solde (MAD)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {/* Ligne de solde d'ouverture si compte filtré */}
                 {selectedAccountId && (
-                  <TableRow className="bg-claude-bg-secondary font-medium">
+                  <TableRow className="bg-claude-surface font-medium">
                     <TableCell colSpan={5}>Solde d'ouverture</TableCell>
                     <TableCell></TableCell>
                     <TableCell align="right">-</TableCell>
@@ -208,7 +207,6 @@ export const GeneralLedger: React.FC = () => {
                 )}
               </TableBody>
             </Table>
-          </div>
         )}
 
         {/* Informations */}

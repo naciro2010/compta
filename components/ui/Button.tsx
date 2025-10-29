@@ -18,7 +18,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'bg-claude-surface border border-claude-border text-claude-text hover:bg-claude-surface-hover': variant === 'secondary',
             'hover:bg-claude-surface-hover text-claude-text': variant === 'ghost',
             'bg-claude-danger text-white hover:bg-red-600': variant === 'danger',
-            'border border-claude-border text-claude-text hover:bg-claude-bg-secondary': variant === 'outline',
+            'border border-claude-border text-claude-text hover:bg-claude-surface': variant === 'outline',
             'px-3 py-1.5 text-sm': size === 'sm',
             'px-4 py-2 text-base': size === 'md',
             'px-6 py-3 text-lg': size === 'lg',

@@ -67,3 +67,95 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-subtle);
 }
+
+/* Select and Option styles - Fix invisible dropdowns */
+select {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  cursor: pointer;
+}
+
+select option {
+  background-color: var(--surface) !important;
+  color: var(--text) !important;
+  padding: 8px 12px;
+}
+
+select option:hover,
+select option:focus,
+select option:checked {
+  background-color: var(--surface-hover) !important;
+  color: var(--text) !important;
+}
+
+select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form inputs consistency */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="tel"],
+textarea {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-subtle);
+}
+
+/* Responsive improvements */
+@media (max-width: 640px) {
+  /* Better touch targets on mobile */
+  button, select, input[type="button"], input[type="submit"] {
+    min-height: 44px;
+  }
+
+  /* Better form spacing on mobile */
+  input, select, textarea {
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+
+  /* Better table scrolling indication */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  /* Add scroll indicators */
+  .overflow-x-auto::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to left, var(--bg), transparent);
+    pointer-events: none;
+  }
+}
+
+/* Improved focus states for accessibility */
+select:focus,
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Better contrast for disabled states */
+select:disabled,
+input:disabled,
+textarea:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--surface) !important;
+}
