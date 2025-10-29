@@ -946,8 +946,8 @@ export function generateFinancialStatementsPack(
   // Générer chaque état
   const bilan = generateBilan(fiscalYear, accounts, entries, previousFiscalYear, model, userId);
   const cpc = generateCPC(fiscalYear, accounts, entries, previousFiscalYear, model, userId);
-  const esg = model === 'NORMAL' ? generateESG(fiscalYear, cpc, userId) : undefined;
-  const tableauFinancement = generateTableauFinancement(fiscalYear, bilan, cpc, esg || null, userId);
+  const esg = model === 'NORMAL' ? generateESG(fiscalYear, cpc, userId) : null;
+  const tableauFinancement = generateTableauFinancement(fiscalYear, bilan, cpc, esg, userId);
   const etic = generateETIC(fiscalYear, companySettings, model, userId);
 
   // Valider les états
