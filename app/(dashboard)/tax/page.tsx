@@ -67,7 +67,19 @@ export default function TaxPage() {
   const handleExportXML = (declarationId: string) => {
     try {
       const xmlExport = generateSimplTVAXML(declarationId, 'current-user')
-      alert(`Export XML généré: ${xmlExport.filename}`)
+
+      // Créer et déclencher le téléchargement du fichier XML
+      const blob = new Blob([xmlExport.xmlContent], { type: 'application/xml;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = xmlExport.filename
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+
+      alert(`Export XML téléchargé: ${xmlExport.filename}`)
     } catch (error: any) {
       alert(`Erreur: ${error.message}`)
     }
@@ -295,8 +307,8 @@ export default function TaxPage() {
 
       {/* Modal Création */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-2xl">
             <h2 className="text-xl font-bold text-claude-text mb-4">Nouvelle Déclaration TVA</h2>
 
             <div className="space-y-4">
