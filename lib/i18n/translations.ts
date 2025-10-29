@@ -22,6 +22,7 @@ export const translations = {
     'nav.tax': 'TVA',
     'nav.payroll': 'Paie',
     'nav.guide': 'Guide',
+    'nav.contact': 'Contact',
     'nav.settings': 'Paramètres',
 
     // Commun
@@ -75,9 +76,9 @@ export const translations = {
     'message.noData': 'Aucune donnée disponible',
 
     // Chat Assistant
-    'chat.title': 'Assistant CGNC',
+    'chat.title': 'Assistant MizanPro',
     'chat.subtitle': 'Toujours disponible pour vous aider',
-    'chat.welcome': 'Bonjour ! 👋 Je suis votre assistant CGNC Flow. Je peux vous aider avec l\'utilisation de l\'application et répondre à vos questions sur la comptabilité marocaine. Comment puis-je vous aider aujourd\'hui ?',
+    'chat.welcome': 'Bonjour ! 👋 Je suis votre assistant MizanPro. Je peux vous aider avec l\'utilisation de l\'application et répondre à vos questions sur la comptabilité marocaine. Comment puis-je vous aider aujourd\'hui ?',
     'chat.placeholder': 'Posez votre question...',
     'chat.disclaimer': 'Les réponses sont basées sur la réglementation marocaine (CGNC)',
     'chat.frequentQuestions': 'Questions fréquentes :',
@@ -106,15 +107,16 @@ export const translations = {
     'nav.tax': 'الضرائب',
     'nav.payroll': 'الرواتب',
     'nav.guide': 'الدليل',
+    'nav.contact': 'اتصل بنا',
     'nav.settings': 'الإعدادات',
 
     'common.save': 'حفظ',
     'common.cancel': 'إلغاء',
     'common.delete': 'حذف',
 
-    'chat.title': 'مساعد CGNC',
+    'chat.title': 'مساعد MizanPro',
     'chat.subtitle': 'متاح دائمًا لمساعدتك',
-    'chat.welcome': 'مرحبا! 👋 أنا مساعدك CGNC Flow. يمكنني مساعدتك في استخدام التطبيق والإجابة على أسئلتك حول المحاسبة المغربية. كيف يمكنني مساعدتك اليوم؟',
+    'chat.welcome': 'مرحبا! 👋 أنا مساعدك MizanPro. يمكنني مساعدتك في استخدام التطبيق والإجابة على أسئلتك حول المحاسبة المغربية. كيف يمكنني مساعدتك اليوم؟',
     'chat.placeholder': 'اطرح سؤالك...',
     'chat.disclaimer': 'الإجابات مبنية على التنظيم المغربي (CGNC)',
     'chat.frequentQuestions': 'أسئلة متكررة:',
@@ -141,15 +143,16 @@ export const translations = {
     'nav.tax': 'Tax',
     'nav.payroll': 'Payroll',
     'nav.guide': 'Guide',
+    'nav.contact': 'Contact',
     'nav.settings': 'Settings',
 
     'common.save': 'Save',
     'common.cancel': 'Cancel',
     'common.delete': 'Delete',
 
-    'chat.title': 'CGNC Assistant',
+    'chat.title': 'MizanPro Assistant',
     'chat.subtitle': 'Always available to help you',
-    'chat.welcome': 'Hello! 👋 I\'m your CGNC Flow assistant. I can help you with using the application and answer your questions about Moroccan accounting. How can I help you today?',
+    'chat.welcome': 'Hello! 👋 I\'m your MizanPro assistant. I can help you with using the application and answer your questions about Moroccan accounting. How can I help you today?',
     'chat.placeholder': 'Ask your question...',
     'chat.disclaimer': 'Answers are based on Moroccan regulations (CGNC)',
     'chat.frequentQuestions': 'Frequent questions:',

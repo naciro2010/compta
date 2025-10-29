@@ -315,6 +315,53 @@ export const knowledgeBase: KnowledgeItem[] = [
     tags: ['fiscalité', 'retenue source'],
     priority: 6,
   },
+
+  // INFORMATIONS DE CONTACT
+  {
+    id: 'contact-01',
+    category: 'usage',
+    question: 'Comment contacter le support MizanPro ?',
+    answer: 'Vous pouvez nous contacter de plusieurs façons :\n📧 Email: support@mizanpro.ma\n📞 Téléphone: +212 537-68-68-68\n📍 Adresse: Hay Riad, Rabat, Maroc\n\nNotre équipe support est disponible du lundi au vendredi de 9h à 18h, et le samedi de 9h à 13h.',
+    keywords: ['contact', 'support', 'aide', 'assistance', 'contacter', 'joindre', 'email', 'téléphone', 'adresse'],
+    tags: ['contact', 'support'],
+    priority: 10,
+  },
+  {
+    id: 'contact-02',
+    category: 'usage',
+    question: 'Quel est l\'email de support ?',
+    answer: 'Notre adresse email de support est : support@mizanpro.ma\n\nPour les questions commerciales, vous pouvez aussi nous écrire à : contact@mizanpro.ma\n\nNous répondons généralement sous 24h ouvrées.',
+    keywords: ['email', 'mail', 'adresse mail', 'support', 'contact'],
+    tags: ['contact', 'email'],
+    priority: 9,
+  },
+  {
+    id: 'contact-03',
+    category: 'usage',
+    question: 'Quel est le numéro de téléphone de MizanPro ?',
+    answer: 'Vous pouvez nous appeler au : +212 537-68-68-68\n\nNos horaires d\'accueil téléphonique :\n- Lundi à Vendredi : 9h00 - 18h00\n- Samedi : 9h00 - 13h00\n- Dimanche : Fermé',
+    keywords: ['téléphone', 'numéro', 'appeler', 'contact', 'phone'],
+    tags: ['contact', 'téléphone'],
+    priority: 9,
+  },
+  {
+    id: 'contact-04',
+    category: 'usage',
+    question: 'Où se trouvent les bureaux de MizanPro ?',
+    answer: 'Nos bureaux sont situés à :\n📍 Hay Riad, Rabat, Maroc\n\nHay Riad est le quartier des affaires de Rabat, facilement accessible.\n\nNous accueillons les visites sur rendez-vous uniquement. Pour prendre rendez-vous, contactez-nous par téléphone au +212 537-68-68-68 ou par email à contact@mizanpro.ma',
+    keywords: ['adresse', 'bureaux', 'localisation', 'où', 'rabat', 'hay riad', 'visite'],
+    tags: ['contact', 'localisation'],
+    priority: 8,
+  },
+  {
+    id: 'contact-05',
+    category: 'usage',
+    question: 'Quels sont les horaires du support ?',
+    answer: 'Notre équipe support est disponible aux horaires suivants :\n\n🕐 Lundi - Vendredi : 9h00 - 18h00\n🕐 Samedi : 9h00 - 13h00\n🚫 Dimanche : Fermé\n\nNotre chatbot intelligent est quant à lui disponible 24h/24 et 7j/7 pour répondre à vos questions.',
+    keywords: ['horaires', 'heures', 'ouverture', 'disponibilité', 'quand'],
+    tags: ['contact', 'horaires'],
+    priority: 7,
+  },
 ];
 
 /**

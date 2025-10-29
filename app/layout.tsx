@@ -3,8 +3,8 @@ import './globals.css'
 import { LocaleProvider } from '@/lib/i18n/LocaleProvider'
 
 export const metadata: Metadata = {
-  title: 'CGNC Flow — Comptabilité marocaine moderne',
-  description: 'Application de comptabilité générale conforme CGNC pour le marché marocain',
+  title: 'MizanPro — Logiciel Comptabilité Maroc | Gestion Comptable CGNC Rabat',
+  description: 'MizanPro : Solution de comptabilité marocaine en ligne. Gestion factures, TVA, déclarations fiscales conformes CGNC. Logiciel comptable pour entreprises au Maroc (Rabat, Casablanca). Essai gratuit.',
   viewport: {
     width: 'device-width',
     initialScale: 1,
