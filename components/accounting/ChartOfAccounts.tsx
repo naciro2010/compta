@@ -126,23 +126,23 @@ export const ChartOfAccounts: React.FC = () => {
 
           {/* Résumé */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="p-4 rounded-lg bg-claude-bg-secondary">
+            <div className="p-4 rounded-lg bg-claude-surface">
               <div className="text-sm text-claude-text-muted">Total comptes</div>
               <div className="text-2xl font-bold text-claude-text">{accounts.length}</div>
             </div>
-            <div className="p-4 rounded-lg bg-claude-bg-secondary">
+            <div className="p-4 rounded-lg bg-claude-surface">
               <div className="text-sm text-claude-text-muted">Comptes de détail</div>
               <div className="text-2xl font-bold text-claude-text">
                 {accounts.filter(a => a.isDetailAccount).length}
               </div>
             </div>
-            <div className="p-4 rounded-lg bg-claude-bg-secondary">
+            <div className="p-4 rounded-lg bg-claude-surface">
               <div className="text-sm text-claude-text-muted">Comptes CGNC</div>
               <div className="text-2xl font-bold text-claude-text">
                 {accounts.filter(a => !a.isCustom).length}
               </div>
             </div>
-            <div className="p-4 rounded-lg bg-claude-bg-secondary">
+            <div className="p-4 rounded-lg bg-claude-surface">
               <div className="text-sm text-claude-text-muted">Comptes personnalisés</div>
               <div className="text-2xl font-bold text-claude-accent">
                 {accounts.filter(a => a.isCustom).length}
@@ -152,12 +152,11 @@ export const ChartOfAccounts: React.FC = () => {
 
           {/* Liste des comptes */}
           {Object.keys(accountsByClass).length === 0 ? (
-            <div className="p-12 text-center bg-claude-bg-secondary rounded-lg">
+            <div className="p-12 text-center bg-claude-surface rounded-lg">
               <BookMarked className="w-12 h-12 mx-auto mb-4 text-claude-text-muted opacity-50" />
               <p className="text-claude-text-muted">Aucun compte trouvé</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -214,7 +213,7 @@ export const ChartOfAccounts: React.FC = () => {
                                 </TableCell>
                                 <TableCell>{account.class}</TableCell>
                                 <TableCell>
-                                  <span className="text-xs px-2 py-1 rounded bg-claude-bg-secondary">
+                                  <span className="text-xs px-2 py-1 rounded bg-claude-surface">
                                     {account.type}
                                   </span>
                                 </TableCell>
@@ -239,7 +238,6 @@ export const ChartOfAccounts: React.FC = () => {
                     })}
                 </TableBody>
               </Table>
-            </div>
           )}
         </div>
       </Card>

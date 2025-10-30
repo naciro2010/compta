@@ -16,22 +16,51 @@ import {
   Calculator,
   Menu,
   X,
+  FileSpreadsheet,
+  UserCheck,
+  Truck,
+  HelpCircle,
+  FileCheck,
+  AlertTriangle,
+  Mail,
+  Shield,
+  ClipboardCheck,
 } from 'lucide-react'
+import { LanguageSelector } from './LanguageSelector'
+import { useT, TranslationKey } from '@/lib/i18n/translations'
+import { useAuthStore } from '@/store/auth'
+import { ModulePermission } from '@/types/auth'
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Ventes', href: '/sales', icon: FileText },
-  { name: 'Achats', href: '/purchases', icon: ShoppingCart },
-  { name: 'Banque', href: '/bank', icon: Banknote },
-  { name: 'Grand livre', href: '/ledger', icon: BookOpen },
-  { name: 'TVA', href: '/tax', icon: Receipt },
-  { name: 'Paie', href: '/payroll', icon: Users },
-  { name: 'Paramètres', href: '/settings', icon: Settings },
+const navigation: Array<{
+  nameKey: TranslationKey;
+  href: string;
+  icon: any;
+  requiredPermission?: ModulePermission;
+  badge?: () => number | undefined;
+}> = [
+  { nameKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { nameKey: 'nav.sales', href: '/sales', icon: FileText },
+  { nameKey: 'nav.invoices', href: '/invoices', icon: Receipt },
+  { nameKey: 'nav.invoices.overdue', href: '/invoices/overdue', icon: AlertTriangle },
+  { nameKey: 'nav.quotes', href: '/quotes', icon: FileCheck },
+  { nameKey: 'nav.purchases', href: '/purchases', icon: ShoppingCart },
+  { nameKey: 'nav.customers', href: '/customers', icon: UserCheck },
+  { nameKey: 'nav.suppliers', href: '/suppliers', icon: Truck },
+  { nameKey: 'nav.bank', href: '/bank', icon: Banknote },
+  { nameKey: 'nav.ledger', href: '/ledger', icon: BookOpen },
+  { nameKey: 'nav.financial-statements', href: '/financial-statements', icon: FileSpreadsheet },
+  { nameKey: 'nav.tax', href: '/tax', icon: Receipt },
+  { nameKey: 'nav.payroll', href: '/payroll', icon: Users },
+  { nameKey: 'nav.guide', href: '/guide', icon: HelpCircle },
+  { nameKey: 'nav.contact', href: '/contact', icon: Mail },
+  { nameKey: 'nav.settings', href: '/settings', icon: Settings },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
+  const { t } = useT()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { hasPermission, pendingApprovalsCount } = useAuthStore()
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
@@ -53,7 +82,7 @@ export function Sidebar() {
       {/* Overlay mobile */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          className="lg:hidden fixed inset-0 bg-black/70 z-40"
           onClick={closeMobileMenu}
         />
       )}
@@ -71,38 +100,110 @@ export function Sidebar() {
             <div className="w-8 h-8 bg-claude-accent rounded-lg flex items-center justify-center">
               <Calculator className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-semibold text-claude-text">CGNC Flow</span>
+            <span className="text-lg font-semibold text-claude-text">MizanPro</span>
           </Link>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
+            // Vérifier les permissions si nécessaire
+            if (item.requiredPermission && !hasPermission(item.requiredPermission)) {
+              return null;
+            }
+
+            // Check if pathname matches this item
+            const matchesPath = pathname === item.href || pathname.startsWith(item.href + '/')
+
+            // Check if there's a more specific menu item that should be active instead
+            const hasMoreSpecificMatch = matchesPath && navigation.some(
+              (navItem) =>
+                navItem.href !== item.href &&
+                navItem.href.startsWith(item.href + '/') &&
+                (pathname === navItem.href || pathname.startsWith(navItem.href + '/'))
+            )
+
+            // Only set active if it matches and there's no more specific match
+            const isActive = matchesPath && !hasMoreSpecificMatch
             const Icon = item.icon
+            const badgeCount = item.badge?.();
 
             return (
               <Link
-                key={item.name}
+                key={item.nameKey}
                 href={item.href}
                 onClick={closeMobileMenu}
                 className={clsx(
-                  'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative',
                   isActive
                     ? 'bg-claude-accent text-white'
                     : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
                 )}
               >
                 <Icon className="w-5 h-5" />
-                {item.name}
+                <span className="flex-1">{t(item.nameKey)}</span>
+                {badgeCount && badgeCount > 0 && (
+                  <span className="px-2 py-0.5 bg-claude-accent rounded-full text-xs font-bold text-white">
+                    {badgeCount > 9 ? '9+' : badgeCount}
+                  </span>
+                )}
               </Link>
             )
           })}
+
+          {/* Section Administration (visible uniquement pour admins) */}
+          {(hasPermission('users:read') || hasPermission('approvals:read')) && (
+            <>
+              <div className="pt-4 pb-2 px-3">
+                <p className="text-xs font-semibold text-claude-muted uppercase tracking-wider">
+                  Administration
+                </p>
+              </div>
+
+              {hasPermission('approvals:read') && (
+                <Link
+                  href="/approvals"
+                  onClick={closeMobileMenu}
+                  className={clsx(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative',
+                    pathname === '/approvals'
+                      ? 'bg-claude-accent text-white'
+                      : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
+                  )}
+                >
+                  <ClipboardCheck className="w-5 h-5" />
+                  <span className="flex-1">Approbations</span>
+                  {pendingApprovalsCount > 0 && (
+                    <span className="px-2 py-0.5 bg-claude-accent rounded-full text-xs font-bold text-white">
+                      {pendingApprovalsCount > 9 ? '9+' : pendingApprovalsCount}
+                    </span>
+                  )}
+                </Link>
+              )}
+
+              {hasPermission('users:read') && (
+                <Link
+                  href="/users"
+                  onClick={closeMobileMenu}
+                  className={clsx(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                    pathname === '/users'
+                      ? 'bg-claude-accent text-white'
+                      : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
+                  )}
+                >
+                  <Shield className="w-5 h-5" />
+                  Utilisateurs
+                </Link>
+              )}
+            </>
+          )}
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-claude-border">
-          <p className="text-xs text-claude-text-subtle">Version 2.0.0</p>
+        <div className="p-4 border-t border-claude-border space-y-3">
+          <LanguageSelector />
+          <p className="text-xs text-claude-text-subtle text-center">Version 2.0.0</p>
         </div>
       </aside>
     </>

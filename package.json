@@ -1,5 +1,5 @@
 {
-  "name": "cgnc-flow",
+  "name": "mizanpro",
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -7,26 +7,30 @@
     "build": "next build",
     "start": "next start",
     "export": "next build && next export",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "mkdir -p public && cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/pdf.worker.min.mjs"
   },
   "dependencies": {
-    "next": "^14.2.0",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "zustand": "^4.5.0",
+    "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "lucide-react": "^0.424.0",
-    "clsx": "^2.1.1"
+    "next": "^14.2.0",
+    "pdfjs-dist": "^5.4.296",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tesseract.js": "^6.0.1",
+    "xlsx": "^0.18.5",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.0"
+    "eslint-config-next": "14.2.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }

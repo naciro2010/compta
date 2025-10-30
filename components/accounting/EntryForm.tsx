@@ -225,24 +225,23 @@ export const EntryForm: React.FC = () => {
           </div>
 
           {lines.length === 0 ? (
-            <div className="text-center py-12 bg-claude-bg-secondary rounded-lg">
+            <div className="text-center py-12 bg-claude-surface rounded-lg">
               <p className="text-claude-text-muted">
                 Aucune ligne. Cliquez sur "Ajouter une ligne" pour commencer.
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Compte *</TableHead>
-                    <TableHead>Libellé *</TableHead>
-                    <TableHead>Devise</TableHead>
-                    <TableHead className="text-right">Débit</TableHead>
-                    <TableHead className="text-right">Crédit</TableHead>
-                    <TableHead className="text-right">Débit (MAD)</TableHead>
-                    <TableHead className="text-right">Crédit (MAD)</TableHead>
-                    <TableHead></TableHead>
+                    <TableHead className="min-w-[200px]">Compte *</TableHead>
+                    <TableHead className="min-w-[200px]">Libellé *</TableHead>
+                    <TableHead className="min-w-[100px]">Devise</TableHead>
+                    <TableHead className="text-right min-w-[120px]">Débit</TableHead>
+                    <TableHead className="text-right min-w-[120px]">Crédit</TableHead>
+                    <TableHead className="text-right min-w-[120px]">Débit (MAD)</TableHead>
+                    <TableHead className="text-right min-w-[120px]">Crédit (MAD)</TableHead>
+                    <TableHead className="min-w-[60px]"></TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -252,11 +251,11 @@ export const EntryForm: React.FC = () => {
                         <select
                           value={line.accountId || ''}
                           onChange={(e) => updateLine(index, 'accountId', e.target.value)}
-                          className="w-full px-2 py-1 rounded bg-claude-bg-secondary border border-claude-border text-sm"
+                          className="w-full px-2 py-1.5 rounded bg-claude-surface border border-claude-border text-claude-text text-sm focus:outline-none focus:ring-2 focus:ring-claude-accent cursor-pointer"
                         >
-                          <option value="">Sélectionner</option>
+                          <option value="" className="bg-claude-surface text-claude-text">Sélectionner</option>
                           {detailAccounts.map(acc => (
-                            <option key={acc.id} value={acc.id}>
+                            <option key={acc.id} value={acc.id} className="bg-claude-surface text-claude-text">
                               {acc.number} - {acc.label}
                             </option>
                           ))}
@@ -276,10 +275,10 @@ export const EntryForm: React.FC = () => {
                         <select
                           value={line.currency || 'MAD'}
                           onChange={(e) => updateLine(index, 'currency', e.target.value)}
-                          className="w-full px-2 py-1 rounded bg-claude-bg-secondary border border-claude-border text-sm"
+                          className="w-full px-2 py-1.5 rounded bg-claude-surface border border-claude-border text-claude-text text-sm focus:outline-none focus:ring-2 focus:ring-claude-accent cursor-pointer"
                         >
                           {currencies.map(c => (
-                            <option key={c.code} value={c.code}>
+                            <option key={c.code} value={c.code} className="bg-claude-surface text-claude-text">
                               {c.code}
                             </option>
                           ))}
@@ -329,7 +328,7 @@ export const EntryForm: React.FC = () => {
                   ))}
 
                   {/* Ligne de total */}
-                  <TableRow className="font-semibold bg-claude-bg-secondary">
+                  <TableRow className="font-semibold bg-claude-surface">
                     <TableCell colSpan={5} className="text-right">TOTAUX (MAD)</TableCell>
                     <TableCell align="right" className="font-mono">
                       {totals.debit.toFixed(2)} DH
@@ -341,24 +340,23 @@ export const EntryForm: React.FC = () => {
                   </TableRow>
                 </TableBody>
               </Table>
-            </div>
           )}
         </div>
 
         {/* État de l'équilibre */}
         {lines.length > 0 && (
-          <div className="flex items-center gap-2 p-4 rounded-lg bg-claude-bg-secondary">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 p-4 rounded-lg bg-claude-surface">
             {balance.isBalanced ? (
               <>
-                <CheckCircle className="w-5 h-5 text-green-500" />
-                <span className="text-green-500 font-medium">
+                <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                <span className="text-green-500 font-medium text-sm sm:text-base">
                   Écriture équilibrée ✓
                 </span>
               </>
             ) : (
               <>
-                <AlertCircle className="w-5 h-5 text-red-500" />
-                <span className="text-red-500 font-medium">
+                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <span className="text-red-500 font-medium text-sm sm:text-base">
                   Déséquilibre: {balance.difference.toFixed(2)} DH
                 </span>
               </>
@@ -386,7 +384,7 @@ export const EntryForm: React.FC = () => {
         )}
 
         {/* Actions */}
-        <div className="flex justify-end gap-4">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 sm:gap-4">
           <Button
             variant="outline"
             onClick={() => {
@@ -395,10 +393,11 @@ export const EntryForm: React.FC = () => {
               setReference('');
               setErrors([]);
             }}
+            className="w-full sm:w-auto"
           >
             Annuler
           </Button>
-          <Button onClick={handleSave} disabled={!balance.isBalanced}>
+          <Button onClick={handleSave} disabled={!balance.isBalanced} className="w-full sm:w-auto">
             <Save className="w-4 h-4 mr-2" />
             Enregistrer l'écriture
           </Button>

@@ -1,8 +1,10 @@
 'use client'
 
+import Link from 'next/link'
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input, Label } from '@/components/ui/Input'
+import { Settings, Hash, Building, Percent, ChevronRight } from 'lucide-react'
 
 export default function SettingsPage() {
   return (
@@ -13,6 +15,54 @@ export default function SettingsPage() {
           Configuration de l'application
         </p>
       </header>
+
+      {/* Navigation rapide */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Link href="/settings/numbering">
+          <Card className="hover:border-blue-500 transition-colors cursor-pointer h-full">
+            <div className="p-4">
+              <div className="flex items-start justify-between">
+                <div className="p-2 bg-blue-500/10 rounded-lg">
+                  <Hash className="h-6 w-6 text-blue-400" />
+                </div>
+                <ChevronRight className="h-5 w-5 text-gray-500" />
+              </div>
+              <h3 className="text-lg font-medium text-white mt-3">Numérotation</h3>
+              <p className="text-sm text-gray-400 mt-1">
+                Configurer les formats de numérotation des documents
+              </p>
+            </div>
+          </Card>
+        </Link>
+
+        <Card className="opacity-50 cursor-not-allowed h-full">
+          <div className="p-4">
+            <div className="flex items-start justify-between">
+              <div className="p-2 bg-gray-700 rounded-lg">
+                <Building className="h-6 w-6 text-gray-500" />
+              </div>
+            </div>
+            <h3 className="text-lg font-medium text-white mt-3">Informations société</h3>
+            <p className="text-sm text-gray-400 mt-1">
+              Coordonnées et identifiants fiscaux
+            </p>
+          </div>
+        </Card>
+
+        <Card className="opacity-50 cursor-not-allowed h-full">
+          <div className="p-4">
+            <div className="flex items-start justify-between">
+              <div className="p-2 bg-gray-700 rounded-lg">
+                <Percent className="h-6 w-6 text-gray-500" />
+              </div>
+            </div>
+            <h3 className="text-lg font-medium text-white mt-3">Paramètres TVA</h3>
+            <p className="text-sm text-gray-400 mt-1">
+              Configuration des taux de TVA
+            </p>
+          </div>
+        </Card>
+      </div>
 
       <Card>
         <CardHeader>

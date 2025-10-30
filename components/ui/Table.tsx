@@ -25,7 +25,7 @@ interface TableHeaderProps {
 
 export const TableHeader: React.FC<TableHeaderProps> = ({ children, className }) => {
   return (
-    <thead className={clsx('bg-claude-bg-secondary', className)}>
+    <thead className={clsx('bg-claude-surface', className)}>
       {children}
     </thead>
   );
@@ -54,7 +54,7 @@ export const TableRow: React.FC<TableRowProps> = ({ children, className, onClick
   return (
     <tr
       className={clsx(
-        'hover:bg-claude-bg-secondary transition-colors',
+        'hover:bg-claude-surface-hover transition-colors',
         onClick && 'cursor-pointer',
         className
       )}
