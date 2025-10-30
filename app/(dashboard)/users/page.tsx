@@ -9,8 +9,8 @@ import { useState } from 'react';
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { useAuthStore } from '@/store/auth';
 import { AuthUser, UserRole, ROLE_HIERARCHY } from '@/types/auth';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import {
   User,
   UserPlus,
