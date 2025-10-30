@@ -11,7 +11,7 @@ import { InvoiceLine } from '@/types/invoicing';
 
 // Configure PDF.js worker - Use local worker file instead of CDN
 if (typeof window !== 'undefined') {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '/compta/pdf.worker.min.mjs';
 }
 
 interface ExtractedData {
