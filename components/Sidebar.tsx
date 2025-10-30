@@ -23,11 +23,21 @@ import {
   FileCheck,
   AlertTriangle,
   Mail,
+  Shield,
+  ClipboardCheck,
 } from 'lucide-react'
 import { LanguageSelector } from './LanguageSelector'
 import { useT, TranslationKey } from '@/lib/i18n/translations'
+import { useAuthStore } from '@/store/auth'
+import { ModulePermission } from '@/types/auth'
 
-const navigation: Array<{ nameKey: TranslationKey; href: string; icon: any }> = [
+const navigation: Array<{
+  nameKey: TranslationKey;
+  href: string;
+  icon: any;
+  requiredPermission?: ModulePermission;
+  badge?: () => number | undefined;
+}> = [
   { nameKey: 'nav.dashboard', href: '/dashboard', icon: LayoutDashboard },
   { nameKey: 'nav.sales', href: '/sales', icon: FileText },
   { nameKey: 'nav.invoices', href: '/invoices', icon: Receipt },
@@ -50,6 +60,7 @@ export function Sidebar() {
   const pathname = usePathname()
   const { t } = useT()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { hasPermission, pendingApprovalsCount } = useAuthStore()
 
   const closeMobileMenu = () => setIsMobileMenuOpen(false)
 
@@ -96,6 +107,11 @@ export function Sidebar() {
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => {
+            // Vérifier les permissions si nécessaire
+            if (item.requiredPermission && !hasPermission(item.requiredPermission)) {
+              return null;
+            }
+
             // Check if pathname matches this item
             const matchesPath = pathname === item.href || pathname.startsWith(item.href + '/')
 
@@ -110,6 +126,7 @@ export function Sidebar() {
             // Only set active if it matches and there's no more specific match
             const isActive = matchesPath && !hasMoreSpecificMatch
             const Icon = item.icon
+            const badgeCount = item.badge?.();
 
             return (
               <Link
@@ -117,17 +134,70 @@ export function Sidebar() {
                 href={item.href}
                 onClick={closeMobileMenu}
                 className={clsx(
-                  'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative',
                   isActive
                     ? 'bg-claude-accent text-white'
                     : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
                 )}
               >
                 <Icon className="w-5 h-5" />
-                {t(item.nameKey)}
+                <span className="flex-1">{t(item.nameKey)}</span>
+                {badgeCount && badgeCount > 0 && (
+                  <span className="px-2 py-0.5 bg-claude-accent rounded-full text-xs font-bold text-white">
+                    {badgeCount > 9 ? '9+' : badgeCount}
+                  </span>
+                )}
               </Link>
             )
           })}
+
+          {/* Section Administration (visible uniquement pour admins) */}
+          {(hasPermission('users:read') || hasPermission('approvals:read')) && (
+            <>
+              <div className="pt-4 pb-2 px-3">
+                <p className="text-xs font-semibold text-claude-muted uppercase tracking-wider">
+                  Administration
+                </p>
+              </div>
+
+              {hasPermission('approvals:read') && (
+                <Link
+                  href="/approvals"
+                  onClick={closeMobileMenu}
+                  className={clsx(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors relative',
+                    pathname === '/approvals'
+                      ? 'bg-claude-accent text-white'
+                      : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
+                  )}
+                >
+                  <ClipboardCheck className="w-5 h-5" />
+                  <span className="flex-1">Approbations</span>
+                  {pendingApprovalsCount > 0 && (
+                    <span className="px-2 py-0.5 bg-claude-accent rounded-full text-xs font-bold text-white">
+                      {pendingApprovalsCount > 9 ? '9+' : pendingApprovalsCount}
+                    </span>
+                  )}
+                </Link>
+              )}
+
+              {hasPermission('users:read') && (
+                <Link
+                  href="/users"
+                  onClick={closeMobileMenu}
+                  className={clsx(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                    pathname === '/users'
+                      ? 'bg-claude-accent text-white'
+                      : 'text-claude-text-muted hover:bg-claude-surface-hover hover:text-claude-text'
+                  )}
+                >
+                  <Shield className="w-5 h-5" />
+                  Utilisateurs
+                </Link>
+              )}
+            </>
+          )}
         </nav>
 
         {/* Footer */}
