@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { AuthGuard } from '@/components/auth/AuthGuard';
 import { useAuthStore } from '@/store/auth';
 import { ApprovalRequest, ApprovalEntityType } from '@/types/auth';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import {
   CheckCircle,
   XCircle,
