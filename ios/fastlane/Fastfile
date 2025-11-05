@@ -1,0 +1,139 @@
+# Fastfile for iOS deployment
+
+default_platform(:ios)
+
+platform :ios do
+
+  before_all do
+    # Set up environment
+    ensure_git_status_clean unless ENV['CI']
+  end
+
+  desc "Build the iOS application for testing"
+  lane :build do
+    # Increment build number based on commits
+    increment_build_number(
+      build_number: number_of_commits,
+      xcodeproj: "./App/App.xcodeproj"
+    )
+
+    # Build the app
+    gym(
+      scheme: "App",
+      workspace: "./App/App.xcworkspace",
+      export_method: "development",
+      output_directory: "./build",
+      clean: true
+    )
+  end
+
+  desc "Build and upload to TestFlight"
+  lane :beta do
+    # Ensure we're on the right branch
+    ensure_git_branch(
+      branch: ENV['GIT_BRANCH'] || 'main'
+    )
+
+    # Increment build number
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1,
+      xcodeproj: "./App/App.xcodeproj"
+    )
+
+    # Match certificates (use match or cert/sigh)
+    match(
+      type: "appstore",
+      readonly: true
+    )
+
+    # Build the app
+    gym(
+      scheme: "App",
+      workspace: "./App/App.xcworkspace",
+      export_method: "app-store",
+      output_directory: "./build",
+      clean: true
+    )
+
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true,
+      ipa: "./build/App.ipa"
+    )
+
+    # Commit version bump
+    commit_version_bump(
+      message: "Version bump to build #{lane_context[SharedValues::BUILD_NUMBER]}",
+      xcodeproj: "./App/App.xcodeproj"
+    )
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :release do
+    # Ensure we're on the right branch
+    ensure_git_branch(
+      branch: ENV['GIT_BRANCH'] || 'main'
+    )
+
+    # Increment version number
+    increment_version_number(
+      bump_type: "patch",
+      xcodeproj: "./App/App.xcodeproj"
+    )
+
+    # Increment build number
+    increment_build_number(
+      build_number: latest_testflight_build_number + 1,
+      xcodeproj: "./App/App.xcodeproj"
+    )
+
+    # Match certificates
+    match(
+      type: "appstore",
+      readonly: true
+    )
+
+    # Build the app
+    gym(
+      scheme: "App",
+      workspace: "./App/App.xcworkspace",
+      export_method: "app-store",
+      output_directory: "./build",
+      clean: true
+    )
+
+    # Upload to App Store
+    deliver(
+      submit_for_review: false,
+      automatic_release: false,
+      force: true,
+      skip_screenshots: true,
+      skip_metadata: false
+    )
+
+    # Commit and tag
+    commit_version_bump(
+      message: "Release version #{lane_context[SharedValues::VERSION_NUMBER]} (#{lane_context[SharedValues::BUILD_NUMBER]})",
+      xcodeproj: "./App/App.xcodeproj"
+    )
+
+    add_git_tag(
+      tag: "ios/v#{lane_context[SharedValues::VERSION_NUMBER]}-#{lane_context[SharedValues::BUILD_NUMBER]}"
+    )
+  end
+
+  desc "Take screenshots for App Store"
+  lane :screenshots do
+    capture_screenshots(
+      scheme: "App"
+    )
+  end
+
+  error do |lane, exception|
+    # Handle errors
+    notification(
+      subtitle: "Fastlane failed",
+      message: "#{lane} failed with error: #{exception.message}"
+    )
+  end
+end

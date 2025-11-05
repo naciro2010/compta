@@ -40,3 +40,39 @@ next-env.d.ts
 # IDE
 .idea/
 .vscode/
+
+# Mobile/Capacitor
+ios/App/Pods/
+ios/App/Podfile.lock
+ios/App/build/
+ios/App/DerivedData/
+ios/*.ipa
+ios/build/
+ios/fastlane/report.xml
+ios/fastlane/Preview.html
+ios/fastlane/screenshots/
+ios/fastlane/test_output/
+ios/fastlane/*.cer
+ios/fastlane/*.p12
+ios/fastlane/*.mobileprovision
+ios/fastlane/AuthKey_*.p8
+ios/fastlane/.env
+ios/Gemfile.lock
+
+android/app/build/
+android/app/release.keystore
+android/keystore.properties
+android/app/keystores/
+android/.gradle/
+android/build/
+android/local.properties
+android/*.apk
+android/*.aab
+android/fastlane/google-play-key.json
+android/fastlane/report.xml
+android/fastlane/.env
+android/Gemfile.lock
+
+# Capacitor
+.capacitor/
+capacitor.config.json

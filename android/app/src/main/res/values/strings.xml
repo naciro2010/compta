@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MizanPro</string>
+    <string name="title_activity_main">MizanPro</string>
+    <string name="package_name">com.mizanpro.app</string>
+    <string name="custom_url_scheme">com.mizanpro.app</string>
+</resources>
