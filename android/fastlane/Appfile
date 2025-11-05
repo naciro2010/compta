@@ -1,0 +1,7 @@
+# Appfile for Android
+
+json_key_file ENV["PLAY_STORE_JSON_KEY_PATH"] || "./fastlane/google-play-key.json"
+package_name "com.mizanpro.app"
+
+# For more information about the Appfile, see:
+# https://docs.fastlane.tools/advanced/#appfile

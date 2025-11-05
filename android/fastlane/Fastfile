@@ -1,0 +1,153 @@
+# Fastfile for Android deployment
+
+default_platform(:android)
+
+platform :android do
+
+  before_all do
+    # Set up environment
+    ensure_git_status_clean unless ENV['CI']
+  end
+
+  desc "Build the Android application for testing"
+  lane :build do
+    # Increment version code
+    increment_version_code(
+      gradle_file_path: "./app/build.gradle"
+    )
+
+    # Build APK
+    gradle(
+      task: "clean assemble",
+      build_type: "Release",
+      project_dir: "./"
+    )
+  end
+
+  desc "Build and upload to Google Play Internal Testing"
+  lane :beta do
+    # Ensure we're on the right branch
+    ensure_git_branch(
+      branch: ENV['GIT_BRANCH'] || 'main'
+    )
+
+    # Increment version code
+    increment_version_code(
+      gradle_file_path: "./app/build.gradle"
+    )
+
+    # Build AAB (Android App Bundle)
+    gradle(
+      task: "clean bundle",
+      build_type: "Release",
+      project_dir: "./"
+    )
+
+    # Upload to Google Play Internal Testing
+    upload_to_play_store(
+      track: "internal",
+      release_status: "draft",
+      aab: "./app/build/outputs/bundle/release/app-release.aab",
+      json_key: ENV["PLAY_STORE_JSON_KEY_PATH"] || "./fastlane/google-play-key.json",
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+
+    # Commit version bump
+    git_commit(
+      path: ["./app/build.gradle"],
+      message: "Version bump to #{lane_context[SharedValues::VERSION_CODE]}"
+    )
+  end
+
+  desc "Deploy a new version to Google Play Production"
+  lane :release do
+    # Ensure we're on the right branch
+    ensure_git_branch(
+      branch: ENV['GIT_BRANCH'] || 'main'
+    )
+
+    # Increment version code and version name
+    increment_version_code(
+      gradle_file_path: "./app/build.gradle"
+    )
+
+    increment_version_name(
+      gradle_file_path: "./app/build.gradle",
+      bump_type: "patch"
+    )
+
+    # Build AAB
+    gradle(
+      task: "clean bundle",
+      build_type: "Release",
+      project_dir: "./"
+    )
+
+    # Upload to Google Play Production
+    upload_to_play_store(
+      track: "production",
+      release_status: "draft",
+      aab: "./app/build/outputs/bundle/release/app-release.aab",
+      json_key: ENV["PLAY_STORE_JSON_KEY_PATH"] || "./fastlane/google-play-key.json",
+      skip_upload_apk: true,
+      skip_upload_metadata: false,
+      skip_upload_images: false,
+      skip_upload_screenshots: false
+    )
+
+    # Commit and tag
+    version_name = get_version_name(
+      gradle_file_path: "./app/build.gradle"
+    )
+
+    version_code = lane_context[SharedValues::VERSION_CODE]
+
+    git_commit(
+      path: ["./app/build.gradle"],
+      message: "Release version #{version_name} (#{version_code})"
+    )
+
+    add_git_tag(
+      tag: "android/v#{version_name}-#{version_code}"
+    )
+  end
+
+  desc "Promote app from internal to beta track"
+  lane :promote_to_beta do
+    upload_to_play_store(
+      track: "internal",
+      track_promote_to: "beta",
+      json_key: ENV["PLAY_STORE_JSON_KEY_PATH"] || "./fastlane/google-play-key.json",
+      skip_upload_apk: true,
+      skip_upload_aab: true
+    )
+  end
+
+  desc "Promote app from beta to production"
+  lane :promote_to_production do
+    upload_to_play_store(
+      track: "beta",
+      track_promote_to: "production",
+      json_key: ENV["PLAY_STORE_JSON_KEY_PATH"] || "./fastlane/google-play-key.json",
+      skip_upload_apk: true,
+      skip_upload_aab: true
+    )
+  end
+
+  desc "Take screenshots for Google Play"
+  lane :screenshots do
+    # Configure screengrab in your project first
+    capture_android_screenshots
+  end
+
+  error do |lane, exception|
+    # Handle errors
+    notification(
+      subtitle: "Fastlane failed",
+      message: "#{lane} failed with error: #{exception.message}"
+    )
+  end
+end
