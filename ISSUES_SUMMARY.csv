@@ -1,0 +1,39 @@
+Priorité,Type,Fichier,Ligne,Problème,Description,Impact
+CRITIQUE,Security,/store/auth.ts,298,No bcrypt for password check,Vérification hash bcrypt non implémentée,Password validation en plain text
+CRITIQUE,Security,/store/auth.ts,300,Hardcoded password,Mot de passe hardcodé 'admin123',Authentification non sécurisée
+CRITIQUE,Security,/store/auth.ts,430,No password hashing,Hash password avec bcrypt manquant,Mots de passe non hashés en stockage
+CRITIQUE,Dependencies,Package.json,ALL,UNMET DEPENDENCIES,Toutes les dépendances manquent,npm install requis avant tout
+CRITIQUE,Feature,/components/invoicing/InvoicePDFTemplate.tsx,32,PDF generation not implemented,Génération PDF non implémentée,Factures ne peuvent pas être générées en PDF
+CRITIQUE,Feature,/lib/vat/simpl-tva-export.ts,152,XSD validation not implemented,Validation XSD réelle non implémentée,Export SIMPL-TVA invalide
+CRITIQUE,Feature,/lib/vat/simpl-tva-export.ts,174,DGI integration not implemented,Intégration DGI réelle manquante,Impossible de soumettre à l'autorité fiscale
+IMPORTANT,Feature,/app/(dashboard)/bank/page.tsx,FULL,Empty page implementation,Module Banque entièrement vide,Rapprochement bancaire non fonctionnel
+IMPORTANT,Feature,/app/(dashboard)/payroll/page.tsx,FULL,Empty page implementation,Module Paie entièrement vide,Paie CNSS non fonctionnel
+IMPORTANT,Feature,/app/(dashboard)/invoices/page.tsx,LINE,PDF generation missing,Génération/visualisation PDF manquante,PDF des factures non disponible
+IMPORTANT,Feature,/app/(dashboard)/quotes/page.tsx,LINE,PDF generation missing,Génération/visualisation PDF manquante,PDF des devis non disponible
+IMPORTANT,Feature,/store/auth.ts,947,Version restoration not applied,Restoration de versions non appliquée,Historique/rollback ne fonctionne pas
+IMPORTANT,Feature,/store/treasury.ts,LINE,Auto-matching not implemented,Matching automatique non implémentée,Réconciliation manuelle requise
+IMPORTANT,Feature,/store/treasury.ts,LINE,7-day forecast not calculated,Calcul prévisions (7 jours) non implémentée,Prévisions de trésorerie manquantes
+IMPORTANT,Feature,/store/vat.ts,LINE,PDF generation for SIMPL-TVA,Génération PDF SIMPL-TVA manquante,Export SIMPL-TVA incomplet
+IMPORTANT,Code Quality,/components/invoicing/InvoiceForm.tsx,FULL,Component too large,Composant de 712 lignes - refactoring requis,Performance et maintenabilité compromises
+IMPORTANT,Code Quality,/components/invoicing/ThirdPartyForm.tsx,FULL,Component too large,Composant de 516 lignes - refactoring requis,Performance et maintenabilité compromises
+IMPORTANT,Code Quality,/components/invoicing/InvoiceDetail.tsx,FULL,Component too large,Composant de 527 lignes - refactoring requis,Performance et maintenabilité compromises
+IMPORTANT,Code Quality,/components/accounting/CompanySetup.tsx,FULL,Component too large,Composant de 522 lignes - refactoring requis,Performance et maintenabilité compromises
+IMPORTANT,Design,/app/(dashboard)/guide/page.tsx,LINE,Hardcoded colors,73 occurrences de couleurs non-Claude,Design system cassé
+IMPORTANT,Testing,Project Root,N/A,No test framework,Zéro fichier de test (0/89),Pas de coverage - risque production
+IMPORTANT,Testing,Project Root,N/A,Missing Jest/Vitest config,Aucun test framework installé,Impossible de tester automatiquement
+IMPORTANT,Data,/components/invoicing/InvoiceForm.tsx,57,Hardcoded company ID,companyId: 'default-company' hardcodé,Multi-sociétés non fonctionnel
+IMPORTANT,Data,/app/(dashboard)/settings/numbering/page.tsx,LINE,Company ID not from auth,Company ID pas récupéré depuis auth,Numérotation factures cassée multi-sociétés
+IMPORTANT,Documentation,Project Root,N/A,No .env.example,Fichier .env.example manquant,Développeurs ne savent pas les variables requises
+IMPORTANT,Performance,Project Root,N/A,Bundle size not optimized,pdfjs (~10MB), tesseract (~50MB) inclus mais usage minimal,Application trop lourde
+MINEUR,Logic,/store/archive.ts,LINE,Hash verification stub,Vérification hash réelle manquante,Archive integrity non vérifiée
+MINEUR,Calculation,/store/invoicing.ts,LINE,averagePaymentDelay not calculated,averagePaymentDelay non calculé,Statistiques incomplètes
+MINEUR,Calculation,/store/invoicing.ts,LINE,topCustomers not calculated,topCustomers non calculé,Dashboard incomplet
+MINEUR,Data,/store/invoicing.ts,LINE,createdBy hardcoded,createdBy: 'current-user' hardcodé,Audit trail incorrect
+MINEUR,Configuration,/store/invoicing.ts,LINE,Data loading stub,Charger depuis localStorage ou API - stub,Données ne persistent pas
+MINEUR,Styling,Code Base,MULTIPLE,Emojis hardcoded,23 occurrences d'emojis en dur,Accessibilité et localisation impactées
+MINEUR,Configuration,tailwind.config.js,N/A,Legacy CSS unused,styles.css vide (legacy),Code mort à nettoyer
+MINEUR,Configuration,Project Root,N/A,No ESLint config,ESLint config stricte manquante,Code quality checks absents
+MINEUR,Configuration,Project Root,N/A,No Prettier config,Prettier config manquante,Code formatting non standardisé
+MINEUR,Configuration,Project Root,N/A,No EditorConfig,.editorconfig manquant,Inconsistences formatage multi-éditeurs
+MINEUR,Mobile,/capacitor.config.ts,LINE,Minimal Capacitor config,Configuration basique,Plugins mobiles manquants
+MINEUR,CI/CD,/.github/workflows,N/A,No test CI/CD workflow,GitHub Actions pour tests manquante,Pas de validation automatique

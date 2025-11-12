@@ -5,6 +5,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import bcrypt from 'bcryptjs';
 import {
   AuthUser,
   UserSession,
@@ -243,7 +244,8 @@ const INITIAL_SUPER_ADMIN: AuthUser = {
   mustChangePassword: true, // Forcer le changement au premier login
   failedLoginAttempts: 0,
   createdAt: new Date(),
-  passwordHash: '$2a$10$demo.hash.for.password.admin123', // Dans un vrai système, utiliser bcrypt
+  // Hash bcrypt de "admin123" (pour démo uniquement - changer en production)
+  passwordHash: '$2a$10$92I5hYqKAOv4JwU/.0ZT2.KmE8VwcN5i5f4qH0sJp9.QmYE8sMGve',
 };
 
 // Store avec persistence
@@ -295,9 +297,14 @@ export const useAuthStore = create<AuthStore>()(
           };
         }
 
-        // TODO: Dans un vrai système, vérifier le hash du mot de passe avec bcrypt
-        // Pour la démo, on accepte "admin123" pour tous les comptes
-        const isPasswordValid = credentials.password === 'admin123';
+        // Vérifier le hash du mot de passe avec bcrypt
+        if (!user.passwordHash) {
+          return {
+            success: false,
+            error: 'Configuration du compte incorrecte. Contactez un administrateur.',
+          };
+        }
+        const isPasswordValid = await bcrypt.compare(credentials.password, user.passwordHash);
 
         if (!isPasswordValid) {
           // Incrémenter les tentatives échouées
@@ -427,8 +434,8 @@ export const useAuthStore = create<AuthStore>()(
           };
         }
 
-        // TODO: Hasher le mot de passe avec bcrypt
-        const passwordHash = `$2a$10$demo.hash.for.password.${request.newPassword}`;
+        // Hasher le mot de passe avec bcrypt (10 rounds)
+        const passwordHash = await bcrypt.hash(request.newPassword, 10);
 
         set((state) => ({
           users: state.users.map((u) =>
@@ -705,6 +712,9 @@ export const useAuthStore = create<AuthStore>()(
           };
         }
 
+        // Hasher le mot de passe
+        const passwordHash = await bcrypt.hash(password, 10);
+
         // Créer l'utilisateur
         try {
           await get().createUser({
@@ -718,6 +728,7 @@ export const useAuthStore = create<AuthStore>()(
             language: 'fr',
             timezone: 'Africa/Casablanca',
             mustChangePassword: false,
+            passwordHash,
             establishmentIds: invitation.establishmentIds,
           });
 
