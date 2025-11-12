@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import {
   ArrowRight,
@@ -19,8 +21,12 @@ import {
   ChevronRight,
   Star
 } from 'lucide-react'
+import { useT } from '@/lib/i18n/translations'
+import { LanguageSelector } from '@/components/LanguageSelector'
 
 export default function HomePage() {
+  const { t } = useT()
+
   return (
     <div className="min-h-screen bg-claude-bg">
       {/* Header */}
@@ -30,20 +36,23 @@ export default function HomePage() {
             <div className="w-8 h-8 bg-claude-accent rounded-lg flex items-center justify-center">
               <Calculator className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-semibold text-claude-text">CGNC Flow</span>
+            <span className="text-xl font-semibold text-claude-text">{t('home.brand')}</span>
           </div>
           <div className="flex items-center gap-4">
             <a href="#features" className="text-sm text-claude-text-muted hover:text-claude-text transition-colors hidden md:block">
-              Fonctionnalités
+              {t('home.nav.features')}
             </a>
             <a href="#pricing" className="text-sm text-claude-text-muted hover:text-claude-text transition-colors hidden md:block">
-              Tarifs
+              {t('home.nav.pricing')}
             </a>
+            <div className="hidden md:block">
+              <LanguageSelector />
+            </div>
             <Link
               href="/dashboard"
               className="px-4 py-2 bg-claude-accent hover:bg-claude-accent-hover text-white rounded-lg transition-colors flex items-center gap-2"
             >
-              Démarrer
+              {t('home.nav.start')}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -55,20 +64,18 @@ export default function HomePage() {
         <section className="container mx-auto px-6 py-20 md:py-28">
           <div className="max-w-5xl mx-auto text-center space-y-8">
             <div className="inline-block px-4 py-1.5 bg-claude-surface border border-claude-border rounded-full text-sm text-claude-text-muted mb-4">
-              🇲🇦 Conforme au Plan Comptable Marocain (CGNC)
+              🇲🇦 {t('home.tagline')}
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-claude-text leading-tight">
-              La comptabilité marocaine
+              {t('home.hero.title')}
               <span className="text-claude-accent block mt-2">
-                moderne et intelligente
+                {t('home.hero.titleAccent')}
               </span>
             </h1>
 
             <p className="text-lg md:text-xl text-claude-text-muted max-w-3xl mx-auto leading-relaxed">
-              CGNC Flow transforme votre gestion comptable avec une solution complète,
-              intuitive et 100% conforme aux normes marocaines. Facturation bilingue, TVA,
-              paie CNSS et analytique multi-sociétés.
+              {t('home.hero.description')}
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
@@ -76,24 +83,24 @@ export default function HomePage() {
                 href="/dashboard"
                 className="px-8 py-4 bg-claude-accent hover:bg-claude-accent-hover text-white rounded-lg transition-all flex items-center gap-2 text-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 w-full sm:w-auto justify-center"
               >
-                Essayer gratuitement
+                {t('home.hero.cta.try')}
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a
                 href="#pricing"
                 className="px-8 py-4 bg-claude-surface border border-claude-border hover:border-claude-accent text-claude-text rounded-lg transition-all flex items-center gap-2 text-lg font-medium w-full sm:w-auto justify-center"
               >
-                Voir les tarifs
+                {t('home.hero.cta.pricing')}
                 <ChevronRight className="w-5 h-5" />
               </a>
             </div>
 
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-16 max-w-4xl mx-auto">
-              <StatCard number="100%" label="Conforme CGNC" />
-              <StatCard number="2 langues" label="FR/AR bilingue" />
-              <StatCard number="Multi" label="Sociétés" />
-              <StatCard number="Cloud" label="Accessible partout" />
+              <StatCard number="100%" label={t('home.stats.compliance')} />
+              <StatCard number={t('home.stats.languages')} label={t('home.stats.languagesDesc')} />
+              <StatCard number="Multi" label={t('home.stats.multiCompany')} />
+              <StatCard number="Cloud" label={t('home.stats.cloud')} />
             </div>
           </div>
         </section>
@@ -103,67 +110,67 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-claude-text mb-4">
-                Tout ce dont vous avez besoin
+                {t('home.features.title')}
               </h2>
               <p className="text-lg text-claude-text-muted max-w-2xl mx-auto">
-                Une suite complète d'outils pour gérer votre comptabilité efficacement
+                {t('home.features.subtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <FeatureCard
                 icon={<FileText className="w-6 h-6" />}
-                title="Facturation intelligente"
-                description="Créez devis, bons de commande et factures en quelques clics. Numérotation automatique et envoi par email."
-                highlights={["Devis → Facture", "Bilingue FR/AR", "PDF automatique"]}
+                title={t('feature.invoicing.title')}
+                description={t('feature.invoicing.desc')}
+                highlights={[t('feature.invoicing.h1'), t('feature.invoicing.h2'), t('feature.invoicing.h3')]}
               />
               <FeatureCard
                 icon={<Receipt className="w-6 h-6" />}
-                title="Gestion TVA & Fiscalité"
-                description="Calcul automatique de la TVA multi-taux (20%, 14%, 10%, 7%). Export SIMPL prêt pour vos déclarations."
-                highlights={["Multi-taux TVA", "Export SIMPL", "Déclarations"]}
+                title={t('feature.vat.title')}
+                description={t('feature.vat.desc')}
+                highlights={[t('feature.vat.h1'), t('feature.vat.h2'), t('feature.vat.h3')]}
               />
               <FeatureCard
                 icon={<Calculator className="w-6 h-6" />}
-                title="Plan comptable CGNC"
-                description="Plan comptable marocain complet et personnalisable. Classe 1 à 8 incluses avec écritures automatiques."
-                highlights={["Classe 1-8", "Personnalisable", "Écritures auto"]}
+                title={t('feature.accounting.title')}
+                description={t('feature.accounting.desc')}
+                highlights={[t('feature.accounting.h1'), t('feature.accounting.h2'), t('feature.accounting.h3')]}
               />
               <FeatureCard
                 icon={<BarChart3 className="w-6 h-6" />}
-                title="Tableaux de bord"
-                description="Visualisez vos performances en temps réel. KPIs, graphiques et analyses pour piloter votre activité."
-                highlights={["KPIs temps réel", "Graphiques", "Analytics"]}
+                title={t('feature.dashboard.title')}
+                description={t('feature.dashboard.desc')}
+                highlights={[t('feature.dashboard.h1'), t('feature.dashboard.h2'), t('feature.dashboard.h3')]}
               />
               <FeatureCard
                 icon={<Users className="w-6 h-6" />}
-                title="Paie & CNSS"
-                description="Calcul automatique de la paie avec cotisations CNSS. Bulletins de paie et déclarations conformes."
-                highlights={["Calcul CNSS", "Bulletins paie", "Conformité"]}
+                title={t('feature.payroll.title')}
+                description={t('feature.payroll.desc')}
+                highlights={[t('feature.payroll.h1'), t('feature.payroll.h2'), t('feature.payroll.h3')]}
               />
               <FeatureCard
                 icon={<Building className="w-6 h-6" />}
-                title="Multi-sociétés"
-                description="Gérez plusieurs entreprises depuis un seul compte. Consolidation et reporting multi-entités."
-                highlights={["Multi-entités", "Consolidation", "Reporting"]}
+                title={t('feature.multiCompany.title')}
+                description={t('feature.multiCompany.desc')}
+                highlights={[t('feature.multiCompany.h1'), t('feature.multiCompany.h2'), t('feature.multiCompany.h3')]}
               />
               <FeatureCard
                 icon={<Globe className="w-6 h-6" />}
-                title="Ventes & Achats"
-                description="Module complet pour gérer vos ventes et achats. Suivi des fournisseurs et clients, paiements, échéances."
-                highlights={["Suivi complet", "Échéancier", "Paiements"]}
+                title={t('feature.sales.title')}
+                description={t('feature.sales.desc')}
+                highlights={[t('feature.sales.h1'), t('feature.sales.h2'), t('feature.sales.h3')]}
               />
               <FeatureCard
                 icon={<FileCheck className="w-6 h-6" />}
-                title="États financiers"
-                description="Générez bilan, compte de résultat et annexes automatiquement. Export Excel et PDF."
-                highlights={["Bilan", "CPC", "Export Excel/PDF"]}
+                title={t('feature.statements.title')}
+                description={t('feature.statements.desc')}
+                highlights={[t('feature.statements.h1'), t('feature.statements.h2'), t('feature.statements.h3')]}
               />
               <FeatureCard
                 icon={<Shield className="w-6 h-6" />}
-                title="Sécurisé & Fiable"
-                description="Vos données sont sécurisées et sauvegardées automatiquement. Architecture moderne et performante."
-                highlights={["Données sécurisées", "Backup auto", "Performance"]}
+                title={t('feature.security.title')}
+                description={t('feature.security.desc')}
+                highlights={[t('feature.security.h1'), t('feature.security.h2'), t('feature.security.h3')]}
               />
             </div>
           </div>
@@ -174,43 +181,43 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-claude-text mb-4">
-                Pourquoi choisir CGNC Flow ?
+                {t('home.benefits.title')}
               </h2>
               <p className="text-lg text-claude-text-muted max-w-2xl mx-auto">
-                Des avantages concrets pour votre entreprise
+                {t('home.benefits.subtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               <BenefitCard
                 icon={<Clock className="w-8 h-8" />}
-                title="Gagnez du temps"
-                description="Automatisez vos tâches comptables répétitives et concentrez-vous sur votre cœur de métier. Jusqu'à 70% de temps gagné sur la saisie."
+                title={t('benefit.time.title')}
+                description={t('benefit.time.desc')}
               />
               <BenefitCard
                 icon={<DollarSign className="w-8 h-8" />}
-                title="Réduisez vos coûts"
-                description="Solution accessible sans frais de licence élevés. Pas besoin d'expert-comptable pour les opérations courantes."
+                title={t('benefit.cost.title')}
+                description={t('benefit.cost.desc')}
               />
               <BenefitCard
                 icon={<Zap className="w-8 h-8" />}
-                title="Simplicité d'utilisation"
-                description="Interface moderne et intuitive. Prenez en main l'application en quelques minutes, même sans être comptable."
+                title={t('benefit.simplicity.title')}
+                description={t('benefit.simplicity.desc')}
               />
               <BenefitCard
                 icon={<TrendingUp className="w-8 h-8" />}
-                title="Pilotez votre croissance"
-                description="Tableaux de bord et indicateurs pour prendre les bonnes décisions. Visualisez votre performance en temps réel."
+                title={t('benefit.growth.title')}
+                description={t('benefit.growth.desc')}
               />
               <BenefitCard
                 icon={<Shield className="w-8 h-8" />}
-                title="100% Conforme"
-                description="Respecte totalement le plan comptable marocain (CGNC) et les normes fiscales en vigueur."
+                title={t('benefit.compliance.title')}
+                description={t('benefit.compliance.desc')}
               />
               <BenefitCard
                 icon={<Download className="w-8 h-8" />}
-                title="Exports flexibles"
-                description="Exportez vos données en Excel, PDF ou CSV pour les partager avec votre comptable ou administration."
+                title={t('benefit.exports.title')}
+                description={t('benefit.exports.desc')}
               />
             </div>
           </div>
@@ -221,76 +228,77 @@ export default function HomePage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-claude-text mb-4">
-                Tarifs simples et transparents
+                {t('home.pricing.title')}
               </h2>
               <p className="text-lg text-claude-text-muted max-w-2xl mx-auto">
-                Choisissez l'offre adaptée à la taille de votre entreprise
+                {t('home.pricing.subtitle')}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {/* Starter Plan */}
               <PricingCard
-                name="Starter"
-                price="Gratuit"
+                name={t('pricing.starter.name')}
+                price={t('pricing.starter.price')}
                 period=""
-                description="Parfait pour démarrer et tester toutes les fonctionnalités"
+                description={t('pricing.starter.desc')}
                 features={[
-                  "1 société",
-                  "50 factures/mois",
-                  "Plan comptable CGNC",
-                  "TVA multi-taux",
-                  "États financiers",
-                  "Support email",
+                  t('pricing.starter.f1'),
+                  t('pricing.starter.f2'),
+                  t('pricing.starter.f3'),
+                  t('pricing.starter.f4'),
+                  t('pricing.starter.f5'),
+                  t('pricing.starter.f6'),
                 ]}
-                cta="Commencer gratuitement"
+                cta={t('pricing.starter.cta')}
                 highlighted={false}
               />
 
               {/* Professional Plan */}
               <PricingCard
-                name="Professionnel"
-                price="299 DH"
-                period="/mois"
-                description="Pour les petites et moyennes entreprises en croissance"
+                name={t('pricing.pro.name')}
+                price={t('pricing.pro.price')}
+                period={t('pricing.pro.period')}
+                description={t('pricing.pro.desc')}
                 features={[
-                  "3 sociétés",
-                  "Factures illimitées",
-                  "Toutes fonctionnalités Starter",
-                  "Module Paie & CNSS",
-                  "Multi-utilisateurs (5)",
-                  "Export SIMPL",
-                  "Analytique avancée",
-                  "Support prioritaire",
+                  t('pricing.pro.f1'),
+                  t('pricing.pro.f2'),
+                  t('pricing.pro.f3'),
+                  t('pricing.pro.f4'),
+                  t('pricing.pro.f5'),
+                  t('pricing.pro.f6'),
+                  t('pricing.pro.f7'),
+                  t('pricing.pro.f8'),
                 ]}
-                cta="Essayer 30 jours gratuits"
+                cta={t('pricing.pro.cta')}
                 highlighted={true}
+                badge={t('pricing.pro.badge')}
               />
 
               {/* Enterprise Plan */}
               <PricingCard
-                name="Entreprise"
-                price="Sur mesure"
+                name={t('pricing.enterprise.name')}
+                price={t('pricing.enterprise.price')}
                 period=""
-                description="Solution complète pour grandes entreprises et cabinets"
+                description={t('pricing.enterprise.desc')}
                 features={[
-                  "Sociétés illimitées",
-                  "Toutes fonctionnalités Pro",
-                  "Multi-utilisateurs illimité",
-                  "API & Intégrations",
-                  "Formation personnalisée",
-                  "Support dédié 24/7",
-                  "Hébergement dédié",
-                  "SLA garanti",
+                  t('pricing.enterprise.f1'),
+                  t('pricing.enterprise.f2'),
+                  t('pricing.enterprise.f3'),
+                  t('pricing.enterprise.f4'),
+                  t('pricing.enterprise.f5'),
+                  t('pricing.enterprise.f6'),
+                  t('pricing.enterprise.f7'),
+                  t('pricing.enterprise.f8'),
                 ]}
-                cta="Contactez-nous"
+                cta={t('pricing.enterprise.cta')}
                 highlighted={false}
               />
             </div>
 
             <div className="text-center mt-12">
               <p className="text-sm text-claude-text-muted">
-                💳 Paiement sécurisé • ✓ Sans engagement • 🔄 Annulation à tout moment
+                {t('home.pricing.note')}
               </p>
             </div>
           </div>
@@ -300,38 +308,38 @@ export default function HomePage() {
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-4xl mx-auto bg-gradient-to-r from-claude-accent to-claude-accent-hover rounded-2xl p-12 text-center text-white shadow-2xl">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Prêt à transformer votre comptabilité ?
+              {t('home.cta.title')}
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Rejoignez les entreprises marocaines qui font confiance à CGNC Flow
+              {t('home.cta.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/dashboard"
                 className="px-8 py-4 bg-white text-claude-accent hover:bg-gray-100 rounded-lg transition-all flex items-center gap-2 text-lg font-medium shadow-lg w-full sm:w-auto justify-center"
               >
-                Démarrer gratuitement
+                {t('home.cta.button1')}
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <a
                 href="#pricing"
                 className="px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white/10 rounded-lg transition-all flex items-center gap-2 text-lg font-medium w-full sm:w-auto justify-center"
               >
-                Comparer les offres
+                {t('home.cta.button2')}
               </a>
             </div>
             <div className="flex items-center justify-center gap-6 mt-8 text-sm opacity-75">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4" />
-                <span>Essai gratuit</span>
+                <span>{t('home.cta.feature1')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4" />
-                <span>Sans carte bancaire</span>
+                <span>{t('home.cta.feature2')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4" />
-                <span>Configuration en 5 min</span>
+                <span>{t('home.cta.feature3')}</span>
               </div>
             </div>
           </div>
@@ -347,43 +355,43 @@ export default function HomePage() {
                 <div className="w-8 h-8 bg-claude-accent rounded-lg flex items-center justify-center">
                   <Calculator className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-lg font-semibold text-claude-text">CGNC Flow</span>
+                <span className="text-lg font-semibold text-claude-text">{t('home.brand')}</span>
               </div>
               <p className="text-sm text-claude-text-muted">
-                Comptabilité marocaine moderne, simple et conforme CGNC.
+                {t('footer.tagline')}
               </p>
             </div>
 
             <div>
-              <h4 className="font-semibold text-claude-text mb-4">Produit</h4>
+              <h4 className="font-semibold text-claude-text mb-4">{t('footer.product')}</h4>
               <ul className="space-y-2 text-sm text-claude-text-muted">
-                <li><a href="#features" className="hover:text-claude-accent transition-colors">Fonctionnalités</a></li>
-                <li><a href="#pricing" className="hover:text-claude-accent transition-colors">Tarifs</a></li>
-                <li><Link href="/dashboard" className="hover:text-claude-accent transition-colors">Démo</Link></li>
+                <li><a href="#features" className="hover:text-claude-accent transition-colors">{t('footer.product.features')}</a></li>
+                <li><a href="#pricing" className="hover:text-claude-accent transition-colors">{t('footer.product.pricing')}</a></li>
+                <li><Link href="/dashboard" className="hover:text-claude-accent transition-colors">{t('footer.product.demo')}</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold text-claude-text mb-4">Ressources</h4>
+              <h4 className="font-semibold text-claude-text mb-4">{t('footer.resources')}</h4>
               <ul className="space-y-2 text-sm text-claude-text-muted">
-                <li><Link href="/guide" className="hover:text-claude-accent transition-colors">Guide</Link></li>
-                <li><a href="#" className="hover:text-claude-accent transition-colors">Documentation</a></li>
-                <li><a href="#" className="hover:text-claude-accent transition-colors">Support</a></li>
+                <li><Link href="/guide" className="hover:text-claude-accent transition-colors">{t('footer.resources.guide')}</Link></li>
+                <li><a href="#" className="hover:text-claude-accent transition-colors">{t('footer.resources.docs')}</a></li>
+                <li><a href="#" className="hover:text-claude-accent transition-colors">{t('footer.resources.support')}</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="font-semibold text-claude-text mb-4">Entreprise</h4>
+              <h4 className="font-semibold text-claude-text mb-4">{t('footer.company')}</h4>
               <ul className="space-y-2 text-sm text-claude-text-muted">
-                <li><a href="#" className="hover:text-claude-accent transition-colors">À propos</a></li>
-                <li><a href="#" className="hover:text-claude-accent transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-claude-accent transition-colors">Conditions</a></li>
+                <li><a href="#" className="hover:text-claude-accent transition-colors">{t('footer.company.about')}</a></li>
+                <li><a href="#" className="hover:text-claude-accent transition-colors">{t('footer.company.contact')}</a></li>
+                <li><a href="#" className="hover:text-claude-accent transition-colors">{t('footer.company.terms')}</a></li>
               </ul>
             </div>
           </div>
 
           <div className="border-t border-claude-border pt-8 text-center text-sm text-claude-text-subtle">
-            <p>© 2024 CGNC Flow — Solution de comptabilité pour entreprises marocaines</p>
+            <p>© 2024 {t('home.brand')} — {t('footer.copyright')}</p>
           </div>
         </div>
       </footer>
@@ -463,6 +471,7 @@ function PricingCard({
   features,
   cta,
   highlighted,
+  badge,
 }: {
   name: string
   price: string
@@ -471,6 +480,7 @@ function PricingCard({
   features: string[]
   cta: string
   highlighted: boolean
+  badge?: string
 }) {
   return (
     <div
@@ -480,10 +490,10 @@ function PricingCard({
           : 'border-claude-border'
       }`}
     >
-      {highlighted && (
+      {highlighted && badge && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
           <span className="bg-claude-accent text-white text-sm font-medium px-4 py-1 rounded-full">
-            ⭐ Plus populaire
+            ⭐ {badge}
           </span>
         </div>
       )}
