@@ -45,3 +45,11 @@ export const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<H
 )
 
 CardDescription.displayName = 'CardDescription'
+
+export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={clsx(className)} {...props} />
+  )
+)
+
+CardContent.displayName = 'CardContent'

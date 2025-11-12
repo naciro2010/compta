@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useInvoicingStore } from '@/store/invoicing';
+import { useAuthStore } from '@/store/auth';
 import {
   Invoice,
   InvoiceType,
@@ -46,6 +47,7 @@ export default function InvoiceForm({
     getThirdParty,
   } = useInvoicingStore();
 
+  const { currentUser } = useAuthStore();
   const customers = getCustomers();
   const suppliers = getSuppliers();
 
@@ -54,7 +56,7 @@ export default function InvoiceForm({
     type: defaultType,
     status: 'DRAFT',
     thirdPartyId: defaultThirdPartyId || '',
-    companyId: 'default-company', // TODO: Get from company store
+    companyId: currentUser?.defaultEstablishmentId || 'default-company',
     issueDate: new Date(),
     paymentTerms: 'NET_30',
     currency: 'MAD',
