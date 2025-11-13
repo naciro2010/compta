@@ -176,6 +176,113 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Technology Stack Section */}
+        <section className="container mx-auto px-6 py-20 bg-gradient-to-br from-claude-surface/50 to-claude-bg">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-block px-4 py-1.5 bg-claude-accent/10 border border-claude-accent/20 rounded-full text-sm text-claude-accent mb-4">
+                🚀 Technologie Moderne
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-claude-text mb-4">
+                Backend Professionnel
+              </h2>
+              <p className="text-lg text-claude-text-muted max-w-2xl mx-auto">
+                Architecture backend robuste avec Spring Boot + Kotlin, JWT, OAuth2 et intégrations complètes
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-12">
+              <div className="bg-claude-surface border border-claude-border rounded-xl p-8 hover:border-claude-accent transition-all">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center text-white font-bold text-xl flex-shrink-0">
+                    K
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-claude-text mb-2">Spring Boot + Kotlin</h3>
+                    <p className="text-sm text-claude-text-muted">Backend moderne et performant avec Spring Boot 3.2, Kotlin 1.9 et Gradle</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm text-claude-text-muted">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    API REST complète et documentée (OpenAPI)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    Architecture en couches (Controller, Service, Repository)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    Spring Data JPA + PostgreSQL / H2
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    Redis pour la gestion des sessions
+                  </li>
+                </ul>
+              </div>
+
+              <div className="bg-claude-surface border border-claude-border rounded-xl p-8 hover:border-claude-accent transition-all">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Shield className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-claude-text mb-2">Authentification Sécurisée</h3>
+                    <p className="text-sm text-claude-text-muted">JWT, OAuth2 et Spring Security pour une sécurité maximale</p>
+                  </div>
+                </div>
+                <ul className="space-y-2 text-sm text-claude-text-muted">
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    JWT avec refresh tokens
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    OAuth2 (Google, Microsoft, Azure)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    Bcrypt hashing + Account lockout
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-claude-accent flex-shrink-0" />
+                    CORS configuré + HTTPS ready
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-claude-accent/10 to-orange-500/10 border border-claude-accent/20 rounded-xl p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-claude-text mb-2">Intégrations Professionnelles</h3>
+                <p className="text-sm text-claude-text-muted">Connectez MizanPro avec vos outils comptables favoris</p>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <IntegrationBadge name="Sage" status="✓ Disponible" />
+                <IntegrationBadge name="QuickBooks" status="✓ Disponible" />
+                <IntegrationBadge name="Xero" status="✓ Disponible" />
+                <IntegrationBadge name="Zoho Books" status="✓ Disponible" />
+                <IntegrationBadge name="Odoo" status="✓ Disponible" />
+                <IntegrationBadge name="FreshBooks" status="🔜 Bientôt" />
+                <IntegrationBadge name="Wave" status="🔜 Bientôt" />
+                <IntegrationBadge name="SAP B1" status="🏢 Enterprise" />
+              </div>
+
+              <div className="mt-8 text-center">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-claude-accent hover:bg-claude-accent-hover text-white rounded-lg transition-all font-medium"
+                >
+                  Découvrir les intégrations
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Benefits Section */}
         <section className="container mx-auto px-6 py-20">
           <div className="max-w-6xl mx-auto">
@@ -526,6 +633,15 @@ function PricingCard({
       >
         {cta}
       </Link>
+    </div>
+  )
+}
+
+function IntegrationBadge({ name, status }: { name: string; status: string }) {
+  return (
+    <div className="bg-white/5 border border-claude-border/50 rounded-lg p-3 text-center hover:border-claude-accent/50 transition-all">
+      <div className="text-sm font-medium text-claude-text mb-1">{name}</div>
+      <div className="text-xs text-claude-text-muted">{status}</div>
     </div>
   )
 }
