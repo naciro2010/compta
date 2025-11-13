@@ -1,0 +1,213 @@
+spring:
+  application:
+    name: mizanpro-backend
+
+  profiles:
+    active: ${SPRING_PROFILE:dev}
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:mizanpro}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: ${DATABASE_DRIVER:org.h2.Driver}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: ${HIBERNATE_DIALECT:org.hibernate.dialect.H2Dialect}
+
+  # Redis pour sessions
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+
+  session:
+    store-type: redis
+    timeout: 24h
+
+  # Configuration OAuth2
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID:your-google-client-id}
+            client-secret: ${GOOGLE_CLIENT_SECRET:your-google-client-secret}
+            scope:
+              - email
+              - profile
+            redirect-uri: "{baseUrl}/api/auth/oauth2/callback/{registrationId}"
+
+          microsoft:
+            client-id: ${MICROSOFT_CLIENT_ID:your-microsoft-client-id}
+            client-secret: ${MICROSOFT_CLIENT_SECRET:your-microsoft-client-secret}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: "{baseUrl}/api/auth/oauth2/callback/{registrationId}"
+
+          azure:
+            provider: azure
+            client-id: ${AZURE_CLIENT_ID:your-azure-client-id}
+            client-secret: ${AZURE_CLIENT_SECRET:your-azure-client-secret}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: "{baseUrl}/api/auth/oauth2/callback/{registrationId}"
+
+        provider:
+          azure:
+            authorization-uri: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+            token-uri: https://login.microsoftonline.com/common/oauth2/v2.0/token
+            user-info-uri: https://graph.microsoft.com/oidc/userinfo
+            jwk-set-uri: https://login.microsoftonline.com/common/discovery/v2.0/keys
+            user-name-attribute: sub
+
+  # Mail configuration
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# Configuration JWT
+jwt:
+  secret: ${JWT_SECRET:your-secret-key-change-in-production-min-256-bits-long}
+  expiration: ${JWT_EXPIRATION:86400000} # 24 heures en millisecondes
+  refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 jours
+
+# Configuration CORS
+cors:
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000,http://localhost:3001}
+  allowed-methods: GET,POST,PUT,DELETE,PATCH,OPTIONS
+  allowed-headers: "*"
+  allow-credentials: true
+  max-age: 3600
+
+# Configuration de l'application
+app:
+  name: MizanPro
+  version: 1.0.0
+  timezone: Africa/Casablanca
+  default-language: fr
+  supported-languages: fr,ar,en
+
+  # Configuration de sécurité
+  security:
+    max-login-attempts: 5
+    account-lockout-duration: 30m
+    password-reset-token-validity: 24h
+    email-verification-token-validity: 7d
+
+  # Intégrations avec outils comptables
+  integrations:
+    sage:
+      enabled: ${SAGE_INTEGRATION_ENABLED:false}
+      api-url: ${SAGE_API_URL:}
+      api-key: ${SAGE_API_KEY:}
+
+    quickbooks:
+      enabled: ${QUICKBOOKS_INTEGRATION_ENABLED:false}
+      client-id: ${QUICKBOOKS_CLIENT_ID:}
+      client-secret: ${QUICKBOOKS_CLIENT_SECRET:}
+
+    xero:
+      enabled: ${XERO_INTEGRATION_ENABLED:false}
+      client-id: ${XERO_CLIENT_ID:}
+      client-secret: ${XERO_CLIENT_SECRET:}
+
+    zoho:
+      enabled: ${ZOHO_INTEGRATION_ENABLED:false}
+      client-id: ${ZOHO_CLIENT_ID:}
+      client-secret: ${ZOHO_CLIENT_SECRET:}
+
+# Configuration du serveur
+server:
+  port: ${SERVER_PORT:8080}
+  compression:
+    enabled: true
+  error:
+    include-message: always
+    include-stacktrace: on_param
+
+# Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# Logging
+logging:
+  level:
+    root: INFO
+    ma.mizanpro: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+# Profil de développement
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    ma.mizanpro: DEBUG
+
+---
+# Profil de production
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/mizanpro}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+logging:
+  level:
+    ma.mizanpro: INFO
+    org.springframework: WARN

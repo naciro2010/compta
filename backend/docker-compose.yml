@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Backend Spring Boot
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILE=dev
+      - DATABASE_URL=jdbc:postgresql://postgres:5432/mizanpro
+      - DATABASE_USERNAME=mizanpro
+      - DATABASE_PASSWORD=mizanpro123
+      - DATABASE_DRIVER=org.postgresql.Driver
+      - HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - JWT_SECRET=your-super-secret-jwt-key-change-in-production-min-256-bits
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - mizanpro-network
+    restart: unless-stopped
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=mizanpro
+      - POSTGRES_USER=mizanpro
+      - POSTGRES_PASSWORD=mizanpro123
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - mizanpro-network
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - mizanpro-network
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+  redis-data:
+
+networks:
+  mizanpro-network:
+    driver: bridge
