@@ -19,6 +19,9 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     const savedLocale = localStorage.getItem('locale') as Locale | null
     if (savedLocale && ['fr', 'ar', 'en'].includes(savedLocale)) {
       setLocaleState(savedLocale)
+      // Appliquer la direction RTL pour l'arabe
+      document.documentElement.lang = savedLocale
+      document.documentElement.dir = savedLocale === 'ar' ? 'rtl' : 'ltr'
     }
     setMounted(true)
   }, [])
@@ -26,8 +29,9 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
     localStorage.setItem('locale', newLocale)
-    // Mettre à jour l'attribut lang du HTML
+    // Mettre à jour l'attribut lang et dir du HTML
     document.documentElement.lang = newLocale
+    document.documentElement.dir = newLocale === 'ar' ? 'rtl' : 'ltr'
   }
 
   // Éviter le flash de contenu non traduit
