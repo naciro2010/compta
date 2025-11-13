@@ -56,6 +56,16 @@ Application Next.js de comptabilité générale conforme au plan comptable maroc
 
 ### 🚧 En Cours / À Faire
 
+**Résumé :**
+```
+🚧 À FAIRE (34 items)
+├── 7 Backend (Tests, OAuth2 config, API métier...)
+├── 6 Frontend (Migration auth, OAuth2 UI...)
+├── 6 Infrastructure (CI/CD, Monitoring, K8s...)
+├── 6 Sécurité (Rate limit, 2FA, SAML...)
+└── 7 Modules Métier (API Factures, Clients...)
+```
+
 #### Backend
 - [ ] **Connexion Frontend ↔ Backend** : Remplacer Zustand auth par API backend
 - [ ] **Tests** : Tests unitaires et d'intégration (JUnit, Mockk)
