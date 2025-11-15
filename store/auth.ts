@@ -241,7 +241,7 @@ const INITIAL_SUPER_ADMIN: AuthUser = {
   isEmailVerified: true,
   language: 'fr',
   timezone: 'Africa/Casablanca',
-  mustChangePassword: true, // Forcer le changement au premier login
+  mustChangePassword: false, // Pas besoin de changement pour le compte démo
   failedLoginAttempts: 0,
   createdAt: new Date(),
   // Hash bcrypt de "admin123" (pour démo uniquement - changer en production)
