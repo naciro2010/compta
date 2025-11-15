@@ -17,9 +17,31 @@ import {
   AuditEntry,
   CompanySettings,
   SectorModel,
+  User,
+  Establishment,
+  GlobalAuditEntry,
+  AuditAction,
+  LegalIdentifiers,
+  VATRegime,
 } from '@/types/accounting';
+import {
+  FinancialStatementsPack,
+  FinancialStatementModel,
+} from '@/types/financial-statements';
 import { CGNC_ACCOUNTS } from '@/data/cgnc-plan';
-import { validateEntry, validateBalance, calculateMADAmount } from '@/lib/accounting/validation';
+import {
+  validateEntry,
+  validateBalance,
+  calculateMADAmount,
+  validateCompanySettings,
+  extractEstablishmentCode,
+} from '@/lib/accounting/validation';
+import { createAuditEntry } from '@/lib/accounting/audit';
+import { hasPermission } from '@/lib/accounting/permissions';
+import {
+  generateFinancialStatementsPack,
+  determineStatementModel,
+} from '@/lib/accounting/financial-statements';
 
 interface AccountingState {
   // Configuration
@@ -42,8 +64,24 @@ interface AccountingState {
   // Devises
   currencies: Currency[];
 
+  // EPIC 2: Utilisateurs et RBAC
+  users: User[];
+  currentUser: User | null;
+
+  // EPIC 2: Établissements
+  establishments: Establishment[];
+  currentEstablishment: Establishment | null;
+
+  // EPIC 2: Journal d'audit global (immuable)
+  globalAuditLog: GlobalAuditEntry[];
+
+  // EPIC 3: États de synthèse
+  financialStatements: FinancialStatementsPack[];
+  currentFinancialStatements: FinancialStatementsPack | null;
+
   // Actions - Configuration
-  initializeCompany: (settings: Omit<CompanySettings, 'id' | 'createdAt'>) => void;
+  initializeCompany: (settings: Omit<CompanySettings, 'id' | 'createdAt' | 'establishments' | 'updatedAt'>) => void;
+  updateCompanySettings: (updates: Partial<CompanySettings>) => void;
 
   // Actions - Comptes
   loadCGNCPlan: (sectorModel?: SectorModel) => void;
@@ -75,9 +113,33 @@ interface AccountingState {
   addCurrency: (currency: Currency) => void;
   updateExchangeRate: (currencyCode: string, rate: number) => void;
 
+  // EPIC 2: Actions - Utilisateurs
+  createUser: (user: Omit<User, 'id' | 'createdAt'>) => void;
+  updateUser: (id: string, updates: Partial<User>) => void;
+  deleteUser: (id: string) => void;
+  setCurrentUser: (user: User | null) => void;
+
+  // EPIC 2: Actions - Établissements
+  createEstablishment: (establishment: Omit<Establishment, 'id' | 'createdAt'>) => void;
+  updateEstablishment: (id: string, updates: Partial<Establishment>) => void;
+  suspendEstablishment: (id: string, userId: string) => void;
+  setCurrentEstablishment: (establishment: Establishment | null) => void;
+
+  // EPIC 2: Actions - Audit
+  addAuditEntry: (action: AuditAction, entityType: string, entityId: string, metadata?: Record<string, any>) => void;
+  getAuditEntries: (filters?: { userId?: string; action?: AuditAction; entityType?: string; startDate?: Date; endDate?: Date }) => GlobalAuditEntry[];
+
+  // EPIC 3: Actions - États de synthèse
+  generateFinancialStatements: (fiscalYearId: string) => FinancialStatementsPack | null;
+  getFinancialStatements: (fiscalYearId: string) => FinancialStatementsPack | null;
+  validateFinancialStatements: (packId: string) => void;
+  lockFinancialStatements: (packId: string) => void;
+  setCurrentFinancialStatements: (pack: FinancialStatementsPack | null) => void;
+  updateStatementModel: (model: FinancialStatementModel) => void;
+
   // Requêtes - Rapports
-  getBalance: (periodId: string) => BalanceSheet | null;
-  getGeneralLedger: (periodId: string, accountId?: string) => GeneralLedger | null;
+  getBalance: (periodId: string, establishmentId?: string) => BalanceSheet | null;
+  getGeneralLedger: (periodId: string, accountId?: string, establishmentId?: string) => GeneralLedger | null;
   getAccountBalance: (accountId: string, periodId: string) => number;
 }
 
@@ -100,19 +162,78 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
       updatedAt: new Date(),
     },
   ],
+  // EPIC 2: État initial
+  users: [],
+  currentUser: null,
+  establishments: [],
+  currentEstablishment: null,
+  globalAuditLog: [],
+
+  // EPIC 3: État initial
+  financialStatements: [],
+  currentFinancialStatements: null,
 
   // ============================================================================
   // Configuration
   // ============================================================================
 
   initializeCompany: (settings) => {
-    const companySettings: CompanySettings = {
+    // EPIC 2: Créer l'établissement principal à partir de l'ICE
+    const establishmentCode = extractEstablishmentCode(settings.legalIdentifiers.ice);
+    const mainEstablishment: Establishment = {
       id: crypto.randomUUID(),
-      ...settings,
+      companyId: '', // Will be set after company creation
+      code: establishmentCode,
+      name: `${settings.name} - Siège`,
+      address: settings.address,
+      city: settings.city,
+      postalCode: settings.postalCode,
+      phone: settings.phone,
+      email: settings.email,
+      isActive: true,
+      isMainEstablishment: true,
       createdAt: new Date(),
     };
 
-    set({ companySettings });
+    const companyId = crypto.randomUUID();
+    mainEstablishment.companyId = companyId;
+
+    const companySettings: CompanySettings = {
+      id: companyId,
+      ...settings,
+      establishments: [mainEstablishment],
+      createdAt: new Date(),
+      // Backward compatibility
+      taxId: settings.legalIdentifiers.ice,
+    };
+
+    set({
+      companySettings,
+      establishments: [mainEstablishment],
+      currentEstablishment: mainEstablishment,
+    });
+
+    // EPIC 2: Créer un utilisateur administrateur par défaut
+    const adminUser: User = {
+      id: crypto.randomUUID(),
+      email: settings.email || 'admin@example.com',
+      firstName: 'Administrateur',
+      lastName: 'Système',
+      role: 'ADMIN',
+      isActive: true,
+      createdAt: new Date(),
+    };
+
+    set({
+      users: [adminUser],
+      currentUser: adminUser,
+    });
+
+    // EPIC 2: Ajouter une entrée d'audit
+    get().addAuditEntry('SETTINGS_UPDATE', 'Company', companyId, {
+      action: 'Company initialized',
+      name: settings.name,
+    });
 
     // Charger le plan de comptes
     get().loadCGNCPlan(settings.sectorModel);
@@ -174,6 +295,26 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
     // Créer l'exercice courant
     const currentYear = new Date().getFullYear();
     get().createFiscalYear(currentYear, settings.fiscalYearStart);
+  },
+
+  updateCompanySettings: (updates) => {
+    const { companySettings, currentUser } = get();
+    if (!companySettings) return;
+
+    const updatedSettings: CompanySettings = {
+      ...companySettings,
+      ...updates,
+      updatedAt: new Date(),
+    };
+
+    set({ companySettings: updatedSettings });
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('SETTINGS_UPDATE', 'Company', companySettings.id, {
+        updates: Object.keys(updates),
+      });
+    }
   },
 
   // ============================================================================
@@ -497,13 +638,215 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
   },
 
   // ============================================================================
+  // EPIC 2: Utilisateurs
+  // ============================================================================
+
+  createUser: (userData) => {
+    const { currentUser } = get();
+
+    // Vérifier la permission
+    if (currentUser && !hasPermission(currentUser, 'users:create')) {
+      console.error('Permission refusée: users:create');
+      return;
+    }
+
+    const user: User = {
+      id: crypto.randomUUID(),
+      ...userData,
+      createdAt: new Date(),
+    };
+
+    set((state) => ({
+      users: [...state.users, user],
+    }));
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('USER_CREATE', 'User', user.id, {
+        email: user.email,
+        role: user.role,
+      });
+    }
+  },
+
+  updateUser: (id, updates) => {
+    const { currentUser } = get();
+
+    // Vérifier la permission
+    if (currentUser && !hasPermission(currentUser, 'users:update')) {
+      console.error('Permission refusée: users:update');
+      return;
+    }
+
+    set((state) => ({
+      users: state.users.map(user =>
+        user.id === id ? { ...user, ...updates, updatedAt: new Date() } : user
+      ),
+    }));
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('USER_UPDATE', 'User', id, {
+        updates: Object.keys(updates),
+      });
+    }
+  },
+
+  deleteUser: (id) => {
+    const { currentUser } = get();
+
+    // Vérifier la permission
+    if (currentUser && !hasPermission(currentUser, 'users:delete')) {
+      console.error('Permission refusée: users:delete');
+      return;
+    }
+
+    set((state) => ({
+      users: state.users.filter(user => user.id !== id),
+    }));
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('USER_DELETE', 'User', id);
+    }
+  },
+
+  setCurrentUser: (user) => {
+    set({ currentUser: user });
+
+    if (user) {
+      get().addAuditEntry('USER_LOGIN', 'User', user.id, {
+        email: user.email,
+      });
+    }
+  },
+
+  // ============================================================================
+  // EPIC 2: Établissements
+  // ============================================================================
+
+  createEstablishment: (establishmentData) => {
+    const { companySettings, currentUser } = get();
+    if (!companySettings) return;
+
+    const establishment: Establishment = {
+      id: crypto.randomUUID(),
+      ...establishmentData,
+      createdAt: new Date(),
+    };
+
+    set((state) => ({
+      establishments: [...state.establishments, establishment],
+      companySettings: state.companySettings
+        ? {
+            ...state.companySettings,
+            establishments: [...state.companySettings.establishments, establishment],
+            updatedAt: new Date(),
+          }
+        : null,
+    }));
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('SETTINGS_UPDATE', 'Establishment', establishment.id, {
+        action: 'Establishment created',
+        name: establishment.name,
+        code: establishment.code,
+      });
+    }
+  },
+
+  updateEstablishment: (id, updates) => {
+    const { currentUser } = get();
+
+    set((state) => {
+      const updatedEstablishments = state.establishments.map(est =>
+        est.id === id ? { ...est, ...updates } : est
+      );
+
+      return {
+        establishments: updatedEstablishments,
+        companySettings: state.companySettings
+          ? {
+              ...state.companySettings,
+              establishments: updatedEstablishments,
+              updatedAt: new Date(),
+            }
+          : null,
+      };
+    });
+
+    // Ajouter une entrée d'audit
+    if (currentUser) {
+      get().addAuditEntry('SETTINGS_UPDATE', 'Establishment', id, {
+        action: 'Establishment updated',
+        updates: Object.keys(updates),
+      });
+    }
+  },
+
+  suspendEstablishment: (id, userId) => {
+    get().updateEstablishment(id, {
+      isActive: false,
+      suspendedAt: new Date(),
+      suspendedBy: userId,
+    });
+  },
+
+  setCurrentEstablishment: (establishment) => {
+    set({ currentEstablishment: establishment });
+  },
+
+  // ============================================================================
+  // EPIC 2: Audit
+  // ============================================================================
+
+  addAuditEntry: (action, entityType, entityId, metadata?) => {
+    const { currentUser, globalAuditLog } = get();
+
+    const auditEntry = createAuditEntry({
+      action,
+      userId: currentUser?.id || 'system',
+      entityType,
+      entityId,
+      metadata,
+    });
+
+    set({
+      globalAuditLog: [...globalAuditLog, auditEntry],
+    });
+  },
+
+  getAuditEntries: (filters?) => {
+    const { globalAuditLog } = get();
+
+    if (!filters) {
+      return globalAuditLog;
+    }
+
+    return globalAuditLog.filter(entry => {
+      if (filters.userId && entry.userId !== filters.userId) return false;
+      if (filters.action && entry.action !== filters.action) return false;
+      if (filters.entityType && entry.entityType !== filters.entityType) return false;
+      if (filters.startDate && entry.timestamp < filters.startDate) return false;
+      if (filters.endDate && entry.timestamp > filters.endDate) return false;
+      return true;
+    });
+  },
+
+  // ============================================================================
   // Rapports
   // ============================================================================
 
-  getBalance: (periodId) => {
+  getBalance: (periodId, establishmentId?) => {
     const { accounts, entries } = get();
 
-    const periodEntries = entries.filter(e => e.periodId === periodId && e.isValidated);
+    // EPIC 2: Filtrer par établissement si spécifié
+    let periodEntries = entries.filter(e => e.periodId === periodId && e.isValidated);
+
+    if (establishmentId) {
+      periodEntries = periodEntries.filter(e => e.establishmentId === establishmentId);
+    }
 
     const lines = accounts
       .filter(a => a.isDetailAccount)
@@ -551,12 +894,17 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
     };
   },
 
-  getGeneralLedger: (periodId, accountId) => {
+  getGeneralLedger: (periodId, accountId?, establishmentId?) => {
     const { entries } = get();
 
+    // EPIC 2: Filtrer par établissement si spécifié
     let periodEntries = entries.filter(
       e => e.periodId === periodId && e.isValidated
     );
+
+    if (establishmentId) {
+      periodEntries = periodEntries.filter(e => e.establishmentId === establishmentId);
+    }
 
     if (accountId) {
       periodEntries = periodEntries.filter(e =>
@@ -616,5 +964,115 @@ export const useAccountingStore = create<AccountingState>((set, get) => ({
     });
 
     return balance;
+  },
+
+  // ============================================================================
+  // EPIC 3: États de synthèse
+  // ============================================================================
+
+  generateFinancialStatements: (fiscalYearId) => {
+    const { fiscalYears, accounts, entries, companySettings, currentUser, financialStatements } = get();
+
+    if (!companySettings || !currentUser) {
+      console.error('Company settings or current user not found');
+      return null;
+    }
+
+    const fiscalYear = fiscalYears.find(fy => fy.id === fiscalYearId);
+    if (!fiscalYear) {
+      console.error('Fiscal year not found');
+      return null;
+    }
+
+    // Trouver l'exercice précédent
+    const previousFiscalYear = fiscalYears.find(
+      fy => fy.year === fiscalYear.year - 1
+    );
+
+    // Générer le pack complet
+    const pack = generateFinancialStatementsPack(
+      fiscalYear,
+      accounts,
+      entries,
+      previousFiscalYear,
+      companySettings,
+      currentUser.id
+    );
+
+    // Sauvegarder le pack
+    set((state) => ({
+      financialStatements: [...state.financialStatements, pack],
+      currentFinancialStatements: pack,
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', pack.id, {
+      fiscalYearId,
+      model: pack.model,
+    });
+
+    return pack;
+  },
+
+  getFinancialStatements: (fiscalYearId) => {
+    const { financialStatements } = get();
+    return financialStatements.find(fs => fs.fiscalYearId === fiscalYearId) || null;
+  },
+
+  validateFinancialStatements: (packId) => {
+    const { currentUser } = get();
+    if (!currentUser) return;
+
+    set((state) => ({
+      financialStatements: state.financialStatements.map(fs =>
+        fs.id === packId
+          ? {
+              ...fs,
+              status: 'VALIDATED' as const,
+              validatedAt: new Date(),
+              validatedBy: currentUser.id,
+            }
+          : fs
+      ),
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', packId, {
+      action: 'validated',
+    });
+  },
+
+  lockFinancialStatements: (packId) => {
+    const { currentUser } = get();
+    if (!currentUser) return;
+
+    set((state) => ({
+      financialStatements: state.financialStatements.map(fs =>
+        fs.id === packId
+          ? {
+              ...fs,
+              status: 'LOCKED' as const,
+            }
+          : fs
+      ),
+    }));
+
+    // Ajouter une entrée d'audit
+    get().addAuditEntry('REPORT_EXPORT', 'FinancialStatements', packId, {
+      action: 'locked',
+    });
+  },
+
+  setCurrentFinancialStatements: (pack) => {
+    set({ currentFinancialStatements: pack });
+  },
+
+  updateStatementModel: (model) => {
+    const { companySettings } = get();
+    if (!companySettings) return;
+
+    get().updateCompanySettings({
+      statementModel: model,
+    });
   },
 }));

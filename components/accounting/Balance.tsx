@@ -168,7 +168,7 @@ export const Balance: React.FC = () => {
                       ))}
 
                       {/* Ligne de sous-total de classe */}
-                      <TableRow className="bg-claude-bg-secondary font-medium">
+                      <TableRow className="bg-claude-surface font-medium">
                         <TableCell colSpan={2} className="text-right">
                           Sous-total Classe {classNumber}
                         </TableCell>

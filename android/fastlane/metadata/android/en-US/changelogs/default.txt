@@ -1,0 +1,7 @@
+Première version de MizanPro
+
+• Gestion complète de la comptabilité
+• Interface moderne et intuitive
+• Fonctionnalités de facturation avancées
+• Suivi de trésorerie en temps réel
+• Rapports financiers détaillés

@@ -1,0 +1,16 @@
+# Appfile for iOS
+
+# Your Apple ID
+apple_id ENV["APPLE_ID"] || "your-apple-id@example.com"
+
+# App Bundle Identifier
+app_identifier "com.mizanpro.app"
+
+# Your Apple Developer Team ID
+team_id ENV["TEAM_ID"] || "YOUR_TEAM_ID"
+
+# Your iTunes Connect Team ID (if different from Developer Team)
+itc_team_id ENV["ITC_TEAM_ID"] || ENV["TEAM_ID"] || "YOUR_ITC_TEAM_ID"
+
+# For more information about the Appfile, see:
+# https://docs.fastlane.tools/advanced/#appfile

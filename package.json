@@ -1,32 +1,56 @@
 {
-  "name": "cgnc-flow",
+  "name": "mizanpro",
   "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:mobile": "BUILD_TARGET=mobile next build",
     "start": "next start",
     "export": "next build && next export",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "mkdir -p public && cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/pdf.worker.min.mjs",
+    "cap:init": "npx cap init",
+    "cap:add:ios": "npx cap add ios",
+    "cap:add:android": "npx cap add android",
+    "cap:sync": "npm run build:mobile && npx cap sync",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android",
+    "mobile:build": "npm run build:mobile && npx cap sync",
+    "ios:build": "npm run mobile:build && cd ios && bundle exec fastlane build",
+    "android:build": "npm run mobile:build && cd android && bundle exec fastlane build",
+    "ios:release": "npm run mobile:build && cd ios && bundle exec fastlane release",
+    "android:release": "npm run mobile:build && cd android && bundle exec fastlane release"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "@capacitor/ios": "^7.4.4",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.3",
+    "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^3.0.3",
+    "lucide-react": "^0.424.0",
     "next": "^14.2.0",
+    "pdfjs-dist": "^5.4.296",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
-    "zustand": "^4.5.0",
-    "date-fns": "^3.6.0",
-    "lucide-react": "^0.424.0",
-    "clsx": "^2.1.1"
+    "tesseract.js": "^6.0.1",
+    "xlsx": "^0.18.5",
+    "zustand": "^4.5.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5",
-    "tailwindcss": "^3.4.1",
-    "postcss": "^8",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.0"
+    "eslint-config-next": "14.2.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
