@@ -18,8 +18,8 @@ export default function LoginPage() {
   const { login, isAuthenticated, currentUser } = useAuthStore();
 
   const [credentials, setCredentials] = useState<LoginCredentials>({
-    email: '',
-    password: '',
+    email: 'admin@mizanpro.ma',
+    password: 'admin123',
     rememberMe: false,
   });
 
