@@ -245,7 +245,7 @@ const INITIAL_SUPER_ADMIN: AuthUser = {
   failedLoginAttempts: 0,
   createdAt: new Date(),
   // Hash bcrypt de "admin123" (pour démo uniquement - changer en production)
-  passwordHash: '$2a$10$92I5hYqKAOv4JwU/.0ZT2.KmE8VwcN5i5f4qH0sJp9.QmYE8sMGve',
+  passwordHash: '$2b$10$Ho82bu/vykQkjs5MYekkquTMLAqE1367OA68d9FCzjmaEnV/kO6L6',
 };
 
 // Store avec persistence
